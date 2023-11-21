@@ -1,0 +1,23 @@
+# @package _group_
+
+fairseq:
+  task:
+    _name: unpaired_audio_text
+    labels: phn
+    data: ???
+    sort_by_length: false
+    shuffle: false
+    text_data: ''
+
+  common_eval:
+    path: ???
+    quiet: true
+
+  dataset:
+    gen_subset: valid
+    batch_size: 1
+
+w2l_decoder: VITERBI_MASKED
+sil_is_blank: true
+lm_model: /work/b07502072/corpus/u-s2s/text/wiki/en/wiki_1-5/phones/lm.phones.filtered.04.bin
+post_process: ???

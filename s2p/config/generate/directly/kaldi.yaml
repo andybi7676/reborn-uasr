@@ -1,0 +1,44 @@
+# @package _group_
+
+fairseq:
+  task:
+    _name: unpaired_audio_text
+    labels: phn
+    data: ???
+    sort_by_length: false
+    shuffle: false
+    text_data: ''
+    directly:
+      checkpoint: ???
+      adjacent_pooling: true
+
+  common_eval:
+    path: ???
+    quiet: true
+
+  dataset:
+    gen_subset: valid
+    batch_size: 1
+
+
+w2l_decoder: KALDI
+post_process: silence
+sil_is_blank: true
+blank_mode: add
+unsupervised_tuning: 0 # tuning mode is 0
+targets: wrd
+kaldi_decoder_config:
+  acoustic_scale: 0.6
+  hlg_graph_path: /work/b07502072/corpus/u-s2s/text/cv_wiki/fr/prep_sil_0-5/fst/phn_to_words_sil/HLG.phn.kenlm.wrd.o40003.fst
+  num_threads: 2
+  output_dict: /work/b07502072/corpus/u-s2s/text/cv_wiki/fr/prep_sil_0-5/fst/phn_to_words_sil/kaldi_dict.kenlm.wrd.o40003.txt
+
+ 
+# THESE HARDLY MATTER
+blank_weight: 0
+
+# THESE DO NOT MATTER
+# word_score: 1
+# viterbi_transcript: /home/splend1dchan/unsupervised_ASR_challenge/examples/wav2vec/unsupervised/workspace/results/LibriSpeech/train-dev-test-clean/bs128_libri960_librilm_g2p_opt/0/valid.txt
+# lexicon: /home/splend1dchan/unsupervised_ASR_challenge/examples/wav2vec/unsupervised/workspace/data/LibriSpeech/train-dev-test-clean/lm/G2P/lexicon_filtered.lst
+# lm_model: /home/splend1dchan/unsupervised_ASR_challenge/examples/wav2vec/unsupervised/workspace/data/LibriSpeech/train-dev-test-clean/lm/G2P/kenlm.wrd.o40003.bin

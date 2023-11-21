@@ -1,0 +1,12 @@
+- task.data=/work/b07502072/corpus/u-s2s/audio/en_feats/librispeech/large_clean_mfa/precompute_pca512_cls128_mean
+- task.text_data=/work/b07502072/corpus/u-s2s/text/ls_wo_lv/prep_g2p/phones/train_all
+- task.kenlm_path=/work/b07502072/corpus/u-s2s/text/ls_wo_lv/prep_g2p/phones/train_all/../lm.phones.filtered.04.bin
+- dataset.num_workers=0
+- common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised
+- model.code_penalty=4
+- model.gradient_penalty=1.5
+- model.smoothness_weight=0.5
+- common.seed=3
+- distributed_training.distributed_world_size=1
+- optimization.max_update=120000
+- +description=ls_100h/large_clean_mfa/ls_wo_lv_g2p_all_p2
