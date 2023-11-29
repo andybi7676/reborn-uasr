@@ -23,9 +23,11 @@ for pred, gt in tqdm(zip(pred_lines, gt_lines), total=len(pred_lines)):
     gt = gt.strip().split()
     assert len(pred) == len(gt)
 
+    # location of non-boundary frames
     pred = [[i for i, frame in enumerate(pred) if frame != '0']]
     gt = [[i for i, frame in enumerate(gt) if frame != '0']]
 
+    # Ground truth first, model prediction second
     metric_tracker_harsh.update(gt, pred)
     metric_tracker_lenient.update(gt, pred)
 
