@@ -152,11 +152,11 @@ def main(args): # for testing
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--kenlm_fpath", type=str, default="YOUR_KENLM_PATH",
+        "--kenlm_fpath", type=str, default="../../data/text/ls_wo_lv/prep_g2p/phones/lm.phones.filtered.04.bin", # modify this path to your own language model
         help="Path to the language model."
     )
     parser.add_argument(
-        "--dict_fpath", type=str, default="",
+        "--dict_fpath", type=str, default="../dummy_data/dict.txt",
         help="Path to the fairseq-style dictionary."
     )
     args = parser.parse_args()
