@@ -17,3 +17,6 @@ WORK_DIR: /home/b07502072/uasr-rl
 cd $WORK_DIR/uasr-rl/rl
 python load_w2vu_example.py
 ```
+
+## Alternative for loading the USAR model
+If you don't want to load the UASR model using fairseq's dirty code, you can use the simple script in `rl/transformer_behavior_cloning/load_w2vu_no_fairseq_example.py`.
