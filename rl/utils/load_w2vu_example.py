@@ -55,7 +55,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--env",
-        default="../env.yaml",
+        default="../../env.yaml",
         help="custom local env file for github collaboration",
     )
     args = parser.parse_args()

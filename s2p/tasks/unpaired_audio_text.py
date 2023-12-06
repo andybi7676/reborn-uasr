@@ -45,15 +45,15 @@ class DirectlyExtractConfig(FairseqDataclass):
     checkpoint: str = field(
         default=MISSING, metadata={"help": "path to the wav2vec2 model for feature extraction"}
     )
-    layer: int = 14,
-    centroids_path: str = 'CLUS128',
-    pca_path: str = 'pca',
-    pca_dim: int = 512,
-    merge_cluster: bool = True,
-    adjacent_pooling: bool = True,
-    pooling:str = 'mean',
-    subsample_rate: float = 0.5,
-    remove_extra: bool = False,
+    layer: int = 14
+    centroids_path: str = 'CLUS128'
+    pca_path: str = 'pca'
+    pca_dim: int = 512
+    merge_cluster: bool = True
+    adjacent_pooling: bool = True
+    pooling:str = 'mean'
+    subsample_rate: float = 0.5
+    remove_extra: bool = False
 
 
 @dataclass
@@ -63,6 +63,9 @@ class UnpairedAudioTextConfig(FairseqDataclass):
     )
     text_data: str = field(
         default=MISSING, metadata={"help": "path to data directory containing text"}
+    )
+    min_length: Optional[int] = field(
+        default=3, metadata={"help": "min length of data"}
     )
     max_length: Optional[int] = None
     labels: Optional[str] = field(
