@@ -12,8 +12,11 @@ def register_and_setup_task(task_cfg_fpath, env):
     task = tasks.setup_task(task_cfg.fairseq.task)
     return task, task_cfg
 
-def get_model_and_saved_cfg(env, task, use_cuda=False):
-    model_fpath = f"{env.WORK_DIR}/s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
+def get_model_and_saved_cfg(env, task, use_cuda=False, ckpt_fpath=None):
+    if ckpt_fpath is None:
+        model_fpath = f"{env.WORK_DIR}/s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
+    else:
+        model_fpath = ckpt_fpath
     models, saved_cfg = checkpoint_utils.load_model_ensemble(
         [model_fpath],
         task=task

@@ -33,6 +33,7 @@ class Scorer(object):
         #     print('{3}\t{0} {1}: {2}'.format(prob, length, ' '.join(words[i+2-length:i+2]), i))
         #     if oov:
         #         print('\t"{0}" is an OOV'.format(words[i+1]))
+        # print(self.compute_uttwise_and_framewise_lm_score(""))
     
     def compute_uttwise_and_framewise_lm_score(self, sentence: str, bos=True, eos=True) -> float:
         _framewise_lm_scores = [log_prob for log_prob,_ , _ in self.lm.full_scores(sentence, bos=bos, eos=eos)]
@@ -40,7 +41,7 @@ class Scorer(object):
         framewise_lm_scores = _framewise_lm_scores[bos:len(_framewise_lm_scores)-eos] # remove bos or eos scores to match sequence length
         return uttwise_lm_score, framewise_lm_scores
     
-    def score(self, result, merge_consecutives=False, rm_sil=False) -> float:
+    def score(self, result, merge_consecutives=False, rm_sil=False):
         # pass
         dense_x = result["logits"] # [B, T, C]
         padding_mask = result["padding_mask"] # [B, T]

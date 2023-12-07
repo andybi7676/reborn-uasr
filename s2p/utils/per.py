@@ -22,10 +22,7 @@ def cal_per(ref_data, hyp_data):
     import edit_distance
     S, D, I, N = (0, 0, 0, 0)
     count = 0
-    for ref, hyp in tqdm(zip(ref_data, hyp_data)):
-        if count < 5:
-            print(' '.join(hyp))
-            print(' '.join(ref))
+    for ref, hyp in tqdm(zip(ref_data, hyp_data), total=len(ref_data), desc=f"Calculating PER...", dynamic_ncols=True):
         sm = edit_distance.SequenceMatcher(a=ref, b=hyp)
         opcodes = sm.get_opcodes()
         

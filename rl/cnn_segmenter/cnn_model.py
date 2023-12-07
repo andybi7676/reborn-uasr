@@ -40,7 +40,7 @@ class CnnBoundaryConfig:
     """
     Config for CNN-based boundary predictor
     """
-    input_dim: int = 1024
+    input_dim: int = 512
     hidden_dim: int = 512
     dropout: float = 0.1
     kernel_size: int = 7
