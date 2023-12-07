@@ -61,6 +61,8 @@ def main():
     device = next(model.parameters()).device
     
     from rl.reward.dictionary import Dictionary
+    from rl.cnn_segmenter.cnn_model import CnnSegmenter, CnnSegmenterConfig, CnnBoundaryConfig
+    cnn_segmenter = CnnSegmenter(CnnSegmenterConfig(), CnnBoundaryConfig())
     dictionary = Dictionary.load(f"{env.WORK_DIR}/rl/dummy_data/dict.txt")
     # generate and output results (raw greedy decode output, without logits pooling)
     raw_output_dir = f"{env.WORK_DIR}/rl/utils/w2vu_segmental_results/raw"
