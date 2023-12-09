@@ -59,7 +59,7 @@ class CnnBoundaryPredictor(nn.Module):
         self.dropout = nn.Dropout(cfg.dropout)
         self.relu = nn.ReLU()
         
-    def forward(self, x, padding_mask):
+    def forward(self, x):
         """
         Input:
             x: (B, T, C)
@@ -85,7 +85,7 @@ class CnnSegmenter(Segmenter):
         self.subsample_rate = cfg.subsample_rate
         self.boundary_predictor = CnnBoundaryPredictor(cnn_boundary_cfg)
 
-    def boundary_predict(self, x, padding_mask):
+    def boundary_predict(self, x, padding_mask, deterministic=False):
         """
         Input:
             x: (B, T, C)
@@ -94,12 +94,16 @@ class CnnSegmenter(Segmenter):
             boundary: (B, T) # 0: not boundary; 1: boundary
             boundary_logits: (B, T, 2) # 0: not boundary; 1: boundary
         """
-        boundary_logits = self.boundary_predictor(x, padding_mask)
-        boundary = boundary_logits.argmax(-1)
-        boundary[padding_mask] = -1
+        boundary_logits = self.boundary_predictor(x)
+        if deterministic:
+            boundary = boundary_logits.argmax(-1)
+            boundary[padding_mask] = -1
+        else:
+            boundary = torch.distributions.Categorical(logits=boundary_logits).sample()
+            boundary[padding_mask] = -1
         return boundary, boundary_logits
 
-    def pre_segment(self, logits, padding_mask, return_boundary=False):
+    def pre_segment(self, logits, padding_mask, return_boundary=False, deterministic=False):
         """
         Input:
             logits: (B, T, C)
@@ -111,7 +115,7 @@ class CnnSegmenter(Segmenter):
         
         bsz, tsz, csz = logits.size()
         
-        boundary, boundary_logits = self.boundary_predict(logits, padding_mask)
+        boundary, boundary_logits = self.boundary_predict(logits, padding_mask, deterministic=deterministic)
         
         # max boundary number
         # print("boundary", boundary)

@@ -25,7 +25,7 @@ class RLCnnAgentConfig(object):
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
     pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/rl_agent/uttwise_reward"
+    save_dir: str = "./output/rl_agent/uttwise_reward_fixsample"
     env: str = "../../env.yaml"
     gamma: float = 0.99
     wandb_log: bool = True
@@ -282,6 +282,11 @@ class TrainRlCnnAgent(object):
                 print(f'Mean uttwise LM PPL: {mean_uttwise_lm_ppl}')
                 print(f'Vocab seen percentage: {vocab_seen_percentage}')
                 print(f'Mean framewise LM scores: {mean_framewise_lm_scores}')
+                print(f'Framewise LM scores: {framewise_lm_scores[0][:5]}')
+                # check if there is empty list in framewise_lm_scores
+                for sublist in framewise_lm_scores:
+                    if len(sublist) == 0:
+                        print(f'Epmty list in framewise_lm_scores {framewise_lm_scores.index(sublist)}')
                 print('-' * 10)
                 if self.cfg.wandb_log:
                     wandb.log(
@@ -443,7 +448,7 @@ class TrainRlCnnAgent(object):
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 30
+        NUM_EPOCHS = 10
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1
