@@ -53,9 +53,9 @@ class Scorer(object):
 
         vocab_seen = torch.zeros(self.num_symbols, dtype=torch.bool)
 
-        c_err = 0 # edit distance errs of the batch
-        c_len = 0 # target length of the batch
-        pred_c_len = 0 # prediction length of the batch
+        c_err = np.zeros(len(z), dtype=np.int) # edit distance errs of the batch
+        c_len = np.zeros(len(z), dtype=np.int) # target length of the batch
+        pred_c_len = np.zeros(len(z), dtype=np.int) # prediction length of the batch
         lm_score_sum = 0 # lm score of the batch
         framewise_lm_scores = [] # framewise lm scores of the batch
         uttwise_lm_scores = [] # uttwise lm scores of the batch
@@ -79,12 +79,12 @@ class Scorer(object):
 
             pred_units_arr = pred_units_arr.tolist()
 
-            pred_c_len += len(pred_units_arr)
+            pred_c_len[i] = len(pred_units_arr)
 
             if t is not None:
                 t = t.tolist()
-                c_err += editdistance.eval(pred_units_arr, t)
-                c_len += len(t)
+                c_err[i] = editdistance.eval(pred_units_arr, t)
+                c_len[i] = len(t)
             else:
                 c_len = pred_c_len
 
@@ -96,7 +96,7 @@ class Scorer(object):
                 lm_score_sum += uttwise_lm_score
         
         vocab_seen_percentage = vocab_seen.sum().item() / self.num_symbols
-        batchwise_lm_score = lm_score_sum / (pred_c_len + 2 * bsz)
+        batchwise_lm_score = lm_score_sum / (pred_c_len.sum() + 2 * bsz)
         batchwise_lm_ppl = math.pow(10, -batchwise_lm_score)
         uttwise_lm_ppls = [math.pow(10, -s) for s in uttwise_lm_scores] # uttwise lm ppls[0] should be the same as the batchwise lm ppl when the batch size is 1
         scores = {
@@ -104,7 +104,11 @@ class Scorer(object):
             'uttwise_lm_ppls': uttwise_lm_ppls,
             'framewise_lm_scores': framewise_lm_scores, # the score indicates the framewise log probabilities.
             'vocab_seen_percentage': vocab_seen_percentage, # you can weight the lm score by this percentage to encourage the model to generate more diversly.
-            'token_error_rate': c_err / c_len if c_len > 0 else 0.0,
+            'token_error_rate': c_err.sum() / c_len.sum() if c_len.sum() > 0 else 0.0, # overall token error rate of the batch
+            'uttwise_token_error_rates': c_err / c_len, # numpy array with shape (B,), uttwise token error rates
+            'uttwise_token_errors': c_err, # numpy array with shape (B,), uttwise token errors
+            'uttwise_token_lengths': c_len, # numpy array with shape (B,), uttwise token lengths
+            'uttwise_pred_token_lengths': pred_c_len, # numpy array with shape (B,), uttwise predicted token lengths
         }
         return scores
         # return self.lm.score(sentence)
@@ -129,6 +133,10 @@ def main(args): # for testing
         "target": tgt_ids,
     })
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be low 🙂
+    print(scores['uttwise_token_error_rates'])
+    print(scores['uttwise_token_errors'])
+    print(scores['uttwise_token_lengths'])
+    print(scores['uttwise_pred_token_lengths'])
     # now add some random processes
     for _ in range(100):
         rand_b, rand_t = np.random.randint(0, len(targets)), np.random.randint(0, max_len)
@@ -139,6 +147,10 @@ def main(args): # for testing
         "target": tgt_ids,
     })
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be higher 😨
+    print(scores['uttwise_token_error_rates'])
+    print(scores['uttwise_token_errors'])
+    print(scores['uttwise_token_lengths'])
+    print(scores['uttwise_pred_token_lengths'])
     # MORE RANDOM PROCESSES
     for _ in range(1000):
         rand_b, rand_t = np.random.randint(0, len(targets)), np.random.randint(0, max_len)
@@ -149,6 +161,10 @@ def main(args): # for testing
         "target": tgt_ids,
     })
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be very high 😱 
+    print(scores['uttwise_token_error_rates'])
+    print(scores['uttwise_token_errors'])
+    print(scores['uttwise_token_lengths'])
+    print(scores['uttwise_pred_token_lengths'])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

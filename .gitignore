@@ -1,6 +1,8 @@
 # custom ignore patterns
 env.yaml
 data
+wandb
+local
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
