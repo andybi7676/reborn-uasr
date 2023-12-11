@@ -107,7 +107,7 @@ class Scorer(object):
             'token_error_rate': c_err.sum() / c_len.sum() if c_len.sum() > 0 else 0.0, # overall token error rate of the batch
             'uttwise_token_error_rates': c_err / c_len, # numpy array with shape (B,), uttwise token error rates
             'uttwise_token_errors': c_err, # numpy array with shape (B,), uttwise token errors
-            'uttwise_token_lengths': c_len, # numpy array with shape (B,), uttwise token lengths
+            'uttwise_target_token_lengths': c_len, # numpy array with shape (B,), uttwise token lengths
             'uttwise_pred_token_lengths': pred_c_len, # numpy array with shape (B,), uttwise predicted token lengths
         }
         return scores
@@ -135,7 +135,7 @@ def main(args): # for testing
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be low 🙂
     print(scores['uttwise_token_error_rates'])
     print(scores['uttwise_token_errors'])
-    print(scores['uttwise_token_lengths'])
+    print(scores['uttwise_target_token_lengths'])
     print(scores['uttwise_pred_token_lengths'])
     # now add some random processes
     for _ in range(100):
@@ -149,7 +149,7 @@ def main(args): # for testing
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be higher 😨
     print(scores['uttwise_token_error_rates'])
     print(scores['uttwise_token_errors'])
-    print(scores['uttwise_token_lengths'])
+    print(scores['uttwise_target_token_lengths'])
     print(scores['uttwise_pred_token_lengths'])
     # MORE RANDOM PROCESSES
     for _ in range(1000):
@@ -163,7 +163,7 @@ def main(args): # for testing
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be very high 😱 
     print(scores['uttwise_token_error_rates'])
     print(scores['uttwise_token_errors'])
-    print(scores['uttwise_token_lengths'])
+    print(scores['uttwise_target_token_lengths'])
     print(scores['uttwise_pred_token_lengths'])
 
 if __name__ == "__main__":
