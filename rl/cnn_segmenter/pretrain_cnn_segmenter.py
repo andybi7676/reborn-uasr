@@ -18,7 +18,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 GT_valid_dataset = ExtractedFeaturesDataset(
-    path='../../data/audio/ls_100h_clean/large_clean', # /precompute_pca512
+    path='../../data/audio/ls_100h_clean/large_clean/precompute_pca512', # /precompute_pca512
     split='valid',
     aux_target_postfix='boundaries',
     aux_target_dir_path='../../data/audio/ls_100h_clean/large_clean_mfa/CLUS128',
@@ -82,7 +82,7 @@ def evaluate_cnn_segmenter(cnn_segmenter, valid_dataloader, device, epoch, BATCH
     for step, batch in enumerate(valid_dataloader):
         # samples = [valid_dataset[idx] for idx in range(step * BATCH_SIZE, (step + 1) * BATCH_SIZE)]
         # batch = valid_dataset.collater(samples)
-        logits = cnn_segmenter(batch['net_input']['features'].to(device), batch['net_input']['padding_mask'].to(device))
+        logits = cnn_segmenter(batch['net_input']['features'].to(device))
         # Flatten logits
         logits = logits.reshape(-1, logits.size(-1))
         target = batch['net_input']['aux_target'].to(device).reshape(-1)
@@ -176,7 +176,7 @@ def pretrain_cnn_segmenter():
     cnn_segmenter = CnnBoundaryPredictor(cnn_boundary_cfg).to(device)
 
     # Audio features path
-    dir_path = '../../data/audio/ls_100h_clean/large_clean' # /precompute_pca512
+    dir_path = '../../data/audio/ls_100h_clean/large_clean/precompute_pca512' # /precompute_pca512
     split = 'train'
     # Boundary labels path
     boundary_labels_path = f'../../data/audio/ls_100h_clean/large_clean/CLUS128'
@@ -189,7 +189,7 @@ def pretrain_cnn_segmenter():
     SAVE_STEPS = 100000
     LOG_STEPS = 10
     MAX_STEPS_PER_EPOCH = 1000
-    NAME=f"pretrain_nonPCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
+    NAME=f"test_pretrain_nonPCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
     SAVE_DIR = './output/cnn_segmenter/' + NAME
 
     # Create save dir
@@ -282,7 +282,7 @@ def pretrain_cnn_segmenter():
 
             # samples = [dataset[idx] for idx in range(step * BATCH_SIZE, (step + 1) * BATCH_SIZE)]
             # batch = dataset.collater(samples)
-            logits = cnn_segmenter(batch['net_input']['features'].to(device), batch['net_input']['padding_mask'].to(device))
+            logits = cnn_segmenter(batch['net_input']['features'].to(device))
     
             # print(logits.shape)
 
@@ -332,7 +332,7 @@ if __name__ == '__main__':
     pretrain_cnn_segmenter()
     
     # Evaluate on GT
-    # # Set device
+    # Set device
     # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # print(f'Using device: {device}')
 
@@ -363,6 +363,11 @@ if __name__ == '__main__':
     # )
     # evaluate_cnn_segmenter(model, valid_dataloader, device, 0, BATCH_SIZE=128, wandb_log=False, print_result=True, log_file=result_log_file, SAVE_DIR=output_dir)
     # evaluate_cnn_segmenter(model, GT_valid_dataloader, device, 0, BATCH_SIZE=128, name='GT_valid', wandb_log=False, print_result=True, log_file=result_log_file, SAVE_DIR=output_dir)
+
+    # result_log_file.write('--- Wav2VecU ---\n')
+    # pred_file_path = output_dir + '/valid_target.boundaries'
+    # gt_file_path = output_dir + '/GT_valid_target.boundaries'
+    # evaluate_phonemeseg(pred_file_path, gt_file_path, result_log_file)
 
     # result_log_file.write('--- valid ---\n')
     # pred_file_path = output_dir + '/valid_pred.boundaries'
