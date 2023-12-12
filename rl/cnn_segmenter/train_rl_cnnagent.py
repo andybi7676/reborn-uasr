@@ -18,6 +18,8 @@ import numpy as np
 from omegaconf import OmegaConf
 from fairseq import checkpoint_utils, tasks, utils
 
+from sklearn.metrics import precision_score, recall_score, f1_score
+
 import wandb
 
 class RLCnnAgentConfig(object):
@@ -25,10 +27,13 @@ class RLCnnAgentConfig(object):
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
     pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/rl_agent/uttwise_reward_fixsample"
+    save_dir: str = "./output/rl_agent/uttwise_reward_ppl_tokerr"
     env: str = "../../env.yaml"
     gamma: float = 0.99
     wandb_log: bool = True
+    utterwise_lm_ppl_coeff: float = 1.0
+    utterwise_token_error_rate_coeff: float = 1.0
+    length_ratio_coeff: float = 0.0
 
 # class Wav2vec_U_with_CnnSegmenter(Wav2vec_U):
 #     def __init__(self, cfg: Wav2vec_UConfig, target_dict):
@@ -90,6 +95,10 @@ class TrainRlCnnAgent(object):
                 name=cfg.save_dir.split('/')[-1],
                 config=cfg,
             )
+        # Create save directory
+        if not os.path.exists(self.cfg.save_dir):
+            os.makedirs(self.cfg.save_dir)
+        self.log_file = open(cfg.save_dir + '/log.txt', 'w')
 
     def get_score(self, pred_logits, padding_mask, tgt_ids=None):
         """
@@ -97,9 +106,14 @@ class TrainRlCnnAgent(object):
         Return:
             scores:
                 batchwise_lm_ppl: float
-                token_error_rate: float (only when tgt_ids is not None)
-                vocab_seen_percentage: float
+                uttwise_lm_ppls: list of float
                 framewise_lm_scores: list of list of float
+                vocab_seen_percentage: float
+                token_error_rate: float (only when tgt_ids is not None)
+                uttwise_token_error_rates: numpy array with shape (B,)
+                uttwise_token_errors: numpy array with shape (B,)
+                uttwise_target_token_lengths: numpy array with shape (B,)
+                uttwise_pred_token_lengths: numpy array with shape (B,)
         """
         
         result = {
@@ -109,22 +123,7 @@ class TrainRlCnnAgent(object):
         if tgt_ids is not None:
             result["target"] = tgt_ids
         
-        scores = self.scorer.score(result, rm_sil=True)
-        
-        # print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be very high 😱 
-        # ##############################
-        # print('-' * 10)
-        # print('Batchwise LM PPL (should be very high): ', scores['batchwise_lm_ppl'])
-        # # Mean of uttwise LM PPL (list of float)
-        # print('Mean uttwise LM PPL: ', sum(scores['uttwise_lm_ppls']) / len(scores['uttwise_lm_ppls']))
-        # # print('Uttwise LM PPL: ', scores['uttwise_lm_ppls'][:5])
-        # if tgt_ids is not None:
-        #     print('Token error rate: ', scores['token_error_rate'])
-        # print('Vocab seen percentage: ', scores['vocab_seen_percentage'])
-        # print('Mean framewise LM scores: ', sum([(sum(sublist) / len(sublist))  for sublist in scores['framewise_lm_scores']]) / len(scores['framewise_lm_scores']))
-        # # print('Framewise LM scores: ', scores['framewise_lm_scores'][0][:5])
-        # print('-' * 10)
-        # ##############################
+        scores = self.scorer.score(result, rm_sil=False)
 
         return scores
     
@@ -139,12 +138,18 @@ class TrainRlCnnAgent(object):
         uttwise_lm_ppls = scores['uttwise_lm_ppls']
         # vocab_seen_percentage = scores['vocab_seen_percentage']
         # framewise_lm_scores = scores['framewise_lm_scores']
+        uttwise_token_error_rates = scores['uttwise_token_error_rates']
+        length_ratio = scores['uttwise_pred_token_lengths'] / scores['uttwise_target_token_lengths']
 
         # flatten framewise_lm_scores
         # framewise_lm_scores = [item for sublist in framewise_lm_scores for item in sublist]
-        
         # framewise_reward = torch.tensor(framewise_lm_scores).to(self.device)
         uttwise_lm_ppls = torch.tensor(uttwise_lm_ppls).to(self.device)
+        uttwise_token_error_rates = torch.tensor(uttwise_token_error_rates).to(self.device)
+        length_ratio = torch.tensor(length_ratio).to(self.device)
+
+        length_ratio_reward = (length_ratio - 1)
+
 
         # print(framewise_reward.shape)
         # print(uttwise_lm_ppls.shape)
@@ -152,6 +157,8 @@ class TrainRlCnnAgent(object):
         # reward standardization
         # framewise_reward = (framewise_reward - framewise_reward.mean()) / framewise_reward.std()
         uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
+        uttwise_token_error_rates = (uttwise_token_error_rates - uttwise_token_error_rates.mean()) / uttwise_token_error_rates.std()
+        length_ratio_reward = (length_ratio_reward - length_ratio_reward.mean()) / length_ratio_reward.std()
         
         
         # reward gained at boundary=1
@@ -166,7 +173,7 @@ class TrainRlCnnAgent(object):
                     # count += 1
                 if boundary[i, j] == -1:
                     # rewards[i, j] = framewise_reward[count]
-                    rewards[i, j] = -uttwise_lm_ppls[i]
+                    rewards[i, j] = -uttwise_lm_ppls[i]*self.cfg.utterwise_lm_ppl_coeff - uttwise_token_error_rates[i]*self.cfg.utterwise_token_error_rate_coeff + length_ratio_reward[i]*self.cfg.length_ratio_coeff
                 #     count += 1
                     break
         # print(count)
@@ -185,6 +192,110 @@ class TrainRlCnnAgent(object):
         # return rewards
         return cum_rewards
 
+    def log_score(self, scores, total_loss, mean_rewards, step, dataset_len, split='train', boundary_scores=None):
+        """
+        Log scores
+        scores:
+            batchwise_lm_ppl: float
+            uttwise_lm_ppls: list of float
+            framewise_lm_scores: list of list of float
+            vocab_seen_percentage: float
+            token_error_rate: float (only when tgt_ids is not None)
+            uttwise_token_error_rates: numpy array with shape (B,)
+            uttwise_token_errors: numpy array with shape (B,)
+            uttwise_target_token_lengths: numpy array with shape (B,)
+            uttwise_pred_token_lengths: numpy array with shape (B,)
+        Log:
+            batchwise_lm_ppl: float
+            mean uttwise_lm_ppl: float
+            mean framewise_lm_scores: float
+            vocab_seen_percentage: float
+            token_error_rate: float (only when tgt_ids is not None)
+            mean_uttwise_token_error_rates: float
+            mean_length_ratio: float
+            mean_pred_token_lengths: float
+        """
+
+        batchwise_lm_ppl = scores['batchwise_lm_ppl']
+        uttwise_lm_ppls = scores['uttwise_lm_ppls']
+        mean_uttwise_lm_ppl = sum(uttwise_lm_ppls) / len(uttwise_lm_ppls)
+        framewise_lm_scores = scores['framewise_lm_scores']
+        mean_framewise_lm_scores = sum([(sum(sublist) / len(sublist))  for sublist in framewise_lm_scores]) / len(framewise_lm_scores)
+        vocab_seen_percentage = scores['vocab_seen_percentage']
+        token_error_rate = scores['token_error_rate']
+        uttwise_token_error_rates = scores['uttwise_token_error_rates']
+        mean_uttwise_token_error_rates = sum(uttwise_token_error_rates) / len(uttwise_token_error_rates)
+        uttwise_target_token_lengths = scores['uttwise_target_token_lengths']
+        uttwise_pred_token_lengths = scores['uttwise_pred_token_lengths']
+        mean_length_ratio = sum(uttwise_pred_token_lengths / uttwise_target_token_lengths) / len(uttwise_target_token_lengths)
+        mean_pred_token_lengths = sum(uttwise_pred_token_lengths) / len(uttwise_pred_token_lengths)
+
+        log_dict = {
+            f'{split}_loss': total_loss,
+            f'{split}_mean_reward': mean_rewards,
+            f'{split}_batchwise_lm_ppl': batchwise_lm_ppl,
+            f'{split}_mean_uttwise_lm_ppl': mean_uttwise_lm_ppl,
+            f'{split}_mean_framewise_lm_scores': mean_framewise_lm_scores,
+            f'{split}_vocab_seen_percentage': vocab_seen_percentage,
+            f'{split}_token_error_rate': token_error_rate,
+            f'{split}_mean_uttwise_token_error_rates': mean_uttwise_token_error_rates,
+            f'{split}_mean_length_ratio': mean_length_ratio,
+            f'{split}_mean_pred_token_lengths': mean_pred_token_lengths,
+        }
+        if boundary_scores is not None:
+            log_dict.update({
+                f'{split}_boundary_f1': boundary_scores['f1'],
+                f'{split}_boundary_precision': boundary_scores['precision'],
+                f'{split}_boundary_recall': boundary_scores['recall'],
+            })
+
+        print(f'Step {step + 1}/{dataset_len}')
+        for key in log_dict:
+            print(f'{key}: {log_dict[key]}')
+        # print(f'Framewise LM scores: {framewise_lm_scores[0][:5]}')
+        # check if there is empty list in framewise_lm_scores
+        # for sublist in framewise_lm_scores:
+        #     if len(sublist) == 0:
+        #         print(f'Epmty list in framewise_lm_scores {framewise_lm_scores.index(sublist)}')
+        # print(f'Framewise length: {[len(sublist) for sublist in framewise_lm_scores]}')
+        print('-' * 10)
+
+        self.log_file.write(f'Step {step + 1}/{dataset_len}\n')
+        for key in log_dict:
+            self.log_file.write(f'{key}: {log_dict[key]}\n')
+            
+        self.log_file.write('-' * 10 + '\n')
+
+        if self.cfg.wandb_log:
+            wandb.log(log_dict)
+
+    def count_boundary_scores(self, boundary_target, boundary):
+        """
+        Return:
+            f1: float
+            precision: float
+            recall: float
+        """
+        target = boundary_target.cpu().numpy().reshape(-1)
+        prediction = boundary.cpu().numpy().reshape(-1)
+
+        # mask out padding
+        mask = target != -1
+        target = target[mask]
+        prediction = prediction[mask]
+
+        f1 = f1_score(target, prediction)
+        precision = precision_score(target, prediction)
+        recall = recall_score(target, prediction)
+
+        boundary_scores = {
+            'f1': f1,
+            'precision': precision,
+            'recall': recall,
+        }
+
+        return boundary_scores
+
 
     def train_rl_agent_epoch(self, model, dataloader, optimizer, device, scheduler, log_steps, gradient_accumulation_steps):
         """
@@ -202,17 +313,17 @@ class TrainRlCnnAgent(object):
             features = sample['net_input']['features']
             features = features.to(device)
 
-            # Get aux targets
-            # aux_targets = sample['net_input']['aux_target']
-            # aux_targets = aux_targets.to(device)
+            # Get aux targets (boundary labels)
+            aux_targets = sample['net_input']['aux_target']
+            aux_targets = aux_targets.to(device)
 
             # Get padding mask
             padding_mask = sample['net_input']['padding_mask']
             padding_mask = padding_mask.to(device)
 
-            # # Get target
-            # targets = sample['target']
-            # targets = targets.to(device)
+            # Get target
+            targets = sample['target']
+            targets = targets.to(device)
 
             # # Get target length
             # target_lengths = sample['target_lengths']
@@ -233,23 +344,15 @@ class TrainRlCnnAgent(object):
             )
 
             batch_size = dense_x.size(0)
-            # print(boundary_logits.shape)
-            # print(boundary.shape)
-            # boundary_logits = boundary_logits.reshape(-1, 2)
-            # boundary = boundary.reshape(-1)
-            # mask
-            # boundary_logits = boundary_logits[boundary != -1]
-            # boundary = boundary[boundary != -1]
 
             # Get loss
             loss = F.cross_entropy(boundary_logits.reshape(-1, 2), boundary.reshape(-1), ignore_index=-1, reduction='none')
-            # print(loss.shape)
-            # print(loss)
+
             # reshape to batchwise
             loss = loss.reshape(batch_size, -1)
 
             # Get scores
-            scores = self.get_score(dense_x, dense_padding_mask)
+            scores = self.get_score(dense_x, dense_padding_mask, tgt_ids=targets)
 
             # Compute reward
             rewards = self.compute_rewards(scores, boundary)
@@ -268,39 +371,8 @@ class TrainRlCnnAgent(object):
 
             # Log
             if (step + 1) % log_steps == 0:
-                batchwise_lm_ppl = scores['batchwise_lm_ppl']
-                uttwise_lm_ppls = scores['uttwise_lm_ppls']
-                mean_uttwise_lm_ppl = sum(uttwise_lm_ppls) / len(uttwise_lm_ppls)
-                vocab_seen_percentage = scores['vocab_seen_percentage']
-                framewise_lm_scores = scores['framewise_lm_scores']
-                mean_framewise_lm_scores = sum([(sum(sublist) / len(sublist))  for sublist in framewise_lm_scores if len(sublist) > 0]) / len(framewise_lm_scores)
-
-                print(f'Step {step + 1}/{len(dataloader)}')
-                print(f'Loss: {loss.sum().item()}')
-                print(f'Mean reward: {rewards.mean().item()}')
-                print(f'Batchwise LM PPL: {batchwise_lm_ppl}')
-                print(f'Mean uttwise LM PPL: {mean_uttwise_lm_ppl}')
-                print(f'Vocab seen percentage: {vocab_seen_percentage}')
-                print(f'Mean framewise LM scores: {mean_framewise_lm_scores}')
-                print(f'Framewise LM scores: {framewise_lm_scores[0][:5]}')
-                # check if there is empty list in framewise_lm_scores
-                for sublist in framewise_lm_scores:
-                    if len(sublist) == 0:
-                        print(f'Epmty list in framewise_lm_scores {framewise_lm_scores.index(sublist)}')
-                print('-' * 10)
-                if self.cfg.wandb_log:
-                    wandb.log(
-                        {
-                            "loss": loss.sum().item(),
-                            "reward": rewards.mean().item(),
-                            "train": {
-                                "batchwise_lm_ppl": batchwise_lm_ppl,
-                                "uttwise_lm_ppls": mean_uttwise_lm_ppl,
-                                "vocab_seen_percentage": vocab_seen_percentage,
-                                "framewise_lm_scores": mean_framewise_lm_scores,
-                            }
-                        }
-                    )
+                self.log_score(scores, loss.mean().item(), rewards.mean().item(), step, len(dataloader))
+                
 
     def validate_rl_agent_epoch(self, model, dataloader, device):
         """
@@ -318,13 +390,17 @@ class TrainRlCnnAgent(object):
                 features = sample['net_input']['features']
                 features = features.to(device)
 
-                # Get aux targets
-                # aux_targets = sample['net_input']['aux_target']
-                # aux_targets = aux_targets.to(device)
+                # Get aux targets (boundary labels)
+                aux_targets = sample['net_input']['aux_target']
+                aux_targets = aux_targets.to(device)
 
                 # Get padding mask
                 padding_mask = sample['net_input']['padding_mask']
                 padding_mask = padding_mask.to(device)
+
+                # Get target
+                targets = sample['target']
+                targets = targets.to(device)
 
                 # Get boundary logits
                 features, padding_mask, boundary, boundary_logits = model.segmenter.pre_segment(features, padding_mask, return_boundary=True)
@@ -340,35 +416,28 @@ class TrainRlCnnAgent(object):
                     orig_dense_x, orig_dense_padding_mask
                 )
 
-                # Log
-                print('Validation')
-                print(f'Step {step + 1}/{len(dataloader)}')
+                batch_size = dense_x.size(0)
+
+                # Count boundary scores
+                boundary_scores = self.count_boundary_scores(aux_targets, boundary)
+
+                # Get loss
+                loss = F.cross_entropy(boundary_logits.reshape(-1, 2), boundary.reshape(-1), ignore_index=-1, reduction='none')
+                loss = loss.reshape(batch_size, -1)
 
                 # Get scores
-                scores = self.get_score(dense_x, dense_padding_mask)
+                scores = self.get_score(dense_x, dense_padding_mask, tgt_ids=targets)
 
-                batchwise_lm_ppl = scores['batchwise_lm_ppl']
-                uttwise_lm_ppls = scores['uttwise_lm_ppls']
-                mean_uttwise_lm_ppl = sum(uttwise_lm_ppls) / len(uttwise_lm_ppls)
-                vocab_seen_percentage = scores['vocab_seen_percentage']
-                framewise_lm_scores = scores['framewise_lm_scores']
-                mean_framewise_lm_scores = sum([(sum(sublist) / len(sublist))  for sublist in framewise_lm_scores if len(sublist) > 0]) / len(framewise_lm_scores)
+                # Compute reward
+                rewards = self.compute_rewards(scores, boundary)
 
-                print(f'Batchwise LM PPL: {batchwise_lm_ppl}')
-                print(f'Mean uttwise LM PPL: {mean_uttwise_lm_ppl}')
-                print(f'Vocab seen percentage: {vocab_seen_percentage}')
-                print(f'Mean framewise LM scores: {mean_framewise_lm_scores}')
-                
-                print('-' * 10)
-                if self.cfg.wandb_log:
-                    wandb.log(
-                        { "val": {
-                            "batchwise_lm_ppl": batchwise_lm_ppl,
-                            "uttwise_lm_ppls": mean_uttwise_lm_ppl,
-                            "vocab_seen_percentage": vocab_seen_percentage,
-                            "framewise_lm_scores": mean_framewise_lm_scores,
-                        }}
-                    )
+                # Get loss * rewards
+                loss = loss * rewards
+
+                # Log
+                print('Validation')
+                self.log_file.write('Validation\n')
+                self.log_score(scores, loss.mean().item(), rewards.mean().item(), step, len(dataloader), split='val', boundary_scores=boundary_scores)
 
 
     def register_and_setup_task(self, task_cfg_fpath, env):
@@ -435,6 +504,8 @@ class TrainRlCnnAgent(object):
         train_dataset = ExtractedFeaturesDataset(
             path=dir_path,
             split='train',
+            labels='logit_segment',
+            label_dict=self.scorer.dictionary,
             aux_target_postfix='boundaries',
             aux_target_dir_path=boundary_labels_path,
         )
@@ -442,6 +513,8 @@ class TrainRlCnnAgent(object):
         valid_dataset = ExtractedFeaturesDataset(
             path=dir_path,
             split='valid',
+            labels='logit_segment',
+            label_dict=self.scorer.dictionary,
             aux_target_postfix='boundaries',
             aux_target_dir_path=boundary_labels_path,
         )
@@ -455,7 +528,7 @@ class TrainRlCnnAgent(object):
         LOG_STEPS = 1
         STEPS_PER_EPOCH = 222
         MAX_STEPS_PER_EPOCH = None
-        MAX_VAL_STEPS = 10
+        MAX_VAL_STEPS = None
 
         # wandb config update
         self.cfg.batch_size = BATCH_SIZE
@@ -478,7 +551,6 @@ class TrainRlCnnAgent(object):
         # Scheduler
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=STEPS_PER_EPOCH * NUM_EPOCHS)
 
-
         # Load data
         self.train_dataloader = DataLoader(
             train_dataset,
@@ -494,10 +566,6 @@ class TrainRlCnnAgent(object):
             shuffle=False,
             batch_size=BATCH_SIZE,
         )
-
-        # Create save directory
-        if not os.path.exists(self.cfg.save_dir):
-            os.makedirs(self.cfg.save_dir)
 
         # Validate
         self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
