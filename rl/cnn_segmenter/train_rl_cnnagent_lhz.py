@@ -21,14 +21,14 @@ from fairseq import checkpoint_utils, tasks, utils
 import wandb
 
 class RLCnnAgentConfig(object):
-    kenlm_fpath: str = "../../../data/text/prep_g2p/phones/lm.phones.filtered.04.bin"
-    dict_fpath: str = "../../dummy_data/dict.txt"
-    pretrain_segmenter_path: str = "../output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
-    pretrain_wav2vecu_path: str = "../../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    reference_fpath: str = ""
-    save_dir: str = "../output/local/rl_agent/multi_reward_fixsample"
-    env: str = "../../../env.yaml"
+    kenlm_fpath: str = "../../data/text/ls_wo_lv/prep_g2p/phones/lm.phones.filtered.04.bin"
+    dict_fpath: str = "../dummy_data/dict.txt"
+    pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val"
+    env: str = "../../env.yaml"
     gamma: float = 0.99
+    ter_tolerance: float = 0.10
     wandb_log: bool = True
 
 class TrainRlCnnAgent(object):
@@ -46,7 +46,7 @@ class TrainRlCnnAgent(object):
                 config=cfg,
             )
 
-    def get_score(self, pred_logits, padding_mask, tgt_ids=None):
+    def get_score(self, pred_logits, padding_mask, target=None):
         """
         Reward function for RL agent
         Return:
@@ -61,10 +61,10 @@ class TrainRlCnnAgent(object):
             "logits": pred_logits,
             "padding_mask": padding_mask,
         }
-        if tgt_ids is not None:
-            result["target"] = tgt_ids
+        if target is not None:
+            result["target"] = target
         
-        scores = self.scorer.score(result, rm_sil=True)
+        scores = self.scorer.score(result)
         
         # print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be very high 😱 
         # ##############################
@@ -92,6 +92,10 @@ class TrainRlCnnAgent(object):
         # Compute reward: 
         # batchwise_lm_ppl = scores['batchwise_lm_ppl']
         uttwise_lm_ppls = scores['uttwise_lm_ppls']
+        target_uttwise_lm_ppls = scores['target_uttwise_lm_ppls']
+        uttwise_token_error_rates = scores['uttwise_token_error_rates']
+        uttwise_pred_token_lengths = scores['uttwise_pred_token_lengths']
+        uttwise_target_token_lengths = scores['uttwise_target_token_lengths']
         # vocab_seen_percentage = scores['vocab_seen_percentage']
         # framewise_lm_scores = scores['framewise_lm_scores']
 
@@ -99,14 +103,37 @@ class TrainRlCnnAgent(object):
         # framewise_lm_scores = [item for sublist in framewise_lm_scores for item in sublist]
         
         # framewise_reward = torch.tensor(framewise_lm_scores).to(self.device)
-        uttwise_lm_ppls = torch.tensor(uttwise_lm_ppls).to(self.device)
+        unpenalized_mask = (uttwise_token_error_rates < self.cfg.ter_tolerance)
+        uttwise_token_error_rates[unpenalized_mask] = 0.0
+        ter_penalty = uttwise_token_error_rates
+        
+        uttwise_lm_ppls = np.array(uttwise_lm_ppls)
+        target_uttwise_lm_ppls = np.array(target_uttwise_lm_ppls)
+        
+        if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
+            uttwise_rewards = target_uttwise_lm_ppls - uttwise_lm_ppls
+            # clip rewards
+            uttwise_rewards = np.clip(uttwise_rewards, -2, 2)
+            positive_rewards_mask = (uttwise_rewards >= 0)
+            uttwise_rewards[positive_rewards_mask]  = uttwise_rewards[positive_rewards_mask]  * (1 - ter_penalty)[positive_rewards_mask]
+            uttwise_rewards[~positive_rewards_mask] = uttwise_rewards[~positive_rewards_mask] * (1 + ter_penalty)[~positive_rewards_mask]
+        else:
+            normed_uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
+            uttwise_rewards = -normed_uttwise_lm_ppls
+        
+        # print(uttwise_lm_ppls)
+        # print(target_uttwise_lm_ppls)
+        # print(uttwise_token_error_rates)
+        # print(ter_penalty)
+        # print(uttwise_rewards)
+        # print(normed_uttwise_lm_ppls)
+        # assert False, "stop here"
 
         # print(framewise_reward.shape)
         # print(uttwise_lm_ppls.shape)
 
         # reward standardization
         # framewise_reward = (framewise_reward - framewise_reward.mean()) / framewise_reward.std()
-        uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
         
         
         # reward gained at boundary=1
@@ -121,8 +148,8 @@ class TrainRlCnnAgent(object):
                     # count += 1
                 if boundary[i, j] == -1:
                     # rewards[i, j] = framewise_reward[count]
-                    rewards[i, j] = -uttwise_lm_ppls[i]
-                #     count += 1
+                    rewards[i, j] = uttwise_rewards[i]
+                    # count += 1
                     break
         # print(count)
         # assert count == framewise_reward.size(0)
@@ -146,6 +173,9 @@ class TrainRlCnnAgent(object):
         """
         model.segmenter.boundary_predictor.train()
         model.zero_grad()
+        example = dataloader.dataset[0]
+        if example.get("target", None) is not None:
+            print("Training with target")
 
         for step, sample in enumerate(dataloader):
 
@@ -165,7 +195,7 @@ class TrainRlCnnAgent(object):
             padding_mask = padding_mask.to(device)
 
             # # Get target
-            # targets = sample['target']
+            target = sample.get("target", None)
             # targets = targets.to(device)
 
             # # Get target length
@@ -203,7 +233,7 @@ class TrainRlCnnAgent(object):
             loss = loss.reshape(batch_size, -1)
 
             # Get scores
-            scores = self.get_score(dense_x, dense_padding_mask)
+            scores = self.get_score(dense_x, dense_padding_mask, target=target)
 
             # Compute reward
             rewards = self.compute_rewards(scores, boundary)
@@ -271,7 +301,8 @@ class TrainRlCnnAgent(object):
                 # Get features
                 features = sample['net_input']['features']
                 features = features.to(device)
-
+                # # Get target
+                target = sample.get("target", None)
                 # Get aux targets
                 # aux_targets = sample['net_input']['aux_target']
                 # aux_targets = aux_targets.to(device)
@@ -299,7 +330,7 @@ class TrainRlCnnAgent(object):
                 print(f'Step {step + 1}/{len(dataloader)}')
 
                 # Get scores
-                scores = self.get_score(dense_x, dense_padding_mask)
+                scores = self.get_score(dense_x, dense_padding_mask, target=target)
 
                 batchwise_lm_ppl = scores['batchwise_lm_ppl']
                 uttwise_lm_ppls = scores['uttwise_lm_ppls']
@@ -388,6 +419,8 @@ class TrainRlCnnAgent(object):
         train_dataset = ExtractedFeaturesDataset(
             path=dir_path,
             split='train',
+            labels='w2vu_logit_segmented',
+            label_dict=self.scorer.dictionary,
             aux_target_postfix='boundaries',
             aux_target_dir_path=boundary_labels_path,
         )
@@ -395,20 +428,22 @@ class TrainRlCnnAgent(object):
         valid_dataset = ExtractedFeaturesDataset(
             path=dir_path,
             split='valid',
+            labels='w2vu_logit_segmented',
+            label_dict=self.scorer.dictionary,
             aux_target_postfix='boundaries',
             aux_target_dir_path=boundary_labels_path,
         )
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 10
+        NUM_EPOCHS = 20
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1
         LOG_STEPS = 1
         STEPS_PER_EPOCH = 222
         MAX_STEPS_PER_EPOCH = None
-        MAX_VAL_STEPS = 10
+        MAX_VAL_STEPS = 20
 
         # wandb config update
         self.cfg.batch_size = BATCH_SIZE
@@ -453,7 +488,7 @@ class TrainRlCnnAgent(object):
             os.makedirs(self.cfg.save_dir)
 
         # Validate
-        self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
+        # self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
 
         # Train Policy Gradient
         for epoch in range(NUM_EPOCHS):
@@ -477,6 +512,7 @@ class TrainRlCnnAgent(object):
 
 if __name__ == "__main__":
     rl_cfg = RLCnnAgentConfig()
+    print(rl_cfg)
     train_rl_agent = TrainRlCnnAgent(rl_cfg)
     train_rl_agent.train_rl_agent() 
 
