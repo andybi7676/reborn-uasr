@@ -25,12 +25,12 @@ class RLCnnAgentConfig(object):
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
     pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val_with_merge_penalty"
+    save_dir: str = "./output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val_test_reward_acceleration"
     env: str = "../../env.yaml"
     gamma: float = 0.99
     ter_tolerance: float = 0.10
     logit_segment: bool = True
-    apply_merge_penalty: bool = True
+    apply_merge_penalty: bool = False
     wandb_log: bool = True
 
 class TrainRlCnnAgent(object):
@@ -126,40 +126,32 @@ class TrainRlCnnAgent(object):
         else:
             normed_uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
             uttwise_rewards = -normed_uttwise_lm_ppls
+        uttwise_rewards = torch.tensor(uttwise_rewards, dtype=torch.float32).to(self.device)
         
-        # print(uttwise_lm_ppls)
-        # print(target_uttwise_lm_ppls)
-        # print(uttwise_token_error_rates)
-        # print(ter_penalty)
-        # print(uttwise_rewards)
-        # print(normed_uttwise_lm_ppls)
-        # assert False, "stop here"
-
-        # print(framewise_reward.shape)
-        # print(uttwise_lm_ppls.shape)
-
         # reward standardization
         # framewise_reward = (framewise_reward - framewise_reward.mean()) / framewise_reward.std()
         
-        
         # reward gained at boundary=1
         rewards = torch.zeros_like(boundary, dtype=torch.float32).to(self.device)
-
         # for each boundary=1, reward[pos] = framewise_reward[count]
         # count = 0
-        for i in range(boundary.size(0)):
-            for j in range(boundary.size(1)):
-                # if boundary[i, j] == 1:
-                    # rewards[i, j] = framewise_reward[count]
-                    # count += 1
-                if boundary[i, j] == -1:
-                    # rewards[i, j] = framewise_reward[count]
-                    rewards[i, j] = uttwise_rewards[i]
-                    # count += 1
-                    break
-        # print(count)
-        # assert count == framewise_reward.size(0)
-        # print(rewards)
+        boundary_for_reward = -torch.ones(boundary.size(0), boundary.size(1)+1, dtype=boundary.dtype).to(self.device)
+        boundary_for_reward[:, :-1] = boundary
+        boundary_for_reward[:,-1] = -1
+        boundary_padding_mask = boundary_for_reward == -1
+        boundary_end_mask = boundary_padding_mask[:, 1:] & (~boundary_padding_mask[:, :-1])
+        rewards[boundary_end_mask] = uttwise_rewards
+        # bsz, tsz = boundary.size(0), boundary.size(1)
+        # for i in range(bsz):
+        #     for j in range(tsz):
+        #         # if boundary[i, j] == 1:
+        #             # rewards[i, j] = framewise_reward[count]
+        #             # count += 1
+        #         if boundary[i, j] == -1 or j == tsz - 1:
+        #             # rewards[i, j] = framewise_reward[count]
+        #             rewards[i, j] = uttwise_rewards[i]
+        #             # count += 1
+        #             break
 
         # cumulative reward (gamma=0.99)
         cum_rewards = torch.zeros_like(rewards, dtype=torch.float32).to(self.device)
