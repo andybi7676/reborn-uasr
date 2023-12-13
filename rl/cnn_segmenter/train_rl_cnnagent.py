@@ -27,7 +27,7 @@ class RLCnnAgentConfig(object):
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
     pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/rl_agent/uttwise_reward_ppl_tokerr"
+    save_dir: str = "./output/rl_agent/uttwise_reward_ppl_tokerr_fixpresegment"
     env: str = "../../env.yaml"
     gamma: float = 0.99
     wandb_log: bool = True
@@ -247,6 +247,7 @@ class TrainRlCnnAgent(object):
                 f'{split}_boundary_f1': boundary_scores['f1'],
                 f'{split}_boundary_precision': boundary_scores['precision'],
                 f'{split}_boundary_recall': boundary_scores['recall'],
+                f'{split}_boundary_1s_ratio': boundary_scores['1s_ratio'],
             })
 
         print(f'Step {step + 1}/{dataset_len}')
@@ -275,6 +276,7 @@ class TrainRlCnnAgent(object):
             f1: float
             precision: float
             recall: float
+            1s_ratio (predicted/target): float 
         """
         target = boundary_target.cpu().numpy().reshape(-1)
         prediction = boundary.cpu().numpy().reshape(-1)
@@ -288,10 +290,13 @@ class TrainRlCnnAgent(object):
         precision = precision_score(target, prediction)
         recall = recall_score(target, prediction)
 
+        boundary_1s_ratio = prediction.sum() / target.sum()
+
         boundary_scores = {
             'f1': f1,
             'precision': precision,
             'recall': recall,
+            '1s_ratio': boundary_1s_ratio,
         }
 
         return boundary_scores
@@ -403,7 +408,7 @@ class TrainRlCnnAgent(object):
                 targets = targets.to(device)
 
                 # Get boundary logits
-                features, padding_mask, boundary, boundary_logits = model.segmenter.pre_segment(features, padding_mask, return_boundary=True)
+                features, padding_mask, boundary, boundary_logits = model.segmenter.pre_segment(features, padding_mask, return_boundary=True, deterministic=True)
 
                 orig_size = features.size(0) * features.size(1) - padding_mask.sum()
 
@@ -521,7 +526,7 @@ class TrainRlCnnAgent(object):
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 10
+        NUM_EPOCHS = 20
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1

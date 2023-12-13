@@ -120,7 +120,7 @@ class CnnSegmenter(Segmenter):
         # max boundary number
         # print("boundary", boundary)
         # print(torch.sum(boundary==1, dim=1))
-        new_tsz = int(torch.max(torch.sum(boundary==1, dim=1)).item())+1
+        new_tsz = int(torch.max(torch.sum(boundary==1, dim=1)).item())+1 # add <bos>
         new_logits = logits.new_zeros(bsz, new_tsz, csz)
         new_pad = padding_mask.new_zeros(bsz, new_tsz)
         
@@ -131,15 +131,18 @@ class CnnSegmenter(Segmenter):
             count = 0
             for t in range(tsz):
                 if padding_mask[b, t] == 1:
-                    new_pad[b, new_idx] = True
-                    continue
+                    break
                 if boundary[b, t] == 1:
                     new_logits[b, new_idx] /= count
                     new_idx += 1
                     count = 0
                 new_logits[b, new_idx] += logits[b, t]
                 count += 1
-            new_logits[b, new_idx] /= count
+            if count > 0:
+                # last segment
+                new_logits[b, new_idx] /= count
+                new_idx += 1
+                count = 0
             if new_idx < new_tsz:
                 pad = new_tsz - new_idx
                 new_logits[b, -pad:] = 0
