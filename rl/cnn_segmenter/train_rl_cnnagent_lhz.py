@@ -25,10 +25,12 @@ class RLCnnAgentConfig(object):
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
     pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val"
+    save_dir: str = "./output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val_with_merge_penalty"
     env: str = "../../env.yaml"
     gamma: float = 0.99
     ter_tolerance: float = 0.10
+    logit_segment: bool = True
+    apply_merge_penalty: bool = True
     wandb_log: bool = True
 
 class TrainRlCnnAgent(object):
@@ -39,6 +41,8 @@ class TrainRlCnnAgent(object):
         )
         self.scorer = Scorer(self.score_cfg)
         self.cfg = cfg
+        self.apply_merge_penalty = cfg.apply_merge_penalty
+        self.logit_segment = cfg.logit_segment
         if self.cfg.wandb_log:
             wandb.init(
                 project="uasr-rl",
@@ -83,7 +87,7 @@ class TrainRlCnnAgent(object):
 
         return scores
     
-    def compute_rewards(self, scores, boundary):
+    def compute_rewards(self, scores, boundary, merge_ratio):
         """
         Compute rewards from scores
         Return:
@@ -91,6 +95,8 @@ class TrainRlCnnAgent(object):
         """
         # Compute reward: 
         # batchwise_lm_ppl = scores['batchwise_lm_ppl']
+        if not self.apply_merge_penalty:
+            merge_ratio = np.zeros(merge_ratio.shape)
         uttwise_lm_ppls = scores['uttwise_lm_ppls']
         target_uttwise_lm_ppls = scores['target_uttwise_lm_ppls']
         uttwise_token_error_rates = scores['uttwise_token_error_rates']
@@ -113,10 +119,10 @@ class TrainRlCnnAgent(object):
         if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
             uttwise_rewards = target_uttwise_lm_ppls - uttwise_lm_ppls
             # clip rewards
-            uttwise_rewards = np.clip(uttwise_rewards, -2, 2)
+            uttwise_rewards = np.clip(uttwise_rewards, -5, 5)
             positive_rewards_mask = (uttwise_rewards >= 0)
-            uttwise_rewards[positive_rewards_mask]  = uttwise_rewards[positive_rewards_mask]  * (1 - ter_penalty)[positive_rewards_mask]
-            uttwise_rewards[~positive_rewards_mask] = uttwise_rewards[~positive_rewards_mask] * (1 + ter_penalty)[~positive_rewards_mask]
+            uttwise_rewards[positive_rewards_mask]  = uttwise_rewards[positive_rewards_mask]  * (1 - ter_penalty[positive_rewards_mask])  * (1 - merge_ratio[positive_rewards_mask])
+            uttwise_rewards[~positive_rewards_mask] = uttwise_rewards[~positive_rewards_mask] * (1 + ter_penalty[~positive_rewards_mask]) * (1 + merge_ratio[~positive_rewards_mask])
         else:
             normed_uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
             uttwise_rewards = -normed_uttwise_lm_ppls
@@ -212,9 +218,16 @@ class TrainRlCnnAgent(object):
             orig_dense_x, token_x = gen_result["dense_x"], gen_result["token_x"]
             orig_dense_padding_mask = gen_result["dense_padding_mask"]
 
-            dense_x, dense_padding_mask = self.model.segmenter.logit_segment(
-                orig_dense_x, orig_dense_padding_mask
-            )
+            if self.logit_segment:
+                dense_x, dense_padding_mask = self.model.segmenter.logit_segment(
+                    orig_dense_x, orig_dense_padding_mask
+                )
+                merge_counts = (~orig_dense_padding_mask).sum(dim=1) - (~dense_padding_mask).sum(dim=1)
+                merge_ratio = merge_counts / (~orig_dense_padding_mask).sum(dim=1)
+                merge_ratio = merge_ratio.cpu().numpy()
+            else:
+                dense_x, dense_padding_mask = orig_dense_x, orig_dense_padding_mask
+                merge_ratio = np.zeros(orig_dense_padding_mask.size(0))
 
             batch_size = dense_x.size(0)
             # print(boundary_logits.shape)
@@ -236,7 +249,7 @@ class TrainRlCnnAgent(object):
             scores = self.get_score(dense_x, dense_padding_mask, target=target)
 
             # Compute reward
-            rewards = self.compute_rewards(scores, boundary)
+            rewards = self.compute_rewards(scores, boundary, merge_ratio)
 
             # Get loss * rewards
             loss = loss * rewards
@@ -321,10 +334,16 @@ class TrainRlCnnAgent(object):
                 orig_dense_x, token_x = gen_result["dense_x"], gen_result["token_x"]
                 orig_dense_padding_mask = gen_result["dense_padding_mask"]
 
-                dense_x, dense_padding_mask = self.model.segmenter.logit_segment(
-                    orig_dense_x, orig_dense_padding_mask
-                )
-
+                if self.logit_segment:
+                    dense_x, dense_padding_mask = self.model.segmenter.logit_segment(
+                        orig_dense_x, orig_dense_padding_mask
+                    )
+                    merge_counts = (~orig_dense_padding_mask).sum(dim=1) - (~dense_padding_mask).sum(dim=1)
+                    merge_ratio = merge_counts / (~orig_dense_padding_mask).sum(dim=1)
+                    merge_ratio = merge_ratio.cpu().numpy()
+                else:
+                    dense_x, dense_padding_mask = orig_dense_x, orig_dense_padding_mask
+                    merge_ratio = np.zeros(orig_dense_padding_mask.size(0))
                 # Log
                 print('Validation')
                 print(f'Step {step + 1}/{len(dataloader)}')
@@ -348,6 +367,7 @@ class TrainRlCnnAgent(object):
                 if self.cfg.wandb_log:
                     wandb.log(
                         { "val": {
+                            "merge_ratio": merge_ratio.mean().item(),
                             "batchwise_lm_ppl": batchwise_lm_ppl,
                             "uttwise_lm_ppls": mean_uttwise_lm_ppl,
                             "vocab_seen_percentage": vocab_seen_percentage,
@@ -489,7 +509,8 @@ class TrainRlCnnAgent(object):
 
         # Validate
         # self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
-
+        if self.apply_merge_penalty:
+            print("Will apply merge penalty.")
         # Train Policy Gradient
         for epoch in range(NUM_EPOCHS):
             print(f'Epoch {epoch + 1}/{NUM_EPOCHS}')
@@ -512,7 +533,6 @@ class TrainRlCnnAgent(object):
 
 if __name__ == "__main__":
     rl_cfg = RLCnnAgentConfig()
-    print(rl_cfg)
     train_rl_agent = TrainRlCnnAgent(rl_cfg)
     train_rl_agent.train_rl_agent() 
 

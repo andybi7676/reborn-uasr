@@ -35,14 +35,20 @@ def get_cnn_segmenter(env, device, ckpt_fpath=None):
     cnn_segmenter.eval()
     return cnn_segmenter
 
-def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_fpath, logit_segment=False, segmenter=None, postprocess_code=None):
-    with torch.no_grad(), open(output_fpath, "w") as fw:
+def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_fpath, logit_segment=False, segmenter=None, postprocess_code=None, return_boundary=True, deterministic=True):
+    if return_boundary:
+        bds_output_fpath = output_fpath.replace(".txt", ".bds")
+    with torch.no_grad(), open(output_fpath, "w") as fw, open(bds_output_fpath, "w") as bds_fw:
         for i in tqdm.tqdm(range(len(dataset)), total=len(dataset), desc=f"Generating results...", dynamic_ncols=True):
             feats = dataset[i]["features"] # (T, C)
             feats = feats.unsqueeze(0).to(device) # (B, T, C)
             feats_padding_mask = torch.zeros(feats.shape[:-1], dtype=torch.bool, device=device)
             if segmenter:
-                feats, feats_padding_mask = segmenter.pre_segment(feats, feats_padding_mask)
+                feats, feats_padding_mask, boundary, boundary_logits = segmenter.pre_segment(feats, feats_padding_mask, return_boundary=return_boundary, deterministic=deterministic)
+            for bd in boundary:
+                bd = bd.cpu().numpy()
+                bd = bd[bd!=-1]
+                print(" ".join([str(b) for b in bd]), file=bds_fw, flush=True)
             sample = {
                 "features": feats,
                 "padding_mask": feats_padding_mask,
@@ -72,12 +78,24 @@ def main(args, task):
     feats_dir = args.feats_dir
 
     output_dir = args.output_dir
+    output_fname = args.output_fname if args.output_fname else split
     if output_dir is None:
         output_dir = f"{env.WORK_DIR}/rl/utils/tmp"
     os.makedirs(output_dir, exist_ok=True)
     dataset = get_extracted_features_dataset(env, feats_dir, split)
-    output_fpath = osp.join(output_dir, f"{split}.txt")
-    generate_w2vu_segmental_results(model, dataset, dictionary, device, output_fpath, logit_segment=args.logit_segment, segmenter=segmenter, postprocess_code=postprocess_code)
+    output_fpath = osp.join(output_dir, f"{output_fname}.txt")
+    generate_w2vu_segmental_results(
+        model, 
+        dataset, 
+        dictionary, 
+        device, 
+        output_fpath, 
+        logit_segment=args.logit_segment, 
+        segmenter=segmenter, 
+        postprocess_code=postprocess_code,
+        return_boundary=args.return_boundary,
+        deterministic=args.deterministic,
+    )
     
 
 if __name__ == "__main__":
@@ -91,7 +109,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--feats_dir",
-        default="../../data/audio/librispeech/large_clean/precompute_pca512_cls128_mean_pooled",
+        default="../../data/audio/ls_100h_clean/large_clean/precompute_pca512",
     )
     parser.add_argument(
         "--segmenter_ckpt",
@@ -99,15 +117,27 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--logit_segment",
-        default=False,
+        default=True,
+    )
+    parser.add_argument(
+        "--return_boundary",
+        default=True,
+    )
+    parser.add_argument(
+        "--deterministic",
+        default=True,
     )
     parser.add_argument(
         "--postprocess_code",
-        default=None,
+        default="silence",
     )
     parser.add_argument(
         "--output_dir",
         default=None,
+    )
+    parser.add_argument(
+        "--output_fname",
+        default="",
     )
     parser.add_argument(
         "--split",
