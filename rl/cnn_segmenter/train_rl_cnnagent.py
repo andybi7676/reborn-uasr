@@ -27,13 +27,13 @@ class RLCnnAgentConfig(object):
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
     pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/rl_agent/uttwise_reward_ppl_tokerr_fixpresegment"
+    save_dir: str = "./output/rl_agent/uttwise_reward_pplclip_tokerr0.7_lenratio0.7"
     env: str = "../../env.yaml"
     gamma: float = 0.99
     wandb_log: bool = True
     utterwise_lm_ppl_coeff: float = 1.0
-    utterwise_token_error_rate_coeff: float = 1.0
-    length_ratio_coeff: float = 0.0
+    utterwise_token_error_rate_coeff: float = 0.7
+    length_ratio_coeff: float = 0.7
 
 # class Wav2vec_U_with_CnnSegmenter(Wav2vec_U):
 #     def __init__(self, cfg: Wav2vec_UConfig, target_dict):
@@ -140,45 +140,44 @@ class TrainRlCnnAgent(object):
         # framewise_lm_scores = scores['framewise_lm_scores']
         uttwise_token_error_rates = scores['uttwise_token_error_rates']
         length_ratio = scores['uttwise_pred_token_lengths'] / scores['uttwise_target_token_lengths']
+        target_uttwise_lm_ppls = scores['target_uttwise_lm_ppls']
 
         # flatten framewise_lm_scores
         # framewise_lm_scores = [item for sublist in framewise_lm_scores for item in sublist]
         # framewise_reward = torch.tensor(framewise_lm_scores).to(self.device)
-        uttwise_lm_ppls = torch.tensor(uttwise_lm_ppls).to(self.device)
-        uttwise_token_error_rates = torch.tensor(uttwise_token_error_rates).to(self.device)
-        length_ratio = torch.tensor(length_ratio).to(self.device)
+        uttwise_lm_ppls = torch.tensor(uttwise_lm_ppls, dtype=torch.float32).to(self.device)
+        uttwise_token_error_rates = torch.tensor(uttwise_token_error_rates, dtype=torch.float32).to(self.device)
+        length_ratio = torch.tensor(length_ratio, dtype=torch.float32).to(self.device)
+        target_uttwise_lm_ppls = torch.tensor(target_uttwise_lm_ppls, dtype=torch.float32).to(self.device)
 
-        length_ratio_reward = (length_ratio - 1)
-
+        length_ratio_loss = torch.abs(length_ratio - 1)
 
         # print(framewise_reward.shape)
         # print(uttwise_lm_ppls.shape)
 
         # reward standardization
         # framewise_reward = (framewise_reward - framewise_reward.mean()) / framewise_reward.std()
-        uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
+        if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
+            uttwise_lm_ppls = uttwise_lm_ppls - target_uttwise_lm_ppls
+            # clip rewards
+            uttwise_lm_ppls = torch.clamp(uttwise_lm_ppls, -5, 5)
+        else:
+            uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
         uttwise_token_error_rates = (uttwise_token_error_rates - uttwise_token_error_rates.mean()) / uttwise_token_error_rates.std()
-        length_ratio_reward = (length_ratio_reward - length_ratio_reward.mean()) / length_ratio_reward.std()
+        length_ratio_loss = (length_ratio_loss - length_ratio_loss.mean()) / length_ratio_loss.std()
         
+        uttwise_rewards = - uttwise_lm_ppls * self.cfg.utterwise_lm_ppl_coeff - uttwise_token_error_rates * self.cfg.utterwise_token_error_rate_coeff - length_ratio_loss * self.cfg.length_ratio_coeff
         
         # reward gained at boundary=1
         rewards = torch.zeros_like(boundary, dtype=torch.float32).to(self.device)
 
         # for each boundary=1, reward[pos] = framewise_reward[count]
-        # count = 0
-        for i in range(boundary.size(0)):
-            for j in range(boundary.size(1)):
-                # if boundary[i, j] == 1:
-                    # rewards[i, j] = framewise_reward[count]
-                    # count += 1
-                if boundary[i, j] == -1:
-                    # rewards[i, j] = framewise_reward[count]
-                    rewards[i, j] = -uttwise_lm_ppls[i]*self.cfg.utterwise_lm_ppl_coeff - uttwise_token_error_rates[i]*self.cfg.utterwise_token_error_rate_coeff + length_ratio_reward[i]*self.cfg.length_ratio_coeff
-                #     count += 1
-                    break
-        # print(count)
-        # assert count == framewise_reward.size(0)
-        # print(rewards)
+        boundary_for_reward = -torch.ones(boundary.size(0), boundary.size(1)+1, dtype=boundary.dtype).to(self.device)
+        boundary_for_reward[:, :-1] = boundary
+        boundary_for_reward[:,-1] = -1
+        boundary_padding_mask = boundary_for_reward == -1
+        boundary_end_mask = boundary_padding_mask[:, 1:] & (~boundary_padding_mask[:, :-1])
+        rewards[boundary_end_mask] = uttwise_rewards
 
         # cumulative reward (gamma=0.99)
         cum_rewards = torch.zeros_like(rewards, dtype=torch.float32).to(self.device)
@@ -526,7 +525,7 @@ class TrainRlCnnAgent(object):
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 20
+        NUM_EPOCHS = 15
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1

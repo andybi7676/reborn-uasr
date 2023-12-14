@@ -1,0 +1,30 @@
+Epoch 0: test loss = 0.46683886079561143
+Epoch 0: test f1 score = 0.39929388405018595
+Epoch 0: test accuracy = 0.7150612339280125
+Epoch 0: test 1s = 155662
+Epoch 0: test 1s_gt = 234445
+Epoch 0: test 1s_ratio = 0.6639595640768624
+Epoch 0: GT_test loss = 0.7770560837927318
+Epoch 0: GT_test f1 score = 0.22848797018075392
+Epoch 0: GT_test accuracy = 0.6709084654982865
+Epoch 0: GT_test 1s = 155662
+Epoch 0: GT_test 1s_gt = 195457
+Epoch 0: GT_test 1s_ratio = 0.7964002312529098
+--- Wav2VecU ---
+SCORES:            Lenient      Harsh
+precision:          0.6874     0.6428
+recall:             0.8368     0.7710
+f1:                 0.7548     0.7011
+rval:               0.7295     0.6967
+--- test ---
+SCORES:            Lenient      Harsh
+precision:          0.8947     0.7985
+recall:             0.5649     0.5302
+f1:                 0.6925     0.6372
+rval:               0.6913     0.6639
+--- GT_test ---
+SCORES:            Lenient      Harsh
+precision:          0.6925     0.6096
+recall:             0.5239     0.4855
+f1:                 0.5965     0.5405
+rval:               0.6504     0.6134

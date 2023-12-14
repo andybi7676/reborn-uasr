@@ -1,8 +1,10 @@
 export PYTHONPATH=$PYTHONPATH:/home/enpei/EnPei/RL/final_usar/uasr-rl/fairseq
 
-python3 ../utils/generate_w2vu_segmental_results.py --feats_dir ../../data/audio/ls_100h_clean/large_clean/precompute_pca512 --segmenter_ckpt ./output/rl_agent/uttwise_reward_ppl_tokerr/rl_agent_segmenter.pt --logit_segment True --postprocess_code silence --output_dir ./output/rl_agent/uttwise_reward_ppl_tokerr
+output_name="uttwise_reward_pplclip_tokerr0.7_lenratio0.7"
 
-python3 ../utils/eval_results.py --hyp ./output/rl_agent/uttwise_reward_ppl_tokerr/test.txt --ref ../utils/golden/test.phones.txt
+python3 ../utils/generate_w2vu_segmental_results.py --feats_dir ../../data/audio/ls_100h_clean/large_clean/precompute_pca512 --segmenter_ckpt ./output/rl_agent/${output_name}/rl_agent_segmenter.pt --logit_segment True --postprocess_code silence --output_dir ./output/rl_agent/${output_name}
+
+python3 ../utils/eval_results.py --hyp ./output/rl_agent/${output_name}/test.txt --ref ../utils/golden/test.phones.txt
 
 
 ### Wave2Vec2.0
