@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 
 MERGE_CONSECUTIVE_AMOUNT = 3
-def bd_to_new_bd(bd: str, merge_three_consecutive=True, merge_two_consecutive=False):
+def bd_to_new_bd(bd: str, merge_three_consecutive=True, merge_two_consecutive=True):
     # pattern 1 1 1 --> 0 1 0
     new_bd = bd
     if merge_three_consecutive:

@@ -30,7 +30,10 @@ def get_cnn_segmenter(env, device, ckpt_fpath=None):
     from rl.cnn_segmenter.cnn_model import CnnSegmenter, SegmentationConfig, CnnBoundaryConfig
     cnn_segmenter = CnnSegmenter(SegmentationConfig(), CnnBoundaryConfig())
     segmenter_ckpt = torch.load(ckpt_fpath, map_location="cpu")
-    cnn_segmenter.load_state_dict(segmenter_ckpt)
+    try:
+        cnn_segmenter.load_state_dict(segmenter_ckpt)
+    except:
+        cnn_segmenter.boundary_predictor.load_state_dict(segmenter_ckpt)
     cnn_segmenter.to(device)
     cnn_segmenter.eval()
     return cnn_segmenter

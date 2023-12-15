@@ -3,3 +3,16 @@ DEL RATE: 4.871328886227926 %
 INS RATE: 2.6931656220031046 %
 SUB RATE: 4.404011931947631 %
 2600
+# original
+SCORES:            Lenient      Harsh
+precision:          0.8012     0.5166
+recall:             0.8618     0.8463
+f1:                 0.8304     0.6416
+rval:               0.8456     0.3916
+
+# merge 3
+SCORES:            Lenient      Harsh
+precision:          0.7926     0.6312
+recall:             0.8204     0.7795
+f1:                 0.8063     0.6976
+rval:               0.8326     0.6778
