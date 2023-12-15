@@ -16,6 +16,7 @@ from fairseq.data import (
 )
 from rl.reward.scorer import Scorer, ScorerCfg
 from torch.nn.utils.rnn import pad_sequence
+from tqdm import tqdm
 import numpy as np
 from fairseq import checkpoint_utils, tasks, utils
 import wandb
@@ -25,13 +26,13 @@ class RLCnnAgentConfig(object):
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
     pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val_test_reward_acceleration"
+    save_dir: str = "./output/local/rl_agent/test_total_rewards"
     env: str = "../../env.yaml"
-    gamma: float = 0.99
-    ter_tolerance: float = 0.10
+    gamma: float = 0.995
+    ter_tolerance: float = 0.08
     logit_segment: bool = True
-    apply_merge_penalty: bool = False
-    wandb_log: bool = True
+    apply_merge_penalty: bool = True
+    wandb_log: bool = False
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -41,6 +42,7 @@ class TrainRlCnnAgent(object):
         )
         self.scorer = Scorer(self.score_cfg)
         self.cfg = cfg
+        self.log_fw = open(os.path.join(cfg.save_dir, "log.txt"), "a")
         self.apply_merge_penalty = cfg.apply_merge_penalty
         self.logit_segment = cfg.logit_segment
         if self.cfg.wandb_log:
@@ -49,6 +51,9 @@ class TrainRlCnnAgent(object):
                 name=cfg.save_dir.split('/')[-1],
                 config=cfg,
             )
+    
+    def log(self, msg):
+        print(msg, file=self.log_fw, flush=True)
 
     def get_score(self, pred_logits, padding_mask, target=None):
         """
@@ -163,7 +168,7 @@ class TrainRlCnnAgent(object):
         # print(cum_rewards)
 
         # return rewards
-        return cum_rewards
+        return cum_rewards, uttwise_rewards
 
     def train_rl_agent_epoch(self, model, dataloader, optimizer, device, scheduler, log_steps, gradient_accumulation_steps):
         """
@@ -177,8 +182,8 @@ class TrainRlCnnAgent(object):
 
         for step, sample in enumerate(dataloader):
 
-            if self.cfg.max_steps_per_epoch is not None and step >= self.cfg.max_steps_per_epoch:
-                break
+            # if self.cfg.max_steps_per_epoch is not None and step >= self.cfg.max_steps_per_epoch:
+            #     break
 
             # Get features
             features = sample['net_input']['features']
@@ -241,7 +246,7 @@ class TrainRlCnnAgent(object):
             scores = self.get_score(dense_x, dense_padding_mask, target=target)
 
             # Compute reward
-            rewards = self.compute_rewards(scores, boundary, merge_ratio)
+            rewards, _ = self.compute_rewards(scores, boundary, merge_ratio)
 
             # Get loss * rewards
             loss = loss * rewards
@@ -296,12 +301,13 @@ class TrainRlCnnAgent(object):
         Validate RL agent for one epoch
         """
         model.eval()
-
+        save_best = False
+        total_rewards = 0.0
         with torch.no_grad():
-            for step, sample in enumerate(dataloader):
+            for step, sample in enumerate(tqdm(dataloader, total=len(dataloader), desc=f"Validating...", dynamic_ncols=True)):
 
-                if self.cfg.max_val_steps is not None and step >= self.cfg.max_val_steps:
-                    break
+                # if self.cfg.max_val_steps is not None and step >= self.cfg.max_val_steps:
+                #     break
 
                 # Get features
                 features = sample['net_input']['features']
@@ -337,11 +343,15 @@ class TrainRlCnnAgent(object):
                     dense_x, dense_padding_mask = orig_dense_x, orig_dense_padding_mask
                     merge_ratio = np.zeros(orig_dense_padding_mask.size(0))
                 # Log
-                print('Validation')
-                print(f'Step {step + 1}/{len(dataloader)}')
+                # print('Validation')
+                # print(f'Step {step + 1}/{len(dataloader)}')
 
                 # Get scores
                 scores = self.get_score(dense_x, dense_padding_mask, target=target)
+                # Get rewards
+                _, uttwise_rewards = self.compute_rewards(scores, boundary, merge_ratio)
+
+                total_rewards += uttwise_rewards.sum().item()
 
                 batchwise_lm_ppl = scores['batchwise_lm_ppl']
                 uttwise_lm_ppls = scores['uttwise_lm_ppls']
@@ -350,12 +360,12 @@ class TrainRlCnnAgent(object):
                 framewise_lm_scores = scores['framewise_lm_scores']
                 mean_framewise_lm_scores = sum([(sum(sublist) / len(sublist))  for sublist in framewise_lm_scores if len(sublist) > 0]) / len(framewise_lm_scores)
 
-                print(f'Batchwise LM PPL: {batchwise_lm_ppl}')
-                print(f'Mean uttwise LM PPL: {mean_uttwise_lm_ppl}')
-                print(f'Vocab seen percentage: {vocab_seen_percentage}')
-                print(f'Mean framewise LM scores: {mean_framewise_lm_scores}')
+                # print(f'Batchwise LM PPL: {batchwise_lm_ppl}')
+                # print(f'Mean uttwise LM PPL: {mean_uttwise_lm_ppl}')
+                # print(f'Vocab seen percentage: {vocab_seen_percentage}')
+                # print(f'Mean framewise LM scores: {mean_framewise_lm_scores}')
                 
-                print('-' * 10)
+                # print('-' * 10)
                 if self.cfg.wandb_log:
                     wandb.log(
                         { "val": {
@@ -367,6 +377,13 @@ class TrainRlCnnAgent(object):
                         }}
                     )
 
+        if total_rewards > self.best_valid_score:
+            self.best_valid_score = total_rewards
+            save_best = True
+        print(f"total_rewards: {total_rewards}")
+        self.log(f"total_rewards: {total_rewards}")
+        return save_best
+    
     def register_and_setup_task(self, task_cfg_fpath, env):
         task_cfg = OmegaConf.load(task_cfg_fpath)
         task_cfg.fairseq.common.user_dir = f"{env.WORK_DIR}/s2p"
@@ -404,7 +421,11 @@ class TrainRlCnnAgent(object):
             p.param_group = "segmenter"
 
         # Load pre-trained CNN model
-        self.model.segmenter.boundary_predictor.load_state_dict(torch.load(self.cfg.pretrain_segmenter_path))
+        try:
+            self.model.segmenter.boundary_predictor.load_state_dict(torch.load(self.cfg.pretrain_segmenter_path))
+        except:
+            print(f"Cannot load {self.cfg.pretrain_segmenter_path} by boundary predictor, try to load by segmenter")
+            self.model.segmenter.load_state_dict(torch.load(self.cfg.pretrain_segmenter_path))
 
         self.model.segmenter.boundary_predictor.train()
 
@@ -477,7 +498,7 @@ class TrainRlCnnAgent(object):
 
         # Scheduler
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=STEPS_PER_EPOCH * NUM_EPOCHS)
-
+        self.best_valid_score = float('-inf')
 
         # Load data
         self.train_dataloader = DataLoader(
@@ -499,33 +520,38 @@ class TrainRlCnnAgent(object):
         if not os.path.exists(self.cfg.save_dir):
             os.makedirs(self.cfg.save_dir)
 
-        # Validate
-        # self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
         if self.apply_merge_penalty:
             print("Will apply merge penalty.")
+        # Validate
+        self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
         # Train Policy Gradient
-        for epoch in range(NUM_EPOCHS):
-            print(f'Epoch {epoch + 1}/{NUM_EPOCHS}')
-            print('-' * 10)
+        # for epoch in range(NUM_EPOCHS):
+        #     print(f'Epoch {epoch + 1}/{NUM_EPOCHS}')
+        #     print('-' * 10)
 
-            # Train
-            self.train_rl_agent_epoch(self.model, self.train_dataloader, optimizer, device, scheduler, LOG_STEPS, GRADIENT_ACCUMULATION_STEPS)
+        #     # Train
+        #     self.train_rl_agent_epoch(self.model, self.train_dataloader, optimizer, device, scheduler, LOG_STEPS, GRADIENT_ACCUMULATION_STEPS)
 
-            # Validate
-            self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
+        #     # Validate
+        #     save_best = self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
 
-            # Save model
-            torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
+        #     # Save model
+        #     if save_best:
+        #         torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_best.pt'.format(epoch))
+        #     torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
 
-        # Save model
-        torch.save(self.model.state_dict(), self.cfg.save_dir + '/rl_agent.pt')
-        torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter.pt')
+        # # Save model
+        # torch.save(self.model.state_dict(), self.cfg.save_dir + '/rl_agent.pt')
+        # torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter.pt')
         
 
 
 if __name__ == "__main__":
-    rl_cfg = RLCnnAgentConfig()
-    train_rl_agent = TrainRlCnnAgent(rl_cfg)
-    train_rl_agent.train_rl_agent() 
+    for i in range(20):
+        segmenter_ckpt_path = f"/home/andybi7676/Desktop/uasr-rl/rl/cnn_segmenter/output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val_with_merge_penalty/rl_agent_segmenter_epoch{i}.pt"
+        rl_cfg = RLCnnAgentConfig()
+        rl_cfg.pretrain_segmenter_path = segmenter_ckpt_path
+        train_rl_agent = TrainRlCnnAgent(rl_cfg)
+        train_rl_agent.train_rl_agent() 
 
     
