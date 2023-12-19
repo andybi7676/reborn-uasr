@@ -1,0 +1,5 @@
+SCORES:            Lenient      Harsh
+precision:          0.7074     0.4526
+recall:             0.7162     0.7106
+f1:                 0.7118     0.5530
+rval:               0.7532     0.3767
