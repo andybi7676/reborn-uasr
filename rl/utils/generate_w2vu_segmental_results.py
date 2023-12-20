@@ -123,6 +123,11 @@ if __name__ == "__main__":
         default=True,
     )
     parser.add_argument(
+        "--no_logit_segment",
+        dest="logit_segment",
+        action="store_false",
+    )
+    parser.add_argument(
         "--return_boundary",
         default=True,
     )
@@ -132,7 +137,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--postprocess_code",
-        default="silence",
+        default="silence", # "silence" or "none"
     )
     parser.add_argument(
         "--output_dir",
