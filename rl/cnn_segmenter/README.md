@@ -10,3 +10,8 @@
 ```
 python3 train_rl_cnnagent.py
 ```
+
+## Evaluation
+```
+bash test_rl_cnnagent.sh
+```
