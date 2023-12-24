@@ -20,3 +20,11 @@ python load_w2vu_example.py
 
 ## Alternative for loading the USAR model
 If you don't want to load the UASR model using fairseq's dirty code, you can use the simple script in `rl/transformer_behavior_cloning/load_w2vu_no_fairseq_example.py`.
+
+
+## Dataset Installation
+* [LibriSpeech ASR Corpus](https://www.openslr.org/12?fbclid=IwAR2rp_pjM4x8KJktlmdEyvtic8mIfrA2n0dD4eatSOStBn9kYgBVId3Hx0Q)
+* Follow [wav2vec-U](https://github.com/facebookresearch/fairseq/blob/main/examples/wav2vec/unsupervised/README.md) to get PCA preprocessed data.
+
+## RL training
+see [this folder](rl/cnn_segmenter/) for more details.
