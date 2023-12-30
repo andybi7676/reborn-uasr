@@ -23,6 +23,7 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 import wandb
 
 class RLCnnAgentConfig(object):
+    config_name: str = "librispeech" # "librispeech" or "timit_matched" or "timit_unmatched"
     kenlm_fpath: str = "../../data/text/prep_g2p/phones/lm.phones.filtered.04.bin"
     dict_fpath: str = "../dummy_data/dict.txt"
     pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
@@ -447,7 +448,7 @@ class TrainRlCnnAgent(object):
     def register_and_setup_task(self, task_cfg_fpath, env):
         task_cfg = OmegaConf.load(task_cfg_fpath)
         task_cfg.fairseq.common.user_dir = f"{env.WORK_DIR}/s2p"
-        task_cfg.fairseq.task.text_data = f"{env.WORK_DIR}/rl/dummy_data"
+        task_cfg.fairseq.task.text_data = f"{env.WORK_DIR}/rl/dict/{task_cfg.fairseq.task.text_data}" # "librispeech" or "timit_matched" or "timit_unmatched"
         utils.import_user_module(task_cfg.fairseq.common)
         task = tasks.setup_task(task_cfg.fairseq.task)
         return task, task_cfg
@@ -455,7 +456,7 @@ class TrainRlCnnAgent(object):
     def load_pretrained_model(self):
 
         env = OmegaConf.load(self.cfg.env)
-        task_cfg_fpath = f"{env.WORK_DIR}/rl/config/dummy.yaml"
+        task_cfg_fpath = f"{env.WORK_DIR}/rl/config/{self.cfg.config_name}.yaml"
         task, task_cfg = self.register_and_setup_task(task_cfg_fpath, env)
         print(task_cfg)
         # Load model

@@ -111,6 +111,11 @@ if __name__ == "__main__":
         help="custom local env file for github collaboration",
     )
     parser.add_argument(
+        "--config",
+        default="librispeech",
+        help="config name", # "librispeech" or "timit_matched" or "timit_unmatched"
+    )
+    parser.add_argument(
         "--feats_dir",
         default="../../data/audio/ls_100h_clean/large_clean/precompute_pca512",
     )
@@ -157,6 +162,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     env = OmegaConf.load(args.env)
-    task_cfg_fpath = f"{env.WORK_DIR}/rl/config/dummy.yaml"
+    task_cfg_fpath = f"{env.WORK_DIR}/rl/config/{args.config}.yaml"
     task, task_cfg = register_and_setup_task(task_cfg_fpath, env)
     main(args, task)

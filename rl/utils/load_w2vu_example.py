@@ -7,7 +7,7 @@ import argparse
 def register_and_setup_task(task_cfg_fpath, env):
     task_cfg = OmegaConf.load(task_cfg_fpath)
     task_cfg.fairseq.common.user_dir = f"{env.WORK_DIR}/s2p"
-    task_cfg.fairseq.task.text_data = f"{env.WORK_DIR}/rl/dummy_data"
+    task_cfg.fairseq.task.text_data = f"{env.WORK_DIR}/rl/dict/{task_cfg.fairseq.task.text_data}" # "librispeech" or "timit_matched" or "timit_unmatched"
     utils.import_user_module(task_cfg.fairseq.common)
     task = tasks.setup_task(task_cfg.fairseq.task)
     return task, task_cfg
@@ -36,7 +36,7 @@ def generate_random_sample(bsz, tsz, device='cpu'):
 
 def main(args):
     env = OmegaConf.load(args.env)
-    task_cfg_fpath = f"{env.WORK_DIR}/rl/config/dummy.yaml"
+    task_cfg_fpath = f"{env.WORK_DIR}/rl/config/librispeech.yaml"
     task, task_cfg = register_and_setup_task(task_cfg_fpath, env)
     # print(task_cfg)
     

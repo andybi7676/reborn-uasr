@@ -22,20 +22,32 @@ from fairseq import checkpoint_utils, tasks, utils
 import wandb
 
 class RLCnnAgentConfig(object):
-    kenlm_fpath: str = "../../data/text/ls_wo_lv/prep_g2p/phones/lm.phones.filtered.04.bin"
-    dict_fpath: str = "../dummy_data/dict.txt"
-    pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_postITER1_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
-    pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/iter2_seg_from_iter1_bc"
+    # config_name: str = "librispeech" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # kenlm_fpath: str = "../../data/text/ls_wo_lv/prep_g2p/phones/lm.phones.filtered.04.bin"
+    # dict_fpath: str = "../dummy_data/dict.txt"
+    # pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_postITER1_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
+    # pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1/checkpoint_best.pt"
+    config_name: str = "timit_matched" # "librispeech" or "timit_matched" or "timit_unmatched"
+    kenlm_fpath: str = "../../data/text/timit/matched/phones/train_text_phn.04.bin"
+    dict_fpath: str = "../dict/timit_matched/dict.txt"
+    pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/timit_matched_randinit"
+    # config_name: str = "timit_unmatched" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # kenlm_fpath: str = "../../data/text/timit/unmatched/phones/train_text_phn.04.bin"
+    # dict_fpath: str = "../dict/timit_unmatched/dict.txt"
+    # pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    # pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_unmatched/large_clean/timit_unpaired_1k/cp4_gp2.0_sw0.5/seed2/checkpoint_best.pt"
+    # save_dir: str = "./output/local/rl_agent/timit_unmatched_randinit"
     env: str = "../../env.yaml"
-    gamma: float = 0.995
+    gamma: float = 1.0
     ter_tolerance: float = 0.08
     logit_segment: bool = True
     apply_merge_penalty: bool = False
     wandb_log: bool = False
     utterwise_lm_ppl_coeff: float = 1.0
-    utterwise_token_error_rate_coeff: float = 1.0
-    length_ratio_coeff: float = 1.0
+    utterwise_token_error_rate_coeff: float = 0.0
+    length_ratio_coeff: float = 0.5
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -416,7 +428,7 @@ class TrainRlCnnAgent(object):
     def register_and_setup_task(self, task_cfg_fpath, env):
         task_cfg = OmegaConf.load(task_cfg_fpath)
         task_cfg.fairseq.common.user_dir = f"{env.WORK_DIR}/s2p"
-        task_cfg.fairseq.task.text_data = f"{env.WORK_DIR}/rl/dummy_data"
+        task_cfg.fairseq.task.text_data = f"{env.WORK_DIR}/rl/dict/{task_cfg.fairseq.task.text_data}" # "librispeech" or "timit_matched" or "timit_unmatched"
         utils.import_user_module(task_cfg.fairseq.common)
         task = tasks.setup_task(task_cfg.fairseq.task)
         return task, task_cfg
@@ -424,7 +436,7 @@ class TrainRlCnnAgent(object):
     def load_pretrained_model(self):
 
         env = OmegaConf.load(self.cfg.env)
-        task_cfg_fpath = f"{env.WORK_DIR}/rl/config/dummy.yaml"
+        task_cfg_fpath = f"{env.WORK_DIR}/rl/config/{self.cfg.config_name}.yaml"
         task, task_cfg = self.register_and_setup_task(task_cfg_fpath, env)
         print(task_cfg)
         # Load model
@@ -473,7 +485,7 @@ class TrainRlCnnAgent(object):
         self.model.to(device)
 
         # Audio features path
-        dir_path = '../../data/audio/ls_100h_clean/large_clean/precompute_pca512'
+        dir_path = '../../data/audio/timit/matched/large_clean/precompute_pca512'
         # Boundary labels path
         boundary_labels_path = f'../../data/audio/ls_100h_clean/large_clean_mfa/CLUS128'
 
@@ -498,7 +510,7 @@ class TrainRlCnnAgent(object):
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 20
+        NUM_EPOCHS = 200
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1
@@ -567,7 +579,9 @@ class TrainRlCnnAgent(object):
             # Save model
             if save_best:
                 torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_best.pt'.format(epoch))
-            torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
+            if NUM_EPOCHS > 40:
+                if epoch % 5 == 0:
+                    torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
 
         # Save model
         torch.save(self.model.state_dict(), self.cfg.save_dir + '/rl_agent.pt')

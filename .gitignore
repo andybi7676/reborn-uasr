@@ -3,6 +3,7 @@ env.yaml
 data
 wandb
 local
+search_weights
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
