@@ -1,0 +1,1 @@
+| Generate dev-other with beam=500, lm_weight=5.0, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 12.712267982900906, LM_PPL: 25.3105070359958, num feats: 189291, length: 165783, UER to viterbi: 0, score: 3.231219607386631

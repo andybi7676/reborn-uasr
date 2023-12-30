@@ -69,7 +69,7 @@ def main(args, task):
     sys.path.append(f"{env.WORK_DIR}") # this can only be done after register_and_setup_task
     
     use_cuda = torch.cuda.is_available()
-    model, saved_cfg = get_model_and_saved_cfg(env, task, use_cuda=use_cuda)
+    model, saved_cfg = get_model_and_saved_cfg(env, task, use_cuda=use_cuda, ckpt_fpath=args.generator_ckpt)
     model.eval()
     device = next(model.parameters()).device
     
@@ -113,6 +113,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--feats_dir",
         default="../../data/audio/ls_100h_clean/large_clean/precompute_pca512",
+    )
+    parser.add_argument(
+        "--generator_ckpt",
+        default=None,
     )
     parser.add_argument(
         "--segmenter_ckpt",

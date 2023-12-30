@@ -13,12 +13,12 @@ from tqdm import tqdm
 #     if merge_two_consecutive:
 #         new_bd = new_bd.replace("1 1", "0 1")
 #     return new_bd.split(" ")
-def bd_to_new_bd(bd: str, rf: str):
+def bd_to_new_bd(bd: str, rf: str, i):
     new_bd = []
     bd = bd.split(" ")
     one_count = np.array([int(b) for b in bd]).sum()
     rf = rf.split(" ")
-    assert one_count+2 == len(rf) # kernel size = 4 & end of boundary does not account for the last "1"
+    assert one_count+2 == len(rf), f"{i}: {one_count}\n{rf}" # kernel size = 4 & end of boundary does not account for the last "1"
     cur_idx = 0
     cur_token = rf[cur_idx]
     for b in bd:
@@ -46,7 +46,7 @@ def main(args):
         lengths = lf.readlines()
         for i, (bd, rf, l) in enumerate(tqdm(zip(bds, rfs, lengths), total=len(lengths), desc=f"Converting bds to ids...", dynamic_ncols=True)):
             bd, rf = bd.strip(), rf.strip()
-            new_bd = bd_to_new_bd(bd, rf)
+            new_bd = bd_to_new_bd(bd, rf, i)
             if len(new_bd) != int(l.strip()):
                 print(f"Length mismatch: {len(new_bd)} vs {l} @line{i}")
             print(" ".join([str(nbd) for nbd in new_bd]), file=fw, flush=True)

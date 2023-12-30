@@ -179,7 +179,8 @@ def pretrain_cnn_segmenter():
     dir_path = '../../data/audio/ls_100h_clean/large_clean/precompute_pca512' # /precompute_pca512
     split = 'train'
     # Boundary labels path
-    boundary_labels_path = f'../../data/audio/ls_100h_clean/large_clean/CLUS128'
+    boundary_labels_path = f'../../data/audio/ls_100h_clean/large_clean/postITER1'
+    boundary_postfix = "bds"
 
     BATCH_SIZE = 128
     NUM_EPOCHS = 30
@@ -189,7 +190,7 @@ def pretrain_cnn_segmenter():
     SAVE_STEPS = 100000
     LOG_STEPS = 10
     MAX_STEPS_PER_EPOCH = 1000
-    NAME=f"test_pretrain_nonPCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
+    NAME=f"pretrain_PCA_postITER1_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
     SAVE_DIR = './output/cnn_segmenter/' + NAME
 
     # Create save dir
@@ -204,14 +205,14 @@ def pretrain_cnn_segmenter():
     dataset = ExtractedFeaturesDataset(
         path=dir_path,
         split=split,
-        aux_target_postfix='boundaries',
+        aux_target_postfix=boundary_postfix,
         aux_target_dir_path=boundary_labels_path,
     )
 
     valid_dataset = ExtractedFeaturesDataset(
         path=dir_path,
         split='valid',
-        aux_target_postfix='boundaries',
+        aux_target_postfix=boundary_postfix,
         aux_target_dir_path=boundary_labels_path,
     )
     # Load data

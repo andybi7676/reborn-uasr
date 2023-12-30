@@ -24,15 +24,18 @@ import wandb
 class RLCnnAgentConfig(object):
     kenlm_fpath: str = "../../data/text/ls_wo_lv/prep_g2p/phones/lm.phones.filtered.04.bin"
     dict_fpath: str = "../dummy_data/dict.txt"
-    pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
-    pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/test_total_rewards"
+    pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_postITER1_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/iter2_seg_from_iter1_bc"
     env: str = "../../env.yaml"
     gamma: float = 0.995
     ter_tolerance: float = 0.08
     logit_segment: bool = True
-    apply_merge_penalty: bool = True
+    apply_merge_penalty: bool = False
     wandb_log: bool = False
+    utterwise_lm_ppl_coeff: float = 1.0
+    utterwise_token_error_rate_coeff: float = 1.0
+    length_ratio_coeff: float = 1.0
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -42,6 +45,7 @@ class TrainRlCnnAgent(object):
         )
         self.scorer = Scorer(self.score_cfg)
         self.cfg = cfg
+        os.makedirs(cfg.save_dir, exist_ok=True)
         self.log_fw = open(os.path.join(cfg.save_dir, "log.txt"), "a")
         self.apply_merge_penalty = cfg.apply_merge_penalty
         self.logit_segment = cfg.logit_segment
@@ -107,6 +111,7 @@ class TrainRlCnnAgent(object):
         uttwise_token_error_rates = scores['uttwise_token_error_rates']
         uttwise_pred_token_lengths = scores['uttwise_pred_token_lengths']
         uttwise_target_token_lengths = scores['uttwise_target_token_lengths']
+        length_ratio = uttwise_pred_token_lengths / uttwise_target_token_lengths
         # vocab_seen_percentage = scores['vocab_seen_percentage']
         # framewise_lm_scores = scores['framewise_lm_scores']
 
@@ -114,25 +119,49 @@ class TrainRlCnnAgent(object):
         # framewise_lm_scores = [item for sublist in framewise_lm_scores for item in sublist]
         
         # framewise_reward = torch.tensor(framewise_lm_scores).to(self.device)
-        unpenalized_mask = (uttwise_token_error_rates < self.cfg.ter_tolerance)
-        uttwise_token_error_rates[unpenalized_mask] = 0.0
-        ter_penalty = uttwise_token_error_rates
+        # unpenalized_mask = (uttwise_token_error_rates < self.cfg.ter_tolerance)
+        # uttwise_token_error_rates[unpenalized_mask] = 0.0
+        # ter_penalty = uttwise_token_error_rates
         
-        uttwise_lm_ppls = np.array(uttwise_lm_ppls)
-        target_uttwise_lm_ppls = np.array(target_uttwise_lm_ppls)
+        # uttwise_lm_ppls = np.array(uttwise_lm_ppls)
+        # target_uttwise_lm_ppls = np.array(target_uttwise_lm_ppls)
         
+        # if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
+        #     uttwise_rewards = target_uttwise_lm_ppls - uttwise_lm_ppls
+        #     # clip rewards
+        #     uttwise_rewards = np.clip(uttwise_rewards, -5, 5)
+        #     positive_rewards_mask = (uttwise_rewards >= 0)
+        #     uttwise_rewards[positive_rewards_mask]  = uttwise_rewards[positive_rewards_mask]  * (1 - ter_penalty[positive_rewards_mask])  * (1 - merge_ratio[positive_rewards_mask])
+        #     uttwise_rewards[~positive_rewards_mask] = uttwise_rewards[~positive_rewards_mask] * (1 + ter_penalty[~positive_rewards_mask]) * (1 + merge_ratio[~positive_rewards_mask])
+        # else:
+        #     normed_uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
+        #     uttwise_rewards = -normed_uttwise_lm_ppls
+        # uttwise_rewards = torch.tensor(uttwise_rewards, dtype=torch.float32).to(self.device)
+        
+        uttwise_lm_ppls = torch.tensor(uttwise_lm_ppls, dtype=torch.float32).to(self.device)
+        uttwise_token_error_rates = torch.tensor(uttwise_token_error_rates, dtype=torch.float32).to(self.device)
+        length_ratio = torch.tensor(length_ratio, dtype=torch.float32).to(self.device)
+        target_uttwise_lm_ppls = torch.tensor(target_uttwise_lm_ppls, dtype=torch.float32).to(self.device)
+
+        length_ratio_loss = torch.abs(length_ratio - 1)
+
+        # print(framewise_reward.shape)
+        # print(uttwise_lm_ppls.shape)
+
+        # reward standardization
+        # framewise_reward = (framewise_reward - framewise_reward.mean()) / framewise_reward.std()
         if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
-            uttwise_rewards = target_uttwise_lm_ppls - uttwise_lm_ppls
+            uttwise_lm_ppls = uttwise_lm_ppls - target_uttwise_lm_ppls
             # clip rewards
-            uttwise_rewards = np.clip(uttwise_rewards, -5, 5)
-            positive_rewards_mask = (uttwise_rewards >= 0)
-            uttwise_rewards[positive_rewards_mask]  = uttwise_rewards[positive_rewards_mask]  * (1 - ter_penalty[positive_rewards_mask])  * (1 - merge_ratio[positive_rewards_mask])
-            uttwise_rewards[~positive_rewards_mask] = uttwise_rewards[~positive_rewards_mask] * (1 + ter_penalty[~positive_rewards_mask]) * (1 + merge_ratio[~positive_rewards_mask])
+            uttwise_lm_ppls = torch.clamp(uttwise_lm_ppls, -5, 5)
         else:
-            normed_uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
-            uttwise_rewards = -normed_uttwise_lm_ppls
-        uttwise_rewards = torch.tensor(uttwise_rewards, dtype=torch.float32).to(self.device)
+            uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
+        uttwise_token_error_rates = (uttwise_token_error_rates - uttwise_token_error_rates.mean()) / uttwise_token_error_rates.std()
+        length_ratio_loss = (length_ratio_loss - length_ratio_loss.mean()) / length_ratio_loss.std()
         
+        uttwise_rewards = - uttwise_lm_ppls * self.cfg.utterwise_lm_ppl_coeff - uttwise_token_error_rates * self.cfg.utterwise_token_error_rate_coeff - length_ratio_loss * self.cfg.length_ratio_coeff
+        
+
         # reward standardization
         # framewise_reward = (framewise_reward - framewise_reward.mean()) / framewise_reward.std()
         
@@ -523,35 +552,35 @@ class TrainRlCnnAgent(object):
         if self.apply_merge_penalty:
             print("Will apply merge penalty.")
         # Validate
-        self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
+        # self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
         # Train Policy Gradient
-        # for epoch in range(NUM_EPOCHS):
-        #     print(f'Epoch {epoch + 1}/{NUM_EPOCHS}')
-        #     print('-' * 10)
+        for epoch in range(NUM_EPOCHS):
+            print(f'Epoch {epoch + 1}/{NUM_EPOCHS}')
+            print('-' * 10)
 
-        #     # Train
-        #     self.train_rl_agent_epoch(self.model, self.train_dataloader, optimizer, device, scheduler, LOG_STEPS, GRADIENT_ACCUMULATION_STEPS)
+            # Train
+            self.train_rl_agent_epoch(self.model, self.train_dataloader, optimizer, device, scheduler, LOG_STEPS, GRADIENT_ACCUMULATION_STEPS)
 
-        #     # Validate
-        #     save_best = self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
+            # Validate
+            save_best = self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
 
-        #     # Save model
-        #     if save_best:
-        #         torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_best.pt'.format(epoch))
-        #     torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
+            # Save model
+            if save_best:
+                torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_best.pt'.format(epoch))
+            torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
 
-        # # Save model
-        # torch.save(self.model.state_dict(), self.cfg.save_dir + '/rl_agent.pt')
-        # torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter.pt')
+        # Save model
+        torch.save(self.model.state_dict(), self.cfg.save_dir + '/rl_agent.pt')
+        torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter.pt')
         
 
 
 if __name__ == "__main__":
-    for i in range(20):
-        segmenter_ckpt_path = f"/home/andybi7676/Desktop/uasr-rl/rl/cnn_segmenter/output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val_with_merge_penalty/rl_agent_segmenter_epoch{i}.pt"
-        rl_cfg = RLCnnAgentConfig()
-        rl_cfg.pretrain_segmenter_path = segmenter_ckpt_path
-        train_rl_agent = TrainRlCnnAgent(rl_cfg)
-        train_rl_agent.train_rl_agent() 
+    # for i in range(20):
+    #     segmenter_ckpt_path = f"/home/andybi7676/Desktop/uasr-rl/rl/cnn_segmenter/output/local/rl_agent/uttwise_reward_with_ed_fixsample_less_ter_larger_clip_val_with_merge_penalty/rl_agent_segmenter_epoch{i}.pt"
+    rl_cfg = RLCnnAgentConfig()
+    # rl_cfg.pretrain_segmenter_path = segmenter_ckpt_path
+    train_rl_agent = TrainRlCnnAgent(rl_cfg)
+    train_rl_agent.train_rl_agent() 
 
     
