@@ -7,7 +7,7 @@
 import sys
 
 file = open(sys.argv[1], 'r')
-out_file = open(sys.argv[1].replace(".src", ".boundaries"), 'w')
+out_file = open(sys.argv[1].replace(".src", ".bds"), 'w')
 adj = sys.argv[2] == "adj" if len(sys.argv) > 2 else False
 
 for line in file:

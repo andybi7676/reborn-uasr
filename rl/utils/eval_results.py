@@ -7,6 +7,8 @@ def main(args):
     from s2p.utils.per import read_phn_file, cal_per
     if args.split != "test":
         ref = args.ref.replace("test", args.split)
+    else:
+        ref = args.ref
     hyps = read_phn_file(args.hyp)
     refs = read_phn_file(ref)
     S, D, I, N, count = cal_per(refs, hyps)

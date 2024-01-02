@@ -75,7 +75,7 @@ def main(args, task):
     
     from rl.reward.dictionary import Dictionary
     segmenter = get_cnn_segmenter(env, device, ckpt_fpath=args.segmenter_ckpt)
-    dictionary = Dictionary.load(f"{env.WORK_DIR}/rl/dummy_data/dict.txt")
+    dictionary = Dictionary.load(f"{env.WORK_DIR}/rl/dict/{args.config}/dict.txt")
     postprocess_code = args.postprocess_code
     split = args.split
     feats_dir = args.feats_dir

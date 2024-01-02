@@ -23,28 +23,37 @@ import wandb
 
 class RLCnnAgentConfig(object):
     # config_name: str = "librispeech" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # data_dir: str = "../../data/audio/ls_100h_clean/large_clean/precompute_pca512"
     # kenlm_fpath: str = "../../data/text/ls_wo_lv/prep_g2p/phones/lm.phones.filtered.04.bin"
     # dict_fpath: str = "../dummy_data/dict.txt"
     # pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_postITER1_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_29_0.pt"
     # pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1/checkpoint_best.pt"
-    config_name: str = "timit_matched" # "librispeech" or "timit_matched" or "timit_unmatched"
-    kenlm_fpath: str = "../../data/text/timit/matched/phones/train_text_phn.04.bin"
-    dict_fpath: str = "../dict/timit_matched/dict.txt"
-    pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
-    pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/timit_matched_randinit"
-    # config_name: str = "timit_unmatched" # "librispeech" or "timit_matched" or "timit_unmatched"
-    # kenlm_fpath: str = "../../data/text/timit/unmatched/phones/train_text_phn.04.bin"
-    # dict_fpath: str = "../dict/timit_unmatched/dict.txt"
-    # pretrain_segmenter_path: str = "./output/cnn_segmenter/pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo30_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
-    # pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_unmatched/large_clean/timit_unpaired_1k/cp4_gp2.0_sw0.5/seed2/checkpoint_best.pt"
-    # save_dir: str = "./output/local/rl_agent/timit_unmatched_randinit"
+    # w2vu_postfix: str = "w2vu_logit_segmented"
+    # ----------------------------------------------------
+    # config_name: str = "timit_matched" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # data_dir: str = "../../data/audio/timit/matched/large_clean/precompute_pca512"
+    # kenlm_fpath: str = "../../data/text/timit/matched/phones/train_text_phn.04.bin"
+    # dict_fpath: str = "../dict/timit_matched/dict.txt"
+    # pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_matched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo100_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    # pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
+    # save_dir: str = "./output/local/rl_agent/timit_matched_from_bc_relative_to_wfst_length_only"
+    # w2vu_postfix: str = "wfst_decoded"
+    # ----------------------------------------------------
+    config_name: str = "timit_unmatched" # "librispeech" or "timit_matched" or "timit_unmatched"
+    data_dir: str = "../../data/audio/timit/unmatched/large_clean/precompute_pca512"
+    kenlm_fpath: str = "../../data/text/timit/unmatched/phones/train_text_phn.04.bin"
+    dict_fpath: str = "../dict/timit_unmatched/dict.txt"
+    pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_unmatched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo80_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_unmatched/large_clean/timit_unpaired_1k/cp4_gp2.0_sw0.5/seed2/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/timit_unmatched_from_bc_relative_to_wfst_length_only"
+    w2vu_postfix: str = "wfst_decoded"
+
     env: str = "../../env.yaml"
     gamma: float = 1.0
     ter_tolerance: float = 0.08
     logit_segment: bool = True
     apply_merge_penalty: bool = False
-    wandb_log: bool = False
+    wandb_log: bool = True
     utterwise_lm_ppl_coeff: float = 1.0
     utterwise_token_error_rate_coeff: float = 0.0
     length_ratio_coeff: float = 0.5
@@ -485,7 +494,7 @@ class TrainRlCnnAgent(object):
         self.model.to(device)
 
         # Audio features path
-        dir_path = '../../data/audio/timit/matched/large_clean/precompute_pca512'
+        dir_path = self.cfg.data_dir
         # Boundary labels path
         boundary_labels_path = f'../../data/audio/ls_100h_clean/large_clean_mfa/CLUS128'
 
@@ -493,7 +502,7 @@ class TrainRlCnnAgent(object):
         train_dataset = ExtractedFeaturesDataset(
             path=dir_path,
             split='train',
-            labels='w2vu_logit_segmented',
+            labels=self.cfg.w2vu_postfix,
             label_dict=self.scorer.dictionary,
             aux_target_postfix='boundaries',
             aux_target_dir_path=boundary_labels_path,
@@ -502,7 +511,7 @@ class TrainRlCnnAgent(object):
         valid_dataset = ExtractedFeaturesDataset(
             path=dir_path,
             split='valid',
-            labels='w2vu_logit_segmented',
+            labels=self.cfg.w2vu_postfix,
             label_dict=self.scorer.dictionary,
             aux_target_postfix='boundaries',
             aux_target_dir_path=boundary_labels_path,
@@ -515,9 +524,9 @@ class TrainRlCnnAgent(object):
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1
         LOG_STEPS = 1
-        STEPS_PER_EPOCH = 222
+        STEPS_PER_EPOCH = len(train_dataset) // BATCH_SIZE + 1
         MAX_STEPS_PER_EPOCH = None
-        MAX_VAL_STEPS = 20
+        MAX_VAL_STEPS = len(valid_dataset) // BATCH_SIZE + 1
 
         # wandb config update
         self.cfg.batch_size = BATCH_SIZE
