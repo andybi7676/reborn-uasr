@@ -1,5 +1,5 @@
 # Used for finding which raw features are pooled together after wav2vec-u preprocessing.
-# Usage: python wav2vecu_scripts/find_prep_align.py CLUS128/train.src adj
+# Usage: python s2p/scripts/find_prep_align.py CLUS128/train.src adj
 
 # EXAMPLE
 # K-mean IDs:  24  127 115 115 79  79  65  65  65  46
@@ -9,12 +9,17 @@ import sys
 file = open(sys.argv[1], 'r')
 out_file = open(sys.argv[1].replace(".src", ".bds"), 'w')
 adj = sys.argv[2] == "adj" if len(sys.argv) > 2 else False
+mark_end = False
 
 for line in file:
     km_ids = line.strip().split()
     # Boundaries after merging same clusters
-    b_km = [1 if km_ids[i] != km_ids[i+1] else 0 for i in range(len(km_ids)-1)]
-    b_km.append(1)
+    if mark_end:
+        b_km = [1 if km_ids[i] != km_ids[i+1] else 0 for i in range(len(km_ids)-1)]
+        b_km.append(1)
+    else:
+        b_km = [0]
+        b_km += [1 if km_ids[i] != km_ids[i+1] else 0 for i in range(len(km_ids)-1)]
     assert len(b_km) == len(km_ids)
 
     if adj:
