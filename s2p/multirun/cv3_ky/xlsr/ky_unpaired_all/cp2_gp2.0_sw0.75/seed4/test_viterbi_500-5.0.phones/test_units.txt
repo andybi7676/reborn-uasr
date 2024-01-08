@@ -1,0 +1,752 @@
+<SIL> s e s ɯ r t[ ɯ n ɑ n ʁ ɑ r ɑ ʁ ɯ n d[ ɑ l <SIL> q <SIL> e l ɡ oe t[ tS u q u q l ʁ o n <SIL>
+<SIL> m ɑ r l ɑ <SIL> ɑ <SIL> oe r z tS e m e n e n d[ y b ɑ j y <SIL> y d[ oe <SIL> dZ o q u k i e z i n d[ e <SIL> k e r i S k e n <SIL>
+<SIL> e l i r o q u ɑ l ɑ r d[ ɯ s o t[ o r q ɑ n t[ p i S k oe ɑ s ɯ r i S ɑ n <SIL>
+<SIL> ɑ l m e q o z y ɑ m d[ ɑ n i n e oe tS y r q ɑ p q ɑ r q t[ ɑ l t[ r u t[ ɑ ʁ ɑ d[ ɑ m d[ o: k oe d[ y n oe <SIL>
+<SIL> j l oe k oe n i tS d[ e n d[ ɑ ɑ: ɯ n k l oe q t[ ɑ r ɑ: ɯ b ɑ r ɯ <SIL> b u l u tS u l r oe <SIL>
+<SIL> k e l d[ i b i k q o p d[ ɑ p ɑ r ʁ ɑ m e n t[ i n s p i k i r l i <SIL> q ɯ z m ɑ t[ ɯ n ɑ r <SIL> q ɑ l ɯ ʁ ɑ n <SIL>
+<SIL> S r o n d[ o q t[ ɑ n m o n l <SIL> m i t[ <SIL> n ɑ l ɯ n ɑ ʁ ɑ p ɑ r ɑ t[ ɑ S ɑ s i o N l o n u S u o k e r e i <SIL>
+<SIL> m n d[ ɑ j ɯ q ɯ n ɯ p dZ ɑ z s ɯ ɑ S ɯ t[ e r b y i b e t[ u r ɑ d[ <SIL>
+<SIL> s y l e <SIL> e m y k tS y n b ɑ s b ɑ t[ ɯ n d[ e b e r b e dZ ɑ t[ ɑ ɯ ɑ <SIL>
+<SIL> t[ ɑ r ɯ q t[ ɯ <SIL> q ɯ ɑ l ɯ ʁ ɑ r ɯ n <SIL> ɑ l d[ ɯ r ɑ l r o q <SIL> ɑ q ɯ S ɯ dZ ɑ ɯ n ɑ n q ɑ l ʁ ɑ n dZ o q d[ <SIL>
+<SIL> s o t[ k ɑ d[ ɑ n t[ ɑ n d[ o l u: tS o q m n ɯ n ɑ r ɯ k e t[ q l d[ ɑ <SIL>
+<SIL> dZ l d[ i z ɡ e t[ ɑ n e m ɑ l m ɑ oe <SIL> b e r i ɡ n <SIL> dZ o l q ɑ <SIL>
+<SIL> ɑ l z oe k oe <SIL> b ɑ r ɯ t[ q ɑ n ɯ b ɯ z d[ ɑ r t[ o: ɯ z d[ ɑ n ɑ s t[ o u n u ɑ n tS y j b ɑ l d[ ɯ r <SIL>
+<SIL> t[ y z ɡ u: u u: tS y u: s u: <SIL> q ɑ t[ ɑ r ɑ <SIL> b ɑ r i s ɑ ə i d[ e n dZ e m i S u: ɑ j l ɯ u S ɑ <SIL> q f r s u o t[ u: l u: ɡ dZ o n
+<SIL> ɑ j ɑ j d[ o oe t[ tS u: <SIL> l ɑ d[ ɯ n t[ u ʁ ɑ n ɯ n ɑ <SIL> b i r <SIL> dZ y m ɑ b o l d[ u: s ɑ q t[ q k ɑ r u: ɑ <SIL> o l u l S t[ u <SIL>
+<SIL> ɑ ɯ l u S u o k e z s d[ e r ɑ <SIL>
+<SIL> e l e ɡ e r d[ e b y i n m e n i ɯ z m ɑ t[ ɑ n ɑ l ɯ r m ɑ: ɑ s ɯ l e k tS ɯ e tS e ɯ l ɯ t[ ɯ v <SIL>
+<SIL> e b o l b o r ɑ j ɑ n ɯ r oe n d[ u n ɑ b ɑ l u n tS l u dZ e l e r ɯ <SIL>
+<SIL> dZ ɑ l ɯ ɑ n d[ i <SIL> dZ ɑ p q o j u q ɑ n s N ɑ l e r t[ e s i oe r i p dZ ɑ t[ ɑ n b u l t[ oe z <SIL>
+<SIL> b u l dZ r d[ e N t[ o N q ɑ j l ɑ n ɯ e p q ɑ b i q l ɡ o p b e t[ i l i z ɑ r k i e k i l t[ r e oe t[ <SIL>
+<SIL> b i r o l ɑ r q o S u n tS ɑ b o q t[ i tS i n d[ i ʁ ɯ n ɑ d[ oe k e r ɡ z ɡ oe r dZ ɯ e t[ <SIL>
+<SIL> b ɑ j n d[ o l ɑ s e ɑ k i r ɯ p t[ ɯ n ɑ j t[ ɯ ɑ n ɯ dZ y r oe j d[ y <SIL>
+<SIL> ɑ l u n j u b i z tS y n <SIL> l u q ɑ <SIL>
+<SIL> t[ ɑ m ɑ S t[ ɯ n s o n u n d[ ɑ <SIL> e k i k q m ɑ n d[ ɯ ɑ t[ i n d[ e r d[ e n o j u n tS u l u r n <SIL> dZ o ʁ o t[ u S t[ u <SIL>
+<SIL> ɑ l ɑ l ɑ r d[ ɯ n t[ o r t[ y n <SIL> dZ ɑ S <SIL> p ɑ r t[ o s o i k i ɑ l q ɑ l q ɑ n t[ o ʁ u z u e t[ k e k i S e <SIL>
+<SIL> b e ɡ e i d[ i ɑ l y z y l i k e t[ e j ɑ n ɯ q ɑ r ɯ d[ ɑ n t[ i t[ dZ ɑ m ɑ p ɯ ɑ s o l t[ <SIL>
+<SIL> b m e n d[ ɑ ʁ ɯ k i ɑ p t[ ɑ r ɑ s e <SIL> dZ ɑ s ɑ t[ ɯ S i k e r e k i b i r o q ɑ r ɑ dZ ɑ <SIL> dZ o q <SIL>
+<SIL> ɑ l d[ ɯ n ɑ l ɑ ɯ <SIL> t[ ɯ t[ ɑ r t[ ɯ z ɡ i l d[ oe <SIL>
+<SIL> d[ u m r ɑ t[ dZ ɑ b ɯ l u p <SIL> ɑ q ɑ r ɑ l b ɑ j q ɑ l ɑ n e k e n <SIL>
+<SIL> m ɑ r d[ ɯ m o s e n i n s e b i ʁ ɑ n ɑ ʁ ɑ n ɯ t[ ɑ l u: l b o r o r <SIL>
+<SIL> b u k i e s i p t[ ɑ l <SIL> b i r t[ u: ʁ ɑ n ɑ ʁ ɑ s ɯ n ɑ s ɑ t[ ɑ k e r t[ y p <SIL> y i r oe n d[ oe n <SIL>
+<SIL> q u ɑ t[ k i b ɑ q S y ɡ t[ o: n o: q o: m ɑ t[ ɑ t[ o: q ɯ l ɯ q ɑ q ɑ l d[ e d[ e b ɑ t[ q ɯ S o l ɑ r d[ ɑ <SIL>
+<SIL> y ɑ m ɑ s ɑ t[ ɯ m d[ ɑ l t[ e i n i q u t[ o l u d[ u n s ɑ q t[ ɑ l ɯ S ɯ r <SIL>
+<SIL> o s m ɑ: r ɑ n ɯ t[ y ɡ oe n d[ oe r <SIL> q ɑ n d[ i p ɑ r d[ ɯ q k i l d[ e r y: d[ i y i y tS y r ɑ j b ɑ ʁ ɑ l ɯ S t[ ɯ r ɯ <SIL>
+<SIL> ɑ l y ɡ y n s ɑ j s i m i ɑ t[ tS i t[ e m e n e n q ɑ r m ɑ l d[ ɯ r e s e p t[ i <SIL>
+<SIL> p s e b e b i <SIL> b u l <SIL> d[ ɑ t[ ɑ d[ ɑ r ɑ ɯ n o q u q t[ ɑ r ɯ n q o r ʁ o d[ o n l ʁ ɑ n k e t[ i p t[ y q ɑ n <SIL>
+<SIL> ɑ b i z t[ d[ i n <SIL> tS e k ɑ r ɑ r b ɯ z <SIL> tS dZ ɑ q ɯ n d[ <SIL>
+<SIL> b l b l o r <SIL> i S k e ɑ S p ɯ j q ɯ l ɑ d[ e ɡ e n <SIL> k y m oe t[ oe m y <SIL>
+<SIL> ɑ l m e n ɑ q ɑ j e ɑ m e n e n b ɑ r k i d[ i <SIL> q S l p <SIL> dZ ɯ ʁ u: ʁ ɯ ʁ ɑ r ɯ b u l tS u <SIL>
+<SIL> o r u s dZ ɑ l t[ ɑ r ɑ l ɑ <SIL> dZ e r o r u o u q dZ u n ɑ q ɑ r ɑ d[ i n i e r d[ e s ɑ l S ɑ t[ <SIL>
+<SIL> ʁ ɯ r q ɑ l b u l u dZ e r d[ e n <SIL> dZ ɯ z ɯ l s ɯ ɑ o b o l o t[ i <SIL>
+<SIL> ɑ tS k dZ ɯ oe N oe m t[ d[ oe n ɑ o q u tS u l ɑ r d[ ɯ s y z ɡ oe n u o q t[ l q u n q S u t[ ɑ r q ɑ l tS u: N dZ u r ɯ t[ q ɑ n <SIL>
+<SIL> b u o q ɑ p ɑ n ɑ l ɑ r ɯ n q t[ ɯ n e t[ k i n tS i <SIL> ɑ j l ɑ n ɑ p ɑ s m n ɑ j t[ y k oe n d[ <SIL>
+<SIL> b ɑ r o S o n o d[ o e l e <SIL> i e l b i r ɑ u m ɑ j ɑ n ɯ t[ ɑ q n u j t[ u r ʁ ɑ n ɯ n tS e t[ k e q ɑ ʁ u: l b oe ɯ <SIL>
+<SIL> e l dZ u b ɑ dZ e m e n e n <SIL> y k t[ <SIL> dZ ɑ S ɑ r ɯ b ɑ l ɑ r ɑ n dZ ɯ m ɑ t[ b e ɑ b ɯ <SIL>
+<SIL> ɑ t[ ɯ q ɡ y i t[ u l ɑ s o d[ <SIL> d[ ɑ l ɯ <SIL> t[ o ɡ u: l u <SIL> b ɑ t[ ɑ t[ ɯ <SIL>
+<SIL> e S u l dZ e r d[ e ɡ i <SIL> b o b e z i j o j b ɑ S i j e r e k <SIL>
+<SIL> b i r o q u l i u n m ɑ t[ r i ɑ l ɑ r n <SIL> dZ o ʁ u t[ p dZ b i S k e n
+<SIL> e i ɯ b i s i n m n i tS b o n i z ɯ n ɑ j ɑ p ɯ d[ o u i s i q s y d[ i <SIL> tS p N tS i n b oe r y ɯ b l u <SIL>
+<SIL> q r o l i S t[ e r <SIL> r e k y k y n q ɑ t[ S u l s ɯ n d[ ɑ b e r n e dZ e ɑ s t[ ɑ t[ ɑ l u l ɑ n d[ ɯ d[ o v <SIL>
+<SIL> b i s i j <SIL> i l i k e t[ k e <SIL> k y tS m e n b ɑ s ɯ p ɑ l u: ʁ ɑ q <SIL> ɑ e k t[ l oe d[ oe r oe <SIL>
+<SIL> ɑ S u l u b ɑ t[ ɯ b o j n tS e m i t[ s t[ ɑ <SIL> q o m u S i n <SIL> q o z ʁ o d[ u r o r <SIL>
+<SIL> k e tS i m d[ ɑ r d[ o n u n s u r ɑ n ɑ m ɑ m l i y oe m d[ oe m e n ɑ ʁ ɑ q l n <SIL>
+<SIL> m ɑ l ɑ r d[ ɑ b i j d[ e d[ ɑ z m b o ʁ u n d[ u q ɑ l e b ɑ q b ɯ l e l dZ ɑ r ɑ S ɯ m ɑ q d[ i j t[ e k t[ i <SIL>
+<SIL> ɑ e z m e n ɑ n d[ q n <SIL> u m n i j e r i t[ i j <SIL> e o m r m ɑ l n d[ u u: <SIL> ɑ j ɯ ɑ q t[ ɑ S o: n <SIL> q ɑ j l ɑ m <SIL>
+<SIL> o S o r q ɑ m p j ɑ j n ɑ t[ u: r ɑ l u m ɑ: l m ɑ p t[ ɯ q ɑ n t[ ɯ <SIL>
+<SIL> ɑ l t[ y t[ y ɑ ʁ ɑ <SIL> b ɑ j t[ ɯ b e r i S t[ oe r <SIL>
+<SIL> ɑ z b i z dZ S o tS l ɑ r ɑ l ɯ n ɑ l ɯ e s k e t[ e t[ k e b i z i s i s i m <SIL>
+<SIL> m n d[ ɑ n u l ɑ m s u: q <SIL> t[ ɑ j ɯ m <SIL> q ɑ l u r p u i k ɑ l q oe s i t[ oe r u <SIL> oe q u: u r ɑ p q l ɑ j t[ <SIL>
+<SIL> dZ b i z oe z y i S i z d[ e s ɑ t[ ɑ t[ q ɑ r ɑ t[ ɑ z d[ e p <SIL> b e s e p t[ e b i z <SIL>
+<SIL> m l i s ɑ n dZ ɑ r <SIL> t[ r u ʁ o n b i e k <SIL> t[ i ɑ s ɑ s <SIL> q ɑ r ɑ S q p ɯ p <SIL> q u r ɯ p dZ ɑ t[ q ɑ l n ɑ n ɑ j t[ ɑ <SIL>
+<SIL> ɑ t[ r q t[ ɑ t[ tS dZ ɑ n ɯ q t[ ɑ r ɑ d[ ɑ n q o ɑ t[ i l e k i l s o d[ ɑ n s ɑ t[ e k e <SIL>
+<SIL> t[ u r k i e ɑ ɡ ɑ q ɑ r <SIL> d[ f i f t[ i l o ɑ v m u ɑ l i m d[ ɑ r i k e l i v i z d[ i o k q u ə t[ o p o t[ o r u S tS u oe v <SIL>
+<SIL> b u r q ɑ n dZ e r l e r <SIL> dZ e k e m e n tS ɑ k ɑ m ɑ q ɯ t[ ɑ ɯ tS u l ɯ q l b ɑ j t[ <SIL>
+<SIL> ɑ t[ e k S e r i k oe <SIL> ɑ z e tS k e k e l b e t[ i m <SIL>
+<SIL> o dZ m oe S oe z d[ ɑ r y tS y oe n q ɑ z ɑ l ɑ r d[ ɯ n <SIL> ɑ j m ɑ l ɯ b ɯ z n z t[ o: l y oe j t[ i <SIL>
+<SIL> dZ ɑ l ɑ l t[ u r ɑ l q ɑ d[ ɑ r d[ e r <SIL> q o r q o u n t[ y dZ y n d[ ɑ e m <SIL>
+<SIL> ɑ n t[ o ɑ: ʁ ɑ t[ r ɑ j o n u n d[ ɑ q o r u <SIL> b ɑ r q ɑ n d[ ɑ r d[ ɯ ɑ <SIL> b ɑ r b ɑ z d[ j t[ ɑ S ɑ t[ b <SIL>
+<SIL> e l b u l ɑ j ɑ l dZ y r y t[ y S y <SIL> q ɯ l ʁ ɑ n <SIL>
+<SIL> b i s z <SIL> ɑ s ɯ m ɑ n d[ ɑ n <SIL> ɑ l ɯ n ɯ p <SIL> t[ e k S e r e b e ɡ e n m ɑ: m ɑ t[ b e k e n e m e z b i z d[ i <SIL>
+<SIL> b i e l m o r ɑ n ɯ n b ɑ l d[ ɑ r i <SIL> b e j t[ ɑ p q ɑ n ɑ d[ ɑ <SIL> q ɯ j t[ o t[ o r u S ɑ t[ <SIL>
+<SIL> n i n t[ i t[ i S o: t[ ɑ q t[ ɑ q e n d[ o: ɑ q o: q ɑ j t[ ɯ q ɑ l q ɑ ɯ <SIL>
+<SIL> b ɑ S t[ ɑ q ɯ b ɑ z t[ ɯ tS ɯ n e l e r ɑ d[ e j i ɑ l ɑ <SIL>
+<SIL> ɑ q ɑ l q u ʁ ɑ q o p tS o q <SIL> m e n e n o u r ʁ ɑ n q ɑ m ɑ q t[ ɑ ʁ ɑ d[ ɑ m d[ ɑ r y u n q o r l ʁ ɑ n <SIL>
+<SIL> ɑ f <SIL> e m e i d[ dZ e p u o j t[ ɑ t[ o z ə o n o <SIL> q ɑ r S f e S t[ f N q v s t[ ɑ s i ə j m u n z o z d[ u d[ e p ɑ j t[ k e n v <SIL>
+<SIL> q o: q o: t[ o: ɯ s e j q b ɑ r ɑ t[ ɑ q ɑ o: l ɑ r e l o: q t[ u o l o: ɑ s ɑ t[ <SIL>
+<SIL> b i r <SIL> o q ɑ t[ u: l ɑ r ɯ d[ o q u t[ <SIL>
+<SIL> ɑ ɯ z ɯ r ɑ q <SIL> dZ ɑ n ɯ q k ɑ k oe r oe k <SIL> i l k t[ l oe S <SIL> u q u ɑ dZ ɑ n ɑ t[ y n oe y r m o n m ɑ j t[ i l d[ u <SIL>
+<SIL> m i ɑ l ɑ j <SIL> tS ɯ ɑ n ɑ l ʁ ɑ n ɑ l d[ ɑ j e t[ r <SIL>
+<SIL> b ɑ r t[ u: j ɑ l ɑ l e k i ʁ ɑ t[ ɑ r ɑ l ɑ i l ɑ p <SIL> ɑ l t[ ɯ n tS o p o l ɑ m <SIL>
+<SIL> k y oe y b u r o m u z d[ ɑ r q ɑ p r o q u r u r u d[ u q ɑ j p t[ o l o n u n <SIL> t[ e k s t[ i e n e ɑ n ɯ <SIL>
+<SIL> e m e n <SIL> oe z <SIL> k y tS y m e i S e n e n <SIL>
+<SIL> b e t[ oe S k e k e n tS e t[ b i z i o n d[ o ʁ o u <SIL> t[ o p t[ u q ɑ z q ɑ ɯ t[ ɯ n ɑ t[ q ɯ ʁ ɯ n d[ j oe t[ <SIL>
+<SIL> m e n <SIL> i v j <SIL> t[ ɑ: oe e: b l <SIL> ɑ z e s ɑ m z ɯ ɑ: m e n e n k e l S i n t[ y z ɡ y oe q ɑ r S y tS S q oe <SIL>
+<SIL> dZ ɑ r z r dZ ɑ S o N s u n d[ ɑ n ɑ j l ʁ ɑ d[ ɑ d[ ɑ m d[ ɑ r d[ ɯ e k e z i k t[ i e r s e i m q l ɑ l q ɑ r ʁ ɑ s ɯ z d[ ɑ n dZ o l m ɑ <SIL>
+<SIL> e d[ i q s ɑ l t[ o r d[ ɑ l i l i b j r e m e j t[ ɑ l d[ ɯ k <SIL> k e s y dZ ɑ n e i S t[ i t[ i m i e n e n e l k t[ e k <SIL>
+<SIL> dZ l dZ o t[ ɑ n d[ ɑ j ɑ s m ɑ m <SIL> m y l k l b ɑ S q ɑ r u: s o n d[ u s u n u n <SIL> q ɑ r ɑ m ɯ ʁ ɯ n ɑ <SIL> oe t[ oe k oe n
+<SIL> b ɯ r ɑ s m s i s t[ i k o b o j u n dZ ɑ q ɯ r ʁ ɯ s ɯ ɑ n d[ ɑ j ɑ b ɯ e r y tS y n tS y b ɑ l o i S t[ e t[ <SIL>
+<SIL> b u l <SIL> t[ ɑ ɯ q t[ ɑ b r i n tS ɯ <SIL> dZ o l u: <SIL> b l d[ u r d[ ɑ <SIL>
+<SIL> b u r e m <SIL> b i r <SIL> dZ i n ɯ s t[ u n i k e <SIL> b u l <SIL> dZ ɑ r ɑ j ɑ n d[ ɑ t[ ɯ q ɑ r l <SIL> b ɑ j t[ <SIL>
+<SIL> ɑ l S ɑ l o n ɑ n i s e r ɑ t[ i p d[ e k <SIL> i s u r S tS e S t[ e r m <SIL>
+<SIL> b ɑ l ɯ s ɑ <SIL> dZ o l ʁ u r s ɯ b o j n tS ɑ t[ e k i S e r i y r y p dZ ɑ t[ ɑ t[ ɯ <SIL>
+<SIL> q S ɯ ʁ ɯ t[ u: n ɑ t[ o ʁ ɯ z dZ ɑ S ɑ r ɑ b ɑ l ɑ n ɯ s y z y p l u l t[ u r ɡ oe n s e ɡ e <SIL> b o l ʁ o n <SIL>
+<SIL> m ɯ n ɑ n d[ ɑ l <SIL> k i z d[ i <SIL> t[ e r m n ɑ t[ ɑ n ɑ l i z i m i <SIL> dZ o l b u ɡ dZ o S s b o l ʁ ɯ <SIL>
+<SIL> e l m ɑ n b ɑ l d[ ɑ r d[ ɯ n b ɑ r d[ ɑ r ɑ S q ɑ tS e k e n i n <SIL> y S y n e <SIL>
+<SIL> e l e z ɑ y tS o t[ o q o l d[ o d[ o q <SIL> ɑ l ɑ d[ ɑ d[ ɑ q o l d[ o b u <SIL>
+<SIL> ɑ l m ɑ n ɑ s ɑ <SIL> i e r i q ɯ r ʁ ɯ z <SIL> e j p ɑ p s ɯ r m <SIL>
+<SIL> ɑ n d[ ɑ n s ɯ l t[ ɑ r u m ɑ l b ɑ q ɯ n l ɑ t[ ɑ r t[ ɑ r ɑ <SIL> dZ o l u <SIL>
+<SIL> o l q ɑ ʁ ɑ r s e z k i S tS e <SIL> k e r k i r i t[ u r u n d[ ɑ r b o l o n <SIL>
+<SIL> ɑ n d[ ɑ s e n e n k i n d[ r n u n u ʁ ɑ n e k e n i d[ i r o m e v i k i m e s t[ e q o j o j i <SIL>
+<SIL> b l d[ o j r ɯ z d[ ɯ n m ɑ q ɑ t[ e r q ɑ e q ɯ z m ɑ t[ ɑ n <SIL> l u: l q ɑ m ɯ z ɑ m ɯ s y z e k e n e n d[ e l i l d[ oe <SIL>
+<SIL> q u j n ɯ q ɑ m ɯ j q ɑ l ɯ ʁ S q ɑ ʁ ɯ q ɑ e k i n tS e r e k ɑ l b i l ɡ l b o l d[ u l m ɑ m d[ e d[ i j i ɑ b ɑ ɯ <SIL>
+<SIL> q m ɑ n d[ ɑ k i m d[ e r ʁ ɑ n ɑ b o l ʁ o n dZ o <SIL>
+<SIL> b i l i s e <SIL> o r u <SIL> q ɑ S ɑ i <SIL> d[ oe <SIL> dZ ɑ r ɑ j l ɑ d[ b <SIL>
+<SIL> l o S o n d[ u k t[ ɑ n <SIL> d[ ɑ r i ɡ e r ə l e <SIL> ɑ ə n ɯ ə s ɑ <SIL> o s ɑ l d[ ə ɡ i o: r s ɑ u tS ɑ r ɑ r ɑ q ɑ n d[ oe n k oe k ɑ m ɑ z b u <SIL>
+<SIL> m ɯ n d[ ɑ l t[ u r u m u S u ɑ e j r m e z <SIL> b u l tS u ɑ r <SIL>
+<SIL> b u l dZ o l o r u p <SIL> dZ ɑ t[ <SIL> q ɑ n d[ ɑ d[ ɑ e tS e n e r s e S k e n e m e z <SIL>
+<SIL> oe y z y oe y tS y s y j <SIL> m i t[ r i k u r u l o b m e n i n s i e r i ɡ i s ɑ b i q <SIL>
+<SIL> ɑ S o b u r ɑ z d[ ɯ n ɯ ɑ t[ ɑ r ɑ b e l dZ e ɑ r d[ e n i n i s i e r i m i k i n i n s ɑ r ɯ <SIL> b o l tS u <SIL>
+<SIL> t[ p ɑ z ɯ r ɑ t[ o u n ɑ l ɑ r ɑ t[ ɑ t[ o t[ o t[ m o ɯ dZ e t[ k i l i s i <SIL>
+<SIL> t[ dZ ɑ S t[ ɑ r d[ ɯ n b ɑ r ɯ <SIL> b i z i e z <SIL> m e n e n ɑ l ɯ k t[ d[ e n k d[ e n d[ e q ɯ z ɯ z ɯ S ɑ t[ ɯ <SIL>
+<SIL> ɑ z ɑ j s ɑ j n s e ɡ i z i n s o m n o n t[ oe l oe t[ i v i r dZ ɑ r ɑ ʁ ɑ l ɯ i S t[ e t[ <SIL>
+<SIL> oe z ɑ z ɑ q b i l i p o l k e l i S i m k e <SIL> u S o l dZ u l ɯ ɑ <SIL> u o: dZ i l <SIL> ɑ j u n d[ ɑ ʁ ɯ ɑ n ɑ q o <SIL> q o j d[ o q <SIL>
+<SIL> ɑ d[ dZ o N q u r s ɯ n ɑ t[ oe r k i S i q ɑ z ɑ t[ ɑ q ɑ n d[ ɑ <SIL>
+<SIL> b u j u z ɑ b t[ u n r ɑ s ɯ <SIL> e k i j ɑ n dZ ɯ r <SIL>
+<SIL> tS y tS y r ɑ b ɑ r d[ ɯ q e ɡ s i n e l e ɡ t[ dZ e q ɑ ʁ ɯ t[ q ɯ q l ɯ q o o: i ɑ i <SIL>
+<SIL> m ɑ r b e r <SIL> S ɑ l o tS u n o q o q ɑ l <SIL> dZ ɑ S u r l o n d[ y r i z l oe t[ ɑ l ɑ n d[ ɯ n b i r d[ i m oe k y n e m s <SIL>
+<SIL> k n tS oe i t[ oe r o l s ʁ o n <SIL> dZ ɑ ɯ n d[ ɑ <SIL> oe r t[ o: dZ ɑ t[ i <SIL>
+<SIL> b i z m u n u S u l b o j oe d[ e ɑ l t[ ɯ r ɯ p o j o j <SIL> d[ ɑ ʁ <SIL> k y tS oe t[ y S y oe z k e k i <SIL>
+<SIL> dZ l i s ɯ l m d[ ɑ j ɑ l d[ ɯ n <SIL> q o n d[ o ʁ o r o l u b i r <SIL> dZ ɑ n ɑ l b ɑ r ɯ q t[ u: l <SIL>
+<SIL> b i t[ k y l s ɑ n s ɑ b o j n tS ɑ j i <SIL> t[ e j u j i m e o <SIL> q o r q o m z tS u q t[ u r t[ ɯ <SIL>
+<SIL> i s e m i <SIL> q o r u o s <SIL> r u S ɑ l ɑ ʁ ɑ l ɑ l d[ <SIL>
+<SIL> ɑ <SIL> n i S k e t[ e l i <SIL> ɑ z ɑ t[ ɯ dZ ɯ n ɑ S ɯ n ɑ l ɑ r ɯ n tS ɯ ɑ r ɑ j d[ ɯ <SIL>
+<SIL> ɑ q o l s ɑ l u: l b j u n tS ɑ d[ ɑ ʁ ɯ i m n e l e r b i e ɡ i l y i <SIL>
+<SIL> b u dZ ɑ r d[ ɑ n <SIL> q o l ʁ u n s o n u b u l dZ ɑ q S n e r s i b i r d[ i <SIL> ɑ j <SIL>
+<SIL> ɑ l i S k e t[ i t[ e ɡ e i n ɑ l ɑ r d[ ɑ r d[ ɑ n ɑ b ɯ n ɑ n b ɑ l ɑ S u: s ɑ u k e r e k t[ <SIL>
+<SIL> dZ o: dZ o <SIL> ɑ b ʁ ɑ n dZ o l ɑ l ɑ m j e tS k i n t[ ɑ r t[ ɯ p b o z ʁ ɑ n dZ o q ɑ m d[ e j i ɑ l j <SIL>
+<SIL> ɑ S o S o n u ɑ m u n u <SIL> k e n e n e r e <SIL> q ɑ r p q oe r oe l y d[ ɑ <SIL>
+<SIL> ɑ j b ɯ r S b o l dZ r d[ e k e t[ ɑ l ɑ ɯ S t[ ɯ u: e k dZ ɯ q ɑ p ɑ r t[ oe p r d[ oe r dZ e S ɑ S y tS u u: ɯ <SIL>
+<SIL> q u q j r d[ ɑ <SIL> ɑ d[ ɑ m oe m oe n oe r z j n e l e n dZ o q <SIL>
+<SIL> b ɑ l e m ɑ n d[ ɑ ʁ ɯ b l d[ ɑ r ɑ <SIL> dZ e <SIL> k e tS i n s i r d[ i p i tS ɯ ʁ ɑ l i q ɑ n e m e s <SIL>
+<SIL> ɑ q ɑ l ɑ r ʁ ɑ ʁ ɑ t[ ɑ t[ ɯ dZ i l ɑ k e s k l oe q oe m y <SIL>
+<SIL> r u S s dZ ɑ <SIL> s ɑ q ɯ q ɑ s ɯ n ɑ n k oe r s oe t[ y d[ oe o n u ɑ l ɑ j t[ u r ʁ ɑ n t[ o p t[ u r ɑ r <SIL>
+<SIL> b o r S o n d[ ɯ q t[ ɑ n <SIL> ɑ r ɯ n d[ o n i tS i d[ e k i r s <SIL> s u: l <SIL> i n b j o l ɯ z ɑ t[ ɯ <SIL>
+<SIL> e ɡ i r d[ y l k oe r e b i r i m d[ e k q b o l s u s q <SIL> r ɑ ʁ r e s t[ ɑ l t[ <SIL>
+<SIL> t[ o p o s u s q ʁ r ʁ ɯ s t[ ɑ n d[ oe <SIL> y oe n <SIL> y l ɡ i n ɑ l ɑ tS q ɯ t[ p r ɑ ɯ k t[ ɯ r <SIL>
+<SIL> n o: y tS y n ɑ ɯ l t[ j r ɑ z s d[ ɑ <SIL>
+<SIL> i d[ p o t[ ɑ t[ <SIL> z n ɑ ʁ ɑ r S ɯ <SIL> i S i s ɑ j e s i <SIL> m n oe z y d[ y <SIL> d[ e p e s e i p t[ e t[ <SIL>
+<SIL> ɑ r u l ʁ ɑ b i r ɑ j k e j e j <SIL>
+<SIL> t[ tS e k i t[ e r ɑ l q ɑ ɑ: r ɯ n <SIL> t[ i l d[ e n t[ ɑ n d[ ɯ r t[ y n ɑ r <SIL>
+<SIL> k e k e t[ ɑ r ɑ p t[ e n o q j ɑ ʁ ɑ j b ɑ j l ɑ n ɯ S t[ u: q ɑ k oe z i l k t[ oe l oe y dZ y r ɡ y z p dZ ɑ t[ ɯ S ɑ t[ <SIL>
+<SIL> b ɑ l ɑ r <SIL> ɑ q ɑ S ɯ q l n ɯ t[ S i S i <SIL> q o z ɯ l d[ ɯ d[ r <SIL>
+<SIL> m oe n ɯ n y oe t[ y n oe j m oe k oe m oe e t[ oe n e r k i m d[ ɑ r <SIL> ɑ r ʁ ɯ ɑ n ɑ j o l o t[ d[ y <SIL>
+<SIL> b u l dZ r d[ e d[ i j e r l e <SIL> b ɑ r d[ ɯ ɑ l t[ ɯ n d[ ɑ j b ɑ j l ɑ n ɯ s S q ɑ <SIL>
+<SIL> q u ɯ ʁ ɑ t[ u: ʁ ɑ n <SIL> k i S e n i e n <SIL> ɑ q ɯ b ɑ j l ɯ m n ɑ q z oe z y <SIL> b i l <SIL> b e o t[ u: r ɑ t[ <SIL>
+<SIL> oe u b ɑ S q ɑ <SIL> p ɑ r ɯ S ɯ t[ tS u l ɑ r <SIL> d[ ɯ n <SIL> l ɑ q ɯ i q ɯ r ɯ q t[ dZ ɑ t[ q ɑ n d[ ɯ q t[ ɑ r ɯ n <SIL> y <SIL> u: u t[ o m d[ ɯ <SIL>
+<SIL> o ɑ S ɑ r ɑ t[ q j m i n e r l e r i n e <SIL> q i j ɑ l d[ ɑ r ɯ n ɑ s ɑ q ɑ t[ <SIL>
+<SIL> tS o: ɯ l N tS u ɯ r d[ ɑ ɯ l ɯ ʁ ɑ t[ o: ɯ n ʁ ɑ t[ p t[ ɯ p ɑ p u p l ɑ d[ e m j u <SIL>
+<SIL> n i k i z n e n <SIL> o l ɯ m e n ɑ j t[ ɑ <SIL> b ɑ: ɯ r ɯ n dZ ɑ s ɑ <SIL>
+<SIL> ɑ l b ɑ j t[ e p u l t[ ɑ t[ r e n ɯ q ɑ l ɯ s ɯ S ɯ n ɯ dZ ɑ s ɑ b ɑ S ɯ k o: e r i k <SIL>
+<SIL> ɑ b z i z <SIL> b ɑ r d[ ɯ k i s b ɑ k t[ r l o r u d[ u: q v ɑ l <SIL> b y l oe S t[ u r y p ɑ l ɑ n b z
+<SIL> ɑ S j ɑ n e l e s e n ɑ b ɑ j <SIL> s o ɡ e k e n s i n d[ e p dZ ɑ t[ u: l u n u s u n o S q o l S ɑ t[ <SIL>
+<SIL> q ɑ r l ɑ r <SIL> s ɑ l t[ ɑ r d[ ɯ <SIL> o l d[ o ʁ u n ɑ d[ ɑ n d[ ɑ <SIL>
+<SIL> o ɑ i r o q ɑ l ɑ ɯ n b ɑ r d[ ʁ ɯ t[ ɑ t[ e t[ i <SIL> t[ y r d[ e S t[ e p ɑ t[ ɑ j t[ <SIL>
+<SIL> ɑ l m e n i ɑ i s ɑ l ɑ n ɯ oe l k oe ɡ oe k ɡ r i t[ ɑ d[ ɑ m ɯ b u d[ e p b ɑ j t[ n o: l e t[ <SIL>
+<SIL> q ɑ d[ ɑ m d[ ɑ r ɑ l ɑ r d[ ɯ m o n t[ ɑ r ɑ e k e t[ e r e n e n ɑ: r ɑ ɯ ʁ z ɯ r <SIL>
+<SIL> k y n u l ɑ d[ ɑ n ɑ r ɑ n ɯ t[ ɑ j b ɯ z s ɑ t[ <SIL> t[ e n ɑ <SIL>
+<SIL> ɑ n e k i e n ɑ r i r ɑ m ɑ q n oe z y n oe z y oe tS y l y k y b ɑ r <SIL>
+<SIL> b i r j m o r d[ ɑ <SIL> b i r <SIL> dZ ɑ r i ɑ ʁ ɑ <SIL> t[ y S <SIL> b o l d[ m n ɑ l ɑ p t[ ɯ r e s e dZ o q ɑ j l b u l u <SIL>
+<SIL> k s i t[ i n e t[ ɑ q ɑ r ɑ t[ ɯ t[ p t[ o r s ɑ t[ d[ oe j n d[ i q ɑ m d[ ɯ ʁ ɯ ɑ n <SIL> dZ e d[ l e d[ e n k e k e d[ <SIL>
+<SIL> dZ ɑ q ɯ q ɑ ʁ ɑ n d[ ɑ r d[ ɯ n b e r i o <SIL> b ɑ S q ɑ dZ ɑ n ɑ d[ e n e s i n e s o q u <SIL> dZ ɡ n ɑ t[ ɯ r ɯ <SIL>
+<SIL> ɑ n ɯ n k e n i q ɑ r ɑ dZ ɑ t[ ɯ p b ɯ r oe p <SIL> b e r y i n S ɑ r t[ ɯ <SIL> u o s y o n d[ ɑ b o l t[ <SIL>
+<SIL> u o S o l oe z oe r y ɡ oe <SIL> k p dZ ɑ ʁ ɯ n s ɯ s o q u j ɑ l ɑ r b ɑ j l ɑ n ɯ S t[ u <SIL>
+<SIL> y r u m ɑ n ɑ n ɑ m ɑ m ɑ z ɑ r ɯ d[ ɑ <SIL> ɑ l m e tS i t[ k oe v b i e S m i n d[ e tS e n ɑ d[ m <SIL> tS o ʁ ɑ t[ <SIL>
+<SIL> u r o S u n o y <SIL> oe z ɡ y p r ɑ p b ɑ ɡ ɑ n d[ ɑ b l u p <SIL> e s e p t[ e l i t[ u r
+<SIL> b r s <SIL> S ɑ j l e l <SIL> k ɑ l <SIL> b ɑ s ɑ n ɑ b ɑ j b ɯ z ɯ <SIL>
+<SIL> i r z d[ i n ɑ q ɑ b i r e t[ r ɑ n s r o l o r u b ɯ z <SIL> b ɑ r <SIL>
+<SIL> e l d[ ɑ ʁ ɯ b i r i l i n t[ u r u ʁ u n d[ ɑ u <SIL> e b o q u ɑ t[ s ɯ l ɑ n ʁ ɑ n m <SIL>
+<SIL> ɑ n ɯ l ɑ j q ɑ m ɑ n d[ ɑ s ɑ z ɯ r n tS o b e j t[ o p o j e l e k <SIL>
+<SIL> ɑ q ɯ r l e m e s y z o p q dZ ɑ t[ q ɑ m e k e m e t[ d[ e l <SIL> b ɑ l d[ ɑ r d[ ɯ <SIL> S u q u t[ u: ʁ u j ʁ ɑ l ɯ <SIL>
+<SIL> b i r o q <SIL> q o r u <SIL> q o l k e l i S t[ ɯ <SIL>
+<SIL> b u l b i l i <SIL> dZ o n y n d[ i <SIL> l i z i ɑ <SIL> q ɑ l <SIL> b ɑ j <SIL> q ɑ l d[ e r <SIL>
+<SIL> b ɑ r z ɯ r ɑ l ɑ r <SIL> dZ e p o ɯ t[ ɑ t[ ɑ r d[ ɑ t[ ɑ l ɑ p <SIL> q ɯ p ɯ dZ ɑ t[ <SIL> q ɑ n ɯ t[ u: r e m e s i <SIL>
+<SIL> b e u z ɯ r ɑ q ɯ t[ ɑ j tS ɑ s ɯ l e y S y k y z d[ <SIL>
+<SIL> u l o r t[ u s u ɯ n d[ ɑ ʁ e m e <SIL> tS u r z s u n <SIL> q ɯ r ʁ ɑ n d[ <SIL>
+b i z <SIL> i S k e k e d[ dZ ɑ q ɯ n dZ ɑ r d[ j ɯ <SIL> b ɑ d[ ɑ q i u k y tS y t[ k ɑ n ɑ l ɑ r <SIL> d[ ɯ p t[ e k i e r <SIL> p i <SIL>
+<SIL> b i r z ɑ n ɯ n ɯ e tS i ɑ q ɑ l ɑ ʁ ɯ n <SIL> ɑ m e m e s e b i z s e s <SIL>
+<SIL> b e b e r e m y ɡ oe i l ɑ p <SIL> k e l d[ e d[ e d[ e <SIL> tS o n e n e s e <SIL>
+<SIL> ɑ t[ ɑ d[ ɑ j n ɑ ɯ l s ɑ t[ p ɯ l d[ e k e n o m <SIL>
+<SIL> k dZ ɑ ʁ d[ ɑ j l ɑ r u S u n d[ ɑ b o l u <SIL> q ɑ l d[ e r ɑ l i b ɑ <SIL>
+<SIL> q r o l u S t[ u r ɑ s ɯ n d[ ɑ s oe z <SIL> b l ɯ n d[ ɑ dZ ɑ q <SIL>
+<SIL> b i r e l i m i ɑ t[ e r ɑ l y tS y n s e l e r d[ m ɑ l ɑ m ɑ t[ ɑ ɡ e n t[ i n e r t[ ɑ m u l ɑ n b o l d[ ɯ <SIL>
+<SIL> q S o d[ ɑ e ʁ ɯ S j ɡ oe r y dZ o j m u S t[ ɑ p ɯ e z ɑ l d[ ɯ n <SIL> tS ɑ ɯ t[ q o t[ o r d[ oe n <SIL>
+<SIL> m ɑ l ɑ r ɑ q t[ o l u n ɑ n o oe z d[ oe r o ʁ o n <SIL> b ɑ d[ ɑ s ɑ t[ ɯ S q ɑ n <SIL>
+<SIL> ɑ e t[ y ɯ n ɑ t[ ɑ m <SIL> t[ ɑ n ɯ q ɑ l ɯ n d[ <SIL>
+<SIL> i s k e i z b ɑ j i oe z u m u d[ ɑ d[ o m u t[ u r ɑ dZ o u p i r l i k <SIL>
+<SIL> p ɑ l ɑ m o: ɑ l d[ ɯ n b ɑ j ɑ ɯ e q ɑ j ɑ e q o: r o: e z e l ɡ d[ e b ɑ s t[ o: l ʁ ɑ n o: ɑ s o: t[ e o: r o: p t[ oe <SIL>
+<SIL> m ɑ l i ɯ b o l N s o S ɑ j l o m n u m u i z ɑ m n d[ u r b u S t[ ɑ t[ ɯ j ɑ l u: b d[ ɑ j ɑ t[ ɑ b ɯ r <SIL>
+<SIL> b i l dZ e r d[ N <SIL> dZ y r y <SIL> k e m <SIL> d[ i ɡ i m e n e t[ y r y ɡ oe d[ oe r d[ oe n s ɑ n ɯ y q k oe z y b o l t[ u q t[ oe r d[ <SIL>
+<SIL> ɯ n t[ k e n i q ɑ l ɯ dZ e r d[ e ɯ q o: m S k e l e r d[ e n t[ ɑ r ɑ t[ ɑ <SIL> ɑ r q ɑ n ɑ j e ɑ d[ ɑ m ɑ r b ɑ r <SIL>
+<SIL> e r i m d[ oe t[ o l ʁ n d[ ɑ n <SIL> b ɑ S ɑ z ɑ n ɯ ɑ q ɑ l ɑ n ɑ dZ o q u ɑ u oe m d[ e j t[ ɑ s ɑ j t[ l ɑ r <SIL>
+<SIL> u d[ ɑ n ɡ y n u n s ɑ l ɑ o: S ɑ q ɯ s o: m tS o: l q ɑ e o: t[ o: r q o: r o: n q t[ ɑ r <SIL>
+<SIL> ɑ p ɑ: r b ɑ z d[ ɑ r ɯ q o r o z o n ɯ n b o j u ɡ u n d[ u: ʁ o n <SIL> k oe ɡ oe l tS oe m e n e n tS e n e S e t[ <SIL>
+<SIL> ɑ t[ y m oe k q i <SIL> dZ ɑ n k e l t[ e r y tS e m e n t[ e r m e n e n t[ u ʁ ɑ n <SIL>
+<SIL> oe z ɑ j o tS <SIL> q ɯ r ts s ɯ q o l ʁ o n d[ dZ e r d[ n d[ oe z y m u l <SIL> k l y t[ y ɡ oe n tS o <SIL> o r u n ɑ d[ ɑ <SIL>
+<SIL> b i z b ɑ S ɯ n ɯ t[ ɑ n d[ ɑ ʁ ɑ n e m e s b e z s l j ɑ n ɯ n oe o r u n ɑ n t[ o j d[ oe j y r u <SIL>
+<SIL> ɑ l ɑ r m o n o q ɑ n t[ ɯ p ɑ t[ q ɑ r ɑ s b ɑ t[ <SIL>
+<SIL> e q i r o q d[ ɑ p k j m e t[ ɑ l u: l d[ ɑ ʁ <SIL> b j ɑ l ɑ r b r ɑ z q t[ ɯ m y n r e j t[ <SIL>
+<SIL> k ɑ m o l o tS u: r i ɯ n ə d[ ɑ y <SIL> ɑ n d[ ɑ m ɑ q t[ ɑ r ɑ ɯ p t[ ɑ p t[ ɯ ɑ n dZ ɑ ə s i t[ ɑ b u l ɡ ɑ n <SIL>
+<SIL> b i z i ɡ i ɑ q tS ɑ s ɯ n i S e n e p m t[ ɑ S ɯ ʁ ɑ n ɑ d[ ɑ m d[ ɑ r y q k oe t[ y p tS ɑ t[ ɯ S ɑ t[ <SIL>
+<SIL> m ɯ n d[ ɑ n s o n <SIL> ɑ dZ ɑ q o p <SIL> b i e q ɯ b o ɯ s <SIL> s y dZ ɑ d[ ɑ n b ɑ S t[ ɑ r d[ t[ u: n u t[ ɑ l ɯ q <SIL> q ɯ l d[ ɯ <SIL>
+<SIL> ɑ l v q ɑ ʁ l ɯ t[ r ə d[ ɑ n v tS e tS i m i n e m ɑ k o l <SIL> b o l ɡ i o n e m e z i <SIL>
+<SIL> q o q u j ɑ b o l b ɑ n dZ e r d[ i t[ i d[ i l ɡ oe <SIL> p r ɑ t[ ɑ q o d[ u <SIL> q ɑ r ɑ ɯ ɑ r ɑ <SIL>
+<SIL> t[ i r o q ɑ l oe z ɡ oe n y oe s y n m o u n ɑ n ʁ ɑ n e m e <SIL>
+<SIL> u ɑ p ɑ l ɑ r b i z d[ i q ɑ tS ɑ n ɑ p ɑ k e t[ e s i n e r ɯ e p s u r ɑ S ɑ t[ <SIL>
+<SIL> r ɑ r d[ ɯ n tS ɑ b l b o u n tS ɑ <SIL> s o t[ o t[ u r u m u n u n ʁ ɑ tS ɑ n b o l o l o N r o <SIL> b e l ɡ i s i z <SIL>
+<SIL> ɑ l b y k y oe t[ e tS q ɑ tS t[ ɑ n dZ e r d[ e t[ u r ʁ ɑ n m e s <SIL>
+<SIL> b i r ɑ j d[ ɑ n <SIL> k i e n <SIL> tS <SIL> d[ ɑ b ɑ j k e t[ i p <SIL> q ɑ l ɑ n ʁ o l u: <SIL> d[ e o j l oe ʁ ɯ n m ɑ m <SIL>
+<SIL> v u k f m u S t[ u u: l ɑ r d[ i n m o v m b o l o ɡ ə m ə l u m u j u n tS ɑ j q f l v ɑ v m e t[ tS ə e r i t[ ə n <SIL> p ɑ j d[ ɑ b o l k o oe o n <SIL>
+<SIL> u dZ ɑ q ɯ n d[ ɑ j ɯ n d[ ɑ j <SIL> r ɑ o q u j ɑ ʁ ɑ q b o b o l u d[ ɯ <SIL>
+<SIL> b i s ɑ z ɯ r m ɑ s e l e n i tS e tS ɑ j b j u ɯ z d[ i <SIL>
+<SIL> m ɯ n ɑ n ɯ l e ɑ <SIL> u s e n u l t[ u tS u r q ɑ S ɯ dZ ɑ j ɑ n d[ r ɯ <SIL>
+<SIL> t[ ɑ r b q o r u z d[ o n oe z n e t[ ɑ n d[ ɯ q u r u S u dZ y oe n d[ oe m y q v e m y n oe y b o l o <SIL>
+<SIL> ɑ r ɑ r o S u n tS ɑ l ɯ q ɯ m ɯ q ɑ ɯ l ɯ q m e n ɑ l ɑ d[ ɑ m l t[ y r y: ɡ <SIL> dZ o l i e r ɯ S t[ e <SIL>
+<SIL> ɑ l z oe r t[ k oe b oe ɡ oe t[ q o q y i S t[ r ə n ɑ dZ ɑ p q o <SIL> y tS y oe l oe m t[ ɑ r t[ ɯ d[ oe v <SIL>
+<SIL> n ɯ dZ ɑ N k e i n t[ e <SIL> y r dZ e d[ ɑ b ɑ S t[ ɑ q o: r o N q k i t[ u t[ ɑ o j l o n <SIL>
+<SIL> dZ ɑ b o j ʁ ɑ q dZ e n e k i b ɑ l ɑ q ɑ z ɑ ʁ ɑ j <SIL>
+<SIL> m e <SIL> t[ y i y k y <SIL> s ɑ j t[ y S t[ oe ɡ i n i j ɑ l <SIL> q ɑ l ɑ n ɯ n y n oe z d[ oe dZ o n e oe t[ oe n <SIL>
+<SIL> ɑ n i r o q m n d[ ɑ t[ b ɑ r t[ ɑ l b ɯ l ɯ tS e n e d[ e <SIL> b ɑ b ɯ l tS ɯ r <SIL>
+<SIL> e S b u l u oe l k y tS y n dZ ɑ m ɑ n <SIL>
+<SIL> b ɑ S ɯ n d[ ɑ l ɯ b u l u s u ɯ r <SIL> b o l tS ɯ <SIL>
+<SIL> k i e m d[ i l S u l <SIL> e n b ɑ l ɯ <SIL> dZ e t[ i S k e n d[ e ɡ i m e n e n q u t[ ɑ ʁ ɯ m dZ e l e t[ <SIL>
+<SIL> k e k j ɑ j n ɑ j t[ ɯ m ɯ d[ ɑ <SIL> ɑ l <SIL> ɯ z y n y t[ y dZ ɑ S ɯ <SIL>
+<SIL> u m i l i ts s ɑ e l ɑ r d[ o m o u e l e t[ ɑ p ɑ p <SIL> ɑ l m ɑ q v ɑ l z ɯ j l ɯ k S k e k e l e r e r v <SIL>
+<SIL> b i s <SIL> s ɑ j e t[ r o n d[ ɑ o l ʁ o n m ɑ m e l e l e r d[ e ɯ q ɑ l ɯ n ɑ k e l <SIL> k e r i p <SIL> dZ ɑ t[ ɑ d[ ɯ <SIL>
+<SIL> b m u n d[ ɑ j b o l u p k e t[ e r e n e tS e k n k y t[ <SIL> k y m n e m e s d[ i <SIL>
+<SIL> b m e <SIL> b i z i d[ e <SIL> p ɑ e m i r n q ɯ r ʁ ɯ z d[ ɑ r ɯ m e n e n k p <SIL> s ɑ l ɯ S t[ ɯ r ɯ S ɑ ɑ: r ɯ n b ɑ j q ɑ d[ ɯ l <SIL>
+<SIL> b ɯ r S o t[ p ɑ <SIL> b u l oe t[ u j e r i t[ i S i r e t[ i p <SIL> q ɑ ɯ j p ʁ ɑ s ɯ l ɑ d[ ɑ <SIL>
+<SIL> e S ɑ n ɯ n tS i n d[ e b y r oe s oe <SIL> dZ ɑ n q u r l u p dZ ɑ t[ ɑ t[ <SIL>
+<SIL> q ɑ ɯ n d[ ɑ j i S t[ ɑ dZ ɯ r ɑ b ɑ s ɯ t[ u r ɑ l u: ɑ tS ɯ q ɑ j t[ ɯ l ɑ t[ <SIL>
+<SIL> b o q o u tS o r ɑ k oe k oe t[ y r y tS y u <SIL> t[ u r l u <SIL> y b i l i <SIL>
+<SIL> b u <SIL> dZ ɑ s ɑ ʁ ɑ n q ɯ o m u S t[ ɑ r ɑ ʁ ɑ d[ ɑ t[ i S t[ y j o p <SIL> q ɑ l t[ <SIL>
+<SIL> oe z ɑ y tS m ɑ m e k e t[ i k <SIL> b i r dZ e t[ n <SIL> q ɑ z ɑ q tS ɑ q ɑ r ɯ dZ ɑ t[ ɯ b oe l u S y k e k i <SIL>
+<SIL> q ɯ z q ɑ t[ ɑ ɯ q ɑ l b ɑ l ɯ S b ɑ b ɯ dZ e t[ y p i t[ p o j S ɑ n ɯ ɑ <SIL>
+<SIL> b r o q ɑ m i l i ɑ l ɑ r ɑ n <SIL> q ɑ t[ ɑ l b ɑ n e j b i <SIL>
+<SIL> b r z d[ n b o l b ɑ n d[ ɑ r e n ɑ j d[ ɑ ʁ ɯ d[ ɑ j e ɑ r <SIL>
+<SIL> m ɑ r d[ ɑ j m oe y z ɡ y m u n y ɑ <SIL> i S e n e p ɑ r ɑ k e t[ q ɯ l ɯ i s ɯ n r i k o m <SIL>
+<SIL> o S ɯ m dZ ɑ S r ɑ n ɯ t[ ɑ z ɑ l e S t[ e r e n e <SIL> k t[ q ɑ r tS ɯ l ɑ r ɯ dZ ɑ r d[ e n b e r <SIL> t[ r u S oe t[ <SIL>
+<SIL> m n e d[ e r <SIL> b u l ʁ e S e n e i b l r <SIL>
+<SIL> b ɑ r ɑ r d[ ɯ <SIL> p ɑ r ɯ t[ k e j i S ɑ n <SIL> q ɯ l u: ʁ ɑ s ɑ l o q u t[ <SIL> t[ ɑ r ɯ z <SIL> b o l t[ <SIL>
+<SIL> q o ʁ u ʁ <SIL> q u r ɑ m ɑ l ɑ r d[ ɯ n b ɑ r d[ ɯ q t[ ɑ n d[ o j ɯ n d[ ɑ r o S o l S ɑ: l ɑ: r d[ ɯ ɡ y t[ y t[ <SIL>
+<SIL> b y r S o l m ɑ l d[ ɑ r ɑ q ɯ z ɯ d[ ɑ r d[ ɑ n <SIL> b e r ɡ i l e d[ ɑ <SIL>
+<SIL> t[ i t[ N ɑ l ɑ l e m i b ɑ b ɑ n ɑ o d[ ɑ l u l k u n d[ u t[ ɑ r ɯ S i d[ e ɑ t[ ɑ d[ ɯ r <SIL>
+<SIL> b u l S ɑ q ʁ ɑ t[ m e r i dZ i j ɯ S t[ ɑ n q ɯ r ʁ ɯ z <SIL> t[ ɑ ɯ d[ ɑ b ɯ ʁ ɑ n ɑ ʁ ɑ tS q ɯ p s ɑ p ɑ r ɯ <SIL>
+<SIL> r ʁ ɑ tS e l i n <SIL> b l i v q i z m ɑ t[ l i q f ɑ r i t[ i dZ ɑ z ɯ ɑ k e l e p t[ u r k ɡ dZ ɑ n <SIL>
+<SIL> ɑ u S u n d[ ɑ j l ɑ b ɑ l oe l k y t[ y k y r dZ o q u r q o q u dZ e l e r ɑ n d[ ɑ <SIL> ɑ b ɑ d[ ɑ <SIL>
+<SIL> m u k ɑ t[ o q m o q t[ u ɑ dZ e ɡ i e b i r l e t[ <SIL>
+<SIL> b i k t[ i k y tS <SIL> m e n ɑ <SIL> b ɑ s ɯ ɑ l u: ʁ ɑ <SIL> d[ ɑ j ɑ r d[ r ɯ q ɯ <SIL>
+<SIL> b ɑ r d[ ɯ <SIL> k y n oe l oe r <SIL> dZ o p q o t[ ɑ r t[ ɯ l ɑ t[ ɑ <SIL>
+<SIL> s i S e k t[ y j ɑ d[ ɑ m <SIL> u tS u r d[ ɑ q <SIL> q ɑ m ɑ q <SIL> t[ ɑ r ɑ ɯ <SIL>
+<SIL> b ɑ j ɑ n d[ o r <SIL> z ɑ S e r <SIL> d[ i n tS e r e <SIL> d[ n d[ ɑ t[ ɯ n ɑ n dZ y r y y: z y i l oe t[ <SIL>
+<SIL> u d[ y r o q m e n i <SIL> oe z b ɑ l d[ ɑ r ɯ d[ ɯ n d[ e n s o l u: ʁ <SIL> q ɑ b ɑ t[ ɯ r q ɯ l ɑ j t[ ɯ i j l <SIL>
+<SIL> b ɑ p t[ j r ɑ s ɑ d[ ɑ b o s o <SIL> q ɯ r ɯ z ɯ d[ ɯ k i n ɑ s ɯ b ɑ S t[ ɑ p t[ o q o j o n <SIL>
+<SIL> dZ ɑ q ɑ z d[ ɑ r d[ ɯ q ɯ S ɯ n d[ ɑ e S i k t[ e t[ e tS i n k t[ e n u: tS u r l ɑ r q ɑ t[ l ɑ n <SIL>
+<SIL> b i s ɑ q v ɑ m e i <SIL> dZ ɑ q ɑ oe k i t[ <SIL> b oe dZ oe d[ oe n d[ oe t[ i l q ɑ t[ ɑ s ɯ p b e r ɡ e n <SIL>
+<SIL> b u l dZ e r d[ e n k e l e tS e ɡ <SIL> dZ o q ɑ l d[ e j b ɑ <SIL>
+<SIL> ɑ t[ o l q s q o: ɑ n u l ɑ q t[ l u s u d[ ɑ m dZ ɑ ɯ <SIL> q ɑ r ʁ ɑ n d[ ɑ <SIL>
+<SIL> m ɑ n <SIL> k e j n j <SIL> o b o r <SIL> dZ o q b u l tS ɑ q ɑ q r q ɯ z s u o m ɑ b e l ɡ l e m e <SIL> b o l tS e <SIL>
+<SIL> m e n m e k t[ e p t[ ɯ n ɯ dZ ɑ n d[ ɑ <SIL> k ɯ p q ɯ u <SIL> tS ɯ l ɑ r d[ ɑ m e r i S t[ e p t[ ɯ t[ p <SIL>
+<SIL> ɑ l ɑ l ɑ r y n e i r i n d[ e s ɑ dZ ɑ r ɯ q ɑ t[ <SIL> q i n o n u n ɑ t[ ɯ dZ ɑ s e ɯ r ɑ j p <SIL>
+<SIL> b l b ɑ l r i m e ɡ e oe k oe t[ oe r y m u n u ɑ j <SIL>
+<SIL> b u l d[ e d[ e tS k i r ɑ m ɑ n ɑ n ɯ <SIL> dZ o d[ ɯ <SIL>
+<SIL> k e j i r l r e <SIL> q ɯ r ʁ ɯ s t[ ɑ n d[ ɑ ʁ ɯ <SIL> dZ ɑ q ɯ n d[ ɑ r ɯ n <SIL> s ɑ ʁ ɯ ʁ ɑ n ɯ n ɑ j t[ ɯ S t[ e r <SIL>
+<SIL> b i n s i j ʁ ɑ tS ɯ q ɯ ɑ n d[ ɑ n i n i r <SIL> d[ ɑ j ɑ S t[ ɑ ɯ <SIL>
+<SIL> b ɑ l ɑ d[ ɯ n p i k i e r e n d[ e y b u l <SIL> s oe z d[ y e y k e n d[ i n tS e k q t[ i l e d[ i <SIL>
+<SIL> t[ r ɑ d[ dZ ʁ ɑ tS t[ o q o j tS ɑ s q s ɑ v i S k t[ e t[ i n t[ y t[ i ɡ i n e dZ e ʁ ɑ t[ ɑ n tS o n u p ɑ r d[ k ɑ <SIL>
+<SIL> q l u tS u r ɑ <SIL> o S o l b ɑ j q l ʁ ɑ n <SIL> y t[ <SIL> dZ ɑ q ɯ ɑ n ɯ n s ɑ m ɯ dZ e t[ i ɡ e dZ e t[ e k e n <SIL>
+<SIL> ɑ n d[ ɑ r ɑ v i <SIL> d[ i ɡ i l y k t[ y i u: <SIL> b i l i k ɑ i v t[ o ə dZ o l d[ ə n dZ ɑ t[ k i ɑ n ɑ p o l i ts s ɑ j <SIL> o r o t[ q o v <SIL>
+<SIL> l r ɡ i t[ i k t[ u r ɑ d[ ɑ n <SIL> k e l S p b p e k ɑ l b ɑ m q t[ q oe q r q b i l z p t[ e t[ s ɑ d[ ɑ n k e S p b e j i <SIL>
+<SIL> b ɑ l ɑ tS ɑ t[ ɯ e t[ e r y n y k u y q u <SIL> b u l <SIL> u z q u l e s d[ <SIL>
+<SIL> ɑ dZ ɑ t[ ɑ r ɑ q o j t[ u s ɑ m b i y m ɑ l q t[ q ɑ l o N <SIL> z oe ɡ y ɡ y n ɑ k e n e t[ k i n d[ e <SIL> ɑ r ɯ k e t[ <SIL> q t[ l t[ <SIL>
+<SIL> q r o t[ k u l o <SIL> b l t[ u r ɑ l u: <SIL> dZ ɑ r z ɯ r dZ b o <SIL>
+<SIL> e r u t[ dZ y n i k ɡ i l ʁ ɑ n ɑ l d[ k <SIL> b ɑ q ɯ t[ ɯ q ɯ ɑ l ɯ ʁ ɑ n o m v m s y oe ɡ oe n e ɑ l i n t[ ɑ l r ɯ r <SIL>
+<SIL> b i r o q t[ dZ y k t[ y i S o r u l ɑ r o j e n tS ɑ m ɑ S s t[ e l ɑ j ɑ ɯ n ɑ n tS S e n tS e tS e l e l e k <SIL>
+<SIL> b ɯ m ɑ ʁ ɑ b e r n e s e o l s <SIL> s ɑ l ɑ z ɯ t[ u r ʁ ɑ n ɑ t[ ɯ n o m e n m e r d[ <SIL>
+<SIL> b i z s ɑ q ɑ q ɑ l d[ ɑ r d[ j ɯ <SIL> k e l d[ r e k d[ i ɯ <SIL>
+<SIL> oe d[ y oe n ɯ s u r q ɑ l ɯ p q ɑ l ɑ n ɯ n <SIL> dZ e k i m ɑ l m ɑ t[ ɑ r ɯ n <SIL> dZ ɑ z ɯ p q ɑ l S ɑ <SIL>
+<SIL> o p i r o q ɑ b ɑ l ɑ n ɯ tS s ɑ r b o j u q t[ ɑ n t[ l ɑ l e s ɑ l oe z ɯ q t[ e r ɯ m e n e b r ʁ ɑ <SIL>
+<SIL> ɑ ɯ r ɑ r ʁ ɑ n ʁ o l b ɑ n ɯ s ɯ n S t[ ɑ n q ɑ r ɑ q ɯ j t[ ɯ k e l i o ʁ o j S ɑ j t[ <SIL>
+<SIL> d[ ɑ ʁ j t[ oe k i S i ɡ e dZ e r e n b i r i n tS e m e d[ i s ɯ n ɑ l ɯ q t[ dZ ɑ r d[ ɑ n m oe r s oe t[ y l n <SIL>
+<SIL> ɑ n m ɑ m q u r u S <SIL> dZ e j k oe ɡ y <SIL> y ɑ m p ɑ n dZ n <SIL> t[ ɑ n d[ ɑ ʁ ɑ ɯ m e s i m e m i l d[ i r d[ i ɑ l o v <SIL>
+<SIL> e dZ e ɡ y tS y l oe r b o r u S t[ r tS u l ɑ t[ ɑ r ɑ u n ɑ n ɑ t[ ɑ i n b e l e k t[ r p t[ ɑ p S ɯ b u ɯ <SIL>
+<SIL> e b i r i o q k e l e r <SIL> u q u o q o ʁ u tS u ɑ r ʁ ɯ ɑ j ɑ i S e n e S b e j t[ <SIL>
+<SIL> m o n m e n e n s l e r y: <SIL> q r u N <SIL> s ɑ ʁ ɑ dZ o l ɑ tS ɯ p ɑ t[ ɑ s b l ɑ r <SIL>
+<SIL> o u b ɑ S q ɯ s y r t[ oe r <SIL> ɑ r ɑ S o ɑ t[ ɑ m ɑ l d[ o <SIL>
+<SIL> ɑ e m e n o S o ʁ o q ɑ r S ɯ <SIL> q tS ɯ q ɑ n d[ ɑ n b e d[ e s z i z <SIL> z ɑ q ɯ l ɑ b ɑ j q ɑ l ʁ ɑ m ɯ <SIL>
+<SIL> e l <SIL> d[ i z <SIL> b ɑ: l u ʁ <SIL> m ɑ s e l e o: o y n <SIL> tS ɑ <SIL> i S t[ s p ɑ p ɑ N <SIL> dZ ɑ t[ ɑ b u z i d[ i d[ i l <SIL> ɑ j z o z s o: <SIL>
+<SIL> b ɑ r m i j z ɑ m <SIL> tS ɯ ʁ ɑ r u: l b u l t[ ɑ r m ɑ q t[ ɑ j k y tS y t[ y l oe t[ d[ e b e s e p t[ i <SIL>
+<SIL> k i l e k ɑ n m l d[ ɯ n oe k u l <SIL> d[ oe r oe q l ɑ l u l o tS e tS i m d[ e <SIL> d[ ɑ t[ ɑ o t[ u r ʁ ɑ n ɯ n b i l d[ e r i S i t[ i <SIL>
+<SIL> s u t[ d[ dZ k e l p <SIL> t[ o q t[ u n tS u ɑ r ɯ p t[ u r y p <SIL> k e t[ i p q ɑ l m ɯ <SIL>
+<SIL> m e n <SIL> dZ ɑ q ɯ n q ɯ S u l t[ o l r o ɑ e m dZ ɑ t[ ʁ ɯ ɑ d[ ɯ l d[ ɯ k <SIL> q ɑ r b o r <SIL>
+<SIL> dZ ɑ q ɯ l d[ o S o d[ ɯ n ɑ j t[ d[ ɯ m ɯ n d[ ɑ <SIL> dZ ɑ n ɯ s t[ ɑ n d[ ɑ r <SIL> t[ oe n d[ oe r l y p dZ ɑ t[ q ɯ n e t[ i <SIL>
+<SIL> t[ i z i m e k t[ e ɡ v i tS i o r o: d[ o: N <SIL> u i r ɑ ə n t[ ɑ q ɑ o: q tS y n tS o: m o: y r o: oe l u z i dZ q u: ɑ <SIL> i ʁ ɑ r ɯ S t[ o: j v <SIL>
+<SIL> k i n k i t[ e m ɑ s t[ o r u n ɑ r ɑ s ɯ n d[ ɑ ʁ ɯ <SIL> ɑ r p z ɑ r ɑ r ɯ n ɑ l d[ ɯ d[ oe t[ <SIL>
+<SIL> ɑ m e n e ɑ t[ dZ ɑ t[ ɯ q ɑ n b ɑ l tS m o l ɑ j d[ o: tS y ɡ ɑ n t[ z ɡ i r e ɡ ɑ d[ o oe o z s oe n oe t[ y n d[ y m o m <SIL>
+<SIL> dZ e q ɯ l b i S e k e k e k <SIL> y s e m e n ɑ r e m e n e n k e l i e <SIL>
+<SIL> b d[ r o l q <SIL> d[ o q u m e t[ e r s i <SIL> k e l ɡ e n d[ e m oe m y k y tS y l oe ɡ y <SIL> dZ o q u b o l u: d[ u <SIL>
+<SIL> s o t[ r d[ e l e t[ ɑ ɯ l e tS ɯ n o n e k <SIL> q e r d[ i S i t[ i <SIL>
+<SIL> q ɑ n d[ ɑ b o l q o n d[ o j d[ o ɑ <SIL> b u l u dZ e r p i r o p ɯ ɑ m e s t[ ɑ <SIL>
+<SIL> ɑ l o r u u: s j ɑ ɯ r u d[ ɑ ɯ b ɯ l d[ ɑ e l e k ɡ e n e s oe t[ k oe ʁ ɑ t[ ɯ r ɯ b ɑ l ɑ n d[ ɑ <SIL>
+<SIL> ɑ l o r S o l q ɑ j ɑ d[ ɑ l e q ɑ n s m ɑ r t[ o n u <SIL> dZ o r q ɑ <SIL>
+<SIL> ɑ l ɯ l ɑ n q n t[ ɑ u l u <SIL> u z ɡ oe e tS u ɡ e ɡ ɑ e s o: i q o: s e m e n e d[ e q ɑ t[ i e n e k t[ e p <SIL>
+<SIL> ɑ n z k l t[ y z e l ɑ t[ l u n ɑ l ɯ t[ u k o n dZ e r d[ ɯ n o t[ ɯ p dZ ɑ t[ ɑ t[ <SIL>
+<SIL> m u m e k e t[ <SIL> k ɑ m i s j ɑ q ɑ r ɑ b q ɑ l i l ɡ e b e r i l ɡ e n <SIL>
+<SIL> ɑ l ɯ l e tS <SIL> b i r dZ i n t[ ɯ k b e r ɡ e n <SIL> dZ o u: d[ u m <SIL>
+<SIL> r i m u n ɑ tS ɯ q t[ ɑ n ɑ ɯ l e m i z m s ɯ z d[ e s e p t[ e s i <SIL>
+<SIL> o l z ɑ j <SIL> ɑ j b ɯ n oe ɯ t[ r d[ ɯ n <SIL> ɑ n k e i n y n p o n t[ o n b u j s ɑ t[ d[ ɑ m <SIL>
+<SIL> b ɑ q ɑ j l k oe l u r q ɑ n t[ ɯ p <SIL> dZ ɑ ɯ S ɑ t[ <SIL>
+<SIL> b ɑ p <SIL> e r k e k t[ e r d[ i n d[ i m d[ e r i n <SIL> s u n u S t[ u ɑ ʁ ɑ n <SIL> dZ ɑ l ɯ z d[ i z ɑ j ɯ n e r b l d[ r <SIL>
+<SIL> k i n <SIL> k i t[ i r d[ f <SIL> ɑ f ɑ f j t[ f l u: v t[ e n e S ə tS i r ə r o ə dZ f e r f e r e r e ə k e k t[ ɑ r S f e v r o u n o m o k u tS u o r v
+<SIL> q u r u q s ɑ l ɑ n ʁ ɑ <SIL> oe y b u l ʁ u m u S t[ ɯ ɑ s ɑ e ɑ s i d[ e b e s i p t[ e <SIL>
+<SIL> e m i q ɯ ʁ ɯ t[ ɑ n ɯ q ɑ m q ɑ m ɯ n d[ ɑ s ɯ n ɯ n <SIL> dZ d[ ɯ n t[ n ɯ k oe z dZ y r oe y z d[ o q <SIL>
+<SIL> b i r o <SIL> m i t[ e s e ʁ ɯ z m ɑ t[ k e l e r i r q l ɑ l ɑ r d[ ɑ q t[ o u z u t[ ɑ n u z ɑ q ɯ ɑ S t[ ɯ r <SIL>
+<SIL> ɑ r m l i t[ ɑ i r l e r ɑ j l ɯ k oe z y e y b q ɑ s ɯ S t[ u <SIL>
+<SIL> m e n t[ ɑ ɯ b ɯ ʁ ɑ n d[ ɑ m e s i m e b n b u S ɑ l o n u <SIL> t[ o t[ b oe n p ɑ <SIL>
+<SIL> m ɑ n d[ ɑ r ɯ q ɑ j t[ o j y n tS ɯ q ɑ n <SIL>
+<SIL> m e ɑ n ɑ j l d[ ɑ r d[ ɯ n <SIL> ɑ o t[ u i S t[ i ɡ i n i n <SIL> t[ u: r ɑ <SIL> k oe r y b y l n <SIL>
+<SIL> t[ i n b e k i s ɑ j v <SIL> q ɑ n ɑ t[ b e k i s ɑ ɯ t[ n e r t[ u ʁ ɑ n ɯ n <SIL>
+<SIL> k i r n tS y j oe n d[ oe n t[ ɑ r ɯ t[ ɯ l e q ɑ l t[ ɑ r d[ ɯ q d[ ɑ l e l d[ e r d[ e ɡ oe r s y oe t[ y p k i e l ɑ t[ ɑ l ɯ <SIL>
+<SIL> b ɑ q t[ ɑ r <SIL> q ɑ r ɑ l ɑ j q ɑ l ʁ ɑ n d[ ɯ q t[ ɑ n <SIL> q ɯ j ɯ e <SIL> dZ ɑ t[ ɑ t[ <SIL>
+<SIL> ɑ S ɑ l ɑ r ɑ n d[ ɑ <SIL> ɑ s ɯ z s e l e t[ e n e r ɡ e s n ɑ <SIL> y k y l p b l S ɑ l ɑ r q <SIL>
+<SIL> b m e n <SIL> s oe z b e r e m d[ e ɡ oe n oe s oe z d[ oe r y r m s e b e p b o l ʁ o n ɯ <SIL>
+<SIL> ɑ n k e n b l o S o o: u: s u <SIL> o u tS e <SIL> dZ ɑ d[ ɑ n ɑ l ɯ q ɯ i S q k e s ɑ l u: tS r dZ e r ɑ i <SIL>
+<SIL> o r m o q o q ɑ <SIL> u dZ ɑ S ɯ n b ɑ j l e <SIL> u <SIL> q ɑ n d[ ɑ d[ ɑ d[ ɑ r l ɑ n ɯ t[ u <SIL>
+<SIL> l u r u s t[ u l i b i z d[ e n i <SIL> ɑ s m i t[ i l <SIL> e k e n e n b l n <SIL>
+<SIL> q z S n d[ ɑ <SIL> b i z ɡ e ɑ <SIL> ɑ q t[ tS ɑ d[ t[ y l y n oe m e s z <SIL>
+<SIL> e l dZ ɑ n ɯ m ɑ j ɑ m d[ ɑ r d[ ɯ ɑ t[ ɑ b ɑ j ɑ v <SIL> oe z y j d[ e m i n k i e l e ɡ i n <SIL>
+<SIL> b i d[ e b l d[ ɑ <SIL> i <SIL> k i ɡ i <SIL> dZ o j u: <SIL> u n tS e m i l ɡ e t[ i z <SIL> dZ ɑ n ɑ m ɑ n d[ ɑ t[ ɯ u: b z ɯ <SIL> dZ o q <SIL>
+<SIL> o S oe i y k d[ oe q ɑ n t[ ɑ m r n oe z y l oe k y s e b e p <SIL> b o l ʁ o <SIL>
+<SIL> q u l d[ ɑ j <SIL> ɑ j ɑ l ʁ ɑ r d[ ɑ r ɑ q l <SIL> r e r k e k e d[ ɑ q <SIL> i b i r d[ e l e <SIL> e k i j q l <SIL> ɑ z e k i y b u u: t[ <SIL> b e r ɡ e n d[ ɯ <SIL>
+<SIL> oe b e r o k t[ y p o S o j t[ o l j <SIL> z ɑ r ɯ e k e t[ e r i n e t[ y r <SIL> k oe ɑ s S k e r l e r e d[ ɑ q ɑ t[ ɯ S q ɯ s ɯ k e l e t[ i <SIL>
+<SIL> s t[ o q dZ o q o q tS ɯ ʁ ɑ r d[ ɑ r ɑ l i d[ e d[ i ɑ i t[ o d[ v <SIL>
+<SIL> b o j y S t[ u r u tS u l ɑ r b u l s l ɑ s m o b e k e n e t[ oe n t[ dZ ɑ t[ ɯ S ɑ <SIL>
+<SIL> o s u r ɑ n ɑ n <SIL> t[ u: r ɑ t[ y S i n y l oe r v m v q t[ i l e k ɑ n ɑ l i ɯ n e k i r i v m ɑ m ɑ: S ɯ n m e m e s i <SIL>
+<SIL> t[ dZ ɑ p ɯ z s ɑ n ɑ n m u z ɯ q ɑ t[ ɑ r <SIL> b i S b oe l b o u <SIL> dZ ɑ z ɯ r ɯ S q ɑ <SIL>
+<SIL> b i l i t[ i n s ɑ m ɑ r ɑ q ɑ r ɑ t[ ɑ <SIL> b ɑ r d[ ɯ q ɯ j ɑ k t[ s ɑ <SIL>
+<SIL> k e d[ i ʁ ɑ n ɑ <SIL> k e l p <SIL> m ɑ ʁ ɑ <SIL> ɑ dZ ɑ r d[ ɑ n b e r e j t[ <SIL>
+<SIL> b i r ɑ S u l s u r o b o l d[ ɯ <SIL> b ɑ S q ɑ s ɯ r o b o ʁ ɯ n <SIL> dZ o q ɯ u <SIL>
+<SIL> e k i m u r ʁ ɑ n ɯ n e m e s e p t[ ɑ n ɑ l dZ ɑ q ɑ b ɑ j r ɑ n ɯ b i l b e j ɑ l j r d[ i <SIL>
+<SIL> b i s <SIL> tS u r o t[ ɯ n <SIL> q ɯ z m ɑ t[ q ɑ l ɯ n ɑ <SIL> e t[ y ɡ y n t[ ɑ l ɑ p ɯ l ɑ n ɑ q ɯ ʁ z b ɑ r <SIL>
+<SIL> oe l ɑ r <SIL> S t[ u ɑ t[ oe l i q i l k tS e <SIL> e S i l ʁ ɑ t[ tS e i n e r k i n e n ɑ dZ ɯ r ɑ t[ ɯ <SIL>
+<SIL> ɑ l dZ o ʁ r q u k e n e S t[ e <SIL> ɑ j t[ p ɑ j l e ʁ o l e u <SIL>
+<SIL> oe z ɑ y n dZ ɑ n j ɑ j l e t[ i n b o r b o r u n <SIL> o S ɑ r ɯ n ɑ ɡ oe t[ y r l p t[ e ɡ e n <SIL>
+<SIL> e l ɑ b i q ɯ z <SIL> o s ɯ <SIL> m ɑ ʁ ɑ s ɯ l ɯ m ɑ l i <SIL> k i n m <SIL>
+<SIL> m n u n b ɑ r d[ ɯ <SIL> s o t[ ɑ r q ɯ l o l u S ɯ e k e r e k <SIL> t[ i e d[ i j u: <SIL> s e s b l <SIL>
+<SIL> ɑ e ɡ e r d[ e m i z ɑ m d[ o l o r u q ɑ j ɑ l n s e m e oe z <SIL> k oe r oe t[ y <SIL>
+<SIL> k i r ɡ y tS y <SIL> ɑ n d[ ɑ n i <SIL> t[ <SIL> dZ ɑ q ɑ k e t[ <SIL> b oe r dZ o n y n d[ t[ i l i <SIL> q ɑ t[ ɑ l ɯ p <SIL> o j oe e r b d[ ɯ <SIL>
+<SIL> b u l k oe r oe s oe t[ k y k tS i s ɑ l m ɑ s l b ɑ j y tS y n dZ e k e dZ ɑ n ɑ l u: l u t[ u q r oe k q o r t[ b o p q ɑ l ʁ ɑ <SIL>
+<SIL> b t[ dZ p o t[ ɑ r ɯ i ɯ o k m oe t[ u n <SIL> o r ɑ m ɑ n d[ e r l i <SIL> b i r <SIL> k y oe n d[ ɑ q o j b ɑ S t[ ɯ <SIL>
+<SIL> ɑ q b ɑ: r S ɯ oe <SIL> tS ɑ j n i k q ɑ n i p k e t[ oe t[ i <SIL>
+<SIL> ɑ z d[ i r o p ɑ r ʁ ɑ m e i t[ i n <SIL> q ɯ m ɑ t[ k e l r i u q ɑ l m ɑ: ɑ q o l d[ u: ʁ n b e r ɡ e n e m e z <SIL>
+<SIL> S r q o q o r o tS u: i u n b u l q ɑ n p ɑ n ɑ n ɯ <SIL> e i ɑ l ɯ q t[ ɑ z ɑ l o d[ ɯ b ɑ j t[ ɯ ʁ ɯ <SIL>
+<SIL> k m n ɑ t[ ɯ r d[ r <SIL> k i n o <SIL> k o r ɡ oe n t[ y ɡ oe l oe r t[ d[ u q ɑ n tS ɑ dZ o l u ɡ oe r d[ y m oe e l e <SIL>
+<SIL> S o q o n t[ tS y m i l i t[ e t[ ɑ <SIL> b oe y oe n oe n dZ oe t[ k e r l e r <SIL>
+<SIL> ɑ z ɯ ɑ j d[ o: oe tS ɯ z ɑ q t[ ɯ n ʁ ɑ n <SIL> t[ ɑ j ɯ p <SIL> dZ o: l k i S tS i l r d[ e <SIL> o oe y oe y p k e t[ i S y m y <SIL>
+<SIL> b i oe ɡ u n k oe y j k oe n d[ oe <SIL> u l i m ɑ n dZ l o m ɑ s e l i <SIL>
+<SIL> e m e d[ e <SIL> b ɑ: ɑ r ɯ m i z ɑ m d[ u t[ y r d[ oe s ɑ <SIL>
+<SIL> b ɑ l d[ ɑ r ɯ ʁ <SIL> i l i n b e r y k tS y n k e l d[ i <SIL>
+<SIL> S l ɯ r ɑ n d[ ɑ k p t[ e ɡ y n <SIL> dZ ɯ ʁ ɑ tS q o r u l u S t[ ɑ r ɯ n t[ r u ʁ z ɯ S q ɑ d[ t[ <SIL>
+<SIL> b i S <SIL> dZ ɑ n ɑ d[ ɑ n ɯ l ɯ q o z o l d[ r q l u l b i <SIL> t[ e r ɡ oe dZ y r ɡ oe y p dZ t[ ɑ t[ q ɑ tS ɑ ʁ ɯ d[ ɯ <SIL>
+<SIL> e dZ ɯ n ɑ n ɑ l ɑ r d[ ɯ n <SIL> o q o u s u n <SIL> q ɑ j l j ɯ z <SIL>
+<SIL> e m ɑ n ɯ n e m k e ɡ e <SIL> b ɑ j l ɯ n ɯ S b i e r <SIL>
+<SIL> b ɑ S q ɑ l ɑ r s ɯ q t[ y l e <SIL> m ɑ l ɯ m ɑ t[ <SIL> q ɑ r ɑ dZ ɑ t[ ɑ r ɯ n ɑ n o q p <SIL> dZ ɑ t[ l s ɯ <SIL>
+<SIL> b S b u l d[ i ɡ j oe dZ oe n e l e m e s t[ ɑ r <SIL>
+b i z ɑ z ɑ l ɑ ɯ ʁ ɑ <SIL> s ɑ j q ɑ k e k i z i o q o j ɑ l d[ ɯ z <SIL>
+<SIL> ɑ u o S o n b e q ɑ r ɑ p ɑ q ɑ oe r s y n ɯ s o: t[ o: s t[ ɑ n ɑ r ɯ s b e k y tS <SIL>
+<SIL> ɑ l <SIL> ɯ tS ɯ n ɯ q ɯ <SIL> dZ ɑ ɯ ɑ t[ ɯ q ɑ n ɑ j t[ ɯ r <SIL> l ʁ ɑ u: q u l <SIL> b ɑ r d[ ɯ b e s e p d[ i j <SIL>
+<SIL> u l oe l ɡ o t[ o p t[ o f o q ɑ oe o q t[ k oe r oe <SIL> b r i n k ɑ l ɑ q l i r d[ i r d[ i n <SIL> m i ɑ e l ə d[ o n oe z s i oe b i n d[ e r <SIL>
+<SIL> b i r q ɑ n t[ tS ɑ s u: p tS ɯ ʁ ɑ r ʁ ɑ n q ɑ l u n q ɑ l ɑ r ɑ b ɑ r ɑ <SIL>
+<SIL> t[ r ɑ s ɯ ɑ t[ k i e n i <SIL> q ɑ t[ o u: l o n ɑ <SIL> tS y i k t[ oe r oe ɑ <SIL>
+<SIL> i d[ i n i ɡ oe <SIL> dZ ɑ d[ ɑ n <SIL> b e r t[ i t[ e t[ ɑ l d[ ɑ <SIL>
+<SIL> m i m i ɡ i ɑ n d[ ɑ q ɯ l u s <SIL> q ɑ n ɯ n oe z d[ oe r y n oe n <SIL> s u r ɑ S <SIL> k e r e <SIL>
+<SIL> i e b e r i t[ ɑ l ɑ p k e r l e r <SIL> r j ɑ <SIL> q ɑ r t[ ɯ r s t[ ɯ r ɯ l ʁ ɑ n dZ o q o m <SIL>
+<SIL> oe k y n dZ ɯ l ɯ ʁ ɑ n d[ ɑ <SIL> b i z ɑ ɯ q ɑ b ɑ S q ɑ <SIL> s y r oe t[ ɑ r t[ ɯ ɑ l d[ z <SIL>
+<SIL> b dZ e r t[ i l k e l e r e m u i z ɑ m <SIL> ɯ ɑ s ɑ t[ u: <SIL>
+<SIL> ɑ l t[ e r ɡ e S k e r ɡ l ɑ j ɑ t[ ɑ q ɑ l t[ y r d[ y <SIL> q ɑ l ɑ n ɯ e <SIL> k e k s p b i l q <SIL>
+<SIL> ɑ s o t[ ɑ j u p f o n u n b ɑ S q ɑ <SIL> e k i p m u k t[ o j u n tS ɑ r <SIL> z i s e j t[ <SIL> ɑ q t[ ɑ d[ e r d[ ɑ <SIL>
+<SIL> t[ p ɑ s o n u n u k u s y i ɑ l ɑ ɯ n t[ ɯ e r ɑ t[ ɑ z ɑ b l <SIL> tS ɯ q t[ oe r <SIL>
+<SIL> o v m e n o N S s dZ ɑ n ɯ d[ ɑ d[ ɑ tS ɑ r m <SIL> m ɯ S t[ ɑ ʁ ɯ n d[ ɑ r s ɑ m t[ u: l j u p u ɑ oe z oe s oe v <SIL>
+<SIL> k o l ʁ ɑ l <SIL> b i r dZ ɯ l d[ ɑ n b i r i k e l e t[ y <SIL>
+<SIL> oe z e k y ɡ oe n <SIL> d[ i tS y <SIL> p ɑ n i r d[ e r ɑ l ɑ ʁ ɯ e k oe ɡ oe n u u: l u p ɑ n e r d[ o u S q <SIL>
+<SIL> q ɑ l ɑ l t[ u l S i j dZ y n y n d[ b o l tS ɯ <SIL>
+<SIL> b m e n y tS y n b u l u q o <SIL> i ɡ e <SIL> dZ e <SIL> dZ o m u S b ɯ t[ ɑ q ɑ j t[ ɑ l b ɑ d[ ɯ <SIL>
+<SIL> e d[ n i k s e z <SIL> e i q ɑ tS ɑ n d[ oe z s ɑ m ɑ ʁ m n ɑ q ɑ l tS o N tS u n k i S i k i r i z b e j d[ t[ i <SIL>
+<SIL> q ɑ r d[ ɯ r q u r ɑ ʁ ɑ S y j k y r ɑ dZ ɑ q S <SIL> b o l u p <SIL> q ɑ l d[ ɯ <SIL>
+<SIL> z e k dZ e s i s b i <SIL> ɑ j k o j oe l oe r t[ y tS e tS y tS y n <SIL> u r u s dZ ɑ ʁ ɯ k e t[ k e n d[ i ɡ e n ɑ j t[ u: d[ ɑ <SIL>
+<SIL> t[ y oe r t[ o p t[ o ʁ o <SIL> u l p t[ ɑ r ɑ l s e z k e oe n y d[ oe r y <SIL>
+<SIL> m ɑ ʁ ɑ m ɑ j ɯ p i k i j l i d[ ɑ r o j l e dZ ɑ q m ɑ n ɑ m ɯ s <SIL> ɑ l d[ ɑ m <SIL> tS ɡ oe r d[ e r d[ ɑ <SIL>
+<SIL> t[ o p t[ <SIL> t[ o p b ɑ s ɯ q ɯ ɑ tS S t[ ɑ n <SIL> tS k e k i n ɑ l ɑ <SIL> b e r d[ e n q ɑ n ɑ q ɑ m ɑ n d[ ɑ tS ɯ ʁ ɯ ɑ l ɯ ɑ j t[ <SIL>
+<SIL> b i ɯ r <SIL> k i m <SIL> ɑ r q ɑ n d[ ɑ j t[ ɑ d[ ɯ r l ɑ r m e n e n k e l p i p t[ i S y k y oe n y <SIL>
+<SIL> b ɑ o l ɑ t[ j ɑ j ɯ n o q o t[ u: k u r u n ɑ n ɯ oe t[ y p l <SIL> l y e s e n d[ i e l ʁ ɑ n <SIL>
+<SIL> k t[ e k tS l ɡ e dZ ɑ n ɑ b i r <SIL> t[ <SIL> q ɯ z m ɑ t[ k e l e r i <SIL> k d[ e p dZ ɑ t[ ɑ t[ <SIL>
+<SIL> ɑ d[ o n d[ oe l o: q t[ o r n m e n b ɑ S q ɑ j y n t[ tS q t[ ɑ r d[ ɑ n ɑ l d[ ɯ n m v ɑ l d[ e z dZ ɑ S u: s t[ j ɑ <SIL>
+<SIL> q ɯ ɑ n k e l d[ i j b u m ɑ l m ɑ t[ ɯ r tS e t[ k e q ɑ j t[ ɑ r ɯ <SIL>
+<SIL> b i s y n ɑ q ɯ r ʁ ɯ z e l y i tS y n m ɑ n ɑ s e t[ o s ɯ i q t[ ɯ t[ e s z <SIL>
+<SIL> ɑ s o z s i z t[ r d[ oe q <SIL> t[ ɑ m ɑ n ɑ b i r i k i ɑ <SIL> ɑ j l ɑ m ɑ s b o r t[ r b o u t[ k dZ m ɑ l o o: r k e k i <SIL>
+<SIL> ɑ q ɑ ʁ ɑ q k j oe z n ɑ ʁ ɑ S ɯ ɑ r ɯ <SIL> dZ ɑ z ɯ n u s u n u z S q S q ɑ n <SIL>
+<SIL> b ɑ l o l o ʁ o n d[ o u b u l <SIL> m o d[ ɯ d[ ɑ ʁ ɯ q ɯ z q u z <SIL> t[ u: u d[ ɑ ʁ e m e <SIL>
+<SIL> dZ S ɑ r k e r e i <SIL> k i k e l p <SIL> b i r dZ e z s ɑ b o ʁ o u q u o dZ ɑ ʁ ɑ l e r y <SIL>
+<SIL> ɑ n o S t[ n t[ i p o p q o <SIL> q o r o tS u l oe m oe r b o l y l e r k e n e n t[ ɑ dZ r ɑ t[ u: ʁ ɑ q ɑ l oe k y n p tS y t[ oe r <SIL>
+<SIL> y i n oe d[ y oe tS y n ɑ j ɯ q t[ ɑ q ɯ r <SIL> d[ ɑ <SIL> ɑ n s ɯ z e r dZ y n y k j e m e z i y <SIL>
+<SIL> b i r d[ e n <SIL> o s t[ i n <SIL> b o l o t[ o q o l ɑ m e d[ i k ɑ l ɯ e q ɑ m p ɑ j n ɑ ɯ <SIL>
+<SIL> s o n u n ɑ ʁ ɯ p <SIL> k e l i ɯ S k m e n e n t[ ɑ l e k <SIL> e n e r ɡ ɑ s n y n y r y oe k oe d[ t[ <SIL>
+<SIL> b i o q ɑ b ɑ j e n t[ i k t[ oe l oe n dZ y n d[ y b i r d[ ɑ s oe z o l o n dZ o q <SIL>
+<SIL> ɑ q ɑ b u y m d[ ɑ r ɯ n ɑ l S y tS y n m ɑ S ɯ n e ɡ e <SIL> tS ɯ q ɑ ɯ n d[ ɑ <SIL> q ɯ r ɯ <SIL> dZ oe tS y p u b ɑ z p b ɑ l ɑ n d[ ɯ <SIL>
+<SIL> ɑ s ɑ t[ ɯ s ɑ q t[ ʁ ɯ ʁ j ʁ ɑ r ɯ k ɯ t[ q l ɯ d[ z <SIL>
+<SIL> l ɑ b i S k e t[ e n t[ y n y z t[ y k oe z y z dZ e t[ k i m ɯ t[ ɑ r ɑ l q ɯ ɑ dZ ɑ ʁ ɯ S q ɑ n <SIL>
+<SIL> ɑ n ɑ r ɯ r ɯ n ɑ s ɯ d[ ɑ b ɑ l d[ ɑ r ɑ l i n e n e r l e s <SIL> dZ o: n o: n m ɑ j <SIL> t[ ɑ r d[ ɑ b ɑ r <SIL>
+<SIL> m u r d[ ɑ <SIL> ɑ l ɯ r d[ ɑ b e l e <SIL> q ɑ b ɑ s t[ ɑ <SIL> i l e t[ ɑ dZ r y tS u <SIL>
+<SIL> ɑ n ɯ b i <SIL> b ɑ b r b ɯ z <SIL> i l i s i ɑ <SIL> d[ e i u b i e p u j ɑ <SIL>
+<SIL> oe S ɑ n ɯ <SIL> dZ ɑ q S u l ɑ p <SIL> t[ S t[ e t[ p t[ tS i oe S k e <SIL> d[ i <SIL>
+<SIL> i s q ɑ n t[ e d[ ɑ m u n m u n d[ ɑ n ɑ r ɯ d[ e l e t[ ɑ l q b u: l ɑ ʁ ɯ z k e l e t[ <SIL>
+<SIL> t[ i s t[ q ɑ s t[ ɯ ɑ ɯ ɑ ɯ q o l o ʁ o n ɯ <SIL>
+<SIL> oe z o S j ɑ r d[ ɯ q m i l i t[ s ts e r s ɯ oe <SIL> o q u ɑ n o q o q u s <SIL> t[ u q t[ ɯ p q o t[ o l ʁ n <SIL>
+<SIL> b ɑ S q ɑ j e r k e k t[ e r d[ e d[ ɑ j q <SIL> b ɑ ɯ l ɑ r ɯ <SIL>
+<SIL> ɑ p r e z d[ e t[ e n t[ ɑ p <SIL> S u r m ɑ s m n e n <SIL> ɑ z i l e k i <SIL> t[ oe <SIL> i S i t[ e r i dZ y r u: t[ ɑ t[ ɑ t[ <SIL>
+<SIL> b ɑ r ɯ <SIL> dZ e r i <SIL> dZ i y z <SIL> dZ o q d[ <SIL>
+<SIL> e l ɑ n ɑ n k i tS i n e q ɑ j ɯ o l o l b l d[ t[ ɯ <SIL>
+<SIL> b u m e k e m e r e S y m d[ u ɑ b e q o l u p s ɑ n ɑ l ɑ t[ ɑ l ɑ r d[ e <SIL> k i r k i z i S p k e l e <SIL>
+<SIL> ɑ n ɑ r i s t[ e i S k i <SIL> r d[ ɑ n d[ ɑ r q ɑ t[ o l dZ ɑ b u r q ɑ ʁ ɑ n d[ oe s e b i e p t[ y q ɑ d[ ɑ t[ ɯ p q <SIL>
+<SIL> ɑ p r e z e i t[ i ɑ q ɑ r ɯ S ɑ j <SIL> t[ ɑ ʁ ɯ p ɑ z ɑ n ɯ n s n ʁ n ɑ n q z m ɑ t[ ɑ n ɑ l u: l <SIL>
+<SIL> ɑ n ɯ t[ e s e q o r ɯ s ɑ l m ɑ ʁ b u t[ n ɑ t[ y S i p i <SIL> ɑ S ɯ ɑ ʁ ɑ t[ ɑ v <SIL>
+<SIL> b u r l u ɑ r q ɑ j n e m d[ e n t[ q u l ɑ ʁ ɯ q p b ɑ s ɯ n ɑ l n l ɑ b i l z k <SIL>
+<SIL> b m k s i m b ɑ k i S t[ i n ɑ d[ ɑ t[ m ɑ l i e t[ e n e ɑ n ɯ u z o r t[ p e r y l y: <SIL>
+<SIL> o u o t[ o l d[ o r ɯ dZ e t[ i S s i s j u l u t[ <SIL> ɑ S ɑ n d[ ɯ n d[ i n ɑ l ɑ l ɯ <SIL>
+<SIL> b ɑ j e k e <SIL> dZ t[ y d[ oe n ɑ r t[ ɯ q e m ɑ m ɑ n ɯ i u b o l S ɡ k r e k i <SIL>
+<SIL> ɑ b u l t[ u r u S <SIL> oe z ɡ oe y tS y oe r y ɡ y q ɑ r S ɯ p i k e r i r l y r y n y n dZ o q t[ u n d[ ɑ l d[ o q <SIL>
+<SIL> k l e b e r i m o n <SIL> q ɯ <SIL> b e i S t[ i j <SIL> ɑ n d[ ɯ s ɯ t[ d[ ɑ dZ m ɑ m o j d[ o n q ɑ l d[ ɯ <SIL>
+<SIL> m ɑ n ɯ n ɑ r t[ ɑ n ɑ n t[ r ɑ l u: b u s t[ u n ɑ j d[ o u: tS y i e S i k e p tS ɯ q t[ q ɑ d[ <SIL>
+<SIL> n r ɡ y n d[ y k t[ e t[ e r ɡ b oe t[ e l e k oe e p b o ʁ o n y ɡ y n q p <SIL>
+<SIL> o: r o: m ə n e n i v q ɑ t[ ɑ r ə e l ɡ i m o z s i y k o z o n m o n v ɑ v tS y r i ə n ə d[ ə l b i l <SIL> ɡ ə l o l b o l <SIL> o n oe ɑ dZ e t[ ɯ <SIL>
+<SIL> b ɑ p ɑ m n e n i d[ i m dZ o n u n u p k e tS e k e <SIL>
+<SIL> b u l ɑ r m d[ e n k i e m e s i m e n e b j o l <SIL> tS o q u q <SIL> k i j m e k e n e b l e n d[ e m e s m e <SIL>
+<SIL> b o q k u: tS u j n d[ ɑ e m e s ɑ l ɑ n d[ ɑ n k e n i r e r <SIL>
+<SIL> b i r o q ɑ n d[ ɑ j n k i n d[ y t[ y oe l b e j l n <SIL> q ɯ z d[ q t[ u q u j ɑ l o l o t[ <SIL>
+<SIL> b m e n i o r q ɑ n ɑ ʁ ɑ l <SIL> b ɑ r ɯ S t[ e r <SIL>
+<SIL> r s n o q t[ ɑ n o oe m oe t[ <SIL> dZ ɑ n ɑ <SIL> b ɑ n t[ <SIL> t[ ɑ r <SIL> b i r i ɡ i p i l <SIL> b i r <SIL> p i k i r k e k e l i S i k e r e k m <SIL>
+<SIL> e S t[ ɑ t[ ɑ r m ɑ S ɯ n ɑ t[ ɑ t[ ɑ l ɑ d[ ə ɑ <SIL> ɑ d[ ɑ m ɡ <SIL> ɑ <SIL> b ɑ r ɯ p ɯ p t[ u r ɑ d[ t[ <SIL>
+<SIL> e t[ y r j o q ɑ n d[ ɑ q t[ s ɯ q t[ ɯ k <SIL> q r u S q ɑ n e m e s d[ i <SIL>
+<SIL> ɑ m n u n t[ e r <SIL> p i e k i b e r d[ m <SIL>
+<SIL> b i tS i d[ e n e k e n e i k e s ɑ l d[ e p <SIL> t[ y n e r p dZ ɑ t[ ɑ l <SIL>
+<SIL> ɑ l e dZ e l e r ɡ i l u q ɑ j p t[ ɑ r b d[ i l e k b ɑ l t[ i s i ɡ oe <SIL> dZ o u l e t[ o i <SIL>
+<SIL> ɑ l d[ ɑ t[ ɯ ɑ l ɑ r d[ ɑ ʁ ɑ j b e <SIL>
+<SIL> ɑ n y m d[ o b o l dZ ɑ q ɑ z b e t[ i n e r s i r t[ ɑ r t[ ɯ k dZ ɡ oe n l oe y q ɑ v <SIL> o n dZ u l b l d[ v <SIL>
+<SIL> q ɯ l ɯ r ɯ dZ i j ɯ n ɯ ɑ <SIL> q ɯ ɑ t[ ɯ S <SIL> p ɑ ʁ ɯ ɑ n d[ ɑ r ɯ n ɯ n s e m i m i <SIL> t[ y ɡ y oe n d[ y r y S y k oe n e m e s <SIL>
+<SIL> ɑ u r o q b l q ɑ q t[ e t[ k i n i e <SIL> dZ ɑ j ɯ j p q ɑ l q ɑ n ɯ v <SIL>
+<SIL> s o t[ i l i ɑ n ɑ l i k s S r e m i s i k m ɑ t[ i ɑ l ɯ tS ɑ ʁ ɯ d[ r ʁ ɑ n d[ e p e s i p t[ e ɡ e n <SIL>
+<SIL> ɑ b i l i k i k i e t[ i s e i dZ i l ɑ s ɯ r t[ ɑ n k e s e k e n <SIL>
+<SIL> b i r o q ɑ m p ɑ j ɑ z ɯ r ɯ ʁ ɑ tS j n <SIL> u ɑ s ɑ t[ ɯ ɑ e l e k <SIL>
+<SIL> q ɑ l ɑ r m ɑ ʁ ɑ <SIL> dZ ɑ r d[ ɑ n b e r i S e t[ <SIL>
+<SIL> e r t[ e m e n ɑ j o tS y k oe r s oe t[ y l ɡ oe n y j ɡ oe n dZ ɑ r ɯ q ɑ j t[ ɑ l ʁ ɑ n <SIL> ɑ j <SIL>
+<SIL> b i l d[ e r d[ i j ɑ j l d[ e r ɡ e i s i n e k e l i p t[ ɑ S u: ʁ ɑ tS ɑ q ɯ r <SIL> t[ ɯ l e m n <SIL>
+<SIL> b i z d[ i n i z ɡ i e d[ e ɡ i S t[ e r i ɯ z ɑ r ɯ q ɑ l b e l o q S u l o r u d[ u t[ ɑ s ɑ l ɑ ɯ <SIL>
+<SIL> m e ɑ n ɯ n t[ b e s ɑ s ɯ l ɑ q o n u n ɑ n q ɑ p ɑ j q ɑ l ɑ n q ɑ n u n q u r ɑ <SIL> u l p oe k oe r k u l oe d[ ɑ <SIL>
+<SIL> q ɯ r ʁ ɯ s t[ ɑ n p <SIL> t[ ɑ ɯ q t[ ɑ j i k i n tS i S dZ i l u ɑ j ɯ m q t[ q u r m o n s u z e p t[ ɑ l d[ ɑ r m <SIL>
+<SIL> ɑ r o r o n o j l e dZ ɑ n ɯ t[ r ɑ t[ b ɑ r l ɑ r q u r u l u l v o s u ʁ ɑ t[ dZ e m ɑ l ɑ r ɯ <SIL> o r o t[ l ɑ t[ ɯ <SIL>
+<SIL> b i b r i l ɡ e m ɑ m ɑ t[ ɯ ɑ <SIL> q ɑ q <SIL> t[ d[ e ɑ b ɑ t[ q ɑ n ɑ b oe j t[ <SIL> b i e b i <SIL>
+<SIL> t[ ɑ l ɑ d[ ɑ q ɑ l m ɑ l b ɑ q p <SIL> y k y t[ e k o p e l e dZ e r d[ e <SIL> k oe b y z s i p <SIL>
+<SIL> dZ l d[ r o q t[ i u: s ɑ l ɯ e tS q ɑ n d[ ɑ b ɑ r oe r b e r s e r ɑ n d[ ɯ n e ʁ ɯ l <SIL> k e r e d[ ɯ <SIL>
+<SIL> ɑ r y q ɑ t[ ɯ r S u: tS u r m e z k oe n u d[ n oe z oe q ɑ n s ɑ q ɑ q ɑ t[ ɑ S ɑ l d[ ɯ r v <SIL>
+<SIL> b i r o q e k i j n ɑ r ɯ z d[ ɑ r ɯ n q ɑ j r ɑ l ɯ S u <SIL>
+<SIL> b S u l dZ oe r d[ ɯ t[ k y n ɑ r b ɯ r ɡ y n d[ n oe y z y z e i d[ i ɑ <SIL>
+<SIL> ɑ S b o ʁ o n b e S ɑ e d[ e m e n ɑ n ɯ n ɑ l e k <SIL>
+<SIL> b i r y tS u: r d[ ɑ u: b ʁ ɑ u: tS e n k i N v ɑ l m ɑ q ɯ l d[ ɑ S ɯ l ʁ ɑ n ɑ s u ɯ ɑ l ɑ r d[ ɯ N v <SIL> b e r i S b i k e r e k i <SIL>
+<SIL> q ɑ r j s ɯ i r d[ ɑ r ɑ dZ ɑ d[ ɑ r <SIL> b i z d[ i n d[ ɑ j ɯ m e ɡ b i d[ z <SIL>
+<SIL> ɑ t[ dZ e q m i j ɑ n y t[ e l e n d[ e r <SIL> dZ ɑ b <SIL> d[ u l ɑ r ʁ ɑ dZ u: o q t[ u l ɑ r i S i k i j b i tS i S e <SIL>
+m ɑ q <SIL> l d[ ɑ ʁ ɯ <SIL> b <SIL> r d[ ɯ q ɯ s ɯ ɑ n d[ ɑ r i d[ e n e t[ <SIL>
+<SIL> ɑ n <SIL> i k i r i n d[ e <SIL> b i l i k i S ɑ j l o oe dZ ɑ r ɑ dZ ɑ n ɑ s ɑ v ɑ k oe z oe m oe e l b u l u s u n <SIL> ɑ ɑ: l ɑ b ɑ j t[ <SIL>
+<SIL> dZ ɑ z ɑ j t[ ɑ b e r i b ɑ l ɑ m ɑ l t[ j ɯ n ɯ p q ɑ l r n d[ e p q o y d[ n <SIL>
+<SIL> dZ e m e n e l ɑ r ɯ m i e s t[ i j d[ i l ɑ l d[ ɑ m ɑ d[ e p m t[ e r y: d[ e n ʁ n o l q u <SIL> d[ i t[ ɑ l
+<SIL> b d[ i d[ i e n t[ ɑ m u l ɑ r m e n e <SIL> e <SIL> z r y t[ y p ɑ dZ ɑ t[ ɑ l z ɯ <SIL>
+<SIL> b u l o q ɑ n t[ ɑ l b ɑ d[ ɯ r ɑ l d[ e p <SIL> b i l d[ b ɑ l ɑ <SIL>
+<SIL> q n ɑ l ɯ e m i q ɑ n tS ɑ d[ ɑ m b ɑ t[ ɯ r s t[ ɑ t[ ɯ p b ɑ l ʁ ɑ n ɯ n q ɑ j t[ ɑ l b j n j <SIL>
+<SIL> ɑ l n ɑ n r i s i u r <SIL> q ɑ j ɑ l u <SIL> m i ɑ k i r <SIL>
+<SIL> b ɑ t[ i p y ɑ r ɯ d[ oe b oe l y d[ y n i tS i n d[ oe l t[ y ɡ oe dZ o l e r i q t[ i q <SIL>
+<SIL> k y b ɑ j p s ɑ l e k s p r z d[ i t[ ɑ n u j b e ɑ t[ ɑ b ɑ j t[ ɯ n dZ ɑ n s ɑ tS ɯ s ɯ n b <SIL>
+<SIL> q y ɑ t[ ʁ b u l u ɑ b ɑ S m i j z ɑ m n e ɑ m ɯ n d[ ɑ n ɯ r ɯ dZ ɑ S ɑ b ɯ z <SIL>
+<SIL> t[ ɑ t[ <SIL> t[ ɯ j ɑ q <SIL> u o u <SIL> q o j ʁ ɑ n e m e s d[ i <SIL>
+<SIL> e d[ ɑ q ɑ n tS ɑ s <SIL> ɑ z ɯ ɑ t[ l e r <SIL>
+<SIL> b u q tS i n ɯ n ɑ d[ j ɯ j b u j tS ɯ t[ i t[ <SIL>
+<SIL> ɑ z i l i k t[ oe y t[ y k oe n d[ n k i n q o u b e k t[ ɑ e s y r y ɡ oe r u oe t[ o: l oe t[ oe u t[ l e j i j l <SIL>
+<SIL> ɑ l ɑ r d[ ɯ n b ɑ: ɑ r <SIL> n ɑ r l ɑ <SIL> t[ ɯ r ɯ p <SIL> b i r <SIL> k y n d[ e k i m ɑ l b r e t[ i <SIL>
+<SIL> ɑ S d[ p t[ ɑ q ɑ r ɑ d[ ɑ <SIL> k i l n k oe r s y t[ y s y n o k o n u l u l o r S t[ u r <SIL>
+<SIL> b u l b o r b r ɑ z ɑ d[ ɑ e k i n tS q r ɯ n d[ ɑ ʁ ɯ t[ dZ ɯ i n t[ ɯ q ɑ t[ ɯ n i l e i <SIL>
+<SIL> ɑ d[ ɑ r ʁ ɑ <SIL> b l e <SIL> b i r i S <SIL> k e r e k i t[ i t[ <SIL> k l b ɑ r ɑ tS u n ɯ <SIL>
+<SIL> oe z ɑ d[ ɯ t[ ɑ ʁ l d[ ɑ j l e q <SIL> ɑ n ɯ n b u l <SIL> ɑ n m y tS y n ɑ t[ ɑ n d[ ɑ S ɯ <SIL> z l ɑ n e l <SIL> e m e s i b o l d[ <SIL>
+<SIL> q i r ɑ d[ y s e r i e m e n b ɑ r ɑ n m ʁ o q ɑ l i r o q ɑ l ɑ z ɯ r ɯ n tS ɑ t[ ɑ p q o l ɑ n ɯ p dZ <SIL>
+<SIL> b m ɑ t[ S q ɑ l q ɯ ʁ ɯ <SIL> k e l ɡ e n ɑ r b i r ɑ <SIL> d[ ɑ <SIL> m i d[ i ts s i n ɑ l ɯ q t[ S i r y d[ y oe n y oe t[ oe t[ <SIL>
+<SIL> v ɑ l <SIL> e m i s ɑ m ɑ r f o S o l u b ɑ q t[ ɑ r v i e S t[ e b e l i S ɑ v t[ k q ɑ n b l v tS <SIL>
+<SIL> q ɑ j k i m b i z d[ e k i j S t[ e k ɡ e n s m o: o oe m oe n oe t[ oe n oe n <SIL> o ɑ o: j oe t[ oe o l ʁ n e m e s i <SIL>
+<SIL> d[ o y: ɯ S <SIL> b e r y <SIL> ɑ tS ɯ q e l y q u r o n d[ o q ɑ r m ɑ t[ oe t[ <SIL>
+<SIL> b m u n d[ ɑ j m i j z ɑ m d[ ɯ o l b o r u <SIL> dZ o q ɑ <SIL>
+<SIL> b S b ɑ k i b o ɑ S n t[ y p j k oe r ɡ oe n d[ e S n e s e tS e q ɑ n dZ o q d[ <SIL>
+<SIL> ɑ l ɑ r dZ o y <SIL> p e r i S i e k e r e k <SIL>
+<SIL> b ɑ l m ɑ ʁ ɑ b ɯ r n tS t[ i b i r d[ ɑ <SIL>
+<SIL> ɑ q ɯ l ɯ k e z d[ e m i n d[ e n <SIL> ɑ S u: n q ɑ l z ɑ d[ ɑ m <SIL> ɯ r m ɯ l <SIL>
+<SIL> q r ɑ l oe b u l s t[ u n ɑ j d[ o N tS s ɯ <SIL> d[ ɑ r ɯ <SIL> t[ o t[ o ʁ ɯ n d[ u q t[ ɑ n <SIL> q ɯ r s ɯ q b o l ʁ ɑ n <SIL> dZ o q <SIL>
+<SIL> ɑ s t[ ə d[ ə <SIL> dZ ɑ p b ɑ r ɑ v q ɑ z ɑ q t[ ɑ n ə d[ ɑ t[ ə r dZ u i l i v i dZ ɑ S ɑ ɡ ɑ n o v <SIL>
+<SIL> k ɑ z ɑ k b i l e ɡ i q ɑ v z ɑ z ɯ r ə n ə tS ɑ q ɑ q ɯ ɑ m e n t[ ɑ e r i <SIL> b i r e l e k i <SIL>
+<SIL> b u r o q <SIL> n e ɡ i z d[ e j ɡ oe z y oe r u <SIL> y s u p b o m u p b ɑ s ɯ <SIL>
+<SIL> d[ dZ r d[ e r <SIL> y k i l u S u l k i S i n m e n t[ i n d[ b o l o n <SIL>
+<SIL> b u l u r ɑ l o l k i n i m <SIL> m <SIL> m ɑ <SIL> ɑ j t[ b e r e l i ɑ l e d[ i o s m ɑ n b ɑ <SIL> p <SIL>
+<SIL> ɑ n ɯ n t[ k e n i b i z e k i n o m u ɑ l <SIL> S ɑ r t[ ɯ dZ ɑ q ɑ r ɑ q v <SIL>
+<SIL> o j n d[ ɑ r d[ ɑ j b ɑ l b ɑ l e s q ɑ z d[ ɑ r d[ ɑ <SIL> ɑ r t[ ɯ tS u l ɑ ʁ ɯ oe r s e t[ <SIL>
+<SIL> e dZ e b i e k oe p oe k y r tS S t[ e y m d[ oe r y n s ɯ n q ʁ ɑ <SIL> ɑ l d[ ɯ <SIL>
+<SIL> o b u l t[ ɑ s m ɑ m u n ɑ u S i n t[ ɯ p t[ ɑ n ɑ t[ ɑ r ɯ l ɯ r d[ m <SIL>
+<SIL> ɑ z l i d[ e b u l <SIL> s e z l d[ e j t[ i ɑ k e l t[ ɯ r u ʁ ɑ n ɑ s e l b o l <SIL> b ɑ ʁ ɯ z ɯ p k e t[ e t[ <SIL>
+<SIL> ɑ r ɑ j ɑ l n i b l ɑ n d[ ɑ r ɑ t[ y S i n b e r o m i z d[ i n k oe z t[ y z y q o ʁ o m <SIL>
+<SIL> b ɑ l t[ ɯ n u r d[ ɑ ʁ ɑ n d[ ɑ r <SIL> S ɑ r ɯ <SIL> k oe r y i r <SIL> y r u S u ɑ <SIL>
+<SIL> i r d[ o s o <SIL> o r ʁ ɑ n d[ ɑ d[ ɯ n e m d[ i p ɑ q ɯ l ʁ ɑ n d[ ɑ l ɯ z o t[ u r o s d[ ɯ <SIL>
+<SIL> e t[ e q m e n e n e n ɯ q ɑ l ʁ ɯ n e k e t[ e r i S t[ e r e b r s t[ ɑ d[ ɑ oe <SIL>
+<SIL> ɑ S j e m e k y z <SIL> y dZ u n q ɑ n dZ ɑ S b ɑ l ɑ r d[ ɯ n <SIL> s ɑ n ɯ n e s e k l ɯ S p e t[ e k e n <SIL>
+<SIL> i e b i r ɑ j m ɑ q t[ ɑ r d[ ɯ m e k <SIL> t[ p t[ i r o r m o r u n ɑ l q u r u l b ɑ j dZ i q ɯ l ɑ n <SIL>
+<SIL> b ɑ l ɑ <SIL> k oe p t[ e oe ɡ oe n <SIL> dZ ɑ r ɑ t[ ɑ r ɯ m e n e n o r u q ɑ n ɑ ʁ ɑ dZ ɑ t[ q ɯ r ɯ l d[ ɯ <SIL>
+<SIL> n t[ e n ɑ l ɑ r v b e r k i dZ i ɑ q S ɑ q tS ɯ <SIL> t[ ɑ j ɑ r ɯ n b i e z S k e i m <SIL>
+<SIL> ɑ s q ɑ q t[ e m ɑ tS q ɑ l <SIL> t[ ɑ q l ɑ r d[ ɑ p j ɑ j d[ ɯ l ʁ o n d[ ɑ <SIL>
+<SIL> r i r q r e r d[ e k o e s i t[ ɑ s ɑ q t[ ɑ s ɯ r q m ɑ n d[ ɑ j q ɯ l ʁ ɑ m k y m i s i <SIL>
+<SIL> e l m j i k e m ɑ tS t[ u: j s k e r e r <SIL>
+<SIL> t[ d[ o l b o r o j n tS e ɑ b i S k e k S ɑ r ɯ ɑ j <SIL> i r d[ i o b ɑ j q o dZ ɑ p dZ ɯ q t[ ɑ r n u m ɑ <SIL>
+<SIL> q ɑ r b ɑ r t[ p y tS y oe s y l oe s oe d[ oe e l e q ɯ r ɯ s t[ ɑ s i l oe p q p t[ ɑ b ɯ z d[ e k S e t[ <SIL>
+<SIL> q ɑ n d[ t[ n s ɯ ɑ t[ q ɑ r ɯ <SIL> b ɑ z ɑ r t[ ɯ m u z ɯ n t[ y oe r y: d[ <SIL> e r y: n e y: tS y oe y oe l y oe y oe y n <SIL>
+<SIL> m e tS y n d[ oe r u: l ʁ ɑ m e n o t[ ɯ r d[ m q ɑ r t[ m d[ ɑ <SIL> m i l i ts s e t[ y S y p ɑ l m e n t[ o q t[ o d[ u l d[ ɯ <SIL>
+<SIL> q ɑ r b i r y i y: d[ oe b r i d[ e n b ɑ l ɑ <SIL> b i r d[ e n <SIL> q ɑ r ɯ ɑ l ɯ r ɯ o z o u p dZ ɑ t[ ɑ t[ <SIL>
+<SIL> ɑ r o r u s e b e p t[ y <SIL> ɑ b ɑ l d[ ɯ z u n <SIL> oe l t[ y r oe ɡ e n i e j q ɯ ʁ ɑ k s m d[ e d[ e s e z d[ ɯ q ɑ l p oe <SIL>
+<SIL> ɑ l dZ u l d[ i b o l b oe s y r i n o ɑ d[ ɑ r dZ ɑ ɯ m ɑ l ɯ q S ɯ b o n d[ u r d[ u s ɑ t[ ɯ p b i S t[ e r S e t[ <SIL>
+<SIL> b u l dZ ɑ t[ ɑ ʁ ɯ q ɑ j m e r ɑ b ɑ r <SIL> q ɑ r m o r i z i m i m e n e n ɑ j m l ɑ n t[ r S ɑ t[ <SIL>
+<SIL> v ɑ z d[ ɯ r e n tS ɑ <SIL> b u l <SIL> q ɑ m f ɑ r f ɑ f q ɑ l ɑ r ɑ v s ɯ n f o t[ ɑ r t[ ɯ ə b e n d[ e <SIL> i S t[ e d[ <SIL> dZ ɑ t[ ɑ t[ <SIL>
+<SIL> dZ u o S oe y n y n <SIL> tS e j ɑ n ɑ l ɑ r e m e n e n b e k i y l y <SIL>
+<SIL> b u l t[ u: r ɑ l u: l q ɑ l ɑ j l <SIL> tS ɑ r ɑ b ɑ j m i n i s e r e l e ɡ k e b i d[ e r e l <SIL>
+<SIL> ɑ v r l ɑ l ɯ r ɯ n e l m <SIL> o s o: u l u j d[ oe r m o: r l k u ɑ b ɑ S q ɑ b ɑ r t[ e ɡ e S ɑ p o: t[ k oe r ɡ oe n <SIL>
+<SIL> ɑ n ɑ k t[ i t[ e r b i l i <SIL> i ɑ dZ l b e r b oe t[ i oe s e p e S e t[ i <SIL>
+<SIL> q ɑ r S u ɯ tS u r d[ ɑ m e k t[ e p e t[ e n e ɑ m ɑ r ɑ t[ ɯ d[ i e tS i b o ʁ ɯ n e b e s <SIL>
+<SIL> q u j ɑ q S e j n q n ɑ n d[ ɑ r ɯ z q k oe j l e r <SIL>
+<SIL> k i k e S i p dZ ɑ t[ ɑ ɯ e d[ e s o p l ɑ r u s z ɑ q ɯ u S dZ u n u l s t[ ɯ r ɡ oe <SIL>
+<SIL> e l z e z k y oe tS y tS o n <SIL> q ɑ s t[ ɯ b ɑ l d[ ɑ r ɯ <SIL> k i tS e n e k e l e r d[ q o r d[ o S ɑ <SIL>
+<SIL> ɑ l b u l s tS dZ e n e i l ɡ e <SIL> m ɑ r ɯ ɑ q d[ o n y o: S t[ r d[ u q <SIL>
+<SIL> k i t[ ɯ ʁ ɯ n d[ ɑ <SIL> dZ y z d[ y oe ɑ d[ ɑ m ɑ r q ɑ n d[ ɑ j dZ ɑ r ɑ q ɑ t[ ɑ r ɯ d[ ɑ l ɯ S q ɑ d[ ɯ <SIL>
+<SIL> t[ e s k r i s e ɯ n tS e k <SIL> k oe n oe <SIL> k oe r s oe p t[ ɑ j u ɑ S t[ ɑ S t[ <SIL>
+<SIL> ɑ r ɑ ɯ l ɯ q ɑ q s ɑ s ɯ q u <SIL> q ɑ t[ ɯ S ɯ o: tS u l ɑ r ɯ n m e n i p e tS p ɯ p S t[ u t[ ɯ t[ e r <SIL>
+<SIL> ɑ q r ɯ n d[ ɑ t[ y l e oe b ɑ r ɯ n dZ ɑ b ɑ l b ɑ j <SIL>
+<SIL> ɑ n d[ ɑ z ɑ S ɯ n ɑ q o t[ u z <SIL> dZ e r ɡ e tS q ɑ r l b e oe s t[ ɑ <SIL>
+<SIL> oe b oe j u n <SIL> ɑ s o t[ q o l <SIL> u <SIL> b e r k e k e r e k <SIL>
+<SIL> v ɑ t[ k f ɑ m ə n e r <SIL> b l u v ɯ z m ɑ t[ ɑ <SIL> b i f r ɑ v m dZ u l ə ɡ e ə dZ ə ɑ v b e ɡ e ə v o b ɑ k q k t[ i t[ v <SIL> i S t[ i e b e v <SIL>
+<SIL> ɑ z d[ ɯ n tS ɑ s ɑ j t[ ɯ ɑ q ɑ tS ɑ n q ɑ l ɯ n ɑ j k e l t[ i r y: l e r i b i l ɡ i s i e z d[ <SIL>
+<SIL> ɑ l ʁ ɑ t[ tS i S t[ e <SIL> p ɑ S t[ ɯ ɑ n ɯ n d[ ɑ q ɑ S i r e t[ y d[ oe u n <SIL> o l d[ u r m <SIL> ɡ i j <SIL> t[ u r n ɯ <SIL>
+<SIL> b u l dZ ɑ q ɯ n ɑ n <SIL> ɑ l u: ɑ z i r k i r l i k i k e dZ e j i <SIL>
+<SIL> m e k e t[ e m d[ e <SIL> q ɯ l ɑ j ɑ s ɯ n d[ ɑ q j ɑ j s q ɑ l i m i u o: S u n u o N u l u p <SIL> t[ ɑ p t[ ɯ <SIL>
+<SIL> e r tS e n p i o n d[ q f r v ɑ m ɑ n d[ ɑ d[ ɑ ʁ i <SIL> k e k j ɑ n ɑ b u l o t[ u r ʁ ɑ m n <SIL> y S y i p t[ r t[ <SIL>
+<SIL> t[ ɯ p t[ ɯ n tS <SIL> dZ ɑ S o l ɑ n ɯ p dZ ɑ t[ q ɑ n <SIL> o t[ u l z y r y ɑ l e r z ɑ m ɑ t[ ɑ q i r ɑ q ɑ l d[ t[ <SIL>
+<SIL> b i r o q u <SIL> tS ɯ n ɑ n ɑ j t[ ɑ m <SIL> t[ d[ i z i l e t[ ɑ dZ ɑ t[ ɯ p t[ j i e r y tS y <SIL>
+<SIL> b ɑ q ɯ q r q o dZ o l u: l q ɑ l ɑ n ɑ ɯ ɑ j ɑ q ɯ ɑ n ɑ n d[ ɑ j d[ ɯ o y tS u l o l u p S t[ e t[ i e n <SIL>
+<SIL> ɑ b ɑ k i m <SIL> ɑ z b ɑ S q ɑ dZ ɯ n u r ɑ r d[ ɯ r ɑ m d[ e j i ɑ l d[ <SIL>
+<SIL> u l oe n oe r d[ <SIL> b i r t[ u ʁ ɑ n ɑ ʁ ɑ l ɑ r ɯ n ɑ n i r y n d[ oe n <SIL>
+<SIL> ɑ S o n d[ ɑ n k i m o d[ ɑ k y tS y t[ r d[ ɑ s ɑ t[ ɑ l u: n i n tS e i k i <SIL>
+<SIL> e t[ i k oe b ɑ j t[ m e n b u t[ u oe S oe S <SIL> k e t[ i p <SIL>
+<SIL> q ɑ ɯ n d[ ɑ n tS ɯ q ɑ n <SIL> q ɯ S t[ ɑ r d[ ɯ b i z d[ e t[ ɑ z ɯ b ɑ t[ ɯ <SIL>
+<SIL> q u r m ɑ o n b o l ʁ o n d[ o r d[ y n d[ oe p <SIL> tS y l y ɡ oe r m ɑ l <SIL> d[ ɑ tS ɑ q ɯ S t[ ɑ ʁ ɯ n ɯ n t[ r ʁ n d[ ɑ r ɯ <SIL>
+<SIL> b ɑ r ɑ r d[ ɯ n ɑ r t[ ɯ n d[ ɑ <SIL> p ɑ r t[ u: j ɑ l ɑ <SIL> dZ ɑ n ɑ r ɯ k e n t[ i n ɑ t[ u r ɑ <SIL>
+<SIL> b ɑ l b i r q ɑ t[ ɑ r u l y: k u l oe r d[ e <SIL> t[ e r ɑ r i s i t[ i t[ j t[ ɑ l ʁ <SIL>
+<SIL> q u r s ɑ n <SIL> q ɯ z ɯ n y r y: s y n e s <SIL> k y r y b e r y: ɡ e n e m e s i n d[ e r d[ e <SIL>
+<SIL> u l ɑ q t[ ɑ dZ e S ɑ q ɯ n <SIL> q o r q u n d[ y t[ y u: l u l q ɑ l d[ ɯ <SIL>
+<SIL> b ɑ l m n i n b o l <SIL> dZ ɑ q t[ ɑ q ɯ <SIL> d[ ɑ r ɯ m e n <SIL> dZ ɑ l ɯ z e k e n i n d[ i b i l e t[ <SIL>
+<SIL> e m e n e k e m e b e r i ɯ n k r k <SIL> k u l t[ tS u r m ɑ m d[ i j n ɑ l d[ <SIL>
+<SIL> ɑ n ɑ k ɯ n d[ ɯ r <SIL> oe r t[ p <SIL> k e t[ <SIL>
+<SIL> o S o m d[ q dZ e l e l e r d[ e n m ɯ n ɑ m ɑ l m ɑ t[ ɑ r k oe e i u tS u r ɑ t[ u: ʁ ɑ b l t[ <SIL>
+<SIL> b S o t[ ɑ r ɯ <SIL> o r ʁ n ɯ n ɑ n ɑ l <SIL> b i j d[ e <SIL> t[ ɑ S t[ ɑ ʁ ɯ ɑ ʁ ɯ <SIL> t[ u: r ɑ <SIL> k e l e n <SIL>
+<SIL> ɯ n ɑ n m i n <SIL> ɑ l d[ ɑ r b ɑ r ɑ n i ɯ tS i n e n ɑ tS q ɑ n ɯ m d[ i z <SIL> ɑ j t[ i n d[ z i <SIL>
+<SIL> ɑ k q y r oe m ɯ oe r y ɡ k oe <SIL> u l u t[ u s u <SIL> m n e q ɯ l ʁ ɑ n m ɯ ɑ d[ ɑ d[ ɑ r b o l o d[ <SIL>
+<SIL> e S e tS q ɑ n ɑ j d[ ɯ S u ɑ n ɯ dZ o <SIL> b l y <SIL>
+<SIL> b i z q ɑ r ɯ s t[ ɑ n d[ ɑ <SIL> l i m ɑ t[ ɯ n o l u t[ oe k oe r y S y b ɑ q ɑ d[ ɯ ɑ ɯ <SIL>
+<SIL> b ɑ b ɑ S q o j dZ o q u t[ e b ɑ l q d[ ɯ <SIL>
+<SIL> e l m e n i j ɑ b ɑ j q o r q p q ɑ l ɑ m d[ ɑ <SIL>
+<SIL> oe z ɑ n d[ ɑ n k i j i k i q ɯ ɑ t[ ɑ r ɑ l ɑ r d[ ɑ q ɑ l n b dZ e m e n e n b e l <SIL> k e <SIL> t[ u: r j t[ <SIL>
+<SIL> ɑ q l ʁ n m n i s t[ r l e r m o r d[ ɑ ʁ ɯ d[ ɑ t[ ɑ r i t[ e l e S t[ i b e r i S e <SIL>
+<SIL> e m e n b ʁ ɑ s ɑ e tS q ɑ tS ɑ n i S e n b d[ i <SIL>
+<SIL> q ɯ r ɯ ʁ ɯ s t[ ɑ n d[ ɯ n <SIL> e l ɑ r ɑ l ɯ q tS y N <SIL> k e r i S l e ɡ i n d[ i e p ɑ o t[ ɑ t[ ɑ r u: z u ɑ l b ɑ j t[ <SIL>
+<SIL> ɑ l q ɑ ʁ ɯ n d[ ɑ r ɯ <SIL> dZ ɑ l q ɑ t[ ɑ r ɯ l ɑ q o l d[ ɑ n u l ɑ t[ e d[ ɯ n m o: r ɯ r <SIL>
+<SIL> m ɑ l ɑ r q o r u l u S q ɑ m ɑ q u l d[ l q <SIL> b e r i ɡ e n d[ e n ɑ t[ ɯ p dZ ɑ t[ ɯ S ɑ t[ <SIL>
+<SIL> b ɑ S q l <SIL> p ɯ r q u r u t[ u r ɑ m e n <SIL> u y k j u m u k ɯ q ɑ r ɑ t[ o q t[ o: N s u o z <SIL> tS ɑ r ɑ k oe r y S y y: k e r e ɡ i l e r <SIL>
+<SIL> i s ɑ j p j oe ɡ y b i l d[ e r ɡ e n d[ e r q ɑ ʁ ɯ ʁ ɯ r ɯ ɑ t[ ɑ ʁ ɯ l m ɯ S i e s i s ɑ e s i m k oe z u ɡ o i e <SIL>
+<SIL> k i r tS ɑ q t[ o b o s m e n e n <SIL> u o l <SIL> dZ y r k u n ɑ s ɯ n ɑ j o j tS u ɑ r ɯ r q v ɑ <SIL> dZ ɑ l q ʁ ɑ n m e s <SIL>
+<SIL> ɑ q r ɑ u q u r o r u l d[ u q t[ ɑ l e s m o n u n ɑ <SIL> b i r i l i p k e t[ i e s <SIL>
+<SIL> ɑ b i z y n y u q S j ʁ ɑ l ɑ ɯ z ɑ m i b u r ɑ l ɯ dZ ɑ dZ ɯ p <SIL> y l oe b e s i <SIL>
+<SIL> e ɑ l b o u m ɑ s ɯ l e s ɯ ɑ s f ə m o ə f o s q o ə t[ ə p q ɑ l m b ɑ t[ ɑ ə d[ e p <SIL> ɯ ɑ s ɯ p t[ i j t[ <SIL>
+<SIL> u b u l b o r b o r l o r ʁ o r <SIL> dZ ɑ r ɑ n ɑ r d[ ɑ n ɑ m ɑ t[ ɯ r t[ y ɯ <SIL>
+<SIL> b i r d[ <SIL> l ɯ i s ɑ n r ɑ m e n e n dZ o l u <SIL>
+<SIL> ɑ l ɯ ɑ l ɯ tS y n oe k m oe t[ i p ɑ e t[ i k ɑ l <SIL> q ɑ p ɑ n ɑ t[ y z d[ ɯ r <SIL>
+<SIL> b i e ɡ i z i j ɑ l <SIL> m l o n d[ oe p <SIL> b i r ɡ e n d[ ɑ l q m ɑ q ɑ l ɑ S u l <SIL> t[ u r ɑ l b o l ʁ o r y <SIL>
+<SIL> e m n k i s t[ e r t[ ɑ r ɑ tS ɑ s ɯ n <SIL> s ɑ e n ɑ n S ɑ r ɯ n ɯ n b e r t[ i t[ m n e n ɑ l q ɯ ɑ <SIL>
+<SIL> e d[ i r o q s o n u n j e r l ɯ k <SIL> b ɑ r d[ ɑ ʁ ɯ n <SIL> oe z <SIL> b e k <SIL> t[ ɑ r ɑ p <SIL> q ɯ l d[ o n oe t[ <SIL>
+<SIL> ɑ d[ ɑ t[ ɑ q ɯ r o z ʁ o ʁ t[ ɑ t[ ɑ n d[ ɑ t[ ɯ e q ɑ m ɑ ʁ m ɑ e m e s <SIL> p o j u n ɑ q ɯ r ɑ t[ ɯ n ɯ S ɑ t[ <SIL>
+<SIL> e b i s i k ɑ q m u d[ ɑ tS dZ e t[ ʁ ɑ n d[ ɑ q ɑ t[ ɑ S t[ ɑ n d[ e tS e l e ɡ i d[ e i o: t[ o: d[ e t[ r ɯ z ɑ d[ ɑ l o: <SIL>
+<SIL> dZ t[ o j oe y k y n y b e l t[ y l e n e k i l ɑ q ɑ l ɑ: n d[ e r i p ɑ <SIL> b ɑ r ɯ tS ɑ tS ɯ l i p q ɑ l ɑ n d[ p <SIL>
+<SIL> oe k ɑ oe t[ m j m u j d[ ɑ q ʁ ɯ dZ ɑ q S o j t[ r ɑ t[ ɯ k e k i n <SIL>
+<SIL> p S b S q ɑ l ɯ r s o j d[ u ɑ s ɑ t[ ɯ q m e n e n ɑ l e k t[ i n i S e t[ <SIL>
+<SIL> ɑ b o s o l u tS u r u d[ ɑ ʁ ɯ q ɯ r p ɑ m b e l i ɑ r d[ ɑ m b ɑ tS ɑ q ɯ p ɑ t[ ɑ n m i j ɑ l s ɑ <SIL>
+<SIL> ɑ z ɑ ɑ: r d[ ɯ ʁ ɯ t[ e n d[ i d[ n q ɑ j s ɯ l ɯ <SIL> u ɑ b ɑ z ɯ q ɯ q tS S t[ ɑ r q ɑ l k e k i n d[ i b i d[ i z i k e s ɑ l dZ ɑ r ɑ S ɑ b <SIL>
+<SIL> t[ p q y l o p t[ oe n d[ r ɯ d[ ɑ t[ s ɑ s e q ɑ t[ q ɯ q m q u s u z m oe q t[ y o: n e s i n t[ e k e oe k ɯ oe e n <SIL>
+<SIL> oe S o u S t[ y u n b o r b o r d[ o q b ɑ r ɯ n ɑ q ɯ s t[ ɑ t[ u: tS u l ɑ r <SIL> t[ ɑ l u: ɑ l u: ʁ ɑ <SIL> n ɑ r ɑ z ɯ <SIL>
+<SIL> ɑ n ɯ i t[ v o l y ɡ y m e n e n <SIL> b u t[ u r ɡ oe t[ o r t[ ɑ j <SIL> v <SIL> u b ɑ q ɯ j t[ k i t[ k i e n <SIL>
+<SIL> o dZ o l q r ɯ s ɯ ʁ ɯ n ɯ n s e b e p t[ e r e ɑ ɯ n ɯ q ɯ ɑ l ɯ l b ɑ r <SIL>
+<SIL> ɑ n ɑ l ɑ r s o: r o dZ ɑ S ɯ r u l ʁ ɑ n s ɑ d[ ɑ r d[ ɯ <SIL> t[ ɑ n d[ ɑ t[ ɑ t[ ɯ S t[ ɯ oe t[ i p oe i <SIL>
+<SIL> u m e n dZ ɑ q k S ɯ e l e k e S e t[ ɑ b ɑ n ɑ o ɑ v d[ e i j t[ i v e r ʁ ɑ tS u S t[ ɑ r <SIL>
+<SIL> e z y j i r ɑ p <SIL> k e t[ e t[ ɑ t[ q o u r q u l ʁ ɑ <SIL> n e ɡ i z <SIL> dZ o q <SIL>
+<SIL> o q o r q t[ <SIL> ɯ <SIL> u l u q ɑ t[ ɯ u s ɑ l d[ ɑ n d[ ɑ <SIL> p <SIL>
+<SIL> b u l k oe k <SIL> j t[ e r k ɑ <SIL> oe j l u j t[ y ɡ oe n N o <SIL> q o l <SIL> k e l ɡ y tS y l k t[ y s y l y S k oe <SIL> u i u n m u q t[ i dZ o b u l
+<SIL> dZ ɑ m e n <SIL> o S o j n u n e l e k t[ e r o u n u q u b ɑ r j ɑ t[ ɯ n <SIL> ɯ ʁ ɯ r ɯ <SIL> b e r e n <SIL>
+<SIL> d[ ɑ l i o r d[ u j ɑ S q ɯ q ɑ b i m n e t[ k y oe t[ y j n u s u ɑ n ɯ S q ɑ d[ ɯ <SIL>
+<SIL> b i n d[ e ɡ e <SIL> dZ ɑ o ʁ ɯ z q r j t[ e r i r ɑ l b o j m u z ɑ m ɑ ʁ ɑ tS ɯ n u n d[ ɑ j l e dZ ɑ ʁ ɯ S ɯ k e r e k <SIL>
+<SIL> ɑ s ɑ j q ɑ t[ tS k e k i n tS i l r u n d[ e d[ e p ɑ o: l t[ u l ɑ n d[ ʁ ɯ t[ ɑ n ɯ ʁ ɑ n s ɑ <SIL>
+<SIL> b u l y u n oe r d[ j <SIL> ɑ r q ɑ l ɑ S ɯ n ɑ ʁ ɑ b ɑ l d[ ɑ r s b i <SIL> b o l o n e k e n <SIL>
+<SIL> e m e n k oe q n tS oe s u m u r u ɑ n m <SIL>
+<SIL> b ɑ ɯ ʁ ɑ r k ɑ z ɑ z k i ɡ i r ɡ i ɡ i n <SIL> o ɑ <SIL> q z i ɑ t[ <SIL> tS oe q ɑ j ɑ n ɯ o: <SIL> ɑ t[ tS u: n u n t[ ɑ l ɑ p q ɯ o: S z ɑ n p <SIL>
+<SIL> oe S u: <SIL> q ɑ l d[ ɯ q t[ ɑ r ɯ n ɯ e l k oe p q o l tS oe r d[ ɑ s e l m e n e n t[ ɑ S t[ q t[ ɑ n d[ ɑ r <SIL> dZ u: p k e t[ p t[ u r ɑ t[ <SIL>
+<SIL> q ɑ d[ ɑ m d[ ɯ n s u dZ e k i p t[ y i m ɑ m l e s i n ɑ n o q t[ o oe j t[ o j ʁ i ɯ b o l t[ <SIL>
+<SIL> ɑ o r S o: n u n b ɑ: l ɑ r ɯ q ɑ i ɡ s r b r k i S i n q o l u ɑ t[ i S i k i oe b l tS u <SIL>
+<SIL> dZ S n d[ ɑ j o r u <SIL> dZ ɑ n ɑ <SIL> ɑ n k e s t[ i l d[ e d[ i n ɯ n q o n o l u S oe <SIL> ɡ oe t[ oe ɡ e r <SIL>
+<SIL> m n e m i e d[ ɑ j p dZ ɑ t[ ɑ n ɯ n ɯ b i l e m d[ m <SIL>
+<SIL> b e ɡ e r d[ e dZ e n u ɯ S t[ ɯ q ɑ t[ ɯ ɑ S b o l t[ s o q ɑ n d[ ɑ j b u l ɑ j p <SIL> j ɑ l ɑ t[ <SIL>
+<SIL> ɑ r q ɯ r n d[ i k <SIL> m e n e n <SIL> ɑ d[ ɑ m ɑ r ɑ m ə S ɯ n u l ɑ r ɑ d[ ə k q ɑ t[ ɑ j ɑ b ɑ S t[ ɑ S t[ ɑ t[ e: d[ e d[ e <SIL> ɑ l v <SIL>
+<SIL> e S o l d[ o l b o r d[ ɑ ʁ ɯ s ɑ m ɑ ɯ S <SIL> t[ e ɡ e n s e r dZ e r d[ e dZ ɑ ʁ ɯ S q ɑ <SIL>
+<SIL> u ɯ s t[ ɑ n d[ ɯ q t[ ɑ l q ɑ q ɑ q d[ ɑ dZ ɑ o: n o: ɯ <SIL> e l i e dZ e l t[ oe r o l u l d[ ɑ ɯ t[ ɯ n ɯ q k r k S k e n <SIL>
+<SIL> ɑ S ɑ l e m e s <SIL> q u l u dZ ɑ d[ ɑ k o r t[ y k r <SIL>
+<SIL> ɑ n ɑ l <SIL> dZ ʁ r ʁ u k e s i k j ɑ d[ ɑ m o m ɑ dZ ɑ n ɑ <SIL> b ɑ l ɑ r n ɑ n d[ ɑ <SIL> ɑ l <SIL> d[ i p l o m ɑ t[ <SIL>
+<SIL> m ɑ n d[ n k i n <SIL> ɑ n ɯ t[ i S l <SIL> q ɑ m e t[ e t[ e r ɡ e i l i S t[ y r y S y k e r e k <SIL>
+<SIL> ɑ tS u m k y n tS y l oe k y l ɡ oe n k y n d[ oe r d[ ɑ ʁ ɯ oe ɑ l o ʁ n t[ ɑ n ɑ l ɑ l d[ b e b e t[ <SIL>
+<SIL> t[ r ɑ r l ɑ n d[ ɯ n b i r i q ɑ i dZ ɑ n p i e r u ɑ b ɑ r t[ ɯ i q <SIL>
+<SIL> e o r u k s i ɑ r ɑ m d[ e z d[ i n s t[ r ɑ t[ i ɡ ɑ l ɯ k o m o n o k t[ oe S <SIL>
+<SIL> b k oe r z y k oe ɡ e r i p <SIL> ɑ S ɑ j b ɯ z <SIL> k e l p <SIL> ɑ t[ ɑ t[ ɯ <SIL>
+<SIL> m e n <SIL> ɑ l <SIL> dZ e k f ɑ <SIL> ɑ r S u n t[ i <SIL> b ɑ r ɯ i p <SIL> k ɑ l k ʁ ɑ n o m <SIL>
+<SIL> b u ʁ o q u S o p q o r u z ʁ o q ɯ z ɯ ʁ ɯ p <SIL> k e t[ i S p e s e k e n d[ e <SIL>
+<SIL> b i z d[ i n ɑ d[ i S t[ e r d[ e n ɑ j t[ ɑ m n d[ ɑ q ɑ l ɑ t[ ɑ j <SIL> n oe r <SIL> t[ o l ʁ o n <SIL>
+<SIL> ɑ q u l ʁ u z m ɑ t[ ɯ l <SIL> ɑ l ɯ r q o b ɑ q ɑ q ɑ d[ i e i S t[ e p i e l <SIL>
+<SIL> ɑ r d[ e m ɑ r ɑ t[ ɯ n <SIL> S k e k i r p o b o j <SIL>
+<SIL> s ɑ p ɑ r d[ ɯ b ɑ s t[ ɑ r t[ ɯ r oe d[ y l r ɑ m ɑ l b ɑ k ɯ t[ q ɑ dZ ɑ r ɑ S ɑ b o u <SIL>
+<SIL> e l i r i o q ɑ n d[ oe j d[ o m y n ɑ t[ <SIL>
+<SIL> ɑ l b l d[ m ɑ l s ɯ S t[ ɑ n e z S k e m e s t[ y k y n d[ oe r b o l o t[ <SIL>
+<SIL> b n ʁ j ɑ j ɑ n ɯ S t[ o b i ʁ n ɑ n d[ ɑ r ɑ k l S ɯ n ɑ s v ɑ t[ dZ ɑ r ɯ S q ɑ t[ ɯ S b l ɯ d[ ɯ m <SIL>
+<SIL> b u l i m d[ e ɡ e <SIL> t[ ɑ i ɑ s e r e i t[ i S i m i m <SIL> k oe n d[ y ɡ oe n t[ y S y n d[ oe d[ i <SIL>
+<SIL> b ɑ l ɯ r ɯ s i e d[ i n k oe s q u ɯ r ɯ n d[ ɯ <SIL> b o ʁ o n d[ u q t[ ɑ n i ɑ t[ d[ e m i k s i e n i s ɑ t[ ɯ p <SIL> k e p i e j t[ <SIL>
+<SIL> oe l e r y t[ b S o l d[ e r ɯ n oe t[ y p b ɑ r ɯ ɑ t[ q ɑ n d[ ɑ r ɯ e j t[ u <SIL>
+b ɑ q t[ y tS y i e d[ e m e n i <SIL> t[ oe t[ q ɑ r b ɯ ʁ ɑ m <SIL> d[ ɯ t[ ɯ n d[ ɯ r ɯ S t[ e r m i <SIL>
+<SIL> dZ S ɯ l d[ ɑ j m e z <SIL> p ɑ r t[ ɑ s ɯ n <SIL> b e r k t[ y r ɡ oe z q ɑ r ɑ S ɯ n q ɯ ɑ r m ɯ ɑ n ɑ N e r b e l d[ <SIL>
+<SIL> ɑ l ɑ l d[ ɯ q t[ k <SIL> t[ u: j m ɑ l ɑ j d[ e m <SIL>
+<SIL> b ɑ S q ɯ o S o n u b ɑ S t[ ɑ S t[ <SIL> k e r e <SIL>
+<SIL> b u o z e k e l ɑ j t[ <SIL> o j y t[ y r i r ɡ e q ɑ l b e n i q b ɑ <SIL>
+<SIL> r dZ e l e q k i z ɯ l <SIL> b o l d[ o n o tS y n e l e k f ɑ n <SIL> t[ ə k u r l o <SIL> b r <SIL> b r e i t[ j t[ <SIL>
+<SIL> r S t[ n t[ p ɑ r ʁ ɑ m ɯ n t[ <SIL> m ɑ n <SIL> ɯ tS ɯ l q t[ ɑ t[ ɯ i u <SIL> s ɑ l u: n u tS i t[ k i t[ q ɑ q t[ ɯ <SIL>
+<SIL> k i l t[ i r i l <SIL> k e n <SIL> ɑ m ɑ t[ e r ə j ɑ l d[ i k i n dZ i ɡ y m v t[ ɑ k t[ ɑ l u: p u <SIL> dZ ɑ t[ ɑ q <SIL>
+<SIL> q ɑ d[ ɑ m d[ ɑ r ɑ j ɑ m i m ɑ n d[ o s u ɑ b i r o q e r e k e k t[ e r e <SIL> s e k e s e s <SIL> t[ <SIL>
+<SIL> ɑ l e oe z o l d[ ɯ tS ɑ r ɑ k e t[ q ɯ l ɯ p s ɑ n ɯ ʁ ɑ d[ i n k i e r ɑ d[ ɑ n ɑ s ɑ p k oe ɡ oe n oe ɑ <SIL>
+<SIL> b e i z <SIL> ɑ j k t[ e b p d[ y j u <SIL> q ɑ l ɯ s ɯ t[ ɯ z dZ e n e b i r e m d[ e k t[ e S t[ e S b e S k e k <SIL>
+<SIL> m ɑ s ɑ l i j d[ ɑ t[ ɑ b ɑ j ɑ t[ ɑ ɯ S ɯ r m ɑ b e r ɡ e n e p dZ ɑ t[ <SIL>
+<SIL> e b i r S k e S i ɑ r q ɑ n d[ ɑ j d[ e ɡ i l d[ e ɡ e dZ ɑ r ɑ t[ ɑ l ɯ p <SIL> o r u q ɑ n ɑ ʁ ɑ dZ ɑ t[ q ɯ r l ɑ n <SIL>
+<SIL> e d[ i r o q ɑ j ʁ r o q o r u S t[ e r s i t[ s i ɑ b ɯ r b d[ o n b ɑ S ɯ n d[ ɑ ʁ ɯ n ɑ j q <SIL>
+<SIL> ɑ n e m i b u l b o u r u q b ɑ r d[ ɯ q b ɑ s t[ ɑ t[ u l d[ o r u d[ ɑ l ɑ q t[ <SIL>
+<SIL> b ɑ r z ɯ r i S t[ e n m ɑ t[ e r i ɑ <SIL> d[ ɑ r ɑ n <SIL> ɑ q t[ ɑ S <SIL> k e r e k ɑ <SIL>
+<SIL> ɑ p t[ ɑ t[ ɯ o l d[ o q m i l i ts e s i ɑ ɯ q ɯ m ɑ t[ k e r i t[ o s m o n y s y z b ɑ l d[ ɯ n m <SIL>
+<SIL> b i d[ e <SIL> u j ɑ t[ q ɑ r u: l <SIL> i n i s i n i t[ i j <SIL> dZ o q u <SIL>
+<SIL> ɑ n ɯ tS u r d[ ɑ q r ʁ ɯ s t[ ɑ n ɯ ɑ q o r q ɑ n d[ ɑ dZ ɑ t[ q ɯ r ɯ l ɯ r i <SIL>
+<SIL> m i l i t[ s ts j o q o j ɑ b o ʁ o n dZ e r e n b i e n d[ i n <SIL> q u l ɑ n b e j t[ oe l q oe t[ ɑ j ʁ ɑ <SIL>
+<SIL> k y n oe l i l o S o j ɑ k i m i ɑ t[ ɑ <SIL> dZ e r t[ e l k e l e r i b oe l y p t[ b r i S n i n d[ t[ e r y <SIL>
+<SIL> b u S u l dZ ɑ q t[ ɑ ɯ s y ɯ p k ʁ ɯ S k e r e k t[ ɑ ɯ n d[ r <SIL>
+<SIL> b u l ɑ d[ ɑ m ɯ q u q t[ ɑ r ɯ n b o ɯ z u l u tS u l u q ɑ j ɯ t[ k e l i S i e m n <SIL> y n <SIL>
+<SIL> ɑ d[ ɑ m <SIL> k e r y: tS e l ɡ b ɑ j i e d[ e n <SIL> ɑ r t[ ɯ q <SIL> o l ʁ o n d[ o <SIL>
+<SIL> oe l i l i z s ɯ q ɯ n u S t[ ɯ n ɑ q ɯ q ɑ q ɯ S u: t[ tS j b ɑ ɯ i z e p i t[ <SIL>
+<SIL> ɑ q ɑ l e z n e k e r k t[ m ɑ l m ɑ t[ ɑ l ɑ l d[ e r ɑ p <SIL>
+<SIL> m ɑ l ɑ n ɑ k e <SIL> dZ e n e S e k oe r e r e p <SIL> k y n d[ y t[ y k oe n b oe r ɑ q ɯ q ɯ r ʁ ɑ n dZ o q <SIL>
+<SIL> ɑ v z ɑ z ɯ r u n tS ɑ <SIL> z l ɑ l i l ɑ q ɑ s ɯ s ɯ z m ɑ t[ ɑ q ɑ t[ ɯ ɑ ʁ ɑ n e b e k ɡ k s i z i <SIL>
+<SIL> e l r o q o l u: s u o z d[ o k t[ o r <SIL> d[ o n m u ɑ <SIL> b ɑ r ɑ r d[ ɑ d[ ɯ s ə z d[ o ə d[ ə <SIL> dZ ɑ n ɑ q ɑ t[ ɑ r ɑ l ɑ j t[ <SIL>
+<SIL> z ɯ r ɑ l ɑ r ɑ ɯ dZ ɑ l d[ ɑ m ɑ n b ɑ r t[ r y: d[ e t[ <SIL> dZ ɑ S ɑ p <SIL> dZ ɑ t[ ɯ S ɑ t[ <SIL>
+<SIL> k e k t[ oe l oe r oe q ɯ l d[ ɑ t[ m ɑ m i l e q ɯ l ɯ S i k e r e k <SIL>
+<SIL> ɑ l ɯ l ɑ r d[ ɯ n <SIL> r e i n k oe l dZ y ɡ i <SIL> t[ u r <SIL> ɑ r b ɑ S q r ɑ <SIL>
+<SIL> ɑ n u l <SIL> ɑ q t[ s e n e s e ɑ q t[ u: ɑ q ɯ l d[ o l ɑ r <SIL> k oe k e n ɑ <SIL>
+<SIL> dZ i q k q oe n s p t[ ts t[ s ts m ɯ n e n m i z ɑ m d[ ɑ r <SIL> d[ dZ i k o: oe r ɑ t[ i o: t[ i k <SIL> e l e m y n oe z y oe d[ ɑ <SIL>
+<SIL> b m e n q <SIL> t[ ɑ p ɑ l i t[ e p t[ e r e d[ e l <SIL> o q u j m <SIL>
+<SIL> ɑ n ɯ l ɯ dZ ɑ N q ɑ r q ɑ l u n u ɯ l ɑ r ɯ d[ ɯ d[ e y tS dZ e k b l e tS dZ e t[ ɑ l s ɯ <SIL>
+<SIL> b u S o q k e tS ɯ m ɑ: ɑ j z ɯ e m i k S t[ i <SIL> i ɡ i l i ɡ y tS y n tS e t[ tS y tS y l tS u b o l q ɑ l d[ ɯ <SIL>
+<SIL> m i z ɑ b ɑ r d[ ɯ ʁ ɯ d[ ɑ <SIL> b i e r d[ i j l S i <SIL> k e r e l <SIL>
+<SIL> b i dZ i p t[ r ɑ t[ tS ɯ n oe ɯ n d[ ɑ e l e ɑ l ɑ r <SIL> dZ u l t[ ɑ n d[ ɑ b ɑ ʁ ɑ n ɑ p t[ ɯ m n u ɑ: ʁ ɑ ɡ ɑ r ʁ m e s e b e <SIL>
+<SIL> q S ɑ z s ɑ t[ p ɯ q ɑ n d[ ɑ d[ ɯ n t[ u: l ʁ ɑ n d[ ɑ r ɯ <SIL> q y m d[ y <SIL> dZ e n i l i j ɑ t[ ɑ S u: b e <SIL>
+<SIL> e m i k e l i S i m d[ e p e r z ts e n s t[ o r u n ɑ j dZ e n b e k oe q o l q o l u y S u ɡ e r e k <SIL>
+<SIL> e m i j s ɑ t[ ɯ ɑ b ɑ j dZ ɑ t[ ɑ l ɯ d[ <SIL>
+<SIL> i n k i z k d[ e m ɑ s e l e ɑ q o m S k e l e r m e n e n <SIL> oe l t[ oe y u ɡ oe n d[ oe r d[ y <SIL> y ɑ b ɯ S k e r e k <SIL>
+<SIL> ɑ z b i r o q <SIL> l b u l d[ ɑ j tS ɯ r ɡ k oe <SIL> ɑ S q ɑ n <SIL> dZ b o q u <SIL>
+<SIL> ɑ q t[ o q t[ oe l N s u: s ɑ q t[ ɑ ʁ ɯ tS e s l t[ o s u m e n e n ɑ: ɑ r ɯ n d[ ɑ j r ɑ s ɯ n ɑ dZ ɑ s ɑ l ɑ d[ <SIL>
+<SIL> b e s t[ e l <SIL> dZ ɑ s o d[ oe b e l ɡ y tS k e l e ts s e l u t[ ɑ S t[ ɑ r u s ɑ l m ɑ l ɯ r <SIL>
+<SIL> ɑ r b u b i m i z d[ ɑ n ɑ r b o j i n tS ɑ s t[ oe s y z dZ ɑ s ɑ l S ɯ ɑ k r e k o m i m <SIL>
+<SIL> e m e n <SIL> t[ o q t[ o N q o j u S n ɑ j t[ ɯ p ɯ l ɑ d[ m y ɑ q ɯ q ɯ z d[ ɯ m <SIL> l dZ ɑ N ɯ d[ o: n p u <SIL>
+<SIL> q l ɑ t[ ɯ ɑ j ɯ k i z s e m e n e n i ʁ ɯ n ɑ n <SIL> m n u n b i b i d[ n <SIL>
+<SIL> e l ɯ o l b i s t[ u l b <SIL> r ɑ t[ ɑ <SIL> ɑ r <SIL>
+<SIL> ɑ q ʁ ɑ <SIL> o S ɑ r ɑ ɯ n d[ ɑ <SIL> e l ɯ q k e ɯ m ɑ t[ k q ɯ j l ɑ j t[ <SIL>
+<SIL> b u l dZ i j i n t[ i k <SIL> t[ o u ɯ tS u t[ o p t[ o q b ɑ t[ q ɯ S <SIL> b u l m o q t[ tS u <SIL>
+<SIL> dZ ɑ l ɯ s t[ ɑ n d[ ɯ n <SIL> ɑ j l d[ ɑ r ɯ n ɯ n <SIL> ɑ l ɯ n d[ ɑ k e tS i m n s o ɑ n ɯ z <SIL>
+<SIL> s o t[ l ʁ n d[ u r d[ u n b ɑ: l ɑ r ɯ s q ɑ l b r dZ e r <SIL> d[ e l o <SIL> t[ u r u S oe t[
+<SIL> ɑ n ɯ l s ɑ q t[ o N tS y dZ ɑ j n ɑ j ɑ l ɯ dZ ɑ q S e k e n d[ i e n ɑ j t[ ɯ <SIL>
+<SIL> m o k q y m u k q ɯ z ɯ r ts e n tS ɑ <SIL> q ɑ m i n t[ ɑ r j ɑ l u ɡ tS u n dZ e t[ k i l e k i s i z b o j o q l b d[ ɑ r <SIL>
+<SIL> ɑ tS z d[ o q ɯ r ɯ s t[ ɑ m ɑ q o n u ɑ z ɑ q s o: ɑ n d[ ɑ ɡ oe y n y n o r d[ ɯ n o r o t[ p b e r ɡ e n <SIL>
+<SIL> e tS ɯ k s ɑ l ɯ q ɑ l q ɯ z d[ oe k oe t[ oe r y p <SIL> m ɑ S i n ɑ ʁ ɑ dZ e t[ p q ɑ l ɯ S u ɯ <SIL>
+<SIL> b e t[ k e b l k <SIL> b ɑ j z p v ɑ m ɑ dZ ɑ S l ɑ <SIL> p ɑ t[ s ɑ z s m o j y S t[ u r u S y l ɑ r n b e r e <SIL>
+<SIL> r tS u r d[ ɑ k i r i S i p i o: ɑ t[ q ɑ n s ɑ j t[ ɯ n q ɑ n ɑ n e r t[ s ɑ ɯ s ɑ j t[ <SIL> o l p z e p t[ e l i n e t[ i o: <SIL>
+<SIL> q S u dZ e r d[ ɑ e q ɑ <SIL> u l u tS u b e k t[ dZ o l u i s i z i l e t[ r <SIL>
+<SIL> b ɑ z ɑ j ɯ t[ e ɡ e n e i q ɑ r ɑ dZ ɑ t[ ɯ n dZ j t[ y S t[ i l o s q y l ɑ <SIL> dZ e N i s b i <SIL>
+<SIL> e l k ɯ e tS u m <SIL> q ɑ l ɑ l ɯ q u l ʁ u l ɑ q y j d[ y n dZ e t[ i n tS ɯ q ɑ j ɑ t[ ɯ n d[ ɑ ʁ ɯ l d[ ɯ <SIL>
+<SIL> e m i k e i b e r d[ e n b e r m ɑ q s ɑ t[ ɯ <SIL> u b u l u t[ u q u m d[ u s ɑ p q t[ ɑ p q ɑ l q <SIL>
+<SIL> b ɑ j e m e d[ i n i S i m e r <SIL> oe z y z e n e r s e ɡ e t[ i S t[ i ɡ i n tS ɯ t[ k e q ɑ q ʁ ɑ n <SIL>
+<SIL> s f o t[ u: y tS f u ɑ s f t[ ɑ l ɯ n d[ ɑ ə <SIL> b o S o t[ o l d[ u d[ o v <SIL>
+<SIL> ɑ j ɯ tS u d[ ɑ i S i b o j u n dZ ɑ t[ e r i k oe r dZ y r p ɯ b ɑ t[ <SIL>
+<SIL> ɑ n dZ ɯ n ɑ n ɑ b o r S o t[ <SIL> q o j u: l q l ɑ l b u l dZ ɑ z ɯ j m e s i m <SIL>
+<SIL> m ɑ n ɯ m e n e n ʁ o S ɑ d[ ɑ ʁ ɯ <SIL> ɑ k e k i z k i S i s ɯ o t[ o l ʁ o n <SIL>
+<SIL> ɑ r i r ɑ l ɑ j n d[ ɑ <SIL> ɑ <SIL> o r u s dZ ɑ d[ ɑ n <SIL> ɑ p d[ ɑ n <SIL> u r u p <SIL> k e l y o i ɑ r n ɑ n d[ m e n d[ ɑ r l ɑ d[ ɯ m <SIL>
+<SIL> k e k o l o k q k ɑ z e k ɡ e r n ɑ z ɑ r ɑ j d[ ɑ r ɯ l i ɯ p v S i S q ɑ n ɑ n u i r d[ y r y i s n u l ɑ q u n
+<SIL> ɑ r l ɑ r <SIL> dZ ɑ p ɑ i u: <SIL> u r u l ɑ r d[ ɯ n o ɑ q ɯ r q m n u b l oe r t[ e p oe m i t[ y n y n m <SIL>
+<SIL> ɑ l ɑ <SIL> b ɑ l d[ ɑ r ɯ <SIL> ɑ j ʁ l y tS y n ɑ t[ k e S t[ e t[ ɑ j l m e n e n ɑ l e i <SIL>
+<SIL> v n d[ ɑ <SIL> v f o q f m o t[ f n o d[ v ɑ v t[ o q t[ ə m u n d[ ɑ q ɑ b l v o v ɑ l ɯ S k f n <SIL> b o l tS u ɑ v <SIL>
+<SIL> o s o t[ o m e n e n k o r s ɑ t[ m ɑ l oe r <SIL> b ɑ: ɑ r ɯ b e r k o n u z ɡ ɑ l n ɑ d[ ɯ m e <SIL>
+<SIL> q S l b i l d[ i r ɡ e n d[ e <SIL> dZ ɑ n ɯ n m e k e m e n e t[ y z ɡ y <SIL> dZ o u l <SIL> q o p u z u ʁ ɯ n dZ ɑ q S ɯ t[ ɑ t[ <SIL>
+<SIL> m S n ɑ n m e n <SIL> b i r i ʁ ɑ n ɑ dZ ɑ n ɯ r m e n e n t[ tS e k t[ e l oe n oe tS i s S t[ <SIL>
+<SIL> b ɑ l <SIL> dZ ɑ q t[ ɑ n o l u <SIL> q ɑ n ɑ ʁ ɑ <SIL> t[ y S t[ e <SIL>
+<SIL> t[ i r t[ ɑ p ɑ j n e s e ɑ l b ɑ ʁ ɑ n d[ ɑ r ɯ <SIL> ɯ ɑ r ɯ p ɑ p b ɑ l ɑ d[ ɑ t[ r t[ y n q ɑ m ɑ ɯ n d[ ɑ b ɑ r <SIL>
+<SIL> ɑ j ɑ j z i e r ɑ S y i b o z u n ɑ l m j d[ y n d[ e r j u n ɑ o q r ɑ S t[ o j l v <SIL>
+<SIL> e r b i s m e r d[ i n ɑ j l o s u t[ ɑ q t[ ɑ ʁ ɯ ɑ s ɯ n e d[ i ɡ l e r <SIL>
+<SIL> oe b l oe s ɯ n d[ y q <SIL> k y n d[ q ɑ r ɯ p ɯ s oe t[ y <SIL>
+<SIL> b u l d[ b dZ y k <SIL> ʁ ɑ ɯ S ɯ l ɑ q ɑ t[ o u: t[ ɑ s ɯ t[ ɯ <SIL>
+<SIL> ɑ r q r ʁ n q S s ɯ n s ɑ n dZ ɑ r y tS y t[ e t[ r <SIL>
+<SIL> b u l dZ o l o t[ <SIL> t[ ɑ r b ɑ z ɑ n ɑ q ɑ r ɑ i u m ɑ t[ ɑ q ɑ r o r o r <SIL>
+<SIL> b ɑ l ɯ dZ ɑ q S ɯ N r s ɑ l d[ e j e d[ e j l <SIL> z ɑ n o z ɑ b ɑ s ɯ m ɑ s ɯ n ɑ q <SIL>
+<SIL> v r S y k m ɑ t[ ɯ N ɑ q ɑ z ɯ r ɯ n ɯ tS f ɑ r ɑ d[ dZ ɑ p o t[ ɑ t[ i k i <SIL> i S i m e r d[ e ɡ i n <SIL> ɑ l ɯ o n t[ p dZ ɑ t[ ɑ j v <SIL>
+<SIL> ɑ l ɑ l ɑ r d[ ə i z d[ ə n ə dZ ɑ r ɑ ə n d[ ɑ r ə d[ ɯ r u m f u n d[ f o r q ɑ v r dZ ɑ t[ q ɑ n d[ ɯ ə k t[ ɑ r ɯ ə b ə <SIL> d[ ɑ b o l ɑ S ɑ S t[ <SIL>
+<SIL> b ɑ r z dZ ɑ tS n p i j ɑ t[ r t[ q ɯ n s i j e n t[ e ɡ i ɡ n ɑ n b r o j u l o t[ n d[ r <SIL>
+<SIL> q ɑ m ɯ n d[ ɑ l ɑ <SIL> k i <SIL> dZ ɑ r ɯ n S e n ɑ l d[ ɑ <SIL> dZ ɑ n ɑ <SIL> b i r S i n ɑ l d[ o j n o S ɯ <SIL>
+<SIL> o S u n ɑ i s t[ ɑ q ɯ r q ɯ b e S <SIL> tS i l i ɑ n b i r <SIL> q r e j i n ɑ d[ ɑ dZ ɑ S ɑ p q ɑ l i S t[ i p k e l ɡ e <SIL>
+<SIL> m ɯ d[ ɑ j m ɑ l ɯ m ɑ t[ ɑ r ɑ b i d[ e <SIL> ɑ <SIL> ɑ l ɯ n e S i n m q k y n e m e s i <SIL>
+<SIL> ɑ q z u b ɑ q ɑ tS ɯ n d[ ɯ ʁ ɯ d[ ɑ j l e q ɑ m i q e j u n i q ɯ l o: z q ɑ z ɑ b l u <SIL>
+<SIL> i s o n d[ u q b o ɑ dZ p t[ y l n d[ oe r n t[ y oe l y S i k e k b u l ɑ n o v ɑ l m u <SIL>
+<SIL> m ɑ ɯ n ɯ n y oe n oe r oe n b ɑ j l ɑ q <SIL> q m e k e m e d[ ɑ t[ ɯ b oe l m y <SIL> b oe l y p <SIL> b e r i S k e n <SIL>
+<SIL> ɑ b u l d[ ɑ k u m e n t[ ɑ z r q ɯ ʁ ɑ tS e dZ ɑ s ɑ l e k i ɑ t[ e j t[ i p q u: b ɑ t[ ɯ r ɑ <SIL>
+<SIL> ɑ n ɑ q ɯ m i t[ m i n <SIL> ɑ r k e n d[ ɑ q ɑ <SIL> b ɑ l d[ ɑ r ɑ r ɑ s ɯ n d[ ɑ ʁ ɯ <SIL> t[ i r e S t[ i b ɑ S t[ ɑ n ɯ t[ k oe r ɡ oe n ɯ m <SIL>
+<SIL> m n d[ ɑ j s t[ i l d[ e ɡ k oe n oe k <SIL> b i e r e n e n e k i n tS i s i n ɑ q o b u l dZ o p t[ ɯ oe t[ y p t[ ɑ t[ ɯ <SIL>
+<SIL> b i z e d[ e l ɑ r n ɑ <SIL> ɑ n ɑ e t[ i k e s e dZ o q d[ u <SIL>
+<SIL> oe z i ɑ j t[ ɯ t[ <SIL> b i z t[ <SIL> t[ <SIL> q ɑ t[ ɯ ɑ S ɑ l ɯ <SIL> t[ e <SIL> t[ e S t[ e k y <SIL>
+<SIL> ɑ z ɑ z ɯ r m e n d[ ɑ e r d[ ɑ n ɯ p <SIL> q ɑ r ɑ dZ ɑ t[ i z d[ e p dZ t[ ɑ m o m <SIL>
+<SIL> u p s o t[ ɑ d[ ɑ n e S t[ e q e k e t[ e oe t[ u: r ɑ l u t[ l q ɑ t[ ɯ n dZ ɑ z ɯ r b ɑ ʁ ɑ d[ n m <SIL>
+<SIL> b k e l <SIL> b o l <SIL> i n b e t[ ɯ r ɯ ʁ ɑ r ʁ ɑ j S k n b d[ o d[ t[ e l ɑ q ɑ l d[ ɯ <SIL>
+<SIL> e l ɯ j l s o <SIL> o j S <SIL> b ɑ z ɑ r ɯ n ɑ n ɑ ɯ m ɑ ʁ ɯ n d[ ɑ ʁ ɯ <SIL> e k i <SIL> tS o n u: s o l o <SIL> d[ ɑ y i <SIL>
+<SIL> o ɑ n ɑ n e m ɑ l ɑ q ɑ j ɯ t[ e n s ɑ t[ q ɑ n dZ o j <SIL>
+<SIL> b e k <SIL> k e n ɑ k oe r o t[ <SIL> t[ o r <SIL> s u: i tS p e j dZ p t[ ɑ t[ ɯ <SIL>
+<SIL> ɑ n r l d[ ɑ ʁ i n i s p e t[ r <SIL> tS i l ʁ i m i ɑ i b l o n o m <SIL>
+<SIL> q ɑ j l ɑ dZ o q ɑ l ɑ q t[ ɯ n <SIL> e ɡ e n b j o ʁ o j k e n <SIL>
+<SIL> ɑ b r u b u l m ɑ S n e m e n e n y j d[ oe n oe z ɑ p b ɑ s ɯ n u q s t[ ɑ t[ ɯ <SIL> dZ o q k <SIL> k i p t[ p q ɑ l ʁ n ɯ <SIL>
+<SIL> o m o t[ e i o l ɯ n <SIL> t[ p m u z q ɑ s ɯ <SIL> ɑ z ɑ t[ u q u n o ʁ s n s ɑ j t[ n ɑ dZ ɑ l ɑ l b ɑ <SIL>
+<SIL> r i s <SIL> ɑ z r ɑ l ɑ r d[ q ɑ j r ɑ n <SIL> u q ɑ r t[ s ɯ q ɯ l ɑ d[ ɑ p oe k y n y r u o: dZ oe t[ l s ɯ <SIL>

@@ -30,33 +30,34 @@ class RLCnnAgentConfig(object):
     # pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1/checkpoint_best.pt"
     # w2vu_postfix: str = "w2vu_logit_segmented"
     # ----------------------------------------------------
-    # config_name: str = "timit_matched" # "librispeech" or "timit_matched" or "timit_unmatched"
-    # data_dir: str = "../../data/audio/timit/matched/large_clean/precompute_pca512"
-    # kenlm_fpath: str = "../../data/text/timit/matched/phones/train_text_phn.04.bin"
-    # dict_fpath: str = "../dict/timit_matched/dict.txt"
-    # pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_matched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo100_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
-    # pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed3/checkpoint_best.pt"
-    # save_dir: str = "./output/local/rl_agent/timit_matched_from_bc_relative_to_wfst_length_only"
-    # w2vu_postfix: str = "wfst_decoded"
+    config_name: str = "timit_matched" # "librispeech" or "timit_matched" or "timit_unmatched"
+    data_dir: str = "../../data/audio/timit/matched/large_clean/precompute_pca512"
+    kenlm_fpath: str = "../../data/text/timit/matched/phones/tiny_train_text_phn.04.bin"
+    dict_fpath: str = "../dict/timit_matched/dict.txt"
+    pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_matched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_10.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed5/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/tiny_lm_timit_matched_from_bc_relative_to_viterbi_more_epoch_ppl_norm"
+    w2vu_postfix: str = "w2vu_logit_segmented"
     # ----------------------------------------------------
-    config_name: str = "timit_unmatched" # "librispeech" or "timit_matched" or "timit_unmatched"
-    data_dir: str = "../../data/audio/timit/unmatched/large_clean/precompute_pca512"
-    kenlm_fpath: str = "../../data/text/timit/unmatched/phones/train_text_phn.04.bin"
-    dict_fpath: str = "../dict/timit_unmatched/dict.txt"
-    pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_unmatched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo80_lr0.0001_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
-    pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_unmatched/large_clean/timit_unpaired_1k/cp4_gp2.0_sw0.5/seed2/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/timit_unmatched_from_bc_relative_to_wfst_length_only"
-    w2vu_postfix: str = "wfst_decoded"
+    # config_name: str = "timit_unmatched" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # data_dir: str = "../../data/audio/timit/unmatched/large_clean/precompute_pca512"
+    # kenlm_fpath: str = "../../data/text/timit/unmatched/phones/train_text_phn.04.bin"
+    # dict_fpath: str = "../dict/timit_unmatched/dict.txt"
+    # pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_unmatched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    # pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_unmatched/large_clean/timit_unpaired_1k/cp4_gp2.0_sw0.5/seed2/checkpoint_best.pt"
+    # save_dir: str = "./output/local/rl_agent/new_timit_unmatched_from_bc_relative_to_wfst_more_epoch_ppl_norm_no_tolerance"
+    # w2vu_postfix: str = "wfst_decoded"
 
     env: str = "../../env.yaml"
     gamma: float = 1.0
-    ter_tolerance: float = 0.08
+    ter_tolerance: float = 0.0
+    length_tolerance: float = 0.0
     logit_segment: bool = True
     apply_merge_penalty: bool = False
     wandb_log: bool = True
     utterwise_lm_ppl_coeff: float = 1.0
     utterwise_token_error_rate_coeff: float = 0.0
-    length_ratio_coeff: float = 0.5
+    length_ratio_coeff: float = 0.2
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -66,7 +67,7 @@ class TrainRlCnnAgent(object):
         )
         self.scorer = Scorer(self.score_cfg)
         self.cfg = cfg
-        os.makedirs(cfg.save_dir, exist_ok=True)
+        os.makedirs(cfg.save_dir, exist_ok=False)
         self.log_fw = open(os.path.join(cfg.save_dir, "log.txt"), "a")
         self.apply_merge_penalty = cfg.apply_merge_penalty
         self.logit_segment = cfg.logit_segment
@@ -165,7 +166,8 @@ class TrainRlCnnAgent(object):
         target_uttwise_lm_ppls = torch.tensor(target_uttwise_lm_ppls, dtype=torch.float32).to(self.device)
 
         length_ratio_loss = torch.abs(length_ratio - 1)
-
+        length_ratio_loss[length_ratio_loss < self.cfg.length_tolerance] = 0.0
+        uttwise_token_error_rates[uttwise_token_error_rates < self.cfg.ter_tolerance] = 0.0
         # print(framewise_reward.shape)
         # print(uttwise_lm_ppls.shape)
 
@@ -174,7 +176,7 @@ class TrainRlCnnAgent(object):
         if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
             uttwise_lm_ppls = uttwise_lm_ppls - target_uttwise_lm_ppls
             # clip rewards
-            uttwise_lm_ppls = torch.clamp(uttwise_lm_ppls, -5, 5)
+            uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
         else:
             uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
         uttwise_token_error_rates = (uttwise_token_error_rates - uttwise_token_error_rates.mean()) / uttwise_token_error_rates.std()
@@ -519,7 +521,7 @@ class TrainRlCnnAgent(object):
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 200
+        NUM_EPOCHS = 500
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1
@@ -541,7 +543,8 @@ class TrainRlCnnAgent(object):
         self.cfg.num_train_data = len(train_dataset)
         self.cfg.num_val_data = len(valid_dataset)
         if self.cfg.wandb_log:
-            wandb.config.update(self.cfg)
+            wandb.config.update(vars(self.cfg))
+            self.log(vars(self.cfg))
 
         # Optimizer
         optimizer = torch.optim.AdamW(self.model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
@@ -569,6 +572,8 @@ class TrainRlCnnAgent(object):
         # Create save directory
         if not os.path.exists(self.cfg.save_dir):
             os.makedirs(self.cfg.save_dir)
+        # log configuration
+        self.log(vars(self.cfg))
 
         if self.apply_merge_penalty:
             print("Will apply merge penalty.")

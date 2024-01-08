@@ -3,6 +3,15 @@ import os
 import argparse
 from omegaconf import OmegaConf
 
+def cal_lengths(refs, hyps):
+    ref_lengths = []
+    hyp_lengths = []
+    for ref in refs:
+        ref_lengths.append(len(ref))
+    for hyp in hyps:
+        hyp_lengths.append(len(hyp))
+    return ref_lengths, hyp_lengths
+
 def main(args):
     from s2p.utils.per import read_phn_file, cal_per
     if args.split != "test":
@@ -12,11 +21,14 @@ def main(args):
     hyps = read_phn_file(args.hyp)
     refs = read_phn_file(ref)
     S, D, I, N, count = cal_per(refs, hyps)
+    ref_lengths, hyp_lengths = cal_lengths(refs, hyps)
     print(f"PER: {(S+D+I)/N *100} %")
     print(f"DEL RATE: {(D)/N *100} %")
     print(f"INS RATE: {(I)/N *100} %")
     print(f"SUB RATE: {(S)/N *100} %")
-    print(count)
+    print(f"total lines: {count}")
+    print(f"total ref tokens: {sum(ref_lengths)}")
+    print(f"total hyp tokens: {sum(hyp_lengths)}")
 
 
 if __name__ == "__main__":

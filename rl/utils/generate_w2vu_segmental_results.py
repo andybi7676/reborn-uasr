@@ -41,7 +41,7 @@ def get_cnn_segmenter(env, device, ckpt_fpath=None):
 def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_fpath, logit_segment=False, segmenter=None, postprocess_code=None, return_boundary=True, deterministic=True):
     if return_boundary:
         bds_output_fpath = output_fpath.replace(".txt", ".bds")
-    with torch.no_grad(), open(output_fpath, "w") as fw, open(bds_output_fpath, "w") as bds_fw:
+    with torch.no_grad(), open(output_fpath, "w") as fw, open(bds_output_fpath, "w") as bds_fw, open(output_fpath.replace(".txt", ".shape"), "w") as lf:
         for i in tqdm.tqdm(range(len(dataset)), total=len(dataset), desc=f"Generating results...", dynamic_ncols=True):
             feats = dataset[i]["features"] # (T, C)
             feats = feats.unsqueeze(0).to(device) # (B, T, C)
@@ -52,6 +52,7 @@ def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_f
                 bd = bd.cpu().numpy()
                 bd = bd[bd!=-1]
                 print(" ".join([str(b) for b in bd]), file=bds_fw, flush=True)
+                print(sum(bd==1), file=lf, flush=True, end=" ")
             sample = {
                 "features": feats,
                 "padding_mask": feats_padding_mask,
@@ -61,7 +62,11 @@ def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_f
             model_out = model(**sample)
             emissions = model.get_logits(model_out)
             preds = emissions.transpose(0, 1).argmax(-1)
-            hypotheses = dictionary.string(preds, bpe_symbol=postprocess_code)
+            print(preds.shape, file=lf, flush=True)
+            if not logit_segment:
+                hypotheses = " ".join([dictionary.symbols[p] for p in preds[0].cpu().numpy()])
+            else:
+                hypotheses = dictionary.string(preds, bpe_symbol=postprocess_code)
             print(hypotheses, file=fw, flush=True) # (T, B, Dict_size)
 
 def main(args, task):

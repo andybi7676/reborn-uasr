@@ -24,7 +24,12 @@ class Scorer(object):
         self.cfg = score_cfg
         self.lm = kenlm.Model(score_cfg.kenlm_fpath)
         self.dictionary = Dictionary.load(score_cfg.dict_fpath)
-        self.sil_id = self.dictionary.index("<SIL>")
+        self.sil_id = self.dictionary.index("<SIL>") # generally, <SIL> should be the silence token in the dictionary
+        if self.sil_id == self.dictionary.unk():
+            self.sil_id = self.dictionary.index("sil") # For timit, sil is the silence token
+            if self.sil_id == self.dictionary.unk():
+                logger.warning("sil not found in the dictionary, use unk instead.")
+        self.sil_tok = self.dictionary[self.sil_id]
         self.num_symbols = len(self.dictionary) - self.dictionary.nspecial
         # sentence = "<SIL> W AY <SIL> L AE D IY S EH D HH IY <SIL>"
         # print("sentence-level score: ")
@@ -96,6 +101,9 @@ class Scorer(object):
                 uttwise_lm_score, framewise_lm_score = self.compute_uttwise_and_framewise_lm_score(pred_str)
                 if t is not None:
                     target_str = self.dictionary.string(t)
+                    if rm_sil:
+                        target_str = target_str.replace(f" {self.sil_tok}", "")
+                        target_str = target_str.replace(f"{self.sil_tok} ", "")
                     target_uttwise_lm_score, _ = self.compute_uttwise_and_framewise_lm_score(target_str)
                     target_uttwise_lm_scores.append(target_uttwise_lm_score / (len(t) + 2))
                 framewise_lm_scores.append(framewise_lm_score)

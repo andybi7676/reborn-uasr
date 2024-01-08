@@ -24,7 +24,7 @@ GT_valid_dataset = ExtractedFeaturesDataset(
     path=f"{audio_dir}/precompute_pca512", # /precompute_pca512
     split='valid',
     aux_target_postfix=bds_postfix,
-    aux_target_dir_path=f'{audio_dir}/CLUS128',
+    aux_target_dir_path=f'{audio_dir}/GOLDEN',
 )
 GT_valid_dataloader = DataLoader(
     GT_valid_dataset,
@@ -186,12 +186,12 @@ def pretrain_cnn_segmenter():
     boundary_postfix = "bds"
 
     BATCH_SIZE = 128
-    NUM_EPOCHS = 80
-    LEARNING_RATE = 1e-4
+    NUM_EPOCHS = 20
+    LEARNING_RATE = 5e-4
     WEIGHT_DECAY = 1e-4
     GRADIENT_ACCUMULATION_STEPS = 1
     SAVE_STEPS = 100000
-    SAVE_EPOCHS = 5
+    SAVE_EPOCHS = 2
     LOG_STEPS = 10
     MAX_STEPS_PER_EPOCH = 1000
     NAME=f"timit_unmatched_pretrain_PCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
@@ -317,11 +317,16 @@ def pretrain_cnn_segmenter():
                 print(f'Epoch {epoch}: step {step}: loss = {loss.item()}')
                 log_file.write(f'Epoch {epoch}: step {step}: loss = {loss.item()}\n')
 
-            if epoch % SAVE_EPOCHS == 0 and step == 0:
+            if step % SAVE_STEPS == 0:
                 torch.save(
                     cnn_segmenter.state_dict(),
                     os.path.join(SAVE_DIR, f'cnn_segmenter_{epoch}_{step}.pt'),
                 )
+        if epoch % SAVE_EPOCHS == 0:
+            torch.save(
+                cnn_segmenter.state_dict(),
+                os.path.join(SAVE_DIR, f'cnn_segmenter_{epoch}.pt'),
+            )
         
         # dataset.ordered_indices()
 
