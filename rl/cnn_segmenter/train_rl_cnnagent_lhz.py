@@ -30,14 +30,14 @@ class RLCnnAgentConfig(object):
     # pretrain_wav2vecu_path: str = "../../s2p/multirun/ls_100h/large_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1/checkpoint_best.pt"
     # w2vu_postfix: str = "w2vu_logit_segmented"
     # ----------------------------------------------------
-    config_name: str = "timit_matched" # "librispeech" or "timit_matched" or "timit_unmatched"
-    data_dir: str = "../../data/audio/timit/matched/large_clean/precompute_pca512"
-    kenlm_fpath: str = "../../data/text/timit/matched/phones/tiny_train_text_phn.04.bin"
-    dict_fpath: str = "../dict/timit_matched/dict.txt"
-    pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_matched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_10.pt"
-    pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed5/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/tiny_lm_timit_matched_from_bc_relative_to_viterbi_more_epoch_ppl_norm"
-    w2vu_postfix: str = "w2vu_logit_segmented"
+    # config_name: str = "timit_matched" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # data_dir: str = "../../data/audio/timit/matched/large_clean/precompute_pca512"
+    # kenlm_fpath: str = "../../data/text/timit/matched/phones/tiny_train_text_phn.04.bin"
+    # dict_fpath: str = "../dict/timit_matched/dict.txt"
+    # pretrain_segmenter_path: str = "./output/local/cnn_segmenter/timit_matched_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter_10.pt"
+    # pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed5/checkpoint_best.pt"
+    # save_dir: str = "./output/local/rl_agent/tiny_lm_timit_matched_from_bc_relative_to_viterbi_more_epoch_ppl_norm"
+    # w2vu_postfix: str = "w2vu_logit_segmented"
     # ----------------------------------------------------
     # config_name: str = "timit_unmatched" # "librispeech" or "timit_matched" or "timit_unmatched"
     # data_dir: str = "../../data/audio/timit/unmatched/large_clean/precompute_pca512"
@@ -47,6 +47,24 @@ class RLCnnAgentConfig(object):
     # pretrain_wav2vecu_path: str = "../../s2p/multirun/timit_unmatched/large_clean/timit_unpaired_1k/cp4_gp2.0_sw0.5/seed2/checkpoint_best.pt"
     # save_dir: str = "./output/local/rl_agent/new_timit_unmatched_from_bc_relative_to_wfst_more_epoch_ppl_norm_no_tolerance"
     # w2vu_postfix: str = "wfst_decoded"
+    # ----------------------------------------------------
+    # config_name: str = "ky" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # data_dir: str = "../../data/audio/ky/feats/precompute_pca512"
+    # kenlm_fpath: str = "../../data/text/ky/prep/phones/lm.phones.filtered.04.bin"
+    # dict_fpath: str = "../dict/ky/dict.txt"
+    # pretrain_segmenter_path: str = "./output/local/cnn_segmenter/ky_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo10_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    # pretrain_wav2vecu_path: str = "../../s2p/multirun/cv3_ky/xlsr/ky_unpaired_all/cp2_gp2.0_sw0.75/seed4/checkpoint_best.pt"
+    # save_dir: str = "./output/local/rl_agent/ky_from_bc_relative_to_viterbi_ppl_norm_len0.2_ter0.2"
+    # w2vu_postfix: str = "w2vu_logit_segmented"
+    # ----------------------------------------------------
+    config_name: str = "de_mls" # "librispeech" or "timit_matched" or "timit_unmatched"
+    data_dir: str = "../../data/de_mls/xlsr_100hr/precompute_pca512"
+    kenlm_fpath: str = "../../data/de_mls/text/prep/phones/lm.phones.filtered.04.bin"
+    dict_fpath: str = "../dict/de_mls/dict.txt"
+    pretrain_segmenter_path: str = "./output/local/cnn_segmenter/de_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo10_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/de_mls/xlsr_100hr/de_unpaired_all/cp2_gp2.0_sw0.5/seed5/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/de_mls_from_bc_rel_to_viterbi_normed_ppl_len0.2"
+    w2vu_postfix: str = "w2vu_logit_segmented"
 
     env: str = "../../env.yaml"
     gamma: float = 1.0
@@ -498,7 +516,7 @@ class TrainRlCnnAgent(object):
         # Audio features path
         dir_path = self.cfg.data_dir
         # Boundary labels path
-        boundary_labels_path = f'../../data/audio/ls_100h_clean/large_clean_mfa/CLUS128'
+        boundary_labels_path = f'{dir_path}/../CLUS128'
 
         # Load Extracted features
         train_dataset = ExtractedFeaturesDataset(
@@ -506,7 +524,7 @@ class TrainRlCnnAgent(object):
             split='train',
             labels=self.cfg.w2vu_postfix,
             label_dict=self.scorer.dictionary,
-            aux_target_postfix='boundaries',
+            aux_target_postfix='bds',
             aux_target_dir_path=boundary_labels_path,
         )
 
@@ -515,13 +533,13 @@ class TrainRlCnnAgent(object):
             split='valid',
             labels=self.cfg.w2vu_postfix,
             label_dict=self.scorer.dictionary,
-            aux_target_postfix='boundaries',
+            aux_target_postfix='bds',
             aux_target_dir_path=boundary_labels_path,
         )
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 500
+        NUM_EPOCHS = 20
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1

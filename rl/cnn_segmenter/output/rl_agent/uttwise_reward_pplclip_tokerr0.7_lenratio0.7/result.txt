@@ -1,33 +1,36 @@
-PER: 11.968506440178661 %
-DEL RATE: 4.871328886227926 %
-INS RATE: 2.6931656220031046 %
-SUB RATE: 4.404011931947631 %
-2600
+# dev-clean
+PER: 11.207699790098808 %
+DEL RATE: 4.783187426406594 %
+INS RATE: 2.1292172221368966 %
+SUB RATE: 4.295295141555316 %
+total lines: 2703
+total ref tokens: 195330
+total hyp tokens: 190146
 
-# original
-SCORES:            Lenient      Harsh
-precision:          0.8012     0.5166
-recall:             0.8618     0.8463
-f1:                 0.8304     0.6416
-rval:               0.8456     0.3916
+# dev-other
+PER: 15.089817029086259 %
+DEL RATE: 6.578610755797786 %
+INS RATE: 2.5282242366942884 %
+SUB RATE: 5.982982036594183 %
+total lines: 2864
+total ref tokens: 179810
+total hyp tokens: 172527
 
-# merge 3
-SCORES:            Lenient      Harsh
-precision:          0.7926     0.6312
-recall:             0.8204     0.7795
-f1:                 0.8063     0.6976
-rval:               0.8326     0.6778
+# test-clean
+PER: 11.633048814271602 %
+DEL RATE: 4.996419554979432 %
+INS RATE: 2.266918256088063 %
+SUB RATE: 4.369711003204106 %
+total lines: 2620
+total ref tokens: 191317
+total hyp tokens: 186095
 
-# merge logits
-SCORES:            Lenient      Harsh
-precision:          0.8150     0.7278
-recall:             0.7923     0.7569
-f1:                 0.8035     0.7421
-rval:               0.8316     0.7768
+# test-other
+PER: 15.527305535023261 %
+DEL RATE: 6.907365537632071 %
+INS RATE: 2.445758511239619 %
+SUB RATE: 6.174181486151572 %
+total lines: 2939
+total ref tokens: 183992
+total hyp tokens: 175783
 
-# merge logits shift 1
-SCORES:            Lenient      Harsh
-precision:          0.8202     0.7367
-recall:             0.8018     0.7662
-f1:                 0.8109     0.7512
-rval:               0.8381     0.7846

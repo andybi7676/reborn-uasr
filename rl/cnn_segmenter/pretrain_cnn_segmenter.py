@@ -17,14 +17,14 @@ from s2p.scripts.phoneseg_utils import PrecisionRecallMetric
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-audio_dir = '../../data/audio/timit/unmatched/large_clean'
+audio_dir = '../../data/de_mls/xlsr_100hr'
 bds_postfix = 'bds'
 
 GT_valid_dataset = ExtractedFeaturesDataset(
     path=f"{audio_dir}/precompute_pca512", # /precompute_pca512
     split='valid',
     aux_target_postfix=bds_postfix,
-    aux_target_dir_path=f'{audio_dir}/GOLDEN',
+    aux_target_dir_path=f'{audio_dir}/CLUS128',
 )
 GT_valid_dataloader = DataLoader(
     GT_valid_dataset,
@@ -186,15 +186,15 @@ def pretrain_cnn_segmenter():
     boundary_postfix = "bds"
 
     BATCH_SIZE = 128
-    NUM_EPOCHS = 20
+    NUM_EPOCHS = 10
     LEARNING_RATE = 5e-4
     WEIGHT_DECAY = 1e-4
     GRADIENT_ACCUMULATION_STEPS = 1
     SAVE_STEPS = 100000
-    SAVE_EPOCHS = 2
+    SAVE_EPOCHS = 1
     LOG_STEPS = 10
     MAX_STEPS_PER_EPOCH = 1000
-    NAME=f"timit_unmatched_pretrain_PCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
+    NAME=f"de_pretrain_PCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
     SAVE_DIR = './output/local/cnn_segmenter/' + NAME
     USE_CE_WEIGHTS = True
     if USE_CE_WEIGHTS:
@@ -203,8 +203,8 @@ def pretrain_cnn_segmenter():
         ce_weight = torch.tensor([1.0, 1.0]).to(device)
 
     # Create save dir
-    if not os.path.exists(SAVE_DIR):
-        os.makedirs(SAVE_DIR)
+    os.makedirs(SAVE_DIR, exist_ok=False)
+    # if not os.path.exists(SAVE_DIR):
 
     log_file = open(SAVE_DIR + '/log.txt', 'w')
 
