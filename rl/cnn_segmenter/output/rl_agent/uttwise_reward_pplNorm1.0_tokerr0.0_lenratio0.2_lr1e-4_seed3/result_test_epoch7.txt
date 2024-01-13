@@ -3,3 +3,17 @@ DEL RATE: 4.651976030137175 %
 INS RATE: 2.222669640822944 %
 SUB RATE: 4.547597980258243 %
 2600
+
+# test
+PER: 11.422243651218363 %
+DEL RATE: 4.651976030137175 %
+INS RATE: 2.222669640822944 %
+SUB RATE: 4.547597980258243 %
+total lines: 2600
+total ref tokens: 188737
+total hyp tokens: 184152
+SCORES:            Lenient      Harsh
+precision:          0.8622     0.7458
+recall:             0.8116     0.7819
+f1:                 0.8361     0.7634
+rval:               0.8555     0.7940
