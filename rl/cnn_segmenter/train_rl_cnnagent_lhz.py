@@ -57,14 +57,23 @@ class RLCnnAgentConfig(object):
     # save_dir: str = "./output/local/rl_agent/ky_from_bc_relative_to_viterbi_ppl_norm_len0.2_ter0.2"
     # w2vu_postfix: str = "w2vu_logit_segmented"
     # ----------------------------------------------------
-    config_name: str = "de_mls" # "librispeech" or "timit_matched" or "timit_unmatched"
-    data_dir: str = "../../data/de_mls/xlsr_100hr/precompute_pca512"
-    kenlm_fpath: str = "../../data/de_mls/text/prep/phones/lm.phones.filtered.04.bin"
-    dict_fpath: str = "../dict/de_mls/dict.txt"
-    pretrain_segmenter_path: str = "./output/local/cnn_segmenter/de_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo10_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
-    pretrain_wav2vecu_path: str = "../../s2p/multirun/de_mls/xlsr_100hr/de_unpaired_all/cp2_gp2.0_sw0.5/seed5/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/de_mls_from_bc_rel_to_viterbi_normed_ppl_len0.2"
-    w2vu_postfix: str = "w2vu_logit_segmented"
+    # config_name: str = "de_mls" # "librispeech" or "timit_matched" or "timit_unmatched"
+    # data_dir: str = "../../data/de_mls/xlsr_100hr/precompute_pca512"
+    # kenlm_fpath: str = "../../data/de_mls/text/prep/phones/lm.phones.filtered.04.bin"
+    # dict_fpath: str = "../dict/de_mls/dict.txt"
+    # pretrain_segmenter_path: str = "./output/local/cnn_segmenter/de_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo10_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt"
+    # pretrain_wav2vecu_path: str = "../../s2p/multirun/de_mls/xlsr_100hr/de_unpaired_all/cp2_gp2.0_sw0.5/seed5/checkpoint_best.pt"
+    # save_dir: str = "./output/local/rl_agent/de_mls_from_bc_rel_to_viterbi_normed_ppl_len0.2"
+    # w2vu_postfix: str = "w2vu_logit_segmented"
+    # ----------------------------------------------------
+    config_name: str = "es_mls" # "librispeech" or "timit_matched" or "timit_unmatched"
+    data_dir: str = "../../data/es_mls/xlsr_100hr/precompute_pca512"
+    kenlm_fpath: str = "../../data/es_mls/text/prep/phones/lm.phones.filtered.04.bin"
+    dict_fpath: str = "../dict/es_mls/dict.txt"
+    pretrain_segmenter_path: str = "./output/local/rl_agent/es_mls_from_bc_rel_to_viterbi_clipped_ppl_len0.5_ter0.3_2nd_best_unsup/rl_agent_segmenter.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/es_mls/xlsr_100hr/es_unpaired_all/second_best_unsup/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/es_mls_from_bc_rel_to_viterbi_clipped_ppl_len0.5_ter0.3_2nd_best_unsup_more_epoch"
+    w2vu_postfix: str = "new_w2vu_logit_segmented"
 
     env: str = "../../env.yaml"
     gamma: float = 1.0
@@ -74,8 +83,8 @@ class RLCnnAgentConfig(object):
     apply_merge_penalty: bool = False
     wandb_log: bool = True
     utterwise_lm_ppl_coeff: float = 1.0
-    utterwise_token_error_rate_coeff: float = 0.0
-    length_ratio_coeff: float = 0.2
+    utterwise_token_error_rate_coeff: float = 0.3
+    length_ratio_coeff: float = 0.5
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -194,7 +203,8 @@ class TrainRlCnnAgent(object):
         if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
             uttwise_lm_ppls = uttwise_lm_ppls - target_uttwise_lm_ppls
             # clip rewards
-            uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
+            uttwise_lm_ppls = torch.clamp(uttwise_lm_ppls, -5, 5)
+            # uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
         else:
             uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
         uttwise_token_error_rates = (uttwise_token_error_rates - uttwise_token_error_rates.mean()) / uttwise_token_error_rates.std()
@@ -614,6 +624,8 @@ class TrainRlCnnAgent(object):
             if NUM_EPOCHS > 40:
                 if epoch % 5 == 0:
                     torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
+            else:
+                torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter_epoch{}.pt'.format(epoch))
 
         # Save model
         torch.save(self.model.state_dict(), self.cfg.save_dir + '/rl_agent.pt')

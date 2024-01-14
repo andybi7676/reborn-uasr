@@ -5,7 +5,7 @@ output_dir=$segmenter_dir
 config_name=de_mls
 feats_dir=../../data/de_mls/xlsr_100hr/precompute_pca512
 golden_dir=../../data/de_mls/labels/100hr
-all_splits="test valid"
+all_splits="valid_small"
 
 for split in $all_splits; do
     echo "Processing $split..."

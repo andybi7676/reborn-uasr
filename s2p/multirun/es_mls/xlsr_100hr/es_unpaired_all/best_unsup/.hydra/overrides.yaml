@@ -1,0 +1,12 @@
+- task.data=/home/b07502072/u-speech2speech/data/es_mls/xlsr_100hr/precompute_pca512_cls128_mean_pooled
+- task.text_data=/home/b07502072/u-speech2speech/data/es_mls/text/prep/phones/train_all
+- task.kenlm_path=/home/b07502072/u-speech2speech/data/es_mls/text/prep/phones/train_all/../lm.phones.filtered.04.bin
+- dataset.num_workers=0
+- common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised
+- model.code_penalty=2
+- model.gradient_penalty=2.0
+- model.smoothness_weight=0.5
+- common.seed=3
+- distributed_training.distributed_world_size=1
+- optimization.max_update=150000
+- +description=es_mls/xlsr_100hr/es_unpaired_all

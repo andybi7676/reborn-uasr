@@ -17,7 +17,7 @@ from s2p.scripts.phoneseg_utils import PrecisionRecallMetric
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-audio_dir = '../../data/de_mls/xlsr_100hr'
+audio_dir = '../../data/es_mls/xlsr_100hr'
 bds_postfix = 'bds'
 
 GT_valid_dataset = ExtractedFeaturesDataset(
@@ -194,7 +194,7 @@ def pretrain_cnn_segmenter():
     SAVE_EPOCHS = 1
     LOG_STEPS = 10
     MAX_STEPS_PER_EPOCH = 1000
-    NAME=f"de_pretrain_PCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
+    NAME=f"es_pretrain_PCA_cnn_segmenter_kernel_size_{cnn_boundary_cfg.kernel_size}_v1_epo{NUM_EPOCHS}_lr{LEARNING_RATE}_wd{WEIGHT_DECAY}_dropout{cnn_boundary_cfg.dropout}_optimAdamW_schCosineAnnealingLR"
     SAVE_DIR = './output/local/cnn_segmenter/' + NAME
     USE_CE_WEIGHTS = True
     if USE_CE_WEIGHTS:
