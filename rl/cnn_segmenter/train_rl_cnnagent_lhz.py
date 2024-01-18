@@ -70,10 +70,10 @@ class RLCnnAgentConfig(object):
     data_dir: str = "../../data/es_mls/xlsr_100hr/precompute_pca512"
     kenlm_fpath: str = "../../data/es_mls/text/prep/phones/lm.phones.filtered.04.bin"
     dict_fpath: str = "../dict/es_mls/dict.txt"
-    pretrain_segmenter_path: str = "./output/local/rl_agent/es_mls_from_bc_rel_to_viterbi_clipped_ppl_len0.5_ter0.3_2nd_best_unsup/rl_agent_segmenter.pt"
-    pretrain_wav2vecu_path: str = "../../s2p/multirun/es_mls/xlsr_100hr/es_unpaired_all/second_best_unsup/checkpoint_best.pt"
-    save_dir: str = "./output/local/rl_agent/es_mls_from_bc_rel_to_viterbi_clipped_ppl_len0.5_ter0.3_2nd_best_unsup_more_epoch"
-    w2vu_postfix: str = "new_w2vu_logit_segmented"
+    pretrain_segmenter_path: str = "./output/local/rl_agent/es_mls_from_bc_rel_to_viterbi_clipped_ppl_len0.5_ter0.3_2nd_best_unsup_more_epoch/rl_agent_segmenter_best.pt"
+    pretrain_wav2vecu_path: str = "../../s2p/multirun/es_mls/xlsr_100hr_postITER1/es_unpaired_all/best_unsup/checkpoint_best.pt"
+    save_dir: str = "./output/local/rl_agent/es_mls_from_bc_rel_to_viterbi_normed_ppl_len0.4_2nd_best_unsup_more_epoch"
+    w2vu_postfix: str = "w2vu_logit_segmented"
 
     env: str = "../../env.yaml"
     gamma: float = 1.0
@@ -83,8 +83,8 @@ class RLCnnAgentConfig(object):
     apply_merge_penalty: bool = False
     wandb_log: bool = True
     utterwise_lm_ppl_coeff: float = 1.0
-    utterwise_token_error_rate_coeff: float = 0.3
-    length_ratio_coeff: float = 0.5
+    utterwise_token_error_rate_coeff: float = 0.0
+    length_ratio_coeff: float = 0.4
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -549,7 +549,7 @@ class TrainRlCnnAgent(object):
 
         # Hyperparameters
         BATCH_SIZE = 128
-        NUM_EPOCHS = 20
+        NUM_EPOCHS = 30
         LEARNING_RATE = 1e-5
         WEIGHT_DECAY = 1e-4
         GRADIENT_ACCUMULATION_STEPS = 1
