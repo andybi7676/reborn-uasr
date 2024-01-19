@@ -1,0 +1,1 @@
+| Generate train with beam=500, lm_weight=5.0, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 28.29743633200992, LM_PPL: 18.616181818056866, num feats: 4910934, length: 3745618, UER to viterbi: 0, score: 2.9240311927151272

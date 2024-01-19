@@ -1,6 +1,7 @@
 # custom ignore patterns
 env.yaml
 data
+data2
 wandb
 local
 search_weights
