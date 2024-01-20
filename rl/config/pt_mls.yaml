@@ -1,0 +1,13 @@
+# @package _group_
+
+fairseq:
+  task:
+    _name: unpaired_audio_text
+    labels: phn
+    data: ???
+    min_length: 0
+    sort_by_length: false
+    shuffle: false
+    text_data: pt_mls
+  common:
+    user_dir: ???
