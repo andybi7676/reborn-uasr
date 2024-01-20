@@ -1,0 +1,14 @@
+
+# valid
+PER: 14.046622833233712 %
+DEL RATE: 4.595869031015474 %
+INS RATE: 3.3937703393770344 %
+SUB RATE: 6.056983462841203 %
+total lines: 400
+total ref tokens: 15057
+total hyp tokens: 14876
+SCORES:            Lenient      Harsh
+precision:          0.8698     0.7875
+recall:             0.7959     0.7710
+f1:                 0.8312     0.7792
+rval:               0.8473     0.8115
