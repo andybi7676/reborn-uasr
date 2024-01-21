@@ -1,0 +1,1 @@
+| Generate test-other with beam=500, lm_weight=0.5, word_score=1.0, sil_weight=0.0, blank_weight=4.0, WER: 23.409051831190418, LM_PPL: 176.49731182731225, num feats: 463974, length: 54512, UER to viterbi: 0, score: 5.1733056458172095
