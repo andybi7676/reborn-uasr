@@ -1,0 +1,13 @@
+- checkpoint.finetune_from_model=/home/b07502072/u-speech2speech/s2p/multirun/timit_matched/large_clean/timit_paired_no_SA/cp4_gp1.5_sw0.5/seed5/checkpoint_best.pt
+- task.data=/home/b07502072/u-speech2speech/data/audio/en_feats/timit/matched/large_clean/precompute_pca512_postITER1_mean
+- task.text_data=/home/b07502072/u-speech2speech/data/text/timit/matched/phones
+- task.kenlm_path=/home/b07502072/u-speech2speech/data/text/timit/matched/phones/train_text_phn.04.bin
+- dataset.num_workers=0
+- common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised
+- model.code_penalty=4
+- model.gradient_penalty=2.0
+- model.smoothness_weight=0.5
+- common.seed=3
+- distributed_training.distributed_world_size=1
+- optimization.max_update=50000
+- +description=timit_matched/large_clean_postITER1/timit_paired_no_SA
