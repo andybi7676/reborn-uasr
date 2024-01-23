@@ -1,4 +1,4 @@
-segmenter_dir=../cnn_segmenter/output/rl_agent/ls_en/LS_EN_pplNorm1.0_tokerr0.2_lenratio0.2_lr1e-4_epoch40_seed3
+segmenter_dir=../cnn_segmenter/output/rl_agent/ls_en/LS_EN_pplNorm1.0_tokerr0.2_lenratio0.4_lr1e-4_epoch40_seed3
 segmenter_ckpt=$segmenter_dir/rl_agent_segmenter_best.pt
 generator_ckpt=../../s2p/multirun/en_ls100h/ll60k/ls860_unpaired_all/best_unsup/checkpoint_best.pt
 output_dir=$segmenter_dir
@@ -40,8 +40,8 @@ for split in $all_splits; do
     tail -n 13 $output_dir/result.txt
 done
 
-ITER1_bds_dir=$feats_dir/../ITER1
-postITER1_bds_dir=$feats_dir/../postITER1
+ITER1_bds_dir=$feats_dir/../ITER1BEST
+postITER1_bds_dir=$feats_dir/../postITER1BEST
 mkdir -p $ITER1_bds_dir
 mkdir -p $postITER1_bds_dir
 for split in $all_splits; do
