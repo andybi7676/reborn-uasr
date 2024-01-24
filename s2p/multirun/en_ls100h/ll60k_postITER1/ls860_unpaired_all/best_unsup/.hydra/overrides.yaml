@@ -1,0 +1,13 @@
+- checkpoint.finetune_from_model=/home/b07502072/u-speech2speech/s2p/multirun/en_ls100h/ll60k/ls860_unpaired_all/best_unsup/checkpoint_best.pt
+- task.data=/home/b07502072/u-speech2speech/data/ls_100h_new/ll60k/precompute_pca512_postITER1_mean
+- task.text_data=/home/b07502072/u-speech2speech/data/ls_100h_new/text/prep/phones/train_all
+- task.kenlm_path=/home/b07502072/u-speech2speech/data/ls_100h_new/text/prep/phones/train_all/../lm.phones.filtered.04.bin
+- dataset.num_workers=0
+- common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised
+- model.code_penalty=4
+- model.gradient_penalty=2.0
+- model.smoothness_weight=0.5
+- common.seed=3
+- distributed_training.distributed_world_size=1
+- optimization.max_update=50000
+- +description=en_ls100h/ll60k_postITER1/ls860_unpaired_all
