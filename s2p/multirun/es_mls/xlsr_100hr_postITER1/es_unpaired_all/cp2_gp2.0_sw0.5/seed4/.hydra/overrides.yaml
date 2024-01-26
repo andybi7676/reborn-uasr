@@ -7,7 +7,7 @@
 - model.code_penalty=2
 - model.gradient_penalty=2.0
 - model.smoothness_weight=0.5
-- common.seed=4
+- common.seed=2
 - distributed_training.distributed_world_size=1
 - optimization.max_update=50000
 - +description=es_mls/xlsr_100hr_postITER1/es_unpaired_all

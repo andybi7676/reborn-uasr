@@ -1,0 +1,13 @@
+- checkpoint.finetune_from_model=/home/b07502072/u-speech2speech/s2p/multirun/de_mls/xlsr_100hr/de_unpaired_all/best_unsup/checkpoint_best.pt
+- task.data=/work/b07502072/corpus/u-s2s/de_mls/xlsr_100hr/precompute_pca512_postITER1_mean
+- task.text_data=/work/b07502072/corpus/u-s2s/de_mls/text/prep/phones/train_all
+- task.kenlm_path=/work/b07502072/corpus/u-s2s/de_mls/text/prep/phones/train_all/../lm.phones.filtered.04.bin
+- dataset.num_workers=0
+- common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised
+- model.code_penalty=2
+- model.gradient_penalty=2.0
+- model.smoothness_weight=0.5
+- common.seed=1
+- distributed_training.distributed_world_size=1
+- optimization.max_update=50000
+- +description=de_mls/xlsr_100hr_postITER1/de_unpaired_all

@@ -116,13 +116,13 @@ hydra:
     - model.code_penalty=2
     - model.gradient_penalty=2.0
     - model.smoothness_weight=0.5
-    - common.seed=4
+    - common.seed=2
     - distributed_training.distributed_world_size=1
     - optimization.max_update=50000
     - +description=es_mls/xlsr_100hr_postITER1/es_unpaired_all
   job:
     name: hydra_train
-    override_dirname: +description=es_mls/xlsr_100hr_postITER1/es_unpaired_all,checkpoint.finetune_from_model=/home/b07502072/u-speech2speech/s2p/multirun/es_mls/xlsr_100hr/es_unpaired_all/second_best_unsup/checkpoint_best.pt,common.seed=4,common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised,dataset.num_workers=0,distributed_training.distributed_world_size=1,model.code_penalty=2,model.gradient_penalty=2.0,model.smoothness_weight=0.5,optimization.max_update=50000,task.data=/work/b07502072/corpus/u-s2s/es_mls/xlsr_100hr/precompute_pca512_postITER1_mean,task.kenlm_path=/work/b07502072/corpus/u-s2s/es_mls/text/prep/phones/train_all/../lm.phones.filtered.04.bin,task.text_data=/work/b07502072/corpus/u-s2s/es_mls/text/prep/phones/train_all
+    override_dirname: +description=es_mls/xlsr_100hr_postITER1/es_unpaired_all,checkpoint.finetune_from_model=/home/b07502072/u-speech2speech/s2p/multirun/es_mls/xlsr_100hr/es_unpaired_all/second_best_unsup/checkpoint_best.pt,common.seed=2,common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised,dataset.num_workers=0,distributed_training.distributed_world_size=1,model.code_penalty=2,model.gradient_penalty=2.0,model.smoothness_weight=0.5,optimization.max_update=50000,task.data=/work/b07502072/corpus/u-s2s/es_mls/xlsr_100hr/precompute_pca512_postITER1_mean,task.kenlm_path=/work/b07502072/corpus/u-s2s/es_mls/text/prep/phones/train_all/../lm.phones.filtered.04.bin,task.text_data=/work/b07502072/corpus/u-s2s/es_mls/text/prep/phones/train_all
     id: '0'
     num: 0
     config_name: w2vu_RL_iter1

@@ -1,6 +1,6 @@
-segmenter_dir=../cnn_segmenter/output/rl_agent/ls_en/LS_EN_pplNorm1.0_tokerr0.2_lenratio0.4_lr1e-4_epoch40_seed3
+segmenter_dir=../cnn_segmenter/output/rl_agent/ls_en/LS_EN_pplNorm1.0_tokerr0.2_lenratio0.0_lr1e-4_epoch40_seed3_postITER1
 segmenter_ckpt=$segmenter_dir/rl_agent_segmenter_best.pt
-generator_ckpt=../../s2p/multirun/en_ls100h/ll60k/ls860_unpaired_all/best_unsup/checkpoint_best.pt
+generator_ckpt=../../s2p/multirun/en_ls100h/ll60k_postITER1/ls860_unpaired_all/best_unsup/checkpoint_best.pt
 output_dir=$segmenter_dir
 config_name=en_ls100h
 feats_dir=../../data/ls_100h_new/ll60k/precompute_pca512
@@ -40,8 +40,8 @@ for split in $all_splits; do
     tail -n 13 $output_dir/result.txt
 done
 
-ITER1_bds_dir=$feats_dir/../ITER1BEST
-postITER1_bds_dir=$feats_dir/../postITER1BEST
+ITER1_bds_dir=$feats_dir/../ITER2
+postITER1_bds_dir=$feats_dir/../postITER2
 mkdir -p $ITER1_bds_dir
 mkdir -p $postITER1_bds_dir
 for split in $all_splits; do
