@@ -44,6 +44,7 @@ def get_cnn_segmenter(env, device, ckpt_fpath=None, boundary_fpath=None):
 def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_fpath, logit_segment=False, segmenter=None, postprocess_code=None, return_boundary=True, deterministic=True):
     if return_boundary:
         bds_output_fpath = output_fpath.replace(".txt", ".bds")
+    segment_by_boundary = False
     if segmenter:
         if hasattr(segmenter, "boundaries"):
             segment_by_boundary = True
