@@ -1,11 +1,13 @@
-segmenter_dir=../cnn_segmenter/output/rl_agent/mls_de/MLS_DE_pplNorm1.0_tokerr0.2_lenratio0.4_lr1e-4_epoch40_seed3
+set -eu
+
+segmenter_dir=../cnn_segmenter/output/rl_agent/mls_de/MLS_DE_pplNorm1.0_tokerr0.2_lenratio0.0_lr1e-4_epoch40_seed3_postITER1
 segmenter_ckpt=$segmenter_dir/rl_agent_segmenter_best.pt
-generator_ckpt=../../s2p/multirun/de_mls/xlsr_100hr/de_unpaired_all/best_unsup/checkpoint_best.pt
+generator_ckpt=../../s2p/multirun/de_mls/xlsr_100hr_postITER1/de_unpaired_all/best_unsup/checkpoint_best.pt
 output_dir=$segmenter_dir
 config_name=de_mls
 feats_dir=../../data/de_mls/xlsr_100hr/precompute_pca512
 golden_dir=../../data/de_mls/labels/100hr
-all_splits="train valid valid_small test"
+all_splits="valid_small train valid test"
 
 for split in $all_splits; do
     echo "Processing $split..."
@@ -40,8 +42,8 @@ for split in $all_splits; do
     # tail -n 13 $output_dir/result.txt
 done
 
-ITER1_bds_dir=$feats_dir/../ITER1
-postITER1_bds_dir=$feats_dir/../postITER1
+ITER1_bds_dir=$feats_dir/../ITER2
+postITER1_bds_dir=$feats_dir/../postITER2
 mkdir -p $ITER1_bds_dir
 mkdir -p $postITER1_bds_dir
 for split in $all_splits; do
