@@ -5,7 +5,7 @@ output_dir=$segmenter_dir
 config_name=en_ls100h
 feats_dir=../../data/ls_100h_new/ll60k/precompute_pca512
 golden_dir=../../data/ls_100h_new/labels
-all_splits="train valid valid_small test dev-other test-other"
+all_splits="test-bds"
 
 for split in $all_splits; do
     echo "Processing $split..."
@@ -35,13 +35,13 @@ for split in $all_splits; do
 
     echo "# $split" >> $output_dir/result.txt
     python eval_results.py --hyp $output_dir/logit_segmented/$split.txt --ref $golden_dir/$split.phn >> $output_dir/result.txt
-    # python eval_boundaries.py --hyp $output_dir/raw/$split.postprocessed.bds --ref ../../data/audio/timit/matched/large_clean/GOLDEN/$split.bds >> $output_dir/result.txt
+    python eval_boundaries.py --hyp $output_dir/raw/$split.postprocessed.bds --ref $feats_dir/../GOLDEN/$split.bds >> $output_dir/result.txt
     echo "" >> $output_dir/result.txt
     tail -n 13 $output_dir/result.txt
 done
 
-ITER1_bds_dir=$feats_dir/../ITER2
-postITER1_bds_dir=$feats_dir/../postITER2
+ITER1_bds_dir=$feats_dir/../ITER1
+postITER1_bds_dir=$feats_dir/../postITER1
 mkdir -p $ITER1_bds_dir
 mkdir -p $postITER1_bds_dir
 for split in $all_splits; do

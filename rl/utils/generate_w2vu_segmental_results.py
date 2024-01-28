@@ -24,10 +24,13 @@ def get_extracted_features_dataset(env, feats_dir, split):
     )
     return dataset
 
-def get_cnn_segmenter(env, device, ckpt_fpath=None):
-    if ckpt_fpath is None:
+def get_cnn_segmenter(env, device, ckpt_fpath=None, boundary_fpath=None):
+    if ckpt_fpath is None and boundary_fpath is None:
         return None
-    from rl.cnn_segmenter.cnn_model import CnnSegmenter, SegmentationConfig, CnnBoundaryConfig
+    from rl.cnn_segmenter.cnn_model import DummySegmenter, CnnSegmenter, SegmentationConfig, CnnBoundaryConfig
+    if ckpt_fpath is None:
+        segmenter = DummySegmenter(SegmentationConfig(), boundary_fpath=boundary_fpath)
+        return segmenter
     cnn_segmenter = CnnSegmenter(SegmentationConfig(), CnnBoundaryConfig())
     segmenter_ckpt = torch.load(ckpt_fpath, map_location="cpu")
     try:
@@ -41,13 +44,19 @@ def get_cnn_segmenter(env, device, ckpt_fpath=None):
 def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_fpath, logit_segment=False, segmenter=None, postprocess_code=None, return_boundary=True, deterministic=True):
     if return_boundary:
         bds_output_fpath = output_fpath.replace(".txt", ".bds")
+    if segmenter:
+        if hasattr(segmenter, "boundaries"):
+            segment_by_boundary = True
     with torch.no_grad(), open(output_fpath, "w") as fw, open(bds_output_fpath, "w") as bds_fw, open(output_fpath.replace(".txt", ".shape"), "w") as lf:
         for i in tqdm.tqdm(range(len(dataset)), total=len(dataset), desc=f"Generating results...", dynamic_ncols=True):
             feats = dataset[i]["features"] # (T, C)
             feats = feats.unsqueeze(0).to(device) # (B, T, C)
             feats_padding_mask = torch.zeros(feats.shape[:-1], dtype=torch.bool, device=device)
             if segmenter:
-                feats, feats_padding_mask, boundary, boundary_logits = segmenter.pre_segment(feats, feats_padding_mask, return_boundary=return_boundary, deterministic=deterministic)
+                if segment_by_boundary:
+                    feats, feats_padding_mask, boundary = segmenter.pre_segment_by_boundary(feats, feats_padding_mask, i, return_boundary=return_boundary)
+                else:
+                    feats, feats_padding_mask, boundary, boundary_logits = segmenter.pre_segment(feats, feats_padding_mask, return_boundary=return_boundary, deterministic=deterministic)
             for bd in boundary:
                 bd = bd.cpu().numpy()
                 bd = bd[bd!=-1]
@@ -79,7 +88,7 @@ def main(args, task):
     device = next(model.parameters()).device
     
     from rl.reward.dictionary import Dictionary
-    segmenter = get_cnn_segmenter(env, device, ckpt_fpath=args.segmenter_ckpt)
+    segmenter = get_cnn_segmenter(env, device, ckpt_fpath=args.segmenter_ckpt, boundary_fpath=args.boundary_fpath)
     dictionary = Dictionary.load(f"{env.WORK_DIR}/rl/dict/{args.config}/dict.txt")
     postprocess_code = args.postprocess_code
     split = args.split
@@ -130,6 +139,10 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--segmenter_ckpt",
+        default=None,
+    )
+    parser.add_argument(
+        "--boundary_fpath",
         default=None,
     )
     parser.add_argument(

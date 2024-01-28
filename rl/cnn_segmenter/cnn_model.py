@@ -35,6 +35,61 @@ class Segmenter(nn.Module):
     def logit_segment(self, logits, padding_mask):
         return logits, padding_mask
 
+class DummySegmenter(Segmenter):
+    def __init__(self, cfg: SegmentationConfig, boundary_fpath=None):
+        super().__init__(cfg)
+        self.boundary_fpath = boundary_fpath
+        self.preprocess_boundary()
+    
+    def preprocess_boundary(self):
+        self.boundaries = []
+        with open(self.boundary_fpath) as f:
+            for l in f:
+                boundary = [int(b) for b in l.strip().split()]
+                boundary_tensor = torch.tensor(boundary, dtype=torch.long)
+                boundary_tensor = boundary_tensor.unsqueeze(0)
+                self.boundaries.append(boundary_tensor)
+        print(f"Loaded {len(self.boundaries)} boundaries from {self.boundary_fpath}")
+
+    # support pre_segment by a boundary sequence (batch size=1 currently)
+    def pre_segment_by_boundary(self, logits, padding_mask, i, return_boundary=False):
+        
+        boundary= self.boundaries[i]
+        bd_shape = boundary.shape
+        assert bd_shape[0] == 1, f"bd_shape[0] = {bd_shape[0]} != 1. Currently only support batch size = 1."
+        
+        bsz, tsz, csz = logits.size()
+        new_tsz = int(torch.max(torch.sum(boundary==1, dim=1)).item())+1 # add <bos>
+        new_logits = logits.new_zeros(bsz, new_tsz, csz)
+        new_pad = padding_mask.new_zeros(bsz, new_tsz)
+        
+        for b in range(bsz):
+            # merge consecutive segments when meeting a boundary (mean_pool_join)
+            new_idx = 0
+            count = 0
+            for t in range(tsz):
+                if padding_mask[b, t] == 1:
+                    break
+                if boundary[b, t] == 1:
+                    new_logits[b, new_idx] /= count
+                    new_idx += 1
+                    count = 0
+                new_logits[b, new_idx] += logits[b, t]
+                count += 1
+            if count > 0:
+                # last segment
+                new_logits[b, new_idx] /= count
+                new_idx += 1
+                count = 0
+            if new_idx < new_tsz:
+                pad = new_tsz - new_idx
+                new_logits[b, -pad:] = 0
+                new_pad[b, -pad:] = True
+        if return_boundary:
+            return new_logits, new_pad, boundary
+        return new_logits, new_pad
+
+
 @dataclass
 class CnnBoundaryConfig:
     """

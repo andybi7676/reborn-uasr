@@ -30,7 +30,7 @@ def bd_to_new_bd(bd: str, rf: str, i):
                 new_bd.append("1")
                 continue
         new_bd.append("0")
-    # return new_bd[1:] + ["0"]
+    return new_bd[1:] + ["0"]
     return new_bd
         
 

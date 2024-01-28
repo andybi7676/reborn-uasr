@@ -52,3 +52,17 @@ total lines: 2939
 total ref tokens: 183992
 total hyp tokens: 176697
 
+# test-bds
+PER: 9.86240111901747 %
+DEL RATE: 4.052199621695799 %
+INS RATE: 3.5557415875000666 %
+SUB RATE: 2.2544599098216036 %
+total lines: 2600
+total ref tokens: 188737
+total hyp tokens: 187800
+SCORES:            Lenient      Harsh
+precision:          0.8211     0.6843
+recall:             0.7712     0.7452
+f1:                 0.7953     0.7135
+rval:               0.8222     0.7435
+
