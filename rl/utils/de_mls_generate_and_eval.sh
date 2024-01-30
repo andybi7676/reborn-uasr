@@ -20,14 +20,14 @@ for split in $all_splits; do
     #     --output_dir $output_dir/logit_segmented \
     #     --split $split
     # raw
-    python generate_w2vu_segmental_results.py \
-        --config $config_name \
-        --feats_dir $feats_dir \
-        --generator_ckpt $generator_ckpt \
-        --segmenter_ckpt $segmenter_ckpt \
-        --no_logit_segment \
-        --output_dir $output_dir/raw \
-        --split $split
+    # python generate_w2vu_segmental_results.py \
+    #     --config $config_name \
+    #     --feats_dir $feats_dir \
+    #     --generator_ckpt $generator_ckpt \
+    #     --segmenter_ckpt $segmenter_ckpt \
+    #     --no_logit_segment \
+    #     --output_dir $output_dir/raw \
+    #     --split $split
     # postprocess boundaries
     python postprocess_boundaries.py \
         --bds_fpath $output_dir/raw/$split.bds \
