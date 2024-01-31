@@ -3,9 +3,9 @@ import yaml
 from glob import glob
 import pandas as pd
 
-SAMPLE_RATE = 48e3
+SAMPLE_RATE = 16e3
 # len_for_bucket_root = '/home/b07502072/u-speech2speech/s2p/data/manifest/en/shuffled'
-len_for_bucket_root = '/work/b07502072/corpus/u-s2s/audio/cv4/de/w2v_manifest/train'
+len_for_bucket_root = '/home/andybi7676/Desktop/uasr-rl/data/audio/timit/matched/large_clean'
 
 def get_csv_fpath(root, csv_pths):
     for path in glob(os.path.join(root, "*")):
