@@ -1,0 +1,9 @@
+# valid
+PER: 7.790917933753136 %
+DEL RATE: 4.360825270055803 %
+INS RATE: 1.2148671479035478 %
+SUB RATE: 2.215225515793785 %
+total lines: 2703
+total ref tokens: 195330
+total hyp tokens: 189185
+
