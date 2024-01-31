@@ -1,0 +1,9 @@
+# test-other
+PER: 16.76812035305883 %
+DEL RATE: 5.9116700726118525 %
+INS RATE: 5.746988999521719 %
+SUB RATE: 5.109461280925258 %
+total lines: 2939
+total ref tokens: 183992
+total hyp tokens: 183689
+

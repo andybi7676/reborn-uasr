@@ -1,0 +1,10 @@
+# test
+PER: 13.374138210404722 %
+DEL RATE: 4.908084488048631 %
+INS RATE: 5.14172812661708 %
+SUB RATE: 3.324325595739009 %
+total lines: 2620
+total ref tokens: 191317
+total hyp tokens: 191764
+
+
