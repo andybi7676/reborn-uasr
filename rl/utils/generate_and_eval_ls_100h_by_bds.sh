@@ -1,6 +1,6 @@
 set -eu
 
-boundary_dir=../../data/ls_100h_new/ll60k/CLUS128
+boundary_dir=../../data/ls_100h_new/ll60k/LUKE
 generator_ckpt=../../s2p/multirun/en_ls100h/ll60k/ls860_unpaired_all/best_unsup/checkpoint_best.pt
 output_dir=$boundary_dir/eval_on_oracle_output
 config_name=en_ls100h
@@ -29,11 +29,11 @@ for split in $all_splits; do
         --output_dir $output_dir/raw \
         --split $split
     # postprocess boundaries
-    # python postprocess_boundaries.py \
-    #     --bds_fpath $output_dir/raw/$split.bds \
-    #     --raw_output_fpath $output_dir/raw/$split.txt \
-    #     --new_bds_fpath $output_dir/raw/$split.postprocessed.bds \
-    #     --length_fpath $feats_dir/$split.lengths
+    python postprocess_boundaries.py \
+        --bds_fpath $output_dir/raw/$split.bds \
+        --raw_output_fpath $output_dir/raw/$split.txt \
+        --new_bds_fpath $output_dir/raw/$split.postprocessed.bds \
+        --length_fpath $feats_dir/$split.lengths
 
     echo "# $split" >> $output_dir/result.txt
     python eval_results.py --hyp $output_dir/logit_segmented/$split.txt --ref $golden_dir/$split.phn >> $output_dir/result.txt
