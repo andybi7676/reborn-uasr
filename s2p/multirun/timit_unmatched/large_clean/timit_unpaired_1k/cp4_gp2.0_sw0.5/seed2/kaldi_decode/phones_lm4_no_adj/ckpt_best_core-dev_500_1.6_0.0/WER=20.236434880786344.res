@@ -1,1 +1,0 @@
-| Generate core-dev with beam=500, lm_weight=1.6, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 20.236434880786344, LM_PPL: 11.936886743066957, num feats: 35425, length: 14665, UER to viterbi: 22.205596289091726, score: 0.5506173671933592

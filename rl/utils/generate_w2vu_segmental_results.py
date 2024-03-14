@@ -74,10 +74,10 @@ def generate_w2vu_segmental_results(model, dataset, dictionary, device, output_f
             preds = emissions.transpose(0, 1).argmax(-1)
             print(preds.shape, file=lf, flush=True)
             if not logit_segment:
-                hypotheses = " ".join([dictionary.symbols[p] for p in preds[0].cpu().numpy()])
+                hypothesis = " ".join([dictionary.symbols[p] for p in preds[0].cpu().numpy()])
             else:
-                hypotheses = dictionary.string(preds, bpe_symbol=postprocess_code)
-            print(hypotheses, file=fw, flush=True) # (T, B, Dict_size)
+                hypothesis = dictionary.string(preds, bpe_symbol=postprocess_code)
+            print(hypothesis, file=fw, flush=True) # (T, B, Dict_size)
 
 def main(args, task):
     print(args)

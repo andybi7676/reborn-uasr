@@ -64,20 +64,20 @@ echo "min phone seen threshold is $min_phones"
 
 if test "$skip_prep" = "false"; then
   mkdir -p $target_dir
-  # python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/normalize_and_filter_text.py --lang $lg --fasttext-model $lid_path < $text_path | grep -v '\-\-\-' | grep -v '[0-9]' > $target_dir/lm.upper.lid.txt
-  # python /home/b07502072/u-speech2speech/s2p/scripts/normalize_and_filter_text.py --lang $lg --fasttext-model $lid_path < $text_path | grep -v '\-\-\-' | grep -v '[0-9]' > $target_dir/lm.upper.lid.txt
-  # # mv $target_dir/lm.upper.lid.txt $target_dir/lm.upper.lid.old.txt
-  # # cp $train_text_path $target_dir/train.words.txt
-  # # sort $target_dir/train.words.txt | uniq > $target_dir/train.words.uniq.txt
-  # # end_line_count=$(wc -l $target_dir/lm.upper.lid.old.txt | cut -d ' ' -f1)
+  python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/normalize_and_filter_text.py --lang $lg --fasttext-model $lid_path < $text_path | grep -v '\-\-\-' | grep -v '[0-9]' > $target_dir/lm.upper.lid.txt
+  python /home/b07502072/u-speech2speech/s2p/scripts/normalize_and_filter_text.py --lang $lg --fasttext-model $lid_path < $text_path | grep -v '\-\-\-' | grep -v '[0-9]' > $target_dir/lm.upper.lid.txt
+  # mv $target_dir/lm.upper.lid.txt $target_dir/lm.upper.lid.old.txt
+  # cp $train_text_path $target_dir/train.words.txt
+  # sort $target_dir/train.words.txt | uniq > $target_dir/train.words.uniq.txt
+  # end_line_count=$(wc -l $target_dir/lm.upper.lid.old.txt | cut -d ' ' -f1)
 
-  # # cat $target_dir/lm.upper.lid.old.txt $target_dir/train.words.uniq.txt | awk '{ print FNR "\t" $0 }' | sort -k2 | uniq -u -f1 | sort -n > $target_dir/lm.upper.lid.train.uniq.txt
-  # # nl -n ln $target_dir/lm.upper.lid.old.txt $target_dir/train.words.uniq.txt | sort -k2 | uniq -u -f1 | sort -n > $target_dir/lm.upper.lid.train.uniq.txt
-  # # awk '{if($1 <= '$end_line_count'){print $0;}}' $target_dir/lm.upper.lid.train.uniq.txt | cut -f2- > $target_dir/lm.upper.lid.txt
-  # # python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/normalize_and_filter_text.py --lang $lg --fasttext-model $lid_path < $text_path | grep -v '\-\-\-' | grep -v '[0-9]'
-  # # python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/normalize_text.py < $text_path | grep -v '\-\-\-' | grep -v '[0-9]' > $target_dir/lm.upper.lid.txt
-  # python $FAIRSEQ_ROOT/fairseq_cli/preprocess.py --dataset-impl mmap --trainpref $target_dir/lm.upper.lid.txt --only-source --destdir $target_dir --thresholdsrc 2 --padding-factor 1 --dict-only
-  # cut -f1 -d' ' $target_dir/dict.txt | grep -v -x '[[:punct:]]*' | grep -Pv '\d\d\d\d\d+' > $target_dir/words.txt
+  # cat $target_dir/lm.upper.lid.old.txt $target_dir/train.words.uniq.txt | awk '{ print FNR "\t" $0 }' | sort -k2 | uniq -u -f1 | sort -n > $target_dir/lm.upper.lid.train.uniq.txt
+  # nl -n ln $target_dir/lm.upper.lid.old.txt $target_dir/train.words.uniq.txt | sort -k2 | uniq -u -f1 | sort -n > $target_dir/lm.upper.lid.train.uniq.txt
+  # awk '{if($1 <= '$end_line_count'){print $0;}}' $target_dir/lm.upper.lid.train.uniq.txt | cut -f2- > $target_dir/lm.upper.lid.txt
+  # python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/normalize_and_filter_text.py --lang $lg --fasttext-model $lid_path < $text_path | grep -v '\-\-\-' | grep -v '[0-9]'
+  # python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/normalize_text.py < $text_path | grep -v '\-\-\-' | grep -v '[0-9]' > $target_dir/lm.upper.lid.txt
+  python $FAIRSEQ_ROOT/fairseq_cli/preprocess.py --dataset-impl mmap --trainpref $target_dir/lm.upper.lid.txt --only-source --destdir $target_dir --thresholdsrc 2 --padding-factor 1 --dict-only
+  cut -f1 -d' ' $target_dir/dict.txt | grep -v -x '[[:punct:]]*' | grep -Pv '\d\d\d\d\d+' > $target_dir/words.txt
 
   echo "complete preprocess and create words.txt"
 

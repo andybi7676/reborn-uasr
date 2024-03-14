@@ -1,1 +1,0 @@
-| Generate core-test with beam=500, lm_weight=1.6, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 22.314622314622316, LM_PPL: 11.61562992845804, num feats: 16864, length: 7084, UER to viterbi: 22.978257469106836, score: 0.5635076644197792

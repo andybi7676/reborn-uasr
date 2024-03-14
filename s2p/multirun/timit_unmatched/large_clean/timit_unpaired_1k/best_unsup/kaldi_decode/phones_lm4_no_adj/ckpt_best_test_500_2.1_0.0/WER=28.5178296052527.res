@@ -1,1 +1,0 @@
-| Generate test with beam=500, lm_weight=2.1, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 28.5178296052527, LM_PPL: 12.470757700481949, num feats: 142807, length: 56948, UER to viterbi: 19.623066322470446, score: 0.49516581033557144
