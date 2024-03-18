@@ -8,7 +8,7 @@ common:
   tensorboard_logdir: tb
   wandb_project: null
   azureml_logging: false
-  seed: 3
+  seed: 5
   cpu: false
   tpu: false
   bf16: false
@@ -225,7 +225,7 @@ model:
   generator_bias: false
   generator_dropout: 0.1
   ncritic: 1
-  smoothness_weight: 0.5
+  smoothness_weight: 0.75
   smoothing: 0
   smoothing_one_sided: false
   gumbel: false
@@ -301,4 +301,4 @@ ema:
   ema_seed_model: null
   ema_update_freq: 1
   ema_fp32: false
-description: es_mls/xlsr_100hr/es_unpaired_all
+description: es_mls/xlsr_100hr/es_unpaired_all_p2

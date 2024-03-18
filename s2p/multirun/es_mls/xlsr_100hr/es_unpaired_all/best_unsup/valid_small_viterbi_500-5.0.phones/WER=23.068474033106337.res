@@ -1,1 +1,0 @@
-| Generate valid_small with beam=500, lm_weight=5.0, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 23.068474033106337, LM_PPL: 14.118111457182998, num feats: 112044, length: 78524, UER to viterbi: 0, score: 2.647458473628546

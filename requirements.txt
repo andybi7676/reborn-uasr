@@ -1,0 +1,6 @@
+# python package required for the project
+# fairseq ( build from source )
+torch
+numpy
+transformers
+datasets

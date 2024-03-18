@@ -2,7 +2,7 @@ hydra:
   run:
     dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
   sweep:
-    dir: multirun/es_mls/xlsr_100hr/es_unpaired_all
+    dir: multirun/es_mls/xlsr_100hr/es_unpaired_all_p2
     subdir: cp${model.code_penalty}_gp${model.gradient_penalty}_sw${model.smoothness_weight}/seed${common.seed}
   hydra_logging:
     version: 1
@@ -105,7 +105,7 @@ hydra:
   output_subdir: .hydra
   overrides:
     hydra:
-    - hydra.sweep.dir=multirun/es_mls/xlsr_100hr/es_unpaired_all
+    - hydra.sweep.dir=multirun/es_mls/xlsr_100hr/es_unpaired_all_p2
     task:
     - task.data=/home/b07502072/u-speech2speech/data/es_mls/xlsr_100hr/precompute_pca512_cls128_mean_pooled
     - task.text_data=/home/b07502072/u-speech2speech/data/es_mls/text/prep/phones/train_all
@@ -114,14 +114,14 @@ hydra:
     - common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised
     - model.code_penalty=2
     - model.gradient_penalty=2.0
-    - model.smoothness_weight=0.5
-    - common.seed=3
+    - model.smoothness_weight=0.75
+    - common.seed=5
     - distributed_training.distributed_world_size=1
     - optimization.max_update=150000
-    - +description=es_mls/xlsr_100hr/es_unpaired_all
+    - +description=es_mls/xlsr_100hr/es_unpaired_all_p2
   job:
     name: hydra_train
-    override_dirname: +description=es_mls/xlsr_100hr/es_unpaired_all,common.seed=3,common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised,dataset.num_workers=0,distributed_training.distributed_world_size=1,model.code_penalty=2,model.gradient_penalty=2.0,model.smoothness_weight=0.5,optimization.max_update=150000,task.data=/home/b07502072/u-speech2speech/data/es_mls/xlsr_100hr/precompute_pca512_cls128_mean_pooled,task.kenlm_path=/home/b07502072/u-speech2speech/data/es_mls/text/prep/phones/train_all/../lm.phones.filtered.04.bin,task.text_data=/home/b07502072/u-speech2speech/data/es_mls/text/prep/phones/train_all
+    override_dirname: +description=es_mls/xlsr_100hr/es_unpaired_all_p2,common.seed=5,common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised,dataset.num_workers=0,distributed_training.distributed_world_size=1,model.code_penalty=2,model.gradient_penalty=2.0,model.smoothness_weight=0.75,optimization.max_update=150000,task.data=/home/b07502072/u-speech2speech/data/es_mls/xlsr_100hr/precompute_pca512_cls128_mean_pooled,task.kenlm_path=/home/b07502072/u-speech2speech/data/es_mls/text/prep/phones/train_all/../lm.phones.filtered.04.bin,task.text_data=/home/b07502072/u-speech2speech/data/es_mls/text/prep/phones/train_all
     id: '0'
     num: 0
     config_name: w2vu

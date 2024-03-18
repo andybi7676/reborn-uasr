@@ -6,6 +6,7 @@ wandb
 local
 search_weights
 kaldi_decode
+*.whl.gz
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

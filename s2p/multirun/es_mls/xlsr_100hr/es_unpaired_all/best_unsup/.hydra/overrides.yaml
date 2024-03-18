@@ -5,8 +5,8 @@
 - common.user_dir=/home/b07502072/u-speech2speech/fairseq/examples/wav2vec/unsupervised
 - model.code_penalty=2
 - model.gradient_penalty=2.0
-- model.smoothness_weight=0.5
-- common.seed=3
+- model.smoothness_weight=0.75
+- common.seed=5
 - distributed_training.distributed_world_size=1
 - optimization.max_update=150000
-- +description=es_mls/xlsr_100hr/es_unpaired_all
+- +description=es_mls/xlsr_100hr/es_unpaired_all_p2
