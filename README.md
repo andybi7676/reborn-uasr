@@ -10,14 +10,14 @@ This repository is dedicated to the "reborn-uasr" project, an initiative focused
 
 The simplest way to access the REBORN models is through Hugging Face. We have wrapped our model including PCA dimension reduction matrix, REBORN segmenter, and REBORN generator into the Hugging Face supported form. Furthermore, we've also built the datasets corresponding to the models to Hugging Face (LibrSpeech 100 hours, Multilingual LibriSpeech across 6 languages). For those who want to have a quick start, please checkout our [demo on Google Colab](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb). 
 
-### Summarizing Card Names
+### Summarizing the Card Names
 
 To replicate the REBORN end-to-end unsupervised phoneme recognition result, one would need:
 * The upstream model (wav2vec 2.0) as feature extracter.
 * The REBORN model (including the PCA dimension reduction matrix, the segmenter, and the generator).
 * The corresponding dataset.
 
-Since each of the components are all available on Hugging Face, we can follow the [demo on Google Colab](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb) and generate the results across different datasets by simply replace the model card name and the dataset name. We summarize the pairing model name and dataset below for simplier usage:
+Since all of the components are all available on Hugging Face, we can follow the [demo on Google Colab](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb) to generate the results across different datasets by simply replace card names of the models and datasets. Here, we summarize all the available pairings of the card names below for convenience:
 | Description       | upstream_model_card | reborn_model_card | dataset_card | dataset_name |    split    |
 |:------------------|:-------------------:|:-----------------:|:------------:|:------------:|:-----------:|
 |LibriSpeech 100 hour @ iter2-stage1|facebook/wav2vec2-large-lv60|andybi7676/reborn-uasr_ls100h_iter2-stage1|andybi7676/reborn-uasr_librispeech-no-silence-100hr||{train.clean.100, dev.clean, dev.other, test.clean, test.other, dev.clean.small}|
@@ -28,6 +28,8 @@ Since each of the components are all available on Hugging Face, we can follow th
 |Multilingual LibriSpeech 100 hour Spanish @ iter2-stage1|facebook/wav2vec2-large-xlsr-53|andybi7676/reborn-uasr_mls-de_iter2-stage1|andybi7676/reborn-uasr_multilingual-librispeech-no-silence-100hr|spanish|{train.100hr, dev, test, dev.small}|
 |Multilingual LibriSpeech 100 hour Italian @ iter2-stage1|facebook/wav2vec2-large-xlsr-53|andybi7676/reborn-uasr_mls-de_iter2-stage1|andybi7676/reborn-uasr_multilingual-librispeech-no-silence-100hr|italian|{train.100hr, dev, test, dev.small}|
 |Multilingual LibriSpeech 100 hour Portuguese @ iter2-stage1|facebook/wav2vec2-large-xlsr-53|andybi7676/reborn-uasr_mls-de_iter2-stage1|andybi7676/reborn-uasr_multilingual-librispeech-no-silence-100hr|portuguese|{train.100hr, dev, test, dev.small}|
+
+By replacing the card names, users can directly experience our pre-trained REBORN models without efforts. 
 
 ## Prerequisite
 If you want to build up the environment and train the REBORN model by your own, please follow the below content to meet the requirements. 
