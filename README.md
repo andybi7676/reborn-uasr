@@ -2,7 +2,7 @@
 
 Liang-Hsuan Tseng, En-Pei Hu, Cheng-Han Chiang, Yuan Tseng, Hung-yi Lee, Lin-shan Lee, Shao-Hua Sun
 #### National Taiwan University
-[![arXiv](https://img.shields.io/badge/arXiv-Paper-color.svg)](https://arxiv.org/abs/2402.03988) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb) [![Hugging Face Collection](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collections-orange)](https://huggingface.co/spaces/Audio-AGI/AudioSep) [![Docker Hub](https://img.shields.io/badge/Docker%20Hub-Image-3385ff.svg)](https://hub.docker.com/r/andybi7676/reborn-uasr)
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-color.svg)](https://arxiv.org/abs/2402.03988) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb) [![Hugging Face Collection](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collections-orange)](https://huggingface.co/collections/andybi7676/reborn-uasr-65f05882cb1dd339b33c3742) [![Docker Hub](https://img.shields.io/badge/Docker%20Hub-Image-3385ff.svg)](https://hub.docker.com/r/andybi7676/reborn-uasr)
 
 This repository is dedicated to the "reborn-uasr" project, an initiative focused on enhancing Unsupervised Automatic Speech Recognition (ASR) through the implementation of Reinforcement Learning (RL) techniques for segmenter training.
 
