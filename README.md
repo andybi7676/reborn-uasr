@@ -1,7 +1,9 @@
 # REBORN: Reinforcement-Learned Boundary Segmentation with Iterative Training for Unsupervised ASR 
 
-Liang-Hsuan Tseng, En-Pei Hu, Cheng-Han Chiang, Yuan Tseng, Hung-yi Lee, Lin-shan Lee, Shao-Hua Sun
-#### National Taiwan University
+<div align="center">Liang-Hsuan Tseng, En-Pei Hu, Cheng-Han Chiang, Yuan Tseng, Hung-yi Lee, Lin-shan Lee, Shao-Hua Sun</div>
+
+#### <div align="center">National Taiwan University</div>
+
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-color.svg)](https://arxiv.org/abs/2402.03988) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb) [![Hugging Face Collection](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collections-orange)](https://huggingface.co/collections/andybi7676/reborn-uasr-65f05882cb1dd339b33c3742) [![Docker Hub](https://img.shields.io/badge/Docker%20Hub-Image-3385ff.svg)](https://hub.docker.com/r/andybi7676/reborn-uasr)
 
 This repository is dedicated to the "reborn-uasr" project, an initiative focused on enhancing Unsupervised Automatic Speech Recognition (ASR) through the implementation of Reinforcement Learning (RL) techniques for segmenter training.
@@ -34,15 +36,17 @@ By replacing the card names, users can directly experience our pre-trained REBOR
 ## Prerequisite
 If you want to build up the environment and train the REBORN model by your own, please follow the below content to meet the requirements. 
 
-### Docker Image
+### Docker Image (Recommended)
 We provide the pre-built docker image on the [Docker Hub](https://hub.docker.com/r/andybi7676/reborn-uasr). The image contains all the dependencies for training reborn. This might be the simpliest way to setup the environment if you are familiar with Docker. Type the following command to pull and run the container based on the image.
 
-`docker run -it --gpus all andybi7676/reborn-uasr:latest`
+```
+docker run -it --rm --gpus all andybi7676/reborn-uasr:latest
+```
 
-Note that this is just an example of using the image in interactive mode with all the gpus. Feel free to use it on your own way If the gpus are not available inside the container, please verify that [nvidia-docker](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu) is installed.
+Note that this is just an example of using the image in interactive mode with all the gpus. Feel free to use it on your own way. If the gpus are not available inside the container, please verify that [nvidia-docker](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu) is installed.
 
-### Building up the Environment by Yourself
-In this section we are going to give instructions on how to build up the REBORN environment step by step.
+### Building up the Environment
+In this section we are going to give instructions on how to build up the REBORN environment step by step. If you are using the reborn-uasr docker image, you can skip this section directly. 
 #### Fairseq
 We have attach the fairseq version we use in the folder `reborn-uasr/fairseq`. You can use it by cloning our repo to make sure that there is no version biases which may possibly lead to unexpected errors. 
 ```shell
@@ -60,7 +64,7 @@ pip install -r requirements.txt
 ```
 Modify and run `path.sh` to export fairseq and reborn-uasr to PYTHONPATH. 
 1. Modify the /path/to/fairseq to export the corrent fairseq path into the environment. 
-2. run `source path.sh` to append `fairseq` and `reborn-uasr` into the PYTHONPATH. The results should be as follows:
+2. run `source path.sh` to append `fairseq` and `reborn-uasr` into the PYTHONPATH. The result should be as follow:
    ```
    (base) username@desktop:/your/path/to/reborn-uasr$ source path.sh 
    Added /your/path/to/fairseq to PYTHONPATH
@@ -83,9 +87,9 @@ TBA
 
 ## Training REBORN
 
-In this section, we will introduce how to train your own reborn model from scratch. Before diving into the training part, we recommend users go through the [Prerequisite](##prerequisite) section and make sure that all the requirements have been satisfied. 
+In this section, we will introduce how to train your own reborn model from scratch. Before diving into the training part, we recommend users go through the [Prerequisite](#prerequisite) section and make sure that all the requirements have been satisfied. 
 
-We divide the training process as three main stage: [wav2vec-U initialization](###stage-0), [segmenter training](###stage-1), and [generator (phoneme prediction model) training](###stage-2). 
+We divide the training process as three main stage: [wav2vec-U initialization](#stage-0-training-wav2vec-u-as-initialization), [segmenter training](#stage-1-reborn-segmenter-training), and [generator (phoneme prediction model) training](#stage-2-reborn-generator-training). 
 
 ### Data Preparation
 #### Audio preparation
@@ -93,7 +97,7 @@ We divide the training process as three main stage: [wav2vec-U initialization](#
 ### Stage 0: Training wav2vec-U as Initialization
 
 ### Stage 1: REBORN segmenter training
-#### Behaviour Cloning
+#### Behavior Cloning
 #### Reinforcement Learning
 
 ### Stage 2: REBORN generator training
