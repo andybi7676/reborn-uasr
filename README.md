@@ -101,6 +101,7 @@ We divide the training process as three main stage: [wav2vec-U initialization](#
 ## Reference Repositories
 * [fairseq](https://github.com/facebookresearch/fairseq)
 * [kenlm](https://github.com/kpu/kenlm)
+* [rVADfast](https://github.com/zhenghuatan/rVADfast)
 * [kaldi](https://github.com/kaldi-asr/kaldi)
 * [pykaldi](https://github.com/pykaldi/pykaldi)
 * [flashlight](https://github.com/flashlight/flashlight)
