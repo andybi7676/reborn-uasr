@@ -673,7 +673,7 @@ def main(cfg: UnsupGenerateConfig, model=None):
 
 
 @hydra.main(
-    config_path=os.path.join("/home/b07502072/u-speech2speech/fairseq", "fairseq", "config"), config_name="config"
+    config_path=os.path.join(os.getenv('FAIRSEQ_ROOT'), "fairseq", "config"), config_name="config" # make sure that $FAIRSEQ_ROOT is set during current runtime!
 )
 def hydra_main(cfg):
     with open_dict(cfg):

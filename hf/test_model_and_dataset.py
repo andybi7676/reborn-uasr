@@ -19,8 +19,8 @@ def main(args):
     upstream_model = AutoModelForPreTraining.from_pretrained(upstream_model_card)
 
     # load the reborn uasr model from the hub, which is composed of the segmenter and the generator
-    model_card = args.model_card
-    reborn_model = AutoModel.from_pretrained(model_card, trust_remote_code=True, revision="main")
+    reborn_model_card = args.reborn_model_card
+    reborn_model = AutoModel.from_pretrained(reborn_model_card, trust_remote_code=True, revision="main")
 
     # model eval mode and to device
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -53,10 +53,10 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset_card", default="andybi7676/reborn-uasr_librispeech-no-silence-100hr")
-    parser.add_argument("--dataset_name", type=str, default=None)
+    parser.add_argument("--dataset_name", type=str, default=None) # set language when using multilingual librispeech ({german, french, italian, spanish, portuguese, dutch})
     parser.add_argument("--split", type=str, default="test")
     parser.add_argument("--upstream_model_card", type=str, default="facebook/wav2vec2-large-lv60") # facebook/wav2vec2-large-lv60 or facebook/wav2vec2-large-xlsr-53
-    parser.add_argument("--model_card", type=str, default="andybi7676/reborn-uasr_ls100h_iter2-stage1")
+    parser.add_argument("--reborn_model_card", type=str, default="andybi7676/reborn-uasr_ls100h_iter2-stage1")
     parser.add_argument("--output_dir", type=str, default="./test_results")
 
     args = parser.parse_args()

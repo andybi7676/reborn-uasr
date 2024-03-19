@@ -4,3 +4,6 @@ torch
 numpy
 transformers
 datasets
+g2p_en
+editdistance
+edit_distance

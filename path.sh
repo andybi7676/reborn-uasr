@@ -1,4 +1,4 @@
-export FAIRSEQ_ROOT=/path/to/fairseq # change to your fairseq path
+export FAIRSEQ_ROOT=/home/andybi7676/Desktop/fairseq # <-- change to your own fairseq path
 # Check if PYTHONPATH is not empty and if FAIRSEQ_ROOT is not in PYTHONPATH
 if [[ -n "$PYTHONPATH" && ! ":$PYTHONPATH:" == *":$FAIRSEQ_ROOT:"* ]]; then
     # If PYTHONPATH exists but does not contain FAIRSEQ_ROOT, append FAIRSEQ_ROOT to it
@@ -17,9 +17,7 @@ fi
 REBORN_WORK_DIR=$(pwd) # Please make sure you run the script in the root directory of REBORN (:/path/to/reborn-uasr$ source path.sh)
 if [[ ! ":$PYTHONPATH:" == *":$REBORN_WORK_DIR:"* ]]; then
     # If PYTHONPATH exists but does not contain FAIRSEQ_ROOT, append FAIRSEQ_ROOT to it
-    echo ":$PYTHONPATH:"
-    echo *":$REBORN_WORK_DIR:"*
-    # export PYTHONPATH="$PYTHONPATH:$REBORN_WORK_DIR"
+    export PYTHONPATH="$PYTHONPATH:$REBORN_WORK_DIR"
     echo "Appended $REBORN_WORK_DIR to PYTHONPATH"
 else
     # If PYTHONPATH contains REBORN_WORK_DIR, print out the message
@@ -36,4 +34,4 @@ echo "During each runtime, please make sure to run \`source path.sh\` to set up 
 echo "======================================================================================="
 # Test the environment
 python rl/utils/test_path.py # make sure that you are under REBORN_WORK_DIR
-# If the output is "SUCCESS", then the environment is set up correctly in current runtime
+# If the output is "SUCCESS", then the environment is set up correctly in the current runtime
