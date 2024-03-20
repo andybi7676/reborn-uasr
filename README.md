@@ -19,7 +19,7 @@ To replicate the REBORN end-to-end unsupervised phoneme recognition result, one 
 * The REBORN model (including the PCA dimension reduction matrix, the segmenter, and the generator).
 * The corresponding dataset.
 
-Since all of the components are all available on Hugging Face, we can follow the [demo on Google Colab](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb) to generate the results across different datasets by simply replace card names of the models and datasets. Here, we summarize all the available pairings of the card names below for convenience:
+Since all of the components are available on Hugging Face, users can follow our [demo on Google Colab](https://colab.research.google.com/github/andybi7676/reborn-uasr/blob/main/hf/reborn_demo_colab.ipynb) to generate the results across different datasets by simply replacing card names of the models and datasets. Here, we summarize all the available pairings of the card names below for convenience:
 | Description       | upstream_model_card | reborn_model_card | dataset_card | dataset_name |    split    |
 |:------------------|:-------------------:|:-----------------:|:------------:|:------------:|:-----------:|
 |LibriSpeech 100 hour @ iter2-stage1|facebook/wav2vec2-large-lv60|andybi7676/reborn-uasr_ls100h_iter2-stage1|andybi7676/reborn-uasr_librispeech-no-silence-100hr||{train.clean.100, dev.clean, dev.other, test.clean, test.other, dev.clean.small}|
@@ -31,21 +31,21 @@ Since all of the components are all available on Hugging Face, we can follow the
 |Multilingual LibriSpeech 100 hour Italian @ iter2-stage1|facebook/wav2vec2-large-xlsr-53|andybi7676/reborn-uasr_mls-de_iter2-stage1|andybi7676/reborn-uasr_multilingual-librispeech-no-silence-100hr|italian|{train.100hr, dev, test, dev.small}|
 |Multilingual LibriSpeech 100 hour Portuguese @ iter2-stage1|facebook/wav2vec2-large-xlsr-53|andybi7676/reborn-uasr_mls-de_iter2-stage1|andybi7676/reborn-uasr_multilingual-librispeech-no-silence-100hr|portuguese|{train.100hr, dev, test, dev.small}|
 
-By replacing the card names, users can directly experience our pre-trained REBORN models without efforts. 
+By replacing the card names, users can directly experience our pre-trained REBORN models with little efforts. 
 
 ## Prerequisite
-If you want to build up the environment and train the REBORN model by your own, please follow the below content to meet the requirements. 
+If you want to build up the environment and train the REBORN model on your own, please follow the below content first to meet the requirements. 
 
 ### Docker Image (Recommended)
-We provide the pre-built docker image on the [Docker Hub](https://hub.docker.com/r/andybi7676/reborn-uasr). The image contains all the dependencies for training reborn. This might be the simpliest way to setup the environment if you are familiar with Docker. Type the following command to pull and run the container based on the image.
+We provide the pre-built docker image on the [Docker Hub](https://hub.docker.com/r/andybi7676/reborn-uasr). The image contains all the dependencies for training reborn. This might be the simpliest way to setup the whole environment if you are familiar with Docker. Type the following command to pull and run the container based on the image.
 
 ```
 docker run -it --rm --gpus all andybi7676/reborn-uasr:latest
 ```
 
-Note that this is just an example of using the image in interactive mode with all the gpus. Feel free to use it on your own way. If the gpus are not available inside the container, please verify that [nvidia-docker](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu) is installed.
+Note that this is just an example of using the image in interactive mode with all the gpus on your machine. Feel free to use it in your own way. If the gpus are not available inside the container, please verify that [nvidia-docker](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu) is installed.
 
-### Building up the Environment
+### Building up the Environment from Source
 In this section we are going to give instructions on how to build up the REBORN environment step by step. If you are using the reborn-uasr docker image, you can skip this section directly. 
 #### Fairseq
 We have attach the fairseq version we use in the folder `reborn-uasr/fairseq`. You can use it by cloning our repo to make sure that there is no version biases which may possibly lead to unexpected errors. 
@@ -89,7 +89,7 @@ TBA
 
 In this section, we will introduce how to train your own reborn model from scratch. Before diving into the training part, we recommend users go through the [Prerequisite](#prerequisite) section and make sure that all the requirements have been satisfied. 
 
-We divide the training process as three main stage: [wav2vec-U initialization](#stage-0-training-wav2vec-u-as-initialization), [segmenter training](#stage-1-reborn-segmenter-training), and [generator (phoneme prediction model) training](#stage-2-reborn-generator-training). 
+We divide the training process into the following three main stages: [wav2vec-U initialization](#stage-0-training-wav2vec-u-as-initialization), [segmenter training](#stage-1-reborn-segmenter-training), and [generator (phoneme prediction model) training](#stage-2-reborn-generator-training). 
 
 ### Data Preparation
 #### Audio preparation
