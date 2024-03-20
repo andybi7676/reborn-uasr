@@ -51,6 +51,7 @@ def compute_wer(ref_uid_to_tra, hyp_uid_to_tra, g2p, g2p_dict):
     d_cnt = 0
     w_cnt = 0
     w_cnt_h = 0
+    hyp_uid_to_tra_phn = {} # added
     for uid in hyp_uid_to_tra:
         ref = ref_uid_to_tra[uid].split()
         if g2p_dict is not None:
@@ -60,12 +61,13 @@ def compute_wer(ref_uid_to_tra, hyp_uid_to_tra, g2p, g2p_dict):
                     hyp = hyp + g2p_dict[word]
                 else:
                     logger.warning(f"{word} not in g2p_dict")
+            hyp_uid_to_tra_phn[uid] = " ".join(hyp)
         elif g2p is not None:
             hyp = g2p(hyp_uid_to_tra[uid])
             hyp = [p for p in hyp if p != "'" and p != " "]
             hyp = [p[:-1] if p[-1].isnumeric() else p for p in hyp]
         else:
-            hyp = hyp_uid_to_tra[uid].split()
+            hyp = hyp_uid_to_tra[uid].split() # added
         logger.debug((
             f"======================\n"
             f"HYP: {' '.join(hyp)}\n"
@@ -79,14 +81,15 @@ def compute_wer(ref_uid_to_tra, hyp_uid_to_tra, g2p, g2p_dict):
         f"wer = {wer*100:.2f}%; num. of ref words = {w_cnt}; "
         f"num. of hyp words = {w_cnt_h}; num. of sentences = {len(ref_uid_to_tra)}"
     ))
-    return wer
+    return wer, hyp_uid_to_tra_phn #modified
 
 def compute_lm_ppl(hyp_uid_to_tra, score_fn):
     lm_score = 0.
     w_cnt = 0
     for hyp in hyp_uid_to_tra.values():
         cur_score = score_fn(hyp)
-        cur_cnt = len(hyp.split()) + 1  # plus one for </s>
+        # cur_cnt = len(hyp.split()) + 1  # plus one for </s>
+        cur_cnt = len(hyp.split()) + 2  # plus two for <s> and </s>
         lm_score += cur_score
         w_cnt += cur_cnt
         logger.debug((
@@ -120,15 +123,19 @@ def main():
         else:
             g2p = G2p()
 
-    wer = compute_wer(ref_uid_to_tra, hyp_uid_to_tra, g2p, g2p_dict)
-    lm_ppl = compute_lm_ppl(hyp_uid_to_tra, compute_lm_score)
+    wer, hyp_uid_to_tra_phn = compute_wer(ref_uid_to_tra, hyp_uid_to_tra, g2p, g2p_dict) #modified
+    if args.phonemize: # added (use phoneme LM instead of word LM)
+        lm_ppl = compute_lm_ppl(hyp_uid_to_tra_phn, compute_lm_score)
+    else:
+        lm_ppl = compute_lm_ppl(hyp_uid_to_tra, compute_lm_score)
     
     gt_wer = -math.inf
     if args.gt_tra:
         gt_uid_to_tra = load_tra(args.gt_tra)
-        gt_wer = compute_wer(gt_uid_to_tra, hyp_uid_to_tra, None, None)
+        gt_wer, _ = compute_wer(gt_uid_to_tra, hyp_uid_to_tra, None, None)
 
-    score = math.log(lm_ppl) * max(wer, args.min_vt_uer)
+    # score = math.log(lm_ppl) * max(wer, args.min_vt_uer)
+    score = 2.7 * math.log(lm_ppl) + max(wer, args.min_vt_uer) # reborn-style unsupervised metric. alpha=2.7
     logging.info(f"{args.hyp_tra}: score={score:.4f}; wer={wer*100:.2f}%; lm_ppl={lm_ppl:.4f}; gt_wer={gt_wer*100:.2f}%")
 
 if __name__ == "__main__":

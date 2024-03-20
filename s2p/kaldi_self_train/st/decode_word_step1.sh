@@ -9,6 +9,7 @@ out_dir=  # same as in train.sh
 lexicon=  # word to phone mapping
 wrd_arpa_lm=  # word LM
 wrd_arpa_lm_bin=  # word LM for KenLM, used in unsupervised selection
+phn_arpa_lm_bin= # phone LM for KenLM, used in unsupervised selection
 
 dec_exp=  # what HMM stage to decode (e.g., tri3b)
 dec_script=  # what decoding script to use (e.g., steps/decode_fmllr.sh)
@@ -38,7 +39,7 @@ local/decode.sh --nj 40 --graph_name graph${dec_suffix} --decode_suffix $dec_suf
   $out_dir/exp/$dec_exp $data_dir $data_dir/lang_test_word
 
 local/unsup_select_decode_word.sh \
-  --split $valid_split --kenlm_path $wrd_arpa_lm_bin \
+  --split $valid_split --kenlm_path $phn_arpa_lm_bin \
   --ref_txt $wrd_data_dir/${valid_split}_gt/text \
   --psd_txt $data_dir/${valid_split}/text \
   --dec_name decode${dec_suffix} --graph_name graph${dec_suffix} \

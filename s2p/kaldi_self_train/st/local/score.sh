@@ -10,8 +10,8 @@ cmd=run.pl
 stage=0
 decode_mbr=true
 word_ins_penalty=0.0,0.5,1.0
-min_lmwt=7
-max_lmwt=17
+min_lmwt=1
+max_lmwt=20
 iter=final
 #end configuration section.
 
