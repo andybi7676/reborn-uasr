@@ -40,8 +40,15 @@ ADD . reborn-uasr
 # install required python packages
 RUN pip install -r reborn-uasr/requirements.txt
 # install fairseq based on current version
-RUN pip install -e reborn-uasr/fairseq
+RUN pip install -e reborn-uasr/fairseq && cd reborn-uasr/fairseq && \
+    python setup.py build_ext --inplace
 ENV FAIRSEQ_ROOT=/workspace/reborn-uasr/fairseq
+# install and build nvidia/apex
+RUN git clone https://github.com/NVIDIA/apex && cd apex && \
+    pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation \
+    --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" \
+    --config-settings "--build-option=--deprecated_fused_adam" --config-settings "--build-option=--xentropy" \
+    --config-settings "--build-option=--fast_multihead_attn" ./
 # install kenlm
 RUN git clone https://github.com/kpu/kenlm.git && \
     cd kenlm && mkdir -p build && \

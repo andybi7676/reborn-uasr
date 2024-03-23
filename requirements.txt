@@ -7,3 +7,5 @@ datasets
 g2p_en
 editdistance
 edit_distance
+soundfile
+tensorboardX
