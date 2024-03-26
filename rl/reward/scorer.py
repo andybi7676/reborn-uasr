@@ -85,18 +85,19 @@ class Scorer(object):
             if merge_consecutives:
                 pred_units_arr = torch.unique_consecutive(pred_units_arr) # this will change the length of the sequence.
 
-            pred_units_arr = pred_units_arr.tolist()
-
             pred_c_len[i] = len(pred_units_arr)
 
             if t is not None:
                 t = t.tolist()
+                pred_units_arr_for_ter = pred_units_arr
                 if ter_rm_sil:
-                    pred_units_arr = pred_units_arr[(pred_units_arr != self.sil_id)]
-                c_err[i] = editdistance.eval(pred_units_arr, t)
+                    pred_units_arr_for_ter = pred_units_arr_for_ter[(pred_units_arr_for_ter != self.sil_id)]
+                pred_units_arr_for_ter = pred_units_arr_for_ter.tolist()
+                c_err[i] = editdistance.eval(pred_units_arr_for_ter, t)
                 c_len[i] = len(t)
             else:
                 c_len = pred_c_len
+            pred_units_arr = pred_units_arr.tolist()
 
             if self.lm is not None:
                 pred_str = self.dictionary.string(pred_units_arr)
