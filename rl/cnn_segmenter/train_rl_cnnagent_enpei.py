@@ -93,6 +93,7 @@ class RLCnnAgentConfig(object):
     num_epochs: int = 500
     learning_rate: float = 1e-5
     save_interval: int = 1
+    rm_sil: bool = False
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -154,7 +155,7 @@ class TrainRlCnnAgent(object):
                 # self.log("val_scores.csv exists but cannot be read")
 
         # Create csv file to save validation scores
-        self.val_score_csv = open(os.path.join(cfg.save_dir, "val_scores.csv"), "a")
+        self.val_score_csv = open(os.path.join(cfg.save_dir, "val_scores.csv"), "w")
     
     def log(self, msg):
         print(msg, file=self.log_fw, flush=True)
@@ -177,7 +178,7 @@ class TrainRlCnnAgent(object):
         if target is not None:
             result["target"] = target
         
-        scores = self.scorer.score(result)
+        scores = self.scorer.score(result, rm_sil=self.cfg.rm_sil)
 
         return scores
     
@@ -653,8 +654,13 @@ class TrainRlCnnAgent(object):
             p.param_group = "segmenter"
 
         # Check if the pre-trained model exists
-        if self.cfg.pretrain_segmenter_path is not None and not os.path.exists(self.cfg.pretrain_segmenter_path):
+        if (self.cfg.pretrain_segmenter_path is not None) and (self.cfg.pretrain_segmenter_path != "None") and not os.path.exists(self.cfg.pretrain_segmenter_path):
             raise Exception(f"Cannot find {self.cfg.pretrain_segmenter_path}")
+
+        if (self.cfg.pretrain_segmenter_path is None) or (self.cfg.pretrain_segmenter_path == "None"):
+            print("No pre-trained segmenter, use random initialization")
+            self.model.segmenter.boundary_predictor.train()
+            return
 
         # Load pre-trained CNN model
         try:
@@ -842,6 +848,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_dir", type=str, default="./output/rl_agent/ls_100h_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1")
     parser.add_argument("--seed", type=int, default=3)
     parser.add_argument("--save_interval", type=int, default=1)
+    parser.add_argument("--rm_sil", type=bool, default=False)
     args = parser.parse_args()
 
     rl_cfg = RLCnnAgentConfig()
