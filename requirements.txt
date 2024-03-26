@@ -9,3 +9,4 @@ editdistance
 edit_distance
 soundfile
 tensorboardX
+npy_append_array

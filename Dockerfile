@@ -41,7 +41,8 @@ ADD . reborn-uasr
 RUN pip install -r reborn-uasr/requirements.txt
 # install fairseq based on current version
 RUN pip install -e reborn-uasr/fairseq && cd reborn-uasr/fairseq && \
-    python setup.py build_ext --inplace
+    python setup.py build_ext --inplace && \
+    conda install -y pytorch::faiss-gpu
 ENV FAIRSEQ_ROOT=/workspace/reborn-uasr/fairseq
 # install and build nvidia/apex
 RUN git clone https://github.com/NVIDIA/apex && cd apex && \
