@@ -48,7 +48,7 @@ class Scorer(object):
         framewise_lm_scores = _framewise_lm_scores[bos:len(_framewise_lm_scores)-eos] # remove bos or eos scores to match sequence length
         return uttwise_lm_score, framewise_lm_scores
     
-    def score(self, result, merge_consecutives=False, rm_sil=False):
+    def score(self, result, merge_consecutives=False, rm_sil=False, ter_rm_sil=False):
         # pass
         dense_x = result["logits"] # [B, T, C]
         padding_mask = result["padding_mask"] # [B, T]
@@ -91,6 +91,8 @@ class Scorer(object):
 
             if t is not None:
                 t = t.tolist()
+                if ter_rm_sil:
+                    pred_units_arr = pred_units_arr[(pred_units_arr != self.sil_id)]
                 c_err[i] = editdistance.eval(pred_units_arr, t)
                 c_len[i] = len(t)
             else:

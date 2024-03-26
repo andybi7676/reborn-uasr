@@ -14,7 +14,7 @@ import os
 import os.path as osp
 from pathlib import Path
 import subprocess
-from typing import Optional
+from typing import Optional, Union
 
 from fairseq.data.dictionary import Dictionary
 from fairseq.dataclass import FairseqDataclass
@@ -61,7 +61,7 @@ def create_lexicon(
     unique_label: str,
     in_units_file: Path,
     out_words_file: Path,
-) -> tuple[Path, Path]:
+) -> Union[Path, Path]:
 
     disambig_in_units_file = fst_dir / f"kaldi_dict.{cfg.in_labels}_disambig.txt"
     lexicon_file = fst_dir / f"kaldi_lexicon.{unique_label}.txt"
@@ -131,7 +131,7 @@ def create_lexicon(
 
 def create_G(
     kaldi_root: Path, fst_dir: Path, lm_arpa: Path, arpa_base: str
-) -> tuple[Path, Path]:
+) -> Union[Path, Path]:
 
     out_words_file = fst_dir / f"kaldi_dict.{arpa_base}.txt"
     grammar_graph = fst_dir / f"G_{arpa_base}.fst"
@@ -295,7 +295,7 @@ def create_H(
     vocab: Dictionary,
     blk_sym: str,
     silence_symbol: Optional[str],
-) -> tuple[Path, Path, Path]:
+) -> Union[Path, Path, Path]:
     h_graph = (
         fst_dir / f"H.{in_labels}{'_' + silence_symbol if silence_symbol else ''}.fst"
     )
