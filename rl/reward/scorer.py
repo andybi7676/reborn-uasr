@@ -63,6 +63,7 @@ class Scorer(object):
         c_err = np.zeros(len(z), dtype=np.int) # edit distance errs of the batch
         c_len = np.zeros(len(z), dtype=np.int) # target length of the batch
         pred_c_len = np.zeros(len(z), dtype=np.int) # prediction length of the batch
+        pred_c_len_for_ter = np.zeros(len(z), dtype=np.int) # prediction length of the batch for ter
         lm_score_sum = 0 # lm score of the batch
         framewise_lm_scores = [] # framewise lm scores of the batch
         uttwise_lm_scores = [] # uttwise lm scores of the batch
@@ -95,6 +96,7 @@ class Scorer(object):
                 pred_units_arr_for_ter = pred_units_arr_for_ter.tolist()
                 c_err[i] = editdistance.eval(pred_units_arr_for_ter, t)
                 c_len[i] = len(t)
+                pred_c_len_for_ter[i] = len(pred_units_arr_for_ter)
             else:
                 c_len = pred_c_len
             pred_units_arr = pred_units_arr.tolist()
@@ -128,7 +130,7 @@ class Scorer(object):
             'uttwise_token_error_rates': c_err / c_len, # numpy array with shape (B,), uttwise token error rates
             'uttwise_token_errors': c_err, # numpy array with shape (B,), uttwise token errors
             'uttwise_target_token_lengths': c_len, # numpy array with shape (B,), uttwise token lengths
-            'uttwise_pred_token_lengths': pred_c_len, # numpy array with shape (B,), uttwise predicted token lengths
+            'uttwise_pred_token_lengths': pred_c_len_for_ter, # numpy array with shape (B,), uttwise token lengths
         }
         return scores
         # return self.lm.score(sentence)

@@ -94,6 +94,7 @@ class RLCnnAgentConfig(object):
     learning_rate: float = 1e-5
     save_interval: int = 1
     rm_sil: bool = False
+    ter_rm_sil: bool = False
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -178,7 +179,7 @@ class TrainRlCnnAgent(object):
         if target is not None:
             result["target"] = target
         
-        scores = self.scorer.score(result, rm_sil=self.cfg.rm_sil)
+        scores = self.scorer.score(result, rm_sil=self.cfg.rm_sil, ter_rm_sil=self.cfg.ter_rm_sil)
 
         return scores
     
@@ -485,9 +486,11 @@ class TrainRlCnnAgent(object):
                 features = features.to(device)
                 # # Get target
                 target = sample.get("target", None)
-                # Get aux targets
-                aux_targets = sample['net_input']['aux_target']
-                aux_targets = aux_targets.to(device)
+
+                if 'aux_target' in sample['net_input']:
+                    # Get aux targets
+                    aux_targets = sample['net_input']['aux_target']
+                    aux_targets = aux_targets.to(device)
 
                 # Get padding mask
                 padding_mask = sample['net_input']['padding_mask']
@@ -514,8 +517,9 @@ class TrainRlCnnAgent(object):
                     dense_x, dense_padding_mask = orig_dense_x, orig_dense_padding_mask
                     merge_ratio = np.zeros(orig_dense_padding_mask.size(0))
 
-                # Count boundary scores
-                boundary_scores = self.count_boundary_scores(aux_targets, boundary)
+                if 'aux_target' in sample['net_input']:
+                    # Count boundary scores
+                    boundary_scores = self.count_boundary_scores(aux_targets, boundary)
                 # Get scores
                 scores = self.get_score(dense_x, dense_padding_mask, target=target)
                 # Get rewards
@@ -533,10 +537,11 @@ class TrainRlCnnAgent(object):
                 uttwise_token_error_rates.extend(scores["uttwise_token_error_rates"])
                 uttwise_pred_token_lengths.extend(scores["uttwise_pred_token_lengths"])
                 uttwise_target_token_lengths.extend(scores["uttwise_target_token_lengths"])
-                boundary_f1.append(boundary_scores['f1'])
-                boundary_precision.append(boundary_scores['precision'])
-                boundary_recall.append(boundary_scores['recall'])
-                boundary_1s_ratio.append(boundary_scores['1s_ratio'])
+                if 'aux_target' in sample['net_input']:
+                    boundary_f1.append(boundary_scores['f1'])
+                    boundary_precision.append(boundary_scores['precision'])
+                    boundary_recall.append(boundary_scores['recall'])
+                    boundary_1s_ratio.append(boundary_scores['1s_ratio'])
 
                 # Log
                 # self.log_score(scores, 0.0, mean_rewards, step, len(dataloader), split='val', boundary_scores=boundary_scores, do_log=False)
@@ -849,6 +854,7 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=3)
     parser.add_argument("--save_interval", type=int, default=1)
     parser.add_argument("--rm_sil", type=bool, default=False)
+    parser.add_argument("--ter_rm_sil", type=bool, default=False)
     args = parser.parse_args()
 
     rl_cfg = RLCnnAgentConfig()
