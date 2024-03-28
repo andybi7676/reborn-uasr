@@ -8,7 +8,7 @@ common:
   tensorboard_logdir: tb
   wandb_project: null
   azureml_logging: false
-  seed: 1
+  seed: 2
   cpu: false
   tpu: false
   bf16: false
@@ -46,7 +46,7 @@ common_eval:
 distributed_training:
   _name: null
   distributed_world_size: 1
-  distributed_num_procs: 1
+  distributed_num_procs: 2
   distributed_rank: 0
   distributed_backend: nccl
   distributed_init_method: null
@@ -65,7 +65,7 @@ distributed_training:
   slowmo_momentum: null
   slowmo_algorithm: LocalSGD
   localsgd_frequency: 3
-  nprocs_per_node: 1
+  nprocs_per_node: 2
   pipeline_model_parallel: false
   pipeline_balance: null
   pipeline_devices: null
@@ -112,7 +112,7 @@ dataset:
 optimization:
   _name: null
   max_epoch: 0
-  max_update: 50000
+  max_update: 20000
   stop_time_hours: 0.0
   clip_norm: 5.0
   sentence_avg: false

@@ -5,3 +5,10 @@ SUB RATE: 2.2111096094066767 %
 total lines: 500
 total ref tokens: 36995
 total hyp tokens: 36875
+# test-bds
+SCORES:            Lenient      Harsh
+precision:          0.8475     0.6794
+recall:             0.7941     0.7794
+f1:                 0.8200     0.7260
+rval:               0.8418     0.7374
+

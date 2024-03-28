@@ -7,7 +7,7 @@
 - model.code_penalty=4
 - model.gradient_penalty=2.0
 - model.smoothness_weight=0.5
-- common.seed=1
+- common.seed=2
 - distributed_training.distributed_world_size=1
-- optimization.max_update=50000
+- optimization.max_update=20000
 - +description=en_ls100h/hb_ll60k_postITER1/ls860_unpaired_all
