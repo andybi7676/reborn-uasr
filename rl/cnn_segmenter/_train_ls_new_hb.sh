@@ -4,7 +4,8 @@ conda activate wav2vecu
 export PYTHONPATH=$PYTHONPATH:/home/r11921042/uasr-rl/fairseq
 
 WORK_DIR=/work/r11921042
-
+# lang=pt
+# LANG=PT
 tag=ls
 TAG=LS
 lang=en
@@ -16,13 +17,13 @@ hr_type=ll60k
 unpair_name=ls860
 
 coef_ter_list="0.2 0.0"
-coef_len_list="0.2 0.0"
-iter=1
+coef_len_list="0.2 0.0" # 0.4 0.6 0.8
+postfix="_tersil_bc"
+seeds="3"
 
 lr_list="1e-4"
-seed_list="3"
 
-for seed in ${seed_list}
+for seed in ${seeds}
 do
 for coef_ter in ${coef_ter_list}
 do
@@ -36,8 +37,8 @@ if [ $coef_ter = "0.0" ] && [ $coef_len != "0.0" ]; then
 fi
 
 # Check if ${WORK_DIR}/output/rl_agent/${tag}_${lang}/${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed3 exists
-if [ -d ${WORK_DIR}/output/rl_agent/${tag}_${lang}/${g_type}${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}_postITER${iter} ]; then
-    echo "Directory exists: ${WORK_DIR}/output/rl_agent/${tag}_${lang}/${g_type}${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}_postITER${iter}"
+if [ -d ${WORK_DIR}/output/rl_agent/${tag}_${lang}/${g_type}${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix} ]; then
+    echo "Directory exists: ${WORK_DIR}/output/rl_agent/${tag}_${lang}/${g_type}${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix}"
     continue
 fi
 
@@ -46,9 +47,9 @@ python3 train_rl_cnnagent_enpei.py \
     --data_dir ${WORK_DIR}/data/${dataset_name}/${g_type}${hr_type} \
     --kenlm_fpath ${WORK_DIR}/data/${dataset_name}/text/prep/phones/lm.phones.filtered.04.bin \
     --dict_fpath ../dict/${lang}_${dataset}/dict.txt \
-    --pretrain_segmenter_path ./output/local/cnn_segmenter/${g_type}${tag}_postITER${iter}_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt \
-    --pretrain_wav2vecu_path ../../s2p/multirun/${lang}_${dataset}/${g_type}${hr_type}_postITER${iter}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt \
-    --w2vu_postfix w2vu_logit_segmented_postITER${iter} \
+    --pretrain_segmenter_path ./output/local/cnn_segmenter/${g_type}${tag}_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt \
+    --pretrain_wav2vecu_path ../../s2p/multirun/${lang}_${dataset}/${g_type}${hr_type}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt \
+    --w2vu_postfix w2vu_logit_segmented \
     --env ../../env.yaml \
     --gamma 1.0 \
     --ter_tolerance 0.0 \
@@ -62,11 +63,11 @@ python3 train_rl_cnnagent_enpei.py \
     --num_epochs 40 \
     --learning_rate ${lr} \
     --seed ${seed} \
-    --save_dir ${WORK_DIR}/output/rl_agent/${tag}_${lang}/${g_type}${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}_postITER${iter} \
+    --save_dir ${WORK_DIR}/output/rl_agent/${tag}_${lang}/${g_type}${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix} \
     --save_interval 4 \
-    --ter_rm_sil True
-    # --rm_sil False # [Only for wosil LM]
-    # --pretrain_segmenter_path /work/r11921042/output/rl_agent/ls_en/LS_EN_pplNorm1.0_tokerr0.2_lenratio0.2_lr1e-4_epoch40_seed3/rl_agent_segmenter_epoch40.pt \
+    --ter_rm_sil 
+    # --rm_sil # [Only for wosil LM]
+    # --pretrain_segmenter_path None \
 
 done
 done
