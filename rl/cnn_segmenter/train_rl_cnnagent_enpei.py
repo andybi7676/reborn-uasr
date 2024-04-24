@@ -21,8 +21,9 @@ import numpy as np
 from fairseq import checkpoint_utils, tasks, utils
 from sklearn.metrics import precision_score, recall_score, f1_score
 import wandb
+import math
 
-WORK_DIR="/work/r11921042"
+# WORK_DIR="/work"
 
 class RLCnnAgentConfig(object):
     # config_name: str = "librispeech" # "librispeech" or "timit_matched" or "timit_unmatched"
@@ -93,7 +94,7 @@ class RLCnnAgentConfig(object):
     num_epochs: int = 500
     learning_rate: float = 1e-5
     save_interval: int = 1
-    rm_sil: bool = False
+    lm_rm_sil: bool = False
     ter_rm_sil: bool = False
 
 class TrainRlCnnAgent(object):
@@ -119,32 +120,44 @@ class TrainRlCnnAgent(object):
         torch.manual_seed(cfg.seed)
         np.random.seed(cfg.seed)
 
-
         # use pandas to save csv
         import pandas as pd
         self.val_score_df = pd.DataFrame(
             columns=[
                 "run_name",
+                "epoch",
                 "model_name",
-                "batchwise_lm_ppl",
+                "dataset_sample_size",
+                "datasetwise_entropy_sum",
+                "datasetwise_lm_ppl",
+                "datasetwise_token_error_rate",
+                "datasetwise_vocab_seen_percentage",
+                "target_entropy_sum",
+                "target_datasetwise_lm_ppl",
+                "pred_token_length_sum",
+                "target_token_length_sum",
+                "pred_token_length_sum_no_sil",
+                "target_token_length_sum_no_sil",
+                "uttwise_vocab_seen_percentage",
                 "uttwise_lm_ppl",
-                "vocab_seen_percentage",
-                "framewise_lm_scores",
-                # "merge_ratio",
                 "target_uttwise_lm_ppl",
+                "framewise_lm_scores",
                 "uttwise_token_error_rate",
                 "uttwise_pred_token_length",
                 "uttwise_target_token_length",
-                "relative_lm_ppl",
+                "uttwise_pred_token_length_no_sil",
+                "uttwise_target_token_length_no_sil",
+                "uttwise_relative_lm_ppl",
                 "ppl_outperform_ratio",
-                "relative_length_ratio",
-                "length_diff_ratio",
+                "uttwise_relative_length_ratio",
+                "uttwise_length_diff_ratio",
                 "boundary_f1",
                 "boundary_precision",
                 "boundary_recall",
                 "boundary_1s_ratio",
                 "avg_rewards",
                 "eval_score",
+                # "merge_ratio",
             ])
 
         # Check if the csv file exists and it can be read
@@ -161,7 +174,7 @@ class TrainRlCnnAgent(object):
     def log(self, msg):
         print(msg, file=self.log_fw, flush=True)
 
-    def get_score(self, pred_logits, padding_mask, target=None):
+    def get_score(self, pred_logits, padding_mask, target=None, return_transcript=False):
         """
         Reward function for RL agent
         Return:
@@ -179,7 +192,7 @@ class TrainRlCnnAgent(object):
         if target is not None:
             result["target"] = target
         
-        scores = self.scorer.score(result, rm_sil=self.cfg.rm_sil, ter_rm_sil=self.cfg.ter_rm_sil)
+        scores = self.scorer.score(result, lm_rm_sil=self.cfg.lm_rm_sil, ter_rm_sil=self.cfg.ter_rm_sil, return_transcript=return_transcript) 
 
         return scores
     
@@ -196,8 +209,8 @@ class TrainRlCnnAgent(object):
         uttwise_lm_ppls = scores['uttwise_lm_ppls']
         target_uttwise_lm_ppls = scores['target_uttwise_lm_ppls']
         uttwise_token_error_rates = scores['uttwise_token_error_rates']
-        uttwise_pred_token_lengths = scores['uttwise_pred_token_lengths']
-        uttwise_target_token_lengths = scores['uttwise_target_token_lengths']
+        uttwise_pred_token_lengths = scores['uttwise_pred_token_lengths_no_sil'] if self.cfg.ter_rm_sil else scores['uttwise_pred_token_lengths'] # length follow token error rate setting
+        uttwise_target_token_lengths = scores['uttwise_target_token_lengths_no_sil'] if self.cfg.ter_rm_sil else scores['uttwise_target_token_lengths']
         length_ratio = uttwise_pred_token_lengths / uttwise_target_token_lengths
         
 
@@ -211,17 +224,21 @@ class TrainRlCnnAgent(object):
         length_ratio_loss[length_ratio_loss < self.cfg.length_tolerance] = 0.0
         uttwise_token_error_rates[uttwise_token_error_rates < self.cfg.ter_tolerance] = 0.0
        
-        # reward standardization
+        # relative rewards
         if len(target_uttwise_lm_ppls) == len(uttwise_lm_ppls):
             uttwise_lm_ppls = uttwise_lm_ppls - target_uttwise_lm_ppls
             # clip rewards
             # uttwise_lm_ppls = torch.clamp(uttwise_lm_ppls, -5, 5)
-        else:
-            uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
+        # else:
+        #     uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
 
         # unstandardized rewards
         mean_rewards = - uttwise_lm_ppls.mean().item() * self.cfg.utterwise_lm_ppl_coeff - uttwise_token_error_rates.mean().item() * self.cfg.utterwise_token_error_rate_coeff - length_ratio_loss.mean().item() * self.cfg.length_ratio_coeff
 
+        if len(uttwise_lm_ppls) == 1: # only one utterance for validation
+            return None, mean_rewards
+
+        # standardize rewards
         uttwise_lm_ppls = (uttwise_lm_ppls - uttwise_lm_ppls.mean()) / uttwise_lm_ppls.std()
         uttwise_token_error_rates = (uttwise_token_error_rates - uttwise_token_error_rates.mean()) / uttwise_token_error_rates.std()
         length_ratio_loss = (length_ratio_loss - length_ratio_loss.mean()) / length_ratio_loss.std()
@@ -292,8 +309,12 @@ class TrainRlCnnAgent(object):
         mean_uttwise_token_error_rates = sum(uttwise_token_error_rates) / len(uttwise_token_error_rates)
         uttwise_target_token_lengths = scores['uttwise_target_token_lengths']
         uttwise_pred_token_lengths = scores['uttwise_pred_token_lengths']
+        uttwise_target_token_lengths_no_sil = scores['uttwise_target_token_lengths_no_sil']
+        uttwise_pred_token_lengths_no_sil = scores['uttwise_pred_token_lengths_no_sil']
         mean_length_ratio = sum(uttwise_pred_token_lengths / uttwise_target_token_lengths) / len(uttwise_target_token_lengths)
         mean_pred_token_lengths = sum(uttwise_pred_token_lengths) / len(uttwise_pred_token_lengths)
+        mean_length_ratio_no_sil = sum(uttwise_pred_token_lengths_no_sil / uttwise_target_token_lengths_no_sil) / len(uttwise_target_token_lengths_no_sil)
+        mean_pred_token_lengths_no_sil = sum(uttwise_pred_token_lengths_no_sil) / len(uttwise_pred_token_lengths_no_sil)
 
         log_dict = {
             f'{split}_loss': total_loss,
@@ -306,6 +327,8 @@ class TrainRlCnnAgent(object):
             f'{split}_mean_uttwise_token_error_rates': mean_uttwise_token_error_rates,
             f'{split}_mean_length_ratio': mean_length_ratio,
             f'{split}_mean_pred_token_lengths': mean_pred_token_lengths,
+            f'{split}_mean_length_ratio_no_sil': mean_length_ratio_no_sil,
+            f'{split}_mean_pred_token_lengths_no_sil': mean_pred_token_lengths_no_sil,
         }
         if boundary_scores is not None:
             log_dict.update({
@@ -459,19 +482,42 @@ class TrainRlCnnAgent(object):
         total_rewards = 0.0
 
         # Record scores
-        batchwise_lm_ppl = []
+        # batchwise_lm_ppl = [] # change to datasetwise_lm_ppl
+        lm_score_sum = 0.0
+        target_lm_score_sum = 0.0
         uttwise_lm_ppls = []
         vocab_seen_percentage = []
         framewise_lm_scores = []
         # merge_ratio = []
         target_uttwise_lm_ppls = []
         uttwise_token_error_rates = []
+        token_errors_sum = 0
         uttwise_pred_token_lengths = []
         uttwise_target_token_lengths = []
+        uttwise_pred_token_lengths_no_sil = []
+        uttwise_target_token_lengths_no_sil = []
         boundary_f1 = []
         boundary_precision = []
         boundary_recall = []
         boundary_1s_ratio = []
+
+        # Write transcriptions and vocab_seen to file
+
+        # create validation directory
+        os.makedirs(os.path.join(self.cfg.save_dir, "val_results"), exist_ok=True)
+
+        # Create file to store utterance-wise results
+        if self.current_epoch == 0:
+            target_transcriptions_fw = open(os.path.join(self.cfg.save_dir, "val_results", "target_transcriptions_units.txt".format(self.current_epoch)), "w")
+            target_transcriptions_no_sil_fw = open(os.path.join(self.cfg.save_dir, "val_results", "target_transcriptions.txt".format(self.current_epoch)), "w")
+        uttwise_result_fw = open(os.path.join(self.cfg.save_dir, "val_results", "uttwise_results_epoch{}.txt".format(self.current_epoch)), "w")
+        # uttwise_lm_ppls, uttwise_token_error_rates, uttwise_pred_token_lengths, uttwise_target_token_lengths, uttwise_pred_token_lengths_no_sil, uttwise_target_token_lengths_no_sil, framewise_lm_scores_len
+        uttwise_result_fw.write("ppl ter pred_len target_len pred_len_no_sil target_len_no_sil lm_frame_len\n")
+
+        transcriptions_fw = open(os.path.join(self.cfg.save_dir, "val_results", "transcriptions_units_epoch{}.txt".format(self.current_epoch)), "w")
+        transcriptions_no_sil_fw = open(os.path.join(self.cfg.save_dir, "val_results", "transcriptions_epoch{}.txt".format(self.current_epoch)), "w")
+
+        datasetwise_vocab_seen = torch.zeros(self.scorer.num_symbols, dtype=torch.bool) # count datasetwise_vocab_seen
         
         print('Validation')
         self.log('Validation')
@@ -497,7 +543,7 @@ class TrainRlCnnAgent(object):
                 padding_mask = padding_mask.to(device)
 
                 # Get boundary logits
-                features, padding_mask, boundary, boundary_logits = model.segmenter.pre_segment(features, padding_mask, return_boundary=True) # deterministic?
+                features, padding_mask, boundary, boundary_logits = model.segmenter.pre_segment(features, padding_mask, return_boundary=True, deterministic=True) # deterministic?
 
                 orig_size = features.size(0) * features.size(1) - padding_mask.sum()
 
@@ -521,40 +567,76 @@ class TrainRlCnnAgent(object):
                     # Count boundary scores
                     boundary_scores = self.count_boundary_scores(aux_targets, boundary)
                 # Get scores
-                scores = self.get_score(dense_x, dense_padding_mask, target=target)
+                scores = self.get_score(dense_x, dense_padding_mask, target=target, return_transcript=True) 
                 # Get rewards
                 rewards, mean_rewards = self.compute_rewards(scores, boundary, merge_ratio)
 
                 # Record scores
                 total_rewards += mean_rewards
-                batchwise_lm_ppl.append(scores["batchwise_lm_ppl"])
+                # batchwise_lm_ppl.append(scores["batchwise_lm_ppl"])
+                lm_score_sum += scores["lm_score_sum"]
+                target_lm_score_sum += scores["target_lm_score_sum"]
                 uttwise_lm_ppls.extend(scores["uttwise_lm_ppls"])
                 vocab_seen_percentage.append(scores["vocab_seen_percentage"])
+                datasetwise_vocab_seen = datasetwise_vocab_seen | scores["vocab_seen"]
                 # mean of framewise_lm_scores of each utterance
                 framewise_lm_scores.extend([np.mean(x) for x in scores["framewise_lm_scores"]])
                 # merge_ratio.append(merge_ratio)
                 target_uttwise_lm_ppls.extend(scores["target_uttwise_lm_ppls"])
                 uttwise_token_error_rates.extend(scores["uttwise_token_error_rates"])
+                token_errors_sum += scores["uttwise_token_errors"].sum()
                 uttwise_pred_token_lengths.extend(scores["uttwise_pred_token_lengths"])
                 uttwise_target_token_lengths.extend(scores["uttwise_target_token_lengths"])
+                uttwise_pred_token_lengths_no_sil.extend(scores["uttwise_pred_token_lengths_no_sil"])
+                uttwise_target_token_lengths_no_sil.extend(scores["uttwise_target_token_lengths_no_sil"])
+
                 if 'aux_target' in sample['net_input']:
                     boundary_f1.append(boundary_scores['f1'])
                     boundary_precision.append(boundary_scores['precision'])
                     boundary_recall.append(boundary_scores['recall'])
                     boundary_1s_ratio.append(boundary_scores['1s_ratio'])
 
+                # transcriptions.extend(scores["transcriptions"])
+                # target_transcriptions.extend(scores["target_transcriptions"])
+                 
+                # Write transcriptions to file
+                if self.current_epoch == 0:
+                    for i in range(len(scores["target_transcriptions"])):
+                        target_transcriptions_fw.write(scores["target_transcriptions"][i] + "\n")
+                        target_transcriptions_no_sil_fw.write(scores["target_transcriptions_no_sil"][i] + "\n")
+                for i in range(len(scores["transcriptions"])):
+                    transcriptions_fw.write(scores["transcriptions"][i] + "\n")
+                    transcriptions_no_sil_fw.write(scores["transcriptions_no_sil"][i] + "\n")
+
+                # Write uttwise results to file
+                for i in range(len(scores["uttwise_token_error_rates"])):
+                    uttwise_result_fw.write(f'{scores["uttwise_lm_ppls"][i]} {scores["uttwise_token_error_rates"][i]} {scores["uttwise_pred_token_lengths"][i]} {scores["uttwise_target_token_lengths"][i]} {scores["uttwise_pred_token_lengths_no_sil"][i]} {scores["uttwise_target_token_lengths_no_sil"][i]} {len(scores["framewise_lm_scores"][i])}\n')
+
                 # Log
                 # self.log_score(scores, 0.0, mean_rewards, step, len(dataloader), split='val', boundary_scores=boundary_scores, do_log=False)
+
+        # count datasetwise_vocab_seen_percentage, datasetwise_lm_ppl, target_datasetwise_lm_ppl, datasetwise_token_error_rate
+        pred_token_length_sum = sum(uttwise_pred_token_lengths)
+        target_token_length_sum = sum(uttwise_target_token_lengths)
+        pred_token_length_sum_no_sil = sum(uttwise_pred_token_lengths_no_sil)
+        target_token_length_sum_no_sil = sum(uttwise_target_token_lengths_no_sil)
+        datasetwise_vocab_seen_percentage = datasetwise_vocab_seen.sum().item() / self.scorer.num_symbols
+        datasetwise_lm_score = lm_score_sum /((pred_token_length_sum_no_sil if self.cfg.lm_rm_sil else pred_token_length_sum) + len(uttwise_pred_token_lengths))
+        datasetwise_lm_ppl = math.pow(10, -datasetwise_lm_score)
+        target_datasetwise_lm_score = target_lm_score_sum / ((target_token_length_sum_no_sil if self.cfg.lm_rm_sil else target_token_length_sum) + len(uttwise_target_token_lengths))
+        target_datasetwise_lm_ppl = math.pow(10, -target_datasetwise_lm_score)
+        datasetwise_token_error_rate = token_errors_sum / (target_token_length_sum_no_sil if self.cfg.ter_rm_sil else target_token_length_sum)
 
         # count custum reward
         relative_lm_ppl = np.array(uttwise_lm_ppls) - np.array(target_uttwise_lm_ppls)
         ppl_outperform_ratio = (relative_lm_ppl < 0).sum() / len(relative_lm_ppl)
-        relative_length_ratio = np.array(uttwise_pred_token_lengths) / np.array(uttwise_target_token_lengths)
+        relative_length_ratio = (np.array(uttwise_pred_token_lengths_no_sil) / np.array(uttwise_target_token_lengths_no_sil)) if self.cfg.ter_rm_sil else (np.array(uttwise_pred_token_lengths) / np.array(uttwise_target_token_lengths))
         length_diff_ratio = np.abs(relative_length_ratio - 1)
         avg_rewards = total_rewards / len(dataloader)
 
         # evaluation metrics: -batchwise_lm_ppl / vocab_seen_percentage
-        eval_score = -np.mean(batchwise_lm_ppl) / np.mean(vocab_seen_percentage)
+        # eval_score = -np.mean(batchwise_lm_ppl) / np.mean(vocab_seen_percentage)
+        eval_score = lm_score_sum / datasetwise_vocab_seen_percentage
 
         avg_boundary_scores = {
             'f1': np.mean(boundary_f1),
@@ -565,20 +647,34 @@ class TrainRlCnnAgent(object):
         # Record average scores
         eval_dict = {
             "run_name": self.cfg.save_dir.split('/')[-1],
+            "epoch": self.current_epoch,
             "model_name": self.model_name,
-            "batchwise_lm_ppl": np.mean(batchwise_lm_ppl),
-            "uttwise_lm_ppl": np.mean(uttwise_lm_ppls),
-            "vocab_seen_percentage": np.mean(vocab_seen_percentage),
-            "framewise_lm_scores": np.mean(framewise_lm_scores),
+            "dataset_sample_size": len(dataloader.dataset),
+            "datasetwise_entropy_sum": lm_score_sum,
+            "datasetwise_lm_ppl": datasetwise_lm_ppl,
+            "datasetwise_token_error_rate": datasetwise_token_error_rate,
+            "datasetwise_vocab_seen_percentage": datasetwise_vocab_seen_percentage,
+            "target_entropy_sum": target_lm_score_sum,
+            "target_datasetwise_lm_ppl": target_datasetwise_lm_ppl,
+            "pred_token_length_sum": pred_token_length_sum,
+            "target_token_length_sum": target_token_length_sum,
+            "pred_token_length_sum_no_sil": pred_token_length_sum_no_sil,
+            "target_token_length_sum_no_sil": target_token_length_sum_no_sil,
+            # "batchwise_lm_ppl": np.mean(batchwise_lm_ppl),
             # "merge_ratio": np.mean(merge_ratio),
+            "uttwise_vocab_seen_percentage": np.mean(vocab_seen_percentage),
+            "uttwise_lm_ppl": np.mean(uttwise_lm_ppls),
             "target_uttwise_lm_ppl": np.mean(target_uttwise_lm_ppls),
+            "framewise_lm_scores": np.mean(framewise_lm_scores),
             "uttwise_token_error_rate": np.mean(uttwise_token_error_rates),
             "uttwise_pred_token_length": np.mean(uttwise_pred_token_lengths),
             "uttwise_target_token_length": np.mean(uttwise_target_token_lengths),
-            "relative_lm_ppl": np.mean(relative_lm_ppl),
+            "uttwise_pred_token_length_no_sil": np.mean(uttwise_pred_token_lengths_no_sil),
+            "uttwise_target_token_length_no_sil": np.mean(uttwise_target_token_lengths_no_sil),
+            "uttwise_relative_lm_ppl": np.mean(relative_lm_ppl),
             "ppl_outperform_ratio": ppl_outperform_ratio,
-            "relative_length_ratio": np.mean(relative_length_ratio),
-            "length_diff_ratio": np.mean(length_diff_ratio),
+            "uttwise_relative_length_ratio": np.mean(relative_length_ratio),
+            "uttwise_length_diff_ratio": np.mean(length_diff_ratio),
             "boundary_f1": avg_boundary_scores['f1'],
             "boundary_precision": avg_boundary_scores['precision'],
             "boundary_recall": avg_boundary_scores['recall'],
@@ -592,7 +688,6 @@ class TrainRlCnnAgent(object):
             save_best = True
             self.log(f"Best validation score: {self.best_valid_score}")
 
-
             # Record for validation csv ('rl_agent_segmenter_best')
             self.eval_dict_best = eval_dict.copy()
             # Change model name
@@ -600,11 +695,11 @@ class TrainRlCnnAgent(object):
 
         
         # Log scores
-        print(f'Validation')
+        # print(f'Validation')
         for key in eval_dict:
             print(f'{key}: {eval_dict[key]}')
         print('-' * 10)
-        self.log(f'Validation')
+        # self.log(f'Validation')
         for key in eval_dict:
             self.log(f'{key}: {eval_dict[key]}')
         self.log('-' * 10)
@@ -614,8 +709,30 @@ class TrainRlCnnAgent(object):
                 "val/" + key: eval_dict[key] for key in eval_dict
             })
 
+        # write vocab_seen to file
+        with open(os.path.join(self.cfg.save_dir, f"val_results/vocab_seen_epoch{self.current_epoch}.txt"), "w") as f:
+            sil_idx = self.scorer.dictionary.index('<SIL>')
+            for i in range(len(self.scorer.dictionary)):
+                if i < self.scorer.dictionary.nspecial:
+                    f.write(f"{self.scorer.dictionary[i]}\tSPECIAL\n")
+                else:
+                    f.write(f"{self.scorer.dictionary[i]}\t{datasetwise_vocab_seen[i-self.scorer.dictionary.nspecial].item()}\n")
+
+        # close file
+        if self.current_epoch == 0:
+            target_transcriptions_fw.close()
+            target_transcriptions_no_sil_fw.close()
+        uttwise_result_fw.close()
+        transcriptions_fw.close()
+        transcriptions_no_sil_fw.close()
+
         # Save scores
         self.val_score_df = self.val_score_df.append(eval_dict, ignore_index=True)
+
+        # Clear then write to csv
+        self.val_score_csv.truncate(0)
+
+        # Write to csv
         self.val_score_df.to_csv(self.val_score_csv, index=False)
         # Flush csv
         self.val_score_csv.flush()
@@ -722,9 +839,9 @@ class TrainRlCnnAgent(object):
         GRADIENT_ACCUMULATION_STEPS = 1
         LOG_STEPS = 1
         SAVE_INTERVAL = self.cfg.save_interval
-        STEPS_PER_EPOCH = len(train_dataset) // BATCH_SIZE + 1
+        STEPS_PER_EPOCH = math.ceil(len(train_dataset) / BATCH_SIZE)
         MAX_STEPS_PER_EPOCH = None
-        MAX_VAL_STEPS = len(valid_dataset) // BATCH_SIZE + 1
+        MAX_VAL_STEPS = len(valid_dataset) # // BATCH_SIZE + (1 if len(valid_dataset) % BATCH_SIZE != 0 else 0)
 
         # wandb config update
         self.cfg.batch_size = BATCH_SIZE
@@ -782,6 +899,7 @@ class TrainRlCnnAgent(object):
             print("Will apply merge penalty.")
         
         # Validate
+        self.current_epoch = self.cfg.start_epoch
         self.model_name = f'rl_agent_segmenter_epoch{self.cfg.start_epoch}.pt'
         self.validate_rl_agent_epoch(self.model, self.valid_dataloader, device)
 
@@ -791,6 +909,8 @@ class TrainRlCnnAgent(object):
         for epoch in range(self.cfg.start_epoch, NUM_EPOCHS):
             print(f'Epoch {epoch + 1}/{NUM_EPOCHS}')
             print('-' * 10)
+
+            self.current_epoch = epoch + 1
 
             # Train
             self.train_rl_agent_epoch(self.model, self.train_dataloader, optimizer, device, scheduler, LOG_STEPS, GRADIENT_ACCUMULATION_STEPS)
@@ -818,6 +938,9 @@ class TrainRlCnnAgent(object):
 
         # Add best model to val_score_df
         self.val_score_df = self.val_score_df.append(self.eval_dict_best, ignore_index=True)
+
+        # Clear then write to csv
+        self.val_score_csv.truncate(0)
         self.val_score_df.to_csv(self.val_score_csv, index=False)
         # Flush csv
         self.val_score_csv.flush()
@@ -839,11 +962,12 @@ if __name__ == "__main__":
     parser.add_argument("--gamma", type=float, default=1.0)
     parser.add_argument("--ter_tolerance", type=float, default=0.0)
     parser.add_argument("--length_tolerance", type=float, default=0.0)
-    parser.add_argument("--logit_segment", type=bool, default=True)
+    parser.add_argument("--logit_segment", action='store_true', default=True)
+    parser.add_argument("--no-logit_segment", dest='logit_segment', action='store_false')
     parser.add_argument("--apply_merge_penalty", type=bool, default=False) 
     # store_false: apply merge penalty, if no-apply_merge_penalty, then store_false
     parser.add_argument('--no-apply_merge_penalty', dest='apply_merge_penalty', action='store_false')
-    parser.add_argument("--wandb_log", type=bool, default=True)
+    parser.add_argument("--wandb_log", action='store_true', default=False)
     parser.add_argument("--utterwise_lm_ppl_coeff", type=float, default=1.0)
     parser.add_argument("--utterwise_token_error_rate_coeff", type=float, default=1.0)
     parser.add_argument("--length_ratio_coeff", type=float, default=0.0)
@@ -853,8 +977,8 @@ if __name__ == "__main__":
     parser.add_argument("--save_dir", type=str, default="./output/rl_agent/ls_100h_clean_postITER1/ls_wo_lv_g2p_all/cp4_gp1.5_sw0.5/seed1")
     parser.add_argument("--seed", type=int, default=3)
     parser.add_argument("--save_interval", type=int, default=1)
-    parser.add_argument("--rm_sil", type=bool, default=False)
-    parser.add_argument("--ter_rm_sil", type=bool, default=False)
+    parser.add_argument("--lm_rm_sil", action='store_true', default=False)
+    parser.add_argument("--ter_rm_sil", action='store_true', default=False)
     args = parser.parse_args()
 
     rl_cfg = RLCnnAgentConfig()

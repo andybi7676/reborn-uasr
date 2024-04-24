@@ -45,10 +45,16 @@ class Scorer(object):
     def compute_uttwise_and_framewise_lm_score(self, sentence: str, bos=True, eos=True) -> float:
         _framewise_lm_scores = [log_prob for log_prob,_ , _ in self.lm.full_scores(sentence, bos=bos, eos=eos)]
         uttwise_lm_score = sum(_framewise_lm_scores)
-        framewise_lm_scores = _framewise_lm_scores[bos:len(_framewise_lm_scores)-eos] # remove bos or eos scores to match sequence length
-        return uttwise_lm_score, framewise_lm_scores
+        # for score, ngram_length, oov in self.lm.full_scores(sentence, bos=bos, eos=eos):
+        #     print(f"Log probability: {score}, N-gram length: {ngram_length}, Is OOV: {oov}")
+        # print(f"uttwise lm score: {uttwise_lm_score}")
+        # print("framewise lm scores len: ", len(_framewise_lm_scores))
+        # for i in range(len(_framewise_lm_scores)):
+        #     print(f"{sentence[i]}: {_framewise_lm_scores[i]}")
+        # framewise_lm_scores = _framewise_lm_scores[bos:len(_framewise_lm_scores)-eos] # remove bos or eos scores to match sequence length
+        return uttwise_lm_score, _framewise_lm_scores
     
-    def score(self, result, merge_consecutives=False, rm_sil=False, ter_rm_sil=False):
+    def score(self, result, merge_consecutives=False, lm_rm_sil=False, ter_rm_sil=False, return_transcript=False): # , ter_rm_sil=False
         # pass
         dense_x = result["logits"] # [B, T, C]
         padding_mask = result["padding_mask"] # [B, T]
@@ -62,12 +68,21 @@ class Scorer(object):
 
         c_err = np.zeros(len(z), dtype=np.int) # edit distance errs of the batch
         c_len = np.zeros(len(z), dtype=np.int) # target length of the batch
+        c_len_no_sil = np.zeros(len(z), dtype=np.int) # target length of the batch for no sil
         pred_c_len = np.zeros(len(z), dtype=np.int) # prediction length of the batch
-        pred_c_len_for_ter = np.zeros(len(z), dtype=np.int) # prediction length of the batch for ter
+        pred_c_len_no_sil = np.zeros(len(z), dtype=np.int) # prediction length of the batch for no sil
         lm_score_sum = 0 # lm score of the batch
         framewise_lm_scores = [] # framewise lm scores of the batch
         uttwise_lm_scores = [] # uttwise lm scores of the batch
         target_uttwise_lm_scores = [] # uttwise lm scores of the batch of target sentences
+
+        if return_transcript:
+            transcriptions = [] # transcriptions of the batch
+            target_transcriptions = [] # transcriptions of the target sentences
+            target_lm_score_sum = 0 # lm score of the target sentences
+            transcriptions_no_sil = [] # transcriptions of the batch without sil
+            target_transcriptions_no_sil = [] # transcriptions of the target sentences without sil
+
         for i, (x, t) in enumerate(
             zip(
                 z,
@@ -76,47 +91,61 @@ class Scorer(object):
         ):
             if t is not None:
                 t = t[(t >= self.dictionary.nspecial)]
+                # if rm_sil:
+                t_no_sil = t[(t != self.sil_id)]
             x = x[(x >= self.dictionary.nspecial)] # for safety
-            if rm_sil:
-                x = x[(x != self.sil_id)] # this is dangerous because it will change the length of the sequence
+            # if rm_sil:
+            x_no_sil = x[(x != self.sil_id)]
 
             vocab_seen[x - self.dictionary.nspecial] = True
 
             pred_units_arr = x
+            pred_units_arr_no_sil = x_no_sil
             if merge_consecutives:
                 pred_units_arr = torch.unique_consecutive(pred_units_arr) # this will change the length of the sequence.
+                pred_units_arr_no_sil = torch.unique_consecutive(pred_units_arr_no_sil)
 
             pred_c_len[i] = len(pred_units_arr)
+            pred_units_arr = pred_units_arr.tolist()
+            pred_c_len_no_sil[i] = len(pred_units_arr_no_sil)
+            pred_units_arr_no_sil = pred_units_arr_no_sil.tolist()
 
             if t is not None:
-                t = t.tolist()
-                pred_units_arr_for_ter = pred_units_arr
                 if ter_rm_sil:
-                    pred_units_arr_for_ter = pred_units_arr_for_ter[(pred_units_arr_for_ter != self.sil_id)]
-                pred_units_arr_for_ter = pred_units_arr_for_ter.tolist()
-                c_err[i] = editdistance.eval(pred_units_arr_for_ter, t)
+                    t_no_sil = t_no_sil.tolist()
+                    c_err[i] = editdistance.eval(pred_units_arr_no_sil, t_no_sil)
+                else:
+                    t = t.tolist()
+                    c_err[i] = editdistance.eval(pred_units_arr, t)
                 c_len[i] = len(t)
-                pred_c_len_for_ter[i] = len(pred_units_arr_for_ter)
+                c_len_no_sil[i] = len(t_no_sil)
             else:
                 c_len = pred_c_len
-            pred_units_arr = pred_units_arr.tolist()
 
             if self.lm is not None:
                 pred_str = self.dictionary.string(pred_units_arr)
-                uttwise_lm_score, framewise_lm_score = self.compute_uttwise_and_framewise_lm_score(pred_str)
+                pred_str_no_sil = self.dictionary.string(pred_units_arr_no_sil)
+                uttwise_lm_score, framewise_lm_score = self.compute_uttwise_and_framewise_lm_score( (pred_str_no_sil if lm_rm_sil else pred_str) )
                 if t is not None:
                     target_str = self.dictionary.string(t)
-                    if rm_sil:
-                        target_str = target_str.replace(f" {self.sil_tok}", "")
-                        target_str = target_str.replace(f"{self.sil_tok} ", "")
-                    target_uttwise_lm_score, _ = self.compute_uttwise_and_framewise_lm_score(target_str)
-                    target_uttwise_lm_scores.append(target_uttwise_lm_score / (len(t) + 2))
+                    target_str_no_sil = self.dictionary.string(t_no_sil)
+                    # if rm_sil:
+                    #    target_str = target_str.replace(f" {self.sil_tok}", "")
+                    #    target_str = target_str.replace(f"{self.sil_tok} ", "")
+                    target_uttwise_lm_score, _ = self.compute_uttwise_and_framewise_lm_score((target_str_no_sil if lm_rm_sil else target_str))
+                    target_uttwise_lm_scores.append(target_uttwise_lm_score / ((len(t_no_sil) + 1) if lm_rm_sil else (len(t) + 1)))
+                    if return_transcript:
+                        transcriptions.append(pred_str)
+                        transcriptions_no_sil.append(pred_str_no_sil)
+                        target_transcriptions.append(target_str)
+                        target_transcriptions_no_sil.append(target_str_no_sil)
+                        target_lm_score_sum += target_uttwise_lm_score
                 framewise_lm_scores.append(framewise_lm_score)
-                uttwise_lm_scores.append(uttwise_lm_score / (len(pred_units_arr) + 2))
+                uttwise_lm_scores.append(uttwise_lm_score / (len(pred_units_arr_no_sil) + 1 if lm_rm_sil else len(pred_units_arr) + 1))
                 lm_score_sum += uttwise_lm_score
         
-        vocab_seen_percentage = vocab_seen.sum().item() / self.num_symbols
-        batchwise_lm_score = lm_score_sum / (pred_c_len.sum() + 2 * bsz)
+        vocab_seen_percentage = vocab_seen.sum().item() / self.num_symbols # percentage of the vocabulary seen in the batch
+        batchwise_lm_score = lm_score_sum / ((pred_c_len_no_sil.sum() if lm_rm_sil else pred_c_len.sum()) + bsz) # batchwise lm score
         batchwise_lm_ppl = math.pow(10, -batchwise_lm_score)
         uttwise_lm_ppls = [math.pow(10, -s) for s in uttwise_lm_scores] # uttwise lm ppls[0] should be the same as the batchwise lm ppl when the batch size is 1
         target_uttwise_lm_ppls = [math.pow(10, -s) for s in target_uttwise_lm_scores]
@@ -126,12 +155,24 @@ class Scorer(object):
             'target_uttwise_lm_ppls': target_uttwise_lm_ppls, # the lm ppls of the target sentences
             'framewise_lm_scores': framewise_lm_scores, # the score indicates the framewise log probabilities.
             'vocab_seen_percentage': vocab_seen_percentage, # you can weight the lm score by this percentage to encourage the model to generate more diversly.
-            'token_error_rate': c_err.sum() / c_len.sum() if c_len.sum() > 0 else 0.0, # overall token error rate of the batch
-            'uttwise_token_error_rates': c_err / c_len, # numpy array with shape (B,), uttwise token error rates
+            'token_error_rate': c_err.sum() / (c_len_no_sil.sum() if ter_rm_sil else c_len.sum()), # token error rate
+            'uttwise_token_error_rates': c_err / (c_len_no_sil if ter_rm_sil else c_len), # numpy array with shape (B,), uttwise token error rates
             'uttwise_token_errors': c_err, # numpy array with shape (B,), uttwise token errors
             'uttwise_target_token_lengths': c_len, # numpy array with shape (B,), uttwise token lengths
-            'uttwise_pred_token_lengths': pred_c_len_for_ter, # numpy array with shape (B,), uttwise token lengths
+            'uttwise_pred_token_lengths': pred_c_len, # numpy array with shape (B,), uttwise token length
+            'uttwise_target_token_lengths_no_sil': c_len_no_sil, # numpy array with shape (B,), uttwise token lengths without sil
+            'uttwise_pred_token_lengths_no_sil': pred_c_len_no_sil, # numpy array with shape (B,), uttwise token length without sil
         }
+
+        if return_transcript:
+            scores['transcriptions'] = transcriptions
+            scores['target_transcriptions'] = target_transcriptions
+            scores['transcriptions_no_sil'] = transcriptions_no_sil
+            scores['target_transcriptions_no_sil'] = target_transcriptions_no_sil
+            scores['vocab_seen'] = vocab_seen
+            scores['lm_score_sum'] = lm_score_sum
+            scores['target_lm_score_sum'] = target_lm_score_sum
+
         return scores
         # return self.lm.score(sentence)
 
@@ -141,7 +182,7 @@ def main(args): # for testing
     targets = [
         "<SIL> W AY <SIL> L AE D IY S EH D HH IY <SIL>",
         "<SIL> IH T S AO L M OW S T AO L AW T <SIL>",
-        "<SIL> AY W UH D <SIL> AH V <SIL> K AO R S IH N F AH N AH T L IY <SIL> HH AE V <SIL> P R AH F ER D <SIL> T UW S T AA R T AO F W IH DH <SIL> D EH B R AH AA N S AH M JH ER N IY AH V W IH CH W IY D IH D N AA T IY V IH N <SIL> N OW DH AH EH N D B AH T DH AE T W AA Z P ER HH AE P S AH <SIL> F UW L IH SH <SIL> AY D IY AH <SIL> AH N D N AA T W AH N T UW B IY EH N K ER IH JH D W IH DH AH Y AH NG G ER L <SIL> T UW B IY K AH N S IH D ER D <SIL>"
+        # "<SIL> AY W UH D <SIL> AH V <SIL> K AO R S IH N F AH N AH T L IY <SIL> HH AE V <SIL> P R AH F ER D <SIL> T UW S T AA R T AO F W IH DH <SIL> D EH B R AH AA N S AH M JH ER N IY AH V W IH CH W IY D IH D N AA T IY V IH N <SIL> N OW DH AH EH N D B AH T DH AE T W AA Z P ER HH AE P S AH <SIL> F UW L IH SH <SIL> AY D IY AH <SIL> AH N D N AA T W AH N T UW B IY EH N K ER IH JH D W IH DH AH Y AH NG G ER L <SIL> T UW B IY K AH N S IH D ER D <SIL>"
     ]
     tgt_ids = [scorer.dictionary.encode_line(t, append_eos=False, add_if_not_exist=False).long() for t in targets]
     lengths = torch.from_numpy(np.array([len(tgt) for tgt in tgt_ids]))
@@ -149,11 +190,13 @@ def main(args): # for testing
     perfect_ids = pad_sequence(tgt_ids, batch_first=True, padding_value=0)
     padding_mask = torch.arange(max_len).expand(len(targets), max_len) >= lengths.unsqueeze(1)
     pred_logits = torch.nn.functional.one_hot(perfect_ids, num_classes=len(scorer.dictionary)).float()
+    for i in range(len(pred_logits)):
+        print(scorer.dictionary.string(pred_logits[i].argmax(-1).tolist()))
     scores = scorer.score({
         "logits": pred_logits,
         "padding_mask": padding_mask,
-        # "target": tgt_ids,
-    })
+        "target": tgt_ids,
+    }, lm_rm_sil=False, ter_rm_sil=True, return_transcript=True)
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be low 🙂
     print(scores['uttwise_lm_ppls'])
     print(scores['target_uttwise_lm_ppls'])
@@ -161,6 +204,8 @@ def main(args): # for testing
     print(scores['uttwise_token_errors'])
     print(scores['uttwise_target_token_lengths'])
     print(scores['uttwise_pred_token_lengths'])
+    print(scores)
+
     # now add some random processes
     for _ in range(100):
         rand_b, rand_t = np.random.randint(0, len(targets)), np.random.randint(0, max_len)
@@ -169,7 +214,7 @@ def main(args): # for testing
         "logits": pred_logits,
         "padding_mask": padding_mask,
         "target": tgt_ids,
-    })
+    }, lm_rm_sil=False, ter_rm_sil=False, return_transcript=True)
     print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be higher 😨
     print(scores['uttwise_lm_ppls'])
     print(scores['target_uttwise_lm_ppls'])
@@ -177,22 +222,35 @@ def main(args): # for testing
     print(scores['uttwise_token_errors'])
     print(scores['uttwise_target_token_lengths'])
     print(scores['uttwise_pred_token_lengths'])
-    # MORE RANDOM PROCESSES
-    for _ in range(1000):
-        rand_b, rand_t = np.random.randint(0, len(targets)), np.random.randint(0, max_len)
-        pred_logits[rand_b, rand_t] = torch.randn(len(scorer.dictionary))
+    print(scores)
     scores = scorer.score({
         "logits": pred_logits,
         "padding_mask": padding_mask,
         "target": tgt_ids,
-    })
-    print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be very high 😱 
-    print(scores['uttwise_lm_ppls'])
-    print(scores['target_uttwise_lm_ppls'])
-    print(scores['uttwise_token_error_rates'])
-    print(scores['uttwise_token_errors'])
-    print(scores['uttwise_target_token_lengths'])
-    print(scores['uttwise_pred_token_lengths'])
+    }, lm_rm_sil=False, ter_rm_sil=True, return_transcript=True)
+    print(scores)
+
+    # # MORE RANDOM PROCESSES
+    # for _ in range(1000):
+    #     rand_b, rand_t = np.random.randint(0, len(targets)), np.random.randint(0, max_len)
+    #     pred_logits[rand_b, rand_t] = torch.randn(len(scorer.dictionary))
+
+    # for i in range(len(pred_logits)):
+    #     print(scorer.dictionary.string(pred_logits[i].argmax(-1).tolist()))
+        
+    # scores = scorer.score({
+    #     "logits": pred_logits,
+    #     "padding_mask": padding_mask,
+    #     "target": tgt_ids,
+    # })
+    # print(scores['batchwise_lm_ppl'], scores['token_error_rate'], scores['vocab_seen_percentage'], scores['framewise_lm_scores'][0][:5]) # ppl should be very high 😱 
+    # print(scores['uttwise_lm_ppls'])
+    # print(scores['target_uttwise_lm_ppls'])
+    # print(scores['uttwise_token_error_rates'])
+    # print(scores['uttwise_token_errors'])
+    # print(scores['uttwise_target_token_lengths'])
+    # print(scores['uttwise_pred_token_lengths'])
+    # print(scores)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
