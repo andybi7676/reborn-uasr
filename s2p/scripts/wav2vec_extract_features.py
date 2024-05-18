@@ -13,6 +13,7 @@ import torch.nn.functional as F
 from shutil import copyfile
 
 from npy_append_array import NpyAppendArray
+from transformers import AutoModel, AutoProcessor
 
 import fairseq
 import soundfile as sf
@@ -76,6 +77,36 @@ class HubertFeatureReader(object):
                 feat.append(feat_chunk)
         return torch.cat(feat, 1).squeeze(0).cpu()
 
+class WavLMFeatureReader(object):
+    def __init__(self, ckpt_fpath, layer):
+        # load from huggingface
+        model = AutoModel.from_pretrained("microsoft/wavlm-large")
+        model.eval()
+        model.cuda()
+        self.model = model
+        self.layer = layer
+    
+    def read_audio(self, fname):
+        """Load an audio file and return PCM along with the sample rate"""
+        wav, sr = sf.read(fname)
+        assert sr == 16e3
+
+        return wav
+
+    def get_feats(self, loc):
+        x = self.read_audio(loc)
+        with torch.no_grad():
+            source = torch.from_numpy(x).float().cuda()
+            # if self.task.cfg.normalize:
+            #     assert source.dim() == 1, source.dim()
+            #     with torch.no_grad():
+            #         source = F.layer_norm(source, source.shape)
+            source = source.view(1, -1)
+
+            m_res = self.model(source, return_dict=True, output_hidden_states=True)
+            m_res_np = m_res.hidden_states[self.layer].squeeze(0).cpu()
+            return m_res_np
+
 class Wav2VecFeatureReader(object):
     def __init__(self, cp_file, layer):
         model, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task(
@@ -119,6 +150,9 @@ def get_iterator(args):
         if "hubert" in args.checkpoint:
             print("Use HubertFeatureReader")
             reader = HubertFeatureReader(args.checkpoint, args.layer)
+        elif "wavlm" in args.checkpoint:
+            print("Use WavLM feature reader, layer=15!")
+            reader = WavLMFeatureReader(args.checkpoint, 15)
         else:
             reader = Wav2VecFeatureReader(args.checkpoint, args.layer)
 

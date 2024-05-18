@@ -66,7 +66,7 @@ def main(args):
         10, -lm_logprob_sum / total_lengths
     )
     
-    print(final_ppl)
+    print(final_ppl, lm_logprob_sum)
 
 
 if __name__ == "__main__":

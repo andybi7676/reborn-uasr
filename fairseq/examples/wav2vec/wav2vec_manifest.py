@@ -46,6 +46,12 @@ def get_parser():
         metavar="FRAG",
         help="if set, path must contain this substring for a file to be included in the manifest",
     )
+    parser.add_argument(
+        "--path-must-not-contain",
+        default=None,
+        type=str,
+        help="if set, path must contain this substring for a file to be included in the manifest",
+    )
     return parser
 
 def get_frames(file_path):
@@ -84,6 +90,8 @@ def main(args):
 
         for file_path, frame in zip(file_paths, frames):
             if args.path_must_contain and args.path_must_contain not in file_path:
+                continue
+            if args.path_must_not_contain and args.path_must_not_contain in file_path:
                 continue
 
             dest = train_f if rand.random() > args.valid_percent else valid_f

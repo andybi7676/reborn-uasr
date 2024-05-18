@@ -36,7 +36,7 @@ class Scorer(object):
         # print(self.lm.score(sentence)) # if properly loaded, the lm should be able to score the sentence
         # print("word-level scores: ")
         # words = ['<s>'] + sentence.split() + ['</s>']
-        # for i, (prob, length, oov) in enumerate(self.lm.full_scores(sentence, bos=False, eos=False)):
+        # for i, (prob, length, oov) in enumerate(self.lm.full_scores(sentence)):
         #     print('{3}\t{0} {1}: {2}'.format(prob, length, ' '.join(words[i+2-length:i+2]), i))
         #     if oov:
         #         print('\t"{0}" is an OOV'.format(words[i+1]))

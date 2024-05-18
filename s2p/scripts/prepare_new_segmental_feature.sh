@@ -16,7 +16,7 @@ train_split=train
 valid_split=valid
 test_split=test
 
-all_splits="valid_small"
+all_splits="train valid test valid_small"
 echo "processing splits: $all_splits"
 
 for split in $all_splits; do

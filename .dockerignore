@@ -6,6 +6,7 @@ data2
 **/local
 **/search_weights
 **/kaldi_decode
+**/outputs
 
 # Byte-compiled / optimized / DLL files
 **/__pycache__/
