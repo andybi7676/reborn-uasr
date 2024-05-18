@@ -40,6 +40,31 @@ def get_iterator(args):
         lp = open(label_path, "r")
     else:
         lp = None
+    f_fpath = osp.join(args.data, f"{args.split}.npy")
+    len_fpath = osp.join(args.data, f"{args.split}.lengths")
+    tsv_fpath = osp.join(args.data, f"{args.split}.tsv")
+    if osp.exists(f_fpath) and osp.exists(len_fpath):
+        feats = np.load(f_fpath)
+        with open(len_fpath, "r") as f_len, open(tsv_fpath, "r") as f_tsv:
+            lengths = [int(x.strip()) for x in f_len.readlines()]
+            # skip root
+            root = f_tsv.readline().strip()
+            fnames = [x.strip() for x in f_tsv.readlines()]
+        total_frames = len(feats)
+        total_lengths = sum(lengths)
+        assert total_frames == total_lengths, f"{total_frames} != {total_lengths}"
+        assert len(lengths) == len(fnames), f"{len(lengths)} != {len(fnames)}"
+        num = len(lengths)
+        print("Use precomputed features!")
+
+        def iterate():
+            offset = 0
+            for i, (length, fname) in enumerate(zip(lengths, fnames)):
+                _feats = feats[offset : offset + length]
+                offset += length
+                yield torch.from_numpy(_feats).cuda(), fname, None
+
+        return iterate, num, root
 
     with open(osp.join(args.data, f"{args.split}.tsv"), "r") as fp:
         lines = fp.read().split("\n")

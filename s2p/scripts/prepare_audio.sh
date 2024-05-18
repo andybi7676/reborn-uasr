@@ -47,7 +47,7 @@ fi
 if [[ -f "$source_dir/$test_split.tsv" ]]; then
     all_splits+=($test_split)
 fi
-all_splits="dev-other valid_small"
+all_splits="valid_small"
 echo "processing splits: $all_splits"
 
 mkdir -p $tgt_dir

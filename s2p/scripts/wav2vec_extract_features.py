@@ -13,7 +13,7 @@ import torch.nn.functional as F
 from shutil import copyfile
 
 from npy_append_array import NpyAppendArray
-from transformers import AutoModel, AutoProcessor
+from s2p.utils.wavlm.wavlm import WavLM, WavLMConfig
 
 import fairseq
 import soundfile as sf
@@ -80,11 +80,16 @@ class HubertFeatureReader(object):
 class WavLMFeatureReader(object):
     def __init__(self, ckpt_fpath, layer):
         # load from huggingface
-        model = AutoModel.from_pretrained("microsoft/wavlm-large")
+        checkpoint = torch.load(ckpt_fpath, map_location='cpu')
+        cfg = WavLMConfig(checkpoint['cfg'])
+        model = WavLM(cfg)
+        model.load_state_dict(checkpoint['model'])
         model.eval()
         model.cuda()
         self.model = model
         self.layer = layer
+        self.cfg = cfg
+        print(f"Normalize wavform: {self.cfg.normalize}")
     
     def read_audio(self, fname):
         """Load an audio file and return PCM along with the sample rate"""
@@ -97,14 +102,19 @@ class WavLMFeatureReader(object):
         x = self.read_audio(loc)
         with torch.no_grad():
             source = torch.from_numpy(x).float().cuda()
-            # if self.task.cfg.normalize:
-            #     assert source.dim() == 1, source.dim()
-            #     with torch.no_grad():
-            #         source = F.layer_norm(source, source.shape)
+            if self.cfg.normalize:
+                assert source.dim() == 1, source.dim()
+                with torch.no_grad():
+                    source = F.layer_norm(source, source.shape)
             source = source.view(1, -1)
 
-            m_res = self.model(source, return_dict=True, output_hidden_states=True)
-            m_res_np = m_res.hidden_states[self.layer].squeeze(0).cpu()
+            rep, layer_results = self.model.extract_features(source, output_layer=self.model.cfg.encoder_layers, ret_layer_results=True)[0]
+            target_layer_res = layer_results[self.layer]
+            print(target_layer_res)
+            tgt_layer_reps = target_layer_res[0].transpose(0, 1).squeeze(0).cpu()
+            print(tgt_layer_reps)
+            print(tgt_layer_reps.shape)
+            assert False, "stop"
             return m_res_np
 
 class Wav2VecFeatureReader(object):
@@ -150,9 +160,9 @@ def get_iterator(args):
         if "hubert" in args.checkpoint:
             print("Use HubertFeatureReader")
             reader = HubertFeatureReader(args.checkpoint, args.layer)
-        elif "wavlm" in args.checkpoint:
-            print("Use WavLM feature reader, layer=15!")
-            reader = WavLMFeatureReader(args.checkpoint, 15)
+        elif "wavlm" in args.checkpoint or "WavLM" in args.checkpoint:
+            print(f"Use WavLM feature reader, layer={args.layer + 1}!")
+            reader = WavLMFeatureReader(args.checkpoint, args.layer + 1)
         else:
             reader = Wav2VecFeatureReader(args.checkpoint, args.layer)
 
