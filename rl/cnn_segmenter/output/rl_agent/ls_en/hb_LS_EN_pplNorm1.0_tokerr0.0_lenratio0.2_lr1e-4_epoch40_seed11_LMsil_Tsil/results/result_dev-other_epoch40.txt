@@ -1,0 +1,9 @@
+# dev-other
+PER: 19.160780824203325 %
+DEL RATE: 6.616428452255159 %
+INS RATE: 3.37856626439019 %
+SUB RATE: 9.165786107557977 %
+total lines: 2864
+total ref tokens: 179810
+total hyp tokens: 173988
+
