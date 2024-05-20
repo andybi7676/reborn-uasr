@@ -1,0 +1,1 @@
+| Generate valid with beam=500, lm_weight=5.0, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 21.472892028874213, LM_PPL: 22.48777824082215, num feats: 272079, length: 200463, UER to viterbi: 0, score: 3.1129719723328297
