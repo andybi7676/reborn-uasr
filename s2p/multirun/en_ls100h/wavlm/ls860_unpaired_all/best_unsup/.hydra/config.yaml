@@ -8,7 +8,7 @@ common:
   tensorboard_logdir: tb
   wandb_project: null
   azureml_logging: false
-  seed: 1
+  seed: 5
   cpu: false
   tpu: false
   bf16: false
@@ -225,13 +225,13 @@ model:
   generator_bias: false
   generator_dropout: 0.1
   ncritic: 1
-  smoothness_weight: 0.75
+  smoothness_weight: 0.5
   smoothing: 0
   smoothing_one_sided: false
   gumbel: false
   hard_gumbel: false
-  gradient_penalty: 2.0
-  code_penalty: 2
+  gradient_penalty: 1.5
+  code_penalty: 4
   temp:
   - 2
   - 0.1

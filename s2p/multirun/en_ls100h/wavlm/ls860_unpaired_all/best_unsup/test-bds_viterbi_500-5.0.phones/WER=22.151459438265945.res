@@ -1,0 +1,1 @@
+| Generate test-bds with beam=500, lm_weight=5.0, word_score=1.0, sil_weight=0.0, blank_weight=0.0, WER: 22.151459438265945, LM_PPL: 22.15781132104562, num feats: 268421, length: 195461, UER to viterbi: 0, score: 3.0981900899004624

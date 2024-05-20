@@ -13,8 +13,8 @@ source_dir=$1
 tgt_dir=$2
 model=$3
 dim=512
-layer=14
-n_clus=64
+layer=15
+n_clus=128
 # if [ -z "$4" ]
 #   then
 #     dim=512
@@ -50,8 +50,8 @@ fi
 if [[ -f "$source_dir/$test_split.tsv" ]]; then
     all_splits+=($test_split)
 fi
-all_splits="train valid test dev-other test-other test-bds"
-# all_splits="valid_small"
+# all_splits="train valid test dev-other test-other test-bds"
+all_splits="test-bds"
 echo "processing splits: $all_splits"
 
 mkdir -p $tgt_dir
@@ -65,13 +65,13 @@ mkdir -p $tgt_dir
 # setopt shwordsplit
 # set -o shwordsplit
 
-# for split in $all_splits; do
-# #   python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/wav2vec_extract_features.py $source_dir --split $split \
-# #   --save-dir $tgt_dir --checkpoint $model --layer $layer
-#   python scripts/wav2vec_extract_features.py $source_dir --split $split \
+for split in $all_splits; do
+#   python $FAIRSEQ_ROOT/examples/wav2vec/unsupervised/scripts/wav2vec_extract_features.py $source_dir --split $split \
 #   --save-dir $tgt_dir --checkpoint $model --layer $layer
-# done
-# echo "Finished extract features."
+  python scripts/wav2vec_extract_features.py $source_dir --split $split \
+  --save-dir $tgt_dir --checkpoint $model --layer $layer
+done
+echo "Finished extract features."
 
 # echo "Clustering..."
 # python scripts/wav2vec_cluster_faiss.py $tgt_dir/${train_split}.tsv \

@@ -1,0 +1,75 @@
+PER: 13.069333693742397 %
+DEL RATE: 5.173672117853764 %
+INS RATE: 2.4922286795512907 %
+SUB RATE: 5.403432896337343 %
+total lines: 500
+total ref tokens: 36995
+total hyp tokens: 36003
+# train
+PER: 12.085998801400635 %
+DEL RATE: 5.244336252399941 %
+INS RATE: 2.0699321703001026 %
+SUB RATE: 4.771730378700592 %
+total lines: 28539
+total ref tokens: 3555817
+total hyp tokens: 3442941
+# valid
+PER: 12.68212768135975 %
+DEL RATE: 5.1497465827061895 %
+INS RATE: 2.47785798392464 %
+SUB RATE: 5.05452311472892 %
+total lines: 2703
+total ref tokens: 195330
+total hyp tokens: 190111
+
+# test
+PER: 12.849877428560974 %
+DEL RATE: 5.119252340356581 %
+INS RATE: 2.483835728137071 %
+SUB RATE: 5.246789360067323 %
+total lines: 2620
+total ref tokens: 191317
+total hyp tokens: 186275
+
+# dev-other
+PER: 19.041210166286636 %
+DEL RATE: 6.737667537956732 %
+INS RATE: 3.1772426450141817 %
+SUB RATE: 9.126299983315722 %
+total lines: 2864
+total ref tokens: 179810
+total hyp tokens: 173408
+
+# test-other
+PER: 19.52802295751989 %
+DEL RATE: 7.187812513587548 %
+INS RATE: 3.182747075959824 %
+SUB RATE: 9.157463367972522 %
+total lines: 2939
+total ref tokens: 183992
+total hyp tokens: 176623
+
+# valid_small
+PER: 13.069333693742397 %
+DEL RATE: 5.173672117853764 %
+INS RATE: 2.4922286795512907 %
+SUB RATE: 5.403432896337343 %
+total lines: 500
+total ref tokens: 36995
+total hyp tokens: 36003
+
+# test-bds
+# test-bds
+PER: 13.200909201693362 %
+DEL RATE: 4.999549637855853 %
+INS RATE: 2.9268240991432526 %
+SUB RATE: 5.274535464694257 %
+total lines: 2600
+total ref tokens: 188737
+total hyp tokens: 184825
+SCORES:            Lenient      Harsh
+precision:          0.8470     0.7127
+recall:             0.7669     0.7426
+f1:                 0.8050     0.7274
+rval:               0.8253     0.7638
+
