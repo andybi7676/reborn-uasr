@@ -26,7 +26,7 @@ coef_len_list="0.0 0.2"
 
 # 4 settings: LM with or without sil, Transcription with or without sil
 # posttag: ["_LMnosil_Tnosil", "_LMnosil_Tsil", "_LMsil_Tnosil", "_LMsil_Tsil"]
-posttag="_LMsil_Tsil"
+posttag="_LMsil_Tsil_from_scratch"
 seeds="3"
 
 lr_list="1e-4"
@@ -66,7 +66,7 @@ python3 train_rl_cnnagent_enpei_standardPPL.py \
     --data_dir ${data_dir}/${dataset_name}/${hr_type} \
     --kenlm_fpath ${data_dir}/${dataset_name}/text/prep/phones/lm.phones.filtered.04.bin \
     --dict_fpath ../dict/${lang}_${dataset}/dict.txt \
-    --pretrain_segmenter_path ./output/cnn_segmenter/${tag}_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt \
+    --pretrain_segmenter_path None \
     --pretrain_wav2vecu_path ../../s2p/multirun/${lang}_${dataset}/${hr_type}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt \
     --w2vu_postfix w2vu_logit_segmented_units \
     --env ../../env.yaml \
@@ -84,8 +84,8 @@ python3 train_rl_cnnagent_enpei_standardPPL.py \
     --save_dir ${output_dir}/rl_agent/${tag}_${lang}/${TAG}_${LANG}_ppl1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${posttag} \
     --save_interval 4 \
     --wandb_log 
+    # --pretrain_segmenter_path ./output/cnn_segmenter/${tag}_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt \
     # --rm_sil # [Only for wosil LM]
-    # --pretrain_segmenter_path None \
 
 done
 done

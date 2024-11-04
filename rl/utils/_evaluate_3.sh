@@ -17,9 +17,7 @@ lang=en
 LANG=EN
 dataset=ls100h
 dataset_name=ls_100h_new
-g_type="wavlm" # "wavlm" or "hb" or "
-g_type_="wavlm_" # "wavlm_" or "hb_" or ""
-hr_type="" # "ll60k" or ""
+hr_type=ll60k
 unpair_name=ls860
 config_name=${lang}_${dataset}
 golden_dir=${data_dir}/${dataset_name}/labels
@@ -46,11 +44,11 @@ postfix=""
 # 4 settings: LM with or without sil, Transcription with or without sil
 # posttag: ["_LMnosil_Tnosil", "_LMnosil_Tsil", "_LMsil_Tnosil", "_LMsil_Tsil"]
 # posttag_list="_LMnosil_Tnosil _LMnosil_Tsil _LMsil_Tnosil _LMsil_Tsil"
-posttag_list="_LMsil_Tsil"
+posttag_list="_LMsil_Tsil_from_scratch"
 
-generator_ckpt=../../s2p/multirun/${lang}_${dataset}/${g_type}${hr_type}${postfix}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt
-feats_dir=${data_dir}/${dataset_name}/${g_type}${hr_type}/precompute_pca512
-# data_root=${data_dir}/${dataset_name}/${hr_type}
+generator_ckpt=../../s2p/multirun/${lang}_${dataset}/${hr_type}${postfix}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt
+feats_dir=${data_dir}/${dataset_name}/${hr_type}/precompute_pca512
+data_root=${data_dir}/${dataset_name}/${hr_type}
 
 # SPLIT_list
 ## LibriSpeech: "test test-other valid dev-other"
@@ -59,11 +57,11 @@ feats_dir=${data_dir}/${dataset_name}/${g_type}${hr_type}/precompute_pca512
 SPLIT_list="test test-other valid dev-other"
 
 # "epoch0 epoch4 epoch8 epoch12 epoch16 epoch20 epoch24 epoch28 epoch32 epoch36 epoch40 best"
-ckpt_typeS="best epoch40" 
+ckpt_typeS="epoch40 best"
 rerun_best="false"
 
 coef_ppl_list="1.0"
-coef_ter_list="0.2 0.0"
+coef_ter_list="0.0"
 coef_len_list="0.0"
 seed_list="3" # [3, 11]
 lr_list="1e-4"
@@ -88,7 +86,7 @@ do
 for posttag in ${posttag_list}
 do
 
-output_name=${OUTPUT_DIR}/${g_type_}${TAG}_${LANG}_pplNorm${coef_ppl}_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix}${posttag}
+output_name=${OUTPUT_DIR}/${TAG}_${LANG}_ppl${coef_ppl}_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix}${posttag}
 # for output_name in $output_list
 # do
 
@@ -99,18 +97,18 @@ result_dir=$output_dir/results
 # make result dir
 mkdir -p $result_dir
 
-# # If ckpt_type is best, check if epoch40 exists, if not, skip
-# if [ $ckpt_type = "best" ]; then
-#     if [ ! -f $segmenter_dir/rl_agent_segmenter_epoch40.pt ]; then
-#         echo "The run hasn't reached epoch40: $segmenter_dir/rl_agent_segmenter_epoch40.pt"
-#         # If result file exists, delete it
-#         if [ -f $result_dir/result_${split}_${ckpt_type}.txt ]; then
-#             rm $result_dir/result_${split}_${ckpt_type}.txt
-#             echo "File deleted: $result_dir/result_${split}_${ckpt_type}.txt"
-#         fi
-#         continue
-#     fi
-# fi
+# If ckpt_type is best, check if epoch40 exists, if not, skip
+if [ $ckpt_type = "best" ]; then
+    if [ ! -f $segmenter_dir/rl_agent_segmenter_epoch40.pt ]; then
+        echo "The run hasn't reached epoch40: $segmenter_dir/rl_agent_segmenter_epoch40.pt"
+        # If result file exists, delete it
+        if [ -f $result_dir/result_${split}_${ckpt_type}.txt ]; then
+            rm $result_dir/result_${split}_${ckpt_type}.txt
+            echo "File deleted: $result_dir/result_${split}_${ckpt_type}.txt"
+        fi
+        continue
+    fi
+fi
 
 # Check if the result file exists
 if [ -f $result_dir/result_${split}_${ckpt_type}.txt ]; then

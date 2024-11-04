@@ -2,20 +2,24 @@
 
 # data_dir=/work/r11921042/data
 data_dir=/livingrooms/public/uasr_rl
+# data_dir=/groups/dmnph/uasr_rl
 # reborn_dir=/home/r11921042/uasr-rl
 reborn_dir=/home/dmnph/reborn-uasr
 
-
+## For LibriSpeech
 lang=ls860
 data_config=ls_100h_new
-g_type="" # "hb_" or ""
-hr_type=ll60k
+g_type=wavlm # "hb_" or "" or "wavlm"
+hr_type="" # "ll60k" or ""
+prep_postfix=""
 ckpt_config=en_ls100h
 # iter=1
 # ckpt_postfix=_postITER${iter}
 ckpt_postfix=""
 pair_config=ls860_unpaired_all
+clus_num=64 # 128 or 64
 
+## For TIMIT
 # iter=1
 # ckpt_config=timit_matched
 # hr_type=large_clean
@@ -23,17 +27,18 @@ pair_config=ls860_unpaired_all
 # data_config=audio/timit/matched
 # ckpt_postfix=_postITER${iter}
 
-
-# lang=de
+## For MLS
+# lang=it # [de, es, fr, it, nl, pt]
 # data_config=${lang}_mls
+# g_type=""
 # hr_type=xlsr_100hr
-# # prep_postfix=_sep
-# prep_postfix=""
+# prep_postfix=_sep # Only for it
+# # prep_postfix=""
 # ckpt_config=${lang}_mls
+# # iter=2
+# # ckpt_postfix=_postITER${iter}
+# ckpt_postfix=""
 # pair_config=${lang}_unpaired_all${prep_postfix}
-# iter=2
-# # ckpt_postfix=""
-# ckpt_postfix=_postITER${iter}
 
 # 1. Set up rl/config (no need to do this if you have already done it)
 
@@ -44,18 +49,18 @@ pair_config=ls860_unpaired_all
 
 # 3. Set up boundary
 echo "Set up boundary"
-# list out every /home/r11921042/uasr-rl/s2p/scripts/find_prep_align.py ${data_dir}/${data_config}/${hr_type}/CLUS128/*.src
-for file in $(ls ${data_dir}/${data_config}/${hr_type}/CLUS128/*.src)
+# list out every /home/r11921042/uasr-rl/s2p/scripts/find_prep_align.py ${data_dir}/${data_config}/${hr_type}/CLUS${clus_num}/*.src
+for file in $(ls ${data_dir}/${data_config}/${g_type}${hr_type}/CLUS${clus_num}/*.src)
 do
     echo $file
-    set=$(echo $file | sed -e "s/.*CLUS128\///" -e "s/.src//")
+    set=$(echo $file | sed -e "s/.*CLUS${clus_num}\///" -e "s/.src//")
     echo $set
-    # Check if ${data_dir}/${data_config}/${hr_type}/CLUS128/${set}.bds exists
-    if [ -f ${data_dir}/${data_config}/${hr_type}/CLUS128/${set}.bds ]; then
-        echo "File exists: ${data_dir}/${data_config}/${hr_type}/CLUS128/${set}.bds"
+    # Check if ${data_dir}/${data_config}/${hr_type}/CLUS${clus_num}/${set}.bds exists
+    if [ -f ${data_dir}/${data_config}/${g_type}${hr_type}/CLUS${clus_num}/${set}.bds ]; then
+        echo "File exists: ${data_dir}/${data_config}/${g_type}${hr_type}/CLUS${clus_num}/${set}.bds"
         continue
     fi
-    python3 ${reborn_dir}/s2p/scripts/find_prep_align.py ${data_dir}/${data_config}/${hr_type}/CLUS128/${set}.src adj
+    python3 ${reborn_dir}/s2p/scripts/find_prep_align.py ${data_dir}/${data_config}/${g_type}${hr_type}/CLUS${clus_num}/${set}.src adj
     echo "generating ${set}.bds"
 done
 

@@ -5,29 +5,47 @@
 
 # WORK_DIR=/work/r11921042
 
-data_dir=/livingrooms/public/uasr_rl
+# data_dir=/livingrooms/public/uasr_rl
+data_dir=/groups/dmnph/uasr_rl
 reborn_dir=/home/dmnph/reborn-uasr
 output_dir=/home/dmnph/reborn_output
 
 source ${reborn_dir}/path.sh
 
+## For LibriSpeech
+# tag=ls
+# TAG=LS
+# lang=en
+# LANG=EN
+# dataset=ls100h
+# dataset_name=ls_100h_new
+# hr_type=ll60k
+# unpair_name=ls860
 
-tag=ls
-TAG=LS
-lang=en
-LANG=EN
-dataset=ls100h
-dataset_name=ls_100h_new
-hr_type=ll60k
-unpair_name=ls860
+## For MLS
+tag=mls
+TAG=MLS
+lang=pt
+LANG=PT
+dataset=mls
+dataset_name=${lang}_${dataset}
+hr_type=xlsr_100hr
+unpair_name=${lang}
+
+if [ $tag == "ls" ]; then
+Pretrain_segmenter_path=./output/cnn_segmenter/${tag}_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt
+else
+Pretrain_segmenter_path=./output/cnn_segmenter/${lang}_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt
+fi
+
 
 coef_ter_list="0.2 0.0"
 coef_len_list="0.2 0.0"
 
 # 4 settings: LM with or without sil, Transcription with or without sil
 # posttag: ["_LMnosil_Tnosil", "_LMnosil_Tsil", "_LMsil_Tnosil", "_LMsil_Tsil"]
-posttag="_LMnosil_Tnosil"
-seeds="11"
+posttag="_LMsil_Tsil"
+seeds="3"
 
 lr_list="1e-4"
 
@@ -64,9 +82,9 @@ fi
 python3 train_rl_cnnagent_enpei.py \
     --config ${lang}_${dataset} \
     --data_dir ${data_dir}/${dataset_name}/${hr_type} \
-    --kenlm_fpath ${data_dir}/${dataset_name}/text/prep/phones/lm.phones.filtered.nosil.04.bin \
+    --kenlm_fpath ${data_dir}/${dataset_name}/text/prep/phones/lm.phones.filtered.04.bin \
     --dict_fpath ../dict/${lang}_${dataset}/dict.txt \
-    --pretrain_segmenter_path ./output/cnn_segmenter/${tag}_pretrain_PCA_cnn_segmenter_kernel_size_7_v1_epo20_lr0.0005_wd0.0001_dropout0.1_optimAdamW_schCosineAnnealingLR/cnn_segmenter.pt \
+    --pretrain_segmenter_path ${Pretrain_segmenter_path} \
     --pretrain_wav2vecu_path ../../s2p/multirun/${lang}_${dataset}/${hr_type}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt \
     --w2vu_postfix w2vu_logit_segmented_units \
     --env ../../env.yaml \
@@ -83,9 +101,9 @@ python3 train_rl_cnnagent_enpei.py \
     --seed ${seed} \
     --save_dir ${output_dir}/rl_agent/${tag}_${lang}/${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${posttag} \
     --save_interval 4 \
-    --wandb_log \
-    --lm_rm_sil \
-    --ter_rm_sil
+    --wandb_log 
+    # --lm_rm_sil \
+    # --ter_rm_sil
     # --pretrain_segmenter_path None \
 
 done

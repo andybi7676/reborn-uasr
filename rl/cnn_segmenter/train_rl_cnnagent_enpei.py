@@ -96,6 +96,7 @@ class RLCnnAgentConfig(object):
     save_interval: int = 1
     lm_rm_sil: bool = False
     ter_rm_sil: bool = False
+    clus_num: int = 128
 
 class TrainRlCnnAgent(object):
     def __init__(self, cfg: RLCnnAgentConfig):
@@ -118,7 +119,10 @@ class TrainRlCnnAgent(object):
             )
         # Set random seed
         torch.manual_seed(cfg.seed)
+        torch.cuda.manual_seed(cfg.seed)
         np.random.seed(cfg.seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
         # use pandas to save csv
         import pandas as pd
@@ -160,16 +164,30 @@ class TrainRlCnnAgent(object):
                 # "merge_ratio",
             ])
 
+        self.best_valid_score = float('-inf')
         # Check if the csv file exists and it can be read
         if os.path.exists(os.path.join(cfg.save_dir, "val_scores.csv")):
+            # copy the file to prevent data loss
+            import shutil
+            shutil.copyfile(os.path.join(cfg.save_dir, "val_scores.csv"), os.path.join(cfg.save_dir, "val_scores_backup.csv"))
             try:
                 self.val_score_df = pd.read_csv(os.path.join(cfg.save_dir, "val_scores.csv"))
+                
+                # check if rl_agent_segmenter_best exists in val_scores.csv
+                if "rl_agent_segmenter_best" not in self.val_score_df["model_name"].values:
+                    # find the max eval_score rows and save it as self.eval_dict_best
+                    self.eval_dict_best = self.val_score_df[self.val_score_df["eval_score"] == self.val_score_df["eval_score"].max()].to_dict(orient="records")[0]
+                    self.eval_dict_best["run_name"] = "rl_agent_segmenter_best"
+                else:
+                    self.eval_dict_best = self.val_score_df[self.val_score_df["model_name"] == "rl_agent_segmenter_best"].to_dict(orient="records")[0]
+                self.best_valid_score = float(self.eval_dict_best["eval_score"])
+                print(f"Previous best valid score: {self.best_valid_score}, epoch: {self.eval_dict_best['epoch']}")
             except:
                 print("val_scores.csv exists but cannot be read")
                 # self.log("val_scores.csv exists but cannot be read")
 
         # Create csv file to save validation scores
-        self.val_score_csv = open(os.path.join(cfg.save_dir, "val_scores.csv"), "w")
+        self.val_score_csv = os.path.join(cfg.save_dir, "val_scores.csv")
     
     def log(self, msg):
         print(msg, file=self.log_fw, flush=True)
@@ -693,6 +711,14 @@ class TrainRlCnnAgent(object):
             # Change model name
             self.eval_dict_best['model_name'] = 'rl_agent_segmenter_best'
 
+
+            # # Check if model_name rl_agent_segmenter_best exists in val_score_df
+            # if self.val_score_df['model_name'].str.contains('rl_agent_segmenter_best').any():
+            #     # Remove the previous best model
+            #     self.val_score_df = self.val_score_df[~self.val_score_df['model_name'].str.contains('rl_agent_segmenter_best')]
+
+            # # Add the best model
+            # self.val_score_df = self.val_score_df.append(self.eval_dict_best, ignore_index=True)
         
         # Log scores
         # print(f'Validation')
@@ -729,13 +755,12 @@ class TrainRlCnnAgent(object):
         # Save scores
         self.val_score_df = self.val_score_df.append(eval_dict, ignore_index=True)
 
-        # Clear then write to csv
-        self.val_score_csv.truncate(0)
+        # Clear the csv file
+        if os.path.exists(self.val_score_csv):
+            os.remove(self.val_score_csv)
 
         # Write to csv
-        self.val_score_df.to_csv(self.val_score_csv, index=False)
-        # Flush csv
-        self.val_score_csv.flush()
+        self.val_score_df.to_csv(self.val_score_csv, encoding='utf-8', index=False)
         
         return save_best
     
@@ -810,7 +835,7 @@ class TrainRlCnnAgent(object):
         # Audio features path
         dir_path = f'{self.cfg.data_dir}/precompute_pca512'
         # Boundary labels path
-        boundary_labels_path = f'{self.cfg.data_dir}/CLUS128'
+        boundary_labels_path = f'{self.cfg.data_dir}/CLUS${self.cfg.clus_num}'
 
         # Load Extracted features
         train_dataset = ExtractedFeaturesDataset(
@@ -870,7 +895,7 @@ class TrainRlCnnAgent(object):
 
         # Scheduler
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=STEPS_PER_EPOCH * (NUM_EPOCHS - self.cfg.start_epoch))
-        self.best_valid_score = float('-inf')
+        # self.best_valid_score = float('-inf')
 
         # Load data
         self.train_dataloader = DataLoader(
@@ -936,14 +961,15 @@ class TrainRlCnnAgent(object):
         # torch.save(self.model.state_dict(), self.cfg.save_dir + '/rl_agent.pt')
         torch.save(self.model.segmenter.state_dict(), self.cfg.save_dir + '/rl_agent_segmenter.pt')
 
-        # Add best model to val_score_df
+        # Add the best model
         self.val_score_df = self.val_score_df.append(self.eval_dict_best, ignore_index=True)
 
-        # Clear then write to csv
-        self.val_score_csv.truncate(0)
-        self.val_score_df.to_csv(self.val_score_csv, index=False)
-        # Flush csv
-        self.val_score_csv.flush()
+        # Clear the csv file
+        if os.path.exists(self.val_score_csv):
+            os.remove(self.val_score_csv)
+
+        # Write to csv
+        self.val_score_df.to_csv(self.val_score_csv, encoding='utf-8', index=False)
         
 
 import argparse
@@ -979,6 +1005,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_interval", type=int, default=1)
     parser.add_argument("--lm_rm_sil", action='store_true', default=False)
     parser.add_argument("--ter_rm_sil", action='store_true', default=False)
+    parser.add_argument("--clus_num", type=int, default=128)
     args = parser.parse_args()
 
     rl_cfg = RLCnnAgentConfig()

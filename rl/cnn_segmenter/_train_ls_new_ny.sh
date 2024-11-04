@@ -26,7 +26,7 @@ coef_len_list="0.2 0.0"
 
 # 4 settings: LM with or without sil, Transcription with or without sil
 # posttag: ["_LMnosil_Tnosil", "_LMnosil_Tsil", "_LMsil_Tnosil", "_LMsil_Tsil"]
-posttag="_LMnosil_Tnosil"
+posttag="_LMnosil_Tsil"
 seeds="11"
 
 lr_list="1e-4"
@@ -84,8 +84,7 @@ python3 train_rl_cnnagent_enpei.py \
     --save_dir ${output_dir}/rl_agent/${tag}_${lang}/${TAG}_${LANG}_pplNorm1.0_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${posttag} \
     --save_interval 4 \
     --wandb_log \
-    --lm_rm_sil \
-    --ter_rm_sil
+    --lm_rm_sil 
     # --pretrain_segmenter_path None \
 
 done
