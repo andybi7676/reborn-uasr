@@ -1,7 +1,7 @@
 # python package required for the project
 # fairseq ( build from source )
 torch
-numpy
+numpy<1.24
 transformers
 datasets
 g2p_en
@@ -10,3 +10,6 @@ edit_distance
 soundfile
 tensorboardX
 npy_append_array
+wandb
+faiss-gpu
+pandas<2.0

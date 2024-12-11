@@ -1,15 +1,12 @@
-source ~/.bashrc
-conda activate wav2vecu
-
-# export PYTHONPATH=$PYTHONPATH:/home/r11921042/uasr-rl/fairseq
-
 data_dir=/livingrooms/public/uasr_rl
 reborn_dir=/home/dmnph/reborn-uasr
-output_dir=/home/dmnph/reborn_output
-
+output_dir=/home/dmnph/reborn-output
 
 source ${reborn_dir}/path.sh
 
+cd ${reborn_dir}/rl/utils
+
+# For LibriSpeech
 tag=ls
 TAG=LS
 lang=en
@@ -19,25 +16,32 @@ dataset_name=ls_100h_new
 hr_type=ll60k
 unpair_name=ls860
 config_name=${lang}_${dataset}
+golden_dir=${data_dir}/${dataset_name}/labels
+
+## For MLS
+# tag=mls
+# TAG=MLS
+# lang=de # ['de', 'es', 'fr', 'it', 'nl', 'pt']
+# LANG=DE # ['DE', 'ES', 'FR', 'IT', 'NL', 'PT']
+# dataset=mls
+# dataset_name=${lang}_${dataset}
+# hr_type=xlsr_100hr
+# unpair_name=${lang}
+# config_name=${lang}_${dataset}
+# golden_dir=${data_dir}/${dataset_name}/labels/100hr
 
 OUTPUT_DIR=${output_dir}/rl_agent/${tag}_${lang}
-# output_list=$(ls -d $output_dir/MLS_${LANG}*)
 
-# for further iteration: ["_postITER${iter}"]
-postfix=""
+postfix="" # for further iteration: ["_postITER${iter}"]
+posttag=""
 
-# for with or without BC: posttag= ["_noBC", ""]
-# 4 settings: LM with or without sil, Transcription with or without sil
-# posttag: ["_LMnosil_Tnosil", "_LMnosil_Tsil", "_LMsil_Tnosil", "_LMsil_Tsil"]
-posttag="_LMsil_Tnosil"
 generator_ckpt=../../s2p/multirun/${lang}_${dataset}/${hr_type}${postfix}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt
-golden_dir=${data_dir}/${dataset_name}/labels
 feats_dir=${data_dir}/${dataset_name}/${hr_type}/precompute_pca512
-data_root=${data_dir}/${dataset_name}/${hr_type}
 
 # SPLIT_list
 ## LibriSpeech: "test test-other valid dev-other"
 ## TIMIT: "core-test core-dev all-test"
+## MLS: "test valid valid_small"
 SPLIT_list="test test-other valid dev-other"
 
 # "epoch0 epoch4 epoch8 epoch12 epoch16 epoch20 epoch24 epoch28 epoch32 epoch36 epoch40 best"
@@ -45,8 +49,8 @@ ckpt_typeS="best epoch40"
 rerun_best="false"
 
 coef_ppl_list="1.0"
-coef_ter_list="0.0"
-coef_len_list="0.0 0.2"
+coef_ter_list="0.2"
+coef_len_list="0.2"
 seed_list="3"
 lr_list="1e-4"
 
@@ -69,9 +73,6 @@ for seed in ${seed_list}
 do
 
 output_name=${OUTPUT_DIR}/${TAG}_${LANG}_pplNorm${coef_ppl}_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix}${posttag}
-# for output_name in $output_list
-# do
-
 segmenter_dir=$output_name
 output_dir=$segmenter_dir
 result_dir=$output_dir/results
@@ -79,18 +80,18 @@ result_dir=$output_dir/results
 # make result dir
 mkdir -p $result_dir
 
-# If ckpt_type is best, check if epoch40 exists, if not, skip
-if [ $ckpt_type = "best" ]; then
-    if [ ! -f $segmenter_dir/rl_agent_segmenter_epoch40.pt ]; then
-        echo "The run hasn't reached epoch40: $segmenter_dir/rl_agent_segmenter_epoch40.pt"
-        # If result file exists, delete it
-        if [ -f $result_dir/result_${split}_${ckpt_type}.txt ]; then
-            rm $result_dir/result_${split}_${ckpt_type}.txt
-            echo "File deleted: $result_dir/result_${split}_${ckpt_type}.txt"
-        fi
-        continue
-    fi
-fi
+# # If ckpt_type is best, check if epoch40 exists, if not, skip
+# if [ $ckpt_type = "best" ]; then
+#     if [ ! -f $segmenter_dir/rl_agent_segmenter_epoch40.pt ]; then
+#         echo "The run hasn't reached epoch40: $segmenter_dir/rl_agent_segmenter_epoch40.pt"
+#         # If result file exists, delete it
+#         if [ -f $result_dir/result_${split}_${ckpt_type}.txt ]; then
+#             rm $result_dir/result_${split}_${ckpt_type}.txt
+#             echo "File deleted: $result_dir/result_${split}_${ckpt_type}.txt"
+#         fi
+#         continue
+#     fi
+# fi
 
 # Check if the result file exists
 if [ -f $result_dir/result_${split}_${ckpt_type}.txt ]; then
