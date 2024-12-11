@@ -101,10 +101,12 @@ We divide the training process into the following three main stages: [wav2vec-U 
 
 In this step, we initialize the CNN-based segmenter using pseudo-boundaries derived from a wav2vec-U model. This pretraining step provides a solid starting point before we move on to reinforcement learning.
 
-**Script**: `rl/cnn_segmenter/_pretrain.sh`  
-**Expected Output**: `cnn_segmenter.pt` in the specified `output_dir`.
+``` shell
+bash rl/cnn_segmenter/_pretrain.sh
+``` 
+Expected Output: `cnn_segmenter.pt` in the specified `output_dir`.
 
-**Important Arguments to Adjust**:
+Important Arguments to Adjust:
 
 - `reborn_dir`: Root directory of the `reborn-uasr` codebase.
 - `output_dir`: Directory where pretraining results and checkpoints will be stored.
@@ -125,7 +127,9 @@ In this step, we initialize the CNN-based segmenter using pseudo-boundaries deri
 
 After pretraining, we refine the segmenter using reinforcement learning. The RL step optimizes the segmenter by considering language model perplexity, phoneme-level token error rates, and length ratio constraints, thereby improving segmentation quality.
 
-**Script**: `rl/cnn_segmenter/_train.sh`  
+``` shell
+bash rl/cnn_segmenter/_train.sh
+```
 **Expected Output**: Multiple RL-updated checkpoints, for example: `rl_agent_segmenter_best.pt`.
 
 **Important Arguments to Adjust**:
@@ -147,11 +151,11 @@ After pretraining, we refine the segmenter using reinforcement learning. The RL 
 - `Pretrain_wav2vecu_path`: Path to the wav2vec-U checkpoint used for feature extraction/logit generation.
 - Adjust `coef_ter`, `coef_len`, and `lr` in `_train.sh` to tune performance.
 
-##### Evaluation
+#### Evaluation
 
 Use the `rl/utils/_evaluate.sh` script to evaluate your trained segmenter against development and test splits. This script generates phoneme sequences and compares them against ground truth references.
 
-**Key Arguments**:
+Key Arguments:
 
 - `reborn_dir`, `output_dir`: Ensure these match your setup.
 - `generator_ckpt`: Path to the wav2vec-U generator model checkpoint.
