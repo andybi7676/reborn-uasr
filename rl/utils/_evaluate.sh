@@ -1,14 +1,10 @@
-source ~/.bashrc
-conda activate wav2vecu
-
-# export PYTHONPATH=$PYTHONPATH:/home/r11921042/uasr-rl/fairseq
-
 data_dir=/livingrooms/public/uasr_rl
 reborn_dir=/home/dmnph/reborn-uasr
-output_dir=/home/dmnph/reborn_output
-
+output_dir=/home/dmnph/reborn-output
 
 source ${reborn_dir}/path.sh
+
+cd ${reborn_dir}/rl/utils
 
 # For LibriSpeech
 tag=ls
@@ -17,9 +13,7 @@ lang=en
 LANG=EN
 dataset=ls100h
 dataset_name=ls_100h_new
-g_type="wavlm" # "wavlm" or "hb" or "
-g_type_="wavlm_" # "wavlm_" or "hb_" or ""
-hr_type="" # "ll60k" or ""
+hr_type=ll60k
 unpair_name=ls860
 config_name=${lang}_${dataset}
 golden_dir=${data_dir}/${dataset_name}/labels
@@ -27,8 +21,8 @@ golden_dir=${data_dir}/${dataset_name}/labels
 ## For MLS
 # tag=mls
 # TAG=MLS
-# lang=fr # ['de', 'es', 'fr', 'it', 'nl', 'pt']
-# LANG=FR # ['DE', 'ES', 'FR', 'IT', 'NL', 'PT']
+# lang=de # ['de', 'es', 'fr', 'it', 'nl', 'pt']
+# LANG=DE # ['DE', 'ES', 'FR', 'IT', 'NL', 'PT']
 # dataset=mls
 # dataset_name=${lang}_${dataset}
 # hr_type=xlsr_100hr
@@ -37,20 +31,12 @@ golden_dir=${data_dir}/${dataset_name}/labels
 # golden_dir=${data_dir}/${dataset_name}/labels/100hr
 
 OUTPUT_DIR=${output_dir}/rl_agent/${tag}_${lang}
-# output_list=$(ls -d $output_dir/MLS_${LANG}*)
 
-# for further iteration: ["_postITER${iter}"]
-postfix=""
+postfix="" # for further iteration: ["_postITER${iter}"]
+posttag=""
 
-# for with or without BC: posttag= ["_noBC", ""]
-# 4 settings: LM with or without sil, Transcription with or without sil
-# posttag: ["_LMnosil_Tnosil", "_LMnosil_Tsil", "_LMsil_Tnosil", "_LMsil_Tsil"]
-# posttag_list="_LMnosil_Tnosil _LMnosil_Tsil _LMsil_Tnosil _LMsil_Tsil"
-posttag_list="_LMsil_Tsil"
-
-generator_ckpt=../../s2p/multirun/${lang}_${dataset}/${g_type}${hr_type}${postfix}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt
-feats_dir=${data_dir}/${dataset_name}/${g_type}${hr_type}/precompute_pca512
-# data_root=${data_dir}/${dataset_name}/${hr_type}
+generator_ckpt=../../s2p/multirun/${lang}_${dataset}/${hr_type}${postfix}/${unpair_name}_unpaired_all/best_unsup/checkpoint_best.pt
+feats_dir=${data_dir}/${dataset_name}/${hr_type}/precompute_pca512
 
 # SPLIT_list
 ## LibriSpeech: "test test-other valid dev-other"
@@ -63,9 +49,9 @@ ckpt_typeS="best epoch40"
 rerun_best="false"
 
 coef_ppl_list="1.0"
-coef_ter_list="0.2 0.0"
-coef_len_list="0.0"
-seed_list="3" # [3, 11]
+coef_ter_list="0.2"
+coef_len_list="0.2"
+seed_list="3"
 lr_list="1e-4"
 
 for split in ${SPLIT_list}
@@ -85,13 +71,8 @@ for lr in ${lr_list}
 do
 for seed in ${seed_list}
 do
-for posttag in ${posttag_list}
-do
 
-output_name=${OUTPUT_DIR}/${g_type_}${TAG}_${LANG}_pplNorm${coef_ppl}_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix}${posttag}
-# for output_name in $output_list
-# do
-
+output_name=${OUTPUT_DIR}/${TAG}_${LANG}_pplNorm${coef_ppl}_tokerr${coef_ter}_lenratio${coef_len}_lr${lr}_epoch40_seed${seed}${postfix}${posttag}
 segmenter_dir=$output_name
 output_dir=$segmenter_dir
 result_dir=$output_dir/results
@@ -179,7 +160,6 @@ fi
     echo "" >> $result_dir/result_${split}_${ckpt_type}.txt
     tail -n 13 $result_dir/result_${split}_${ckpt_type}.txt
 
-done
 done
 done
 done

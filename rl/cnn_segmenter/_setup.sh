@@ -1,23 +1,18 @@
 # Set up the environment
-
-# data_dir=/work/r11921042/data
 data_dir=/livingrooms/public/uasr_rl
-# data_dir=/groups/dmnph/uasr_rl
-# reborn_dir=/home/r11921042/uasr-rl
 reborn_dir=/home/dmnph/reborn-uasr
 
 ## For LibriSpeech
 lang=ls860
 data_config=ls_100h_new
-g_type=wavlm # "hb_" or "" or "wavlm"
-hr_type="" # "ll60k" or ""
+g_type=""                   # ["",      "hb_",      "wavlm"]
+hr_type=ll60k""             # ["ll60k", "ll60k",    ""]
 prep_postfix=""
 ckpt_config=en_ls100h
 # iter=1
-# ckpt_postfix=_postITER${iter}
-ckpt_postfix=""
+ckpt_postfix=""             # ["", "_postITER${iter}"]"
 pair_config=ls860_unpaired_all
-clus_num=64 # 128 or 64
+clus_num=128                # 64 only for wavlm, 128 for others
 
 ## For TIMIT
 # iter=1
@@ -44,12 +39,11 @@ clus_num=64 # 128 or 64
 
 # 2. Set up phoneme dictionary (no need to do this if you have already done it)
 # echo "Set up phoneme dictionary"
-# mkdir /home/r11921042/uasr-rl/rl/dict/${data_config}/
-# cp /work/r11921042/data/${data_config}/text/prep${prep_postfix}/phones/dict* /home/r11921042/uasr-rl/rl/dict/${data_config}/
+# mkdir ${reborn_dir}/rl/dict/${data_config}/
+# cp ${data_dir}/${data_config}/text/prep${prep_postfix}/phones/dict* ${reborn_dir}/rl/dict/${data_config}/
 
 # 3. Set up boundary
 echo "Set up boundary"
-# list out every /home/r11921042/uasr-rl/s2p/scripts/find_prep_align.py ${data_dir}/${data_config}/${hr_type}/CLUS${clus_num}/*.src
 for file in $(ls ${data_dir}/${data_config}/${g_type}${hr_type}/CLUS${clus_num}/*.src)
 do
     echo $file
@@ -65,24 +59,20 @@ do
 done
 
 # 4. Set up w2vu_logit_segmented data
-# List out every folder in /home/r11921042/uasr-rl/s2p/multirun/${config}/xlsr_100hr/${lang}_unpaired_all/best_unsup/ and filter out the folder names that contain "viterbi_500-5.0.phones"
+# List out every folder in ${reborn_dir}/s2p/multirun/${ckpt_config}/${g_type}${hr_type}${ckpt_postfix}/${pair_config}/best_unsup/ and filter out the folder names that contain "viterbi_500-5.0.phones"
 for folder in $(ls ${reborn_dir}/s2p/multirun/${ckpt_config}/${g_type}${hr_type}${ckpt_postfix}/${pair_config}/best_unsup/ | grep "viterbi_500-5.0.phones")
 do
     echo $folder
     set=$(echo $folder | sed -e "s/_viterbi_500-5.0.phones//")
     echo $set
-    # Check if ${WORK_DIR}/data/${config}/xlsr_100hr/precompute_pca512/${set}.w2vu_logit_segmented exists
     if [ -f ${data_dir}/${data_config}/${g_type}${hr_type}/precompute_pca512/${set}.w2vu_logit_segmented${ckpt_postfix} ]; then
         echo "File exists: ${data_dir}/${data_config}/${g_type}${hr_type}/precompute_pca512/${set}.w2vu_logit_segmented${ckpt_postfix}"
-    
     else
         cp ${reborn_dir}/s2p/multirun/${ckpt_config}/${g_type}${hr_type}${ckpt_postfix}/${pair_config}/best_unsup/${set}_viterbi_500-5.0.phones/${set}.txt ${data_dir}/${data_config}/${g_type}${hr_type}/precompute_pca512/${set}.w2vu_logit_segmented${ckpt_postfix}
         echo "copying ${set}.txt to ${set}.w2vu_logit_segmented${ckpt_postfix}"
     fi
 
     # Also copy ${set}_units.txt (with <SIL> tokens) to ${set}.w2vu_logit_segmented_units${ckpt_postfix}
-
-    # Check if ${WORK_DIR}/data/${config}/xlsr_100hr/precompute_pca512/${set}.w2vu_logit_segmented_units exists
     if [ -f ${data_dir}/${data_config}/${g_type}${hr_type}/precompute_pca512/${set}.w2vu_logit_segmented_units${ckpt_postfix} ]; then
         echo "File exists: ${data_dir}/${data_config}/${g_type}${hr_type}/precompute_pca512/${set}.w2vu_logit_segmented_units${ckpt_postfix}"
     else

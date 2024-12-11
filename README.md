@@ -98,7 +98,65 @@ We divide the training process into the following three main stages: [wav2vec-U 
 
 ### Stage 1: REBORN segmenter training
 #### Behavior Cloning
+
+In this step, we initialize the CNN-based segmenter using pseudo-boundaries derived from a wav2vec-U model. This pretraining step provides a solid starting point before we move on to reinforcement learning.
+
+**Script**: `rl/cnn_segmenter/_pretrain.sh`  
+**Expected Output**: `cnn_segmenter.pt` in the specified `output_dir`.
+
+**Important Arguments to Adjust**:
+
+- `reborn_dir`: Root directory of the `reborn-uasr` codebase.
+- `output_dir`: Directory where pretraining results and checkpoints will be stored.
+- `audio_dir`: Directory containing features and boundary files. Example structure:
+    
+    ```
+    audio_dir
+    ├── CLUS128
+    │   ├── train.bds
+    │   └── valid.bds
+    ├── precompute_pca512
+        ├── train.npy
+        └── valid.npy
+    ```
+    
+
 #### Reinforcement Learning
+
+After pretraining, we refine the segmenter using reinforcement learning. The RL step optimizes the segmenter by considering language model perplexity, phoneme-level token error rates, and length ratio constraints, thereby improving segmentation quality.
+
+**Script**: `rl/cnn_segmenter/_train.sh`  
+**Expected Output**: Multiple RL-updated checkpoints, for example: `rl_agent_segmenter_best.pt`.
+
+**Important Arguments to Adjust**:
+
+- `reborn_dir`, `output_dir`: As in pretraining, ensure these are set correctly.
+- `audio_dir`: Move the wav2vec-U logit-segmented phoneme results to:
+    
+    ```
+    audio_dir
+    ├── precompute_pca512
+    │   ├── train.npy
+    │   ├── train.w2vu_logit_segmented_units
+    │   ├── valid.npy
+    │   └── valid.w2vu_logit_segmented_units
+    ```
+    
+- `kenlm_fpath`: Path to the KenLM language model.
+- `Pretrain_segmenter_path`: Path to the pretrained segmenter checkpoint from the Behavior Cloning step.
+- `Pretrain_wav2vecu_path`: Path to the wav2vec-U checkpoint used for feature extraction/logit generation.
+- Adjust `coef_ter`, `coef_len`, and `lr` in `_train.sh` to tune performance.
+
+##### Evaluation
+
+Use the `rl/utils/_evaluate.sh` script to evaluate your trained segmenter against development and test splits. This script generates phoneme sequences and compares them against ground truth references.
+
+**Key Arguments**:
+
+- `reborn_dir`, `output_dir`: Ensure these match your setup.
+- `generator_ckpt`: Path to the wav2vec-U generator model checkpoint.
+- `feats_dir`: Directory containing the PCA-reduced features used during evaluation.
+
 
 ### Stage 2: REBORN generator training
 #### Boundary post-processing
